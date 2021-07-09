@@ -42,7 +42,7 @@
                     <li >
                       <form class="navbar-search" action="javascript:;">
                            <div class="rel">
-                             <div class="text-white m-b-5"><h3>ตรวจประเมิน 5ส</h3></div>
+                             <div class="text-white"><h4>ตรวจประเมิน 5ส</h4></div>
                                <!--    <span class="search-icon"><i class="ti-search"></i></span>
                             <input class="form-control input-sm" placeholder="Search here..."> -->
                            </div>
@@ -57,7 +57,7 @@
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                             <img src="./assets/img/admin-avatar.png" />
-                            <span></span>Admin<i class="fa fa-angle-down m-l-5"></i></a>
+                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
                            <a class="dropdown-item" href="login.html"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>
