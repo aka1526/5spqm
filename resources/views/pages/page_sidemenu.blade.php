@@ -19,9 +19,11 @@
                     <span class="nav-label">กำหนดแผน</span><i class="fa fa-angle-left arrow"></i></a>
                 <ul class="nav-2-level collapse">
                     <li>
-                        <a href="colors.html">แผนการตรวจ</a>
+                        <a href="{{ route('plan.index')}}">แผนการตรวจ</a>
                     </li>
-
+                    <li>
+                        <a href="{{ route('area.index')}}">พื้นที่การตรวจ</a>
+                    </li>
 
                 </ul>
             </li>

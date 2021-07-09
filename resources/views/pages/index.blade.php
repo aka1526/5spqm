@@ -4,7 +4,8 @@
 {{ config('app.name') }}
 @endsection
 
-@include('pages.page_sidemenu')
+@extends('pages.page_sidemenu')
+<!-- @include('pages.page_sidemenu') -->
 
 @section('content-wrapper')
 <div class="content-wrapper">
@@ -46,7 +47,7 @@
             </div>
 
         </div>
-       
+
 
         <style>
             .visitors-table tbody tr td:last-child {
@@ -75,5 +76,5 @@
 @endsection
 
 @section('jsfooter')
-
+    <!-- <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script> -->
 @endsection
