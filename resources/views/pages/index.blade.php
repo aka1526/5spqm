@@ -24,10 +24,10 @@
         <header class="header">
             <div class="page-brand">
                 <a class="link" href="index.html">
-                    <span class="brand">Admin
-                        <span class="brand-tip">CAST</span>
+                    <span class="brand">5 ส
+                        <span class="brand-tip">Style</span>
                     </span>
-                    <span class="brand-mini">AC</span>
+                    <span class="brand-mini">PQM</span>
                 </a>
             </div>
             <div class="flexbox flex-1">
