@@ -15,9 +15,10 @@
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
+    <link href="assets/css/themes/pink.css" rel="stylesheet" id="theme-style">
 </head>
 
-<body class="fixed-navbar">
+<body class="fixed-navbar has-animation fixed-layout">
     <div class="page-wrapper">
         <!-- START HEADER-->
         <header class="header">
