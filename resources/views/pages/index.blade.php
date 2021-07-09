@@ -24,10 +24,10 @@
         <header class="header">
             <div class="page-brand">
                 <a class="link" href="index.html">
-                    <span class="brand">5 ส
-                        <span class="brand-tip"> Style</span>
+                    <span class="brand">Admin
+                        <span class="brand-tip">CAST</span>
                     </span>
-                    <span class="brand-mini"> PQM</span>
+                    <span class="brand-mini">AC</span>
                 </a>
             </div>
             <div class="flexbox flex-1">
@@ -36,10 +36,15 @@
                     <li>
                         <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="ti-menu"></i></a>
                     </li>
-                    <li>
-<h2 class="text-white m-b-5 font-strong">5 ส Style PQM.</h2>
-
+                    <li class="col-9">
+                      <form class="navbar-search" action="javascript:;">
+                           <div class="rel">
+                               <span class="search-icon"><i class="ti-search"></i></span>
+                               <input class="form-control input-sm" placeholder="Search here...">
+                           </div>
+                       </form>
                     </li>
+
                 </ul>
                 <!-- END TOP-LEFT TOOLBAR-->
                 <!-- START TOP-RIGHT TOOLBAR-->
@@ -51,10 +56,7 @@
                             <img src="./assets/img/admin-avatar.png" />
                              </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <!-- <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
-                            <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>
-                            <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a>
-                            <li class="dropdown-divider"></li> -->
+
                             <a class="dropdown-item" href="login.html"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>
                     </li>
