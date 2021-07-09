@@ -42,7 +42,7 @@
                     <li >
                       <form class="navbar-search" action="javascript:;">
                            <div class="rel">
-                             <div class="text-white"><h4>ตรวจประเมิน 5ส</h4></div>
+                             <div class="text-white"><h4>ทีมตรวจประเมิน 5ส</h4></div>
                                <!--    <span class="search-icon"><i class="ti-search"></i></span>
                             <input class="form-control input-sm" placeholder="Search here..."> -->
                            </div>
