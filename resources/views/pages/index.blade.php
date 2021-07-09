@@ -37,12 +37,8 @@
                         <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="ti-menu"></i></a>
                     </li>
                     <li>
-                        <form class="navbar-search" action="javascript:;">
-                            <div class="rel">
-                                <span class="search-icon"><i class="ti-search"></i></span>
-                                <input class="form-control" placeholder="Search here...">
-                            </div>
-                        </form>
+<h2 class="text-white m-b-5 font-strong">5 ส Style PQM.</h2>
+
                     </li>
                 </ul>
                 <!-- END TOP-LEFT TOOLBAR-->
