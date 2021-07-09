@@ -25,9 +25,9 @@
             <div class="page-brand">
                 <a class="link" href="index.html">
                     <span class="brand">5 ส
-                        <span class="brand-tip">Style</span>
+                        <span class="brand-tip"> Style</span>
                     </span>
-                    <span class="brand-mini">PQM</span>
+                    <span class="brand-mini"> PQM</span>
                 </a>
             </div>
             <div class="flexbox flex-1">
