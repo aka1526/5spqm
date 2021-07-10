@@ -64,10 +64,10 @@ class AreaController extends Controller
     $area_name    = isset($request->area_name) ? $request->area_name : '';
     $area_owner   = isset($request->area_owner) ? $request->area_owner : '';
     $username='5s';
-    $update=false;
+    $action=false;
     if($unid !='') {
 
-        $update =AreaTbl::where('unid', '=', $unid)->update([
+        $action =AreaTbl::where('unid', '=', $unid)->update([
         'area_index'=> $area_index,
         'area_name'=> $area_name,
         'area_owner'=> $area_owner,
@@ -76,11 +76,20 @@ class AreaController extends Controller
       ]);
 
     }
-    if($update){
-        return response()->json(['result'=> true],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-    } else {
-        return response()->json(['result'=>false],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+ return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+  }
+
+  public function delete(Request $request){
+    $unid =isset($request->unid) ? $request->unid : '';
+    $action=false;
+    if($unid !='') {
+
+        $action =AreaTbl::where('unid', '=', $unid)->delete();
     }
+
+ return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
   }
   public function editfield(Request $request){

@@ -79,7 +79,7 @@
                                         <td>{{ $row->area_owner }}</td>
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
-                                          <button class="btn btn-danger btn-xs btn-delete" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+                                          <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
                                       </td>
                                     </tr>
                                      @endforeach
@@ -136,7 +136,7 @@
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary btn-save" name="btn-save" id="btn-save" >Save changes</button>
+           <button type="button" class="btn btn-primary btn-save" name="btn-save" id="btn-save" >Save</button>
          </div>
        </div>
      </div>
@@ -149,56 +149,48 @@
 <script>
 
 $(".btn-delete").on('click',function (e){
-  Swal.fire({
-title: 'Are you sure?',
-text: "You won't be able to revert this!",
-icon: 'warning',
-showCancelButton: true,
-confirmButtonColor: '#3085d6',
-cancelButtonColor: '#d33',
-confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-if (result.isConfirmed) {
-  Swal.fire(
-    'Deleted!',
-    'Your file has been deleted.',
-    'success'
-  )
-}
-});
- e.preventDefault();
 
-var UNID =$(this).data('unid');
+    var unid =$(this).data('unid');
+    var url = "{{ route('area.delete')}}";
+        Swal.fire({
+            title: 'คุณต้องการลบข้อมูล?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
 
- $.ajax({
-            type: "POST",
-            url: url,
-            data:{UNID:UNID,STATUS:CHSTATUS,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
-            success: function(data)
-            {
-              console.log(data);
-              $("#area_index").val();
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                          type: "POST",
+                          url: url,
+                          data:{unid:unid,"_token": "{{ csrf_token() }}"},
+                          success: function(data)
+                          {
+                            if(data.result){
+                              Swal.fire({
+                                title: 'คุณต้องการลบข้อมูล?',
+                                icon: 'success',
+                                timer : 1200,
+                              }).then(() => {
+                                   location.reload();
+                              });
+                            } else {
+                              Swal.fire({
+                                title: 'คุณต้องการลบข้อมูล?',
+                                icon: 'error',
+                                timer : 1200,
+                              }).then(() => {
+                                   location.reload();
+                              });
+                            }
+
+                          }
+                  });
             }
-    });
+        });
 
- /*var UNID =$(this).data('unid');
- ale(UNID);
-   swal({
-       title: "Are you sure?",
-       text: "Once deleted, you will not be able to recover this imaginary file!",
-       icon: "warning",
-       buttons: true,
-       dangerMode: true,
-       })
-       .then((willDelete) => {
-       if (willDelete) {
-         swal("Poof! Your imaginary file has been deleted!", {
-           icon: "success",
-         });
-       } else {
-         swal("Your imaginary file is safe!");
-       }
-     });*/
    });
 
 
@@ -221,29 +213,8 @@ $(".btn-edit").on('click',function (e){
              if(res){
                $('#OpenFrmArea').modal('show');
              }
-
            }
          });
-
- //$('#OpenFrmArea').modal('show');
- /*var UNID =$(this).data('unid');
- ale(UNID);
-   swal({
-       title: "Are you sure?",
-       text: "Once deleted, you will not be able to recover this imaginary file!",
-       icon: "warning",
-       buttons: true,
-       dangerMode: true,
-       })
-       .then((willDelete) => {
-       if (willDelete) {
-         swal("Poof! Your imaginary file has been deleted!", {
-           icon: "success",
-         });
-       } else {
-         swal("Your imaginary file is safe!");
-       }
-     });*/
    });
 
 
@@ -252,17 +223,16 @@ $(".btn-edit").on('click',function (e){
   });
 
    $(".btn-save").on('click',function (e){
-          e.preventDefault(); // avoid to execute the actual submit of the form.
+          e.preventDefault();
           var form = $("#FrmArea");
           var url = form.attr('action');
 
           $.ajax({
                  type: "POST",
                  url: url,
-                 data: form.serialize(), // serializes the form's elements.
+                 data: form.serialize(),
                  success: function(data)
                  {
-                  // console.log(data);
                    if(data.result){
                      Swal.fire({
                       icon: 'success',
@@ -284,9 +254,7 @@ $(".btn-edit").on('click',function (e){
                       });
                    }
                  }
-               });
-
-
+          });
       });
 </script>
 @endsection

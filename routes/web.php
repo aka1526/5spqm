@@ -28,5 +28,6 @@ Route::get('/plan/get',   [PlanController::class,'get'])->name('plan.get');
 Route::get('/area',       [AreaController::class,'index'])->name('area.index');
 Route::post('/area/add',  [AreaController::class,'add'])->name('area.add');
 Route::post('/area/edit', [AreaController::class,'edit'])->name('area.edit');
+Route::post('/area/delete', [AreaController::class,'delete'])->name('area.delete');
 Route::post('/area/editfield', [AreaController::class,'editfield'])->name('area.editfield');
 Route::get('/area/get',   [AreaController::class,'get'])->name('area.get');
