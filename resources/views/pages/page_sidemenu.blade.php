@@ -2,7 +2,7 @@
           <div id="sidebar-collapse">
               <div class="admin-block d-flex">
                   <div>
-                      <img src="./assets/img/admin-avatar.png" width="45px" />
+                      <img src="/assets/img/admin-avatar.png" width="45px" />
                   </div>
                   <div class="admin-info">
                       <div class="font-strong">Admin</div><small>Administrator</small></div>
@@ -16,10 +16,13 @@
                   <li class="heading">ตั้งค่าระบบ</li>
                   <li>
                       <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                          <span class="nav-label">กำหนดแผน</span><i class="fa fa-angle-left arrow"></i></a>
+                          <span class="nav-label">ข้อมูลพื้นฐาน</span><i class="fa fa-angle-left arrow"></i></a>
                       <ul class="nav-2-level collapse">
-                          <li>
+                          <!-- <li>
                               <a href="{{ route('plan.index')}}">แผนการตรวจ</a>
+                          </li> -->
+                          <li>
+                              <a href="{{ route('auditor.index')}}">ทีมตรวจ/Auditor</a>
                           </li>
                           <li>
                               <a href="{{ route('area.index')}}">พื้นที่การตรวจ</a>

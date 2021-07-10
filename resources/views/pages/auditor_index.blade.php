@@ -11,15 +11,14 @@
 <div class="content-wrapper">
        <div class="page-content fade-in-up">
 
-
            <div class="row">
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
+                                <div class="ibox-title">ทีมตรวจ/Auditor</div>
                                 <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มพื้นที่</a>
+                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มทีมตรวจ</a>
                                 </div>
                             </div>
 
@@ -28,17 +27,21 @@
                                     <thead class="">
                                         <tr>
                                             <th>#</th>
-                                            <th>พื้นที่</th>
-                                            <th>หัวหน้าพื้นที่</th>
+                                            <th>ชื่อทีมตรวจ</th>
+                                            <th>ความถี่</th>
+                                            <th>สมาชิก</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($dataArea as $key => $row)
+                                    @foreach ($dataAuditposition as $key => $row)
                                     <tr>
-                                        <td>{{ $row->area_index }}</td>
-                                        <td>{{ $row->area_name }}</td>
-                                        <td>{{ $row->area_owner }}</td>
+                                        <td>{{ $row->position_no }}</td>
+                                        <td>{{ $row->position_name }}</td>
+                                        <td>{{ $row->auditor_period }}</td>
+                                        <td>
+                                            <a href="/auditor/{{ $row->unid }}" class="btn btn btn-primary btn-xs m-r-5 btn-member" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-users font-14"></i> รายชื่อ</button>
+                                        </td>
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -61,7 +64,7 @@
    </div>
 
    <!-- Modal -->
-   <div class="modal fade" id="OpenFrmArea" name="OpenFrmArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal fade" id="OpenFrmAuditor" name="OpenFrmAuditor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header bg-primary ">
@@ -71,29 +74,55 @@
            </button>
          </div>
          <div class="modal-body ">
-           <form id="FrmArea" name="FrmArea" action="{{ route('area.add')}}" method="post" enctype="multipart/form-data">
+           <form id="FrmAuditor" name="FrmAuditor" action="{{ route('auditor.add')}}" method="post" enctype="multipart/form-data">
              @csrf
               <input  type="hidden" id="unid" name="unid" value="">
 
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dataArea)+1}}" required>
+                            <input class="form-control" type="number" id="position_no" min="1" max="20" name="position_no" placeholder="ลำดับ" value="{{ count($dataAuditposition)+1}}" required>
                         </div>
-                        <div class="col-sm-10 form-group">
-                            <label>ชื่อพื้นที่</label>
-                             <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
+                        <div class="col-sm-5 form-group">
+                            <label>ชื่อทีมตรวจ</label>
+                             <input class="form-control" type="text" id="position_name" name="position_name" placeholder="ชื่อทีมตรวจ" required>
+                        </div>
+                        <div class="col-sm-5 form-group">
+                            <label>ประเภท</label>
+
+                             <select class="form-control input-sm" id="position_name_eng" name="position_name_eng" required>
+                                 <option value=""></option>
+                                 <option value="SELF">Self Audit</option>
+                                 <option value="COMMIT">Committee Audit</option>
+                                 <option value="TOP">Top Audit</option>
+                             </select>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                          <label >ความถี่</label>
+                          <input class="form-control" type="text" id="auditor_period" name="auditor_period" placeholder="ความถี่" required >
+                            </div>
+                        <div class="col-sm-3 form-group">
+                            <label>จำนวน 1 ครั้งต่อ</label>
+                             <input class="form-control" type="number" max="10" min="1" id="period_qty" name="period_qty" placeholder="จำนวน" required>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label >Month/Week</label>
+                              <select class="form-control input-sm" id="period_type" name="period_type" required>
+                                  <option value=""></option>
+                                  <option value="WEEK">Week</option>
+                                  <option value="MONTH">Month</option>
+                              </select>
                         </div>
                     </div>
 
                <div class="form-group">
-                   <label >หัวหน้าพื้นที่</label>
-                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
+
                </div>
-<!--
-               <div class="form-group">
-                   <button class="btn btn-primary " type="submit">Submit</button>
-               </div> -->
+
            </form>
          </div>
          <div class="modal-footer">
@@ -113,7 +142,8 @@
 $(".btn-delete").on('click',function (e){
 
     var unid =$(this).data('unid');
-    var url = "{{ route('area.delete')}}";
+
+    var url = "{{ route('auditor.delete')}}";
         Swal.fire({
             title: 'คุณต้องการลบข้อมูล?',
             icon: 'warning',
@@ -159,21 +189,26 @@ $(".btn-delete").on('click',function (e){
 $(".btn-edit").on('click',function (e){
  e.preventDefault();
  var unid =$(this).data('unid');
- var url = "{{ route('area.get')}}";
- $("#FrmArea").attr('action', "{{ route('area.edit')}}");
+ var url = "{{ route('auditor.get')}}";
+
+ $("#FrmAuditor").attr('action', "{{ route('auditor.edit')}}");
  $.ajax({
            type: "get",
            url: url,
            data: {unid:unid}, // serializes the form's elements.
            success: function(data)
            {
+             console.log(data);
            var res= data.data;
              $("#unid").val(res.unid);
-             $("#area_index").val(res.area_index);
-             $("#area_name").val(res.area_name);
-             $("#area_owner").val(res.area_owner);
+             $("#position_no").val(res.position_no);
+             $("#position_name").val(res.position_name);
+             $("#position_name_eng").val(res.position_name_eng);
+             $("#auditor_period").val(res.auditor_period);
+             $("#period_qty").val(res.period_qty);
+              $("#period_type").val(res.period_type);
              if(res){
-               $('#OpenFrmArea').modal('show');
+               $('#OpenFrmAuditor').modal('show');
              }
            }
          });
@@ -181,12 +216,12 @@ $(".btn-edit").on('click',function (e){
 
 
    $(".btn-new").on('click',function (e){
-      $('#OpenFrmArea').modal('show');
+      $('#OpenFrmAuditor').modal('show');
   });
 
    $(".btn-save").on('click',function (e){
           e.preventDefault();
-          var form = $("#FrmArea");
+          var form = $("#FrmAuditor");
           var url = form.attr('action');
 
           $.ajax({
@@ -211,7 +246,7 @@ $(".btn-edit").on('click',function (e){
                       title: 'เกิดข้อผิดพลาด!...',
                       timer : 1200
                       }).then((result) => {
-                         $('#OpenFrmArea').modal('hide');
+                         $('#OpenFrmAuditor').modal('hide');
                           location.reload();
                       });
                    }

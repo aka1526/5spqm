@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AuditorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,18 @@ Route::post('/area/edit', [AreaController::class,'edit'])->name('area.edit');
 Route::post('/area/delete', [AreaController::class,'delete'])->name('area.delete');
 Route::post('/area/editfield', [AreaController::class,'editfield'])->name('area.editfield');
 Route::get('/area/get',   [AreaController::class,'get'])->name('area.get');
+
+
+Route::get('/auditor',            [AuditorController::class,'index'])->name('auditor.index');
+
+Route::post('/auditor/add',       [AuditorController::class,'add'])->name('auditor.add');
+Route::post('/auditor/edit',      [AuditorController::class,'edit'])->name('auditor.edit');
+Route::post('/auditor/delete',    [AuditorController::class,'delete'])->name('auditor.delete');
+Route::post('/auditor/editfield', [AuditorController::class,'editfield'])->name('auditor.editfield');
+Route::get('/auditor/get',        [AuditorController::class,'get'])->name('auditor.get');
+
+Route::get('/auditor/{unid}',     [AuditorController::class,'memberindex'])->name('auditor.member.index');
+Route::get('/auditor/member/get',        [AuditorController::class,'memberget'])->name('auditor.member.get');
+Route::post('/auditor/member/add',     [AuditorController::class,'memberadd'])->name('auditor.member.add');
+Route::post('/auditor/member/edit',  [AuditorController::class,'memberedit'])->name('auditor.member.edit');
+Route::post('/auditor/member/delete',  [AuditorController::class,'memberdelete'])->name('auditor.member.delete');

@@ -11,15 +11,15 @@
 <div class="content-wrapper">
        <div class="page-content fade-in-up">
 
-
            <div class="row">
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
+                                <div class="ibox-title">รายชื่อสมาชิกทีม {{ $dataAuditposition->position_name }}  </div>
                                 <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มพื้นที่</a>
+                                    <a class="btn btn-warning btn-sm btn-membernew" href="/auditor"><i class="fa fa-backward"></i> กลับ</a>
+                                    <a class="btn btn-info btn-sm btn-membernew" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มสมาชิก</a>
                                 </div>
                             </div>
 
@@ -28,23 +28,25 @@
                                     <thead class="">
                                         <tr>
                                             <th>#</th>
+                                            <th>ชื่อทีมตรวจ</th>
                                             <th>พื้นที่</th>
-                                            <th>หัวหน้าพื้นที่</th>
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($dataArea as $key => $row)
-                                    <tr>
-                                        <td>{{ $row->area_index }}</td>
-                                        <td>{{ $row->area_name }}</td>
-                                        <td>{{ $row->area_owner }}</td>
-                                        <td>
-                                          <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
-                                          <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                                      </td>
-                                    </tr>
-                                     @endforeach
+                                      @foreach ($dataAuditor as $key => $row)
+                                      <tr>
+                                          <td>{{ $row->auditor_item }}</td>
+                                          <td>{{ $row->auditor_name }}</td>
+                                          <td>{{ $row->area_name }}</td>
+
+                                          <td>
+                                            <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
+                                            <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+                                        </td>
+                                      </tr>
+                                       @endforeach
 
 
                                     </tbody>
@@ -61,7 +63,7 @@
    </div>
 
    <!-- Modal -->
-   <div class="modal fade" id="OpenFrmArea" name="OpenFrmArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal fade" id="OpenFrmSelf" name="OpenFrmSelf" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header bg-primary ">
@@ -71,29 +73,58 @@
            </button>
          </div>
          <div class="modal-body ">
-           <form id="FrmArea" name="FrmArea" action="{{ route('area.add')}}" method="post" enctype="multipart/form-data">
+
+           <form id="FrmAuditor" name="FrmAuditor" action="{{ route('auditor.member.add')}}" method="post" enctype="multipart/form-data">
              @csrf
               <input  type="hidden" id="unid" name="unid" value="">
+              <input  type="hidden" id="audit_position_unid" name="audit_position_unid" value="{{  $dataAuditposition->unid }}">
+              <input  type="hidden" id="audit_position" name="audit_position" value="{{  $dataAuditposition->position_name }}">
+              <input  type="hidden" id="auditor_group" name="auditor_group" value="">
+
 
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dataArea)+1}}" required>
+                            <input class="form-control" type="number" id="auditor_item" min="1" max="20" name="auditor_item" placeholder="ลำดับ" value="{{ count($dataAuditor)+1}}" required>
                         </div>
                         <div class="col-sm-10 form-group">
-                            <label>ชื่อพื้นที่</label>
-                             <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
+                            <label>ชื่อผู้ตรวจ</label>
+                             <input class="form-control" type="text" id="auditor_name" name="auditor_name" placeholder="ชื่อผู้ตรวจ" required>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8 form-group">
+                          <div class="form-group">
+                          <label>กำหนดพื้นที่</label>
+
+                           <select class="form-control input-sm" id="auditor_area" name="auditor_area"  {{ strtolower($dataAuditposition->position_name_eng )  !='self' ? 'disabled' : 'required' }} >
+                               <option value="">ทั้งหมด</option>
+                               @foreach ($dataArea as $key => $row)
+                                <option value="{{ $row->unid}}">{{ $row->area_name }}</option>
+                                @endforeach
+
+                           </select>
+                          </div>
+                      </div>
+
+                        <div class="col-sm-4 form-group">
+                          <label >กลุ่ม</label>
+                          <select class="form-control input-sm" id="auditor_group" name="auditor_group"  {{ strtolower($dataAuditposition->position_name_eng ) =='self' ? 'disabled' : 'required' }} >
+                              <option value=""></option>
+                              <option value="A">GROUP A {{ $dataAuditposition->position_name_eng}}</option>
+                              <option value="B">GROUP B</option>
+                              <option value="D">GROUP C</option>
+                              <option value="E">GROUP E</option>
+                          </select>
                         </div>
                     </div>
 
                <div class="form-group">
-                   <label >หัวหน้าพื้นที่</label>
-                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
+
                </div>
-<!--
-               <div class="form-group">
-                   <button class="btn btn-primary " type="submit">Submit</button>
-               </div> -->
+
            </form>
          </div>
          <div class="modal-footer">
@@ -113,7 +144,8 @@
 $(".btn-delete").on('click',function (e){
 
     var unid =$(this).data('unid');
-    var url = "{{ route('area.delete')}}";
+
+    var url = "{{ route('auditor.member.delete')}}";
         Swal.fire({
             title: 'คุณต้องการลบข้อมูล?',
             icon: 'warning',
@@ -159,34 +191,41 @@ $(".btn-delete").on('click',function (e){
 $(".btn-edit").on('click',function (e){
  e.preventDefault();
  var unid =$(this).data('unid');
- var url = "{{ route('area.get')}}";
- $("#FrmArea").attr('action', "{{ route('area.edit')}}");
+ var url = "{{ route('auditor.member.get')}}";
+  $("#FrmAuditor").attr('action', "{{ route('auditor.member.edit')}}");
  $.ajax({
            type: "get",
            url: url,
            data: {unid:unid}, // serializes the form's elements.
            success: function(data)
            {
+             console.log(data);
            var res= data.data;
-             $("#unid").val(res.unid);
-             $("#area_index").val(res.area_index);
-             $("#area_name").val(res.area_name);
-             $("#area_owner").val(res.area_owner);
+           $("#unid").val(res.unid);
+             $("#auditor_name").val(res.auditor_name);
+             $("#audit_position_unid").val(res.audit_position_unid);
+            $("#audit_position").val(res.audit_position);
+            $("#auditor_group").val(res.auditor_group);
+            $("#auditor_item").val(res.auditor_item);
+            $("#auditor_name").val(res.auditor_name);
+            $("#auditor_area").val(res.auditor_area);
+            $("#area_name").val(res.area_name);
+
              if(res){
-               $('#OpenFrmArea').modal('show');
+               $('#OpenFrmSelf').modal('show');
              }
            }
          });
    });
 
 
-   $(".btn-new").on('click',function (e){
-      $('#OpenFrmArea').modal('show');
+   $(".btn-membernew").on('click',function (e){
+      $('#OpenFrmSelf').modal('show');
   });
 
    $(".btn-save").on('click',function (e){
           e.preventDefault();
-          var form = $("#FrmArea");
+          var form = $("#FrmAuditor");
           var url = form.attr('action');
 
           $.ajax({
@@ -211,7 +250,7 @@ $(".btn-edit").on('click',function (e){
                       title: 'เกิดข้อผิดพลาด!...',
                       timer : 1200
                       }).then((result) => {
-                         $('#OpenFrmArea').modal('hide');
+                         $('#OpenFrmAuditor').modal('hide');
                           location.reload();
                       });
                    }
