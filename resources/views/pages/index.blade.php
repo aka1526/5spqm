@@ -5,8 +5,6 @@
 @endsection
 
 @extends('pages.page_sidemenu')
-<!-- @include('pages.page_sidemenu') -->
-
 @section('content-wrapper')
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->

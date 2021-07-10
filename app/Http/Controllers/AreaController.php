@@ -25,6 +25,9 @@ class AreaController extends Controller
     return view('pages.area_index',compact('dataArea'));
   }
   public function get(Request $request){
+    $unid= isset($request->unid) ? $request->unid :'';
+    $dataArea =AreaTbl::where('unid','=',$unid)->first();
+    return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
   }
   public function add(Request $request){
@@ -34,9 +37,10 @@ class AreaController extends Controller
     $area_name    = isset($request->area_name) ? $request->area_name : '';
     $area_owner   = isset($request->area_owner) ? $request->area_owner : '';
     $username='5s';
+    $action= false;
     if($unid =='') {
         $uuid = $this->genUnid();
-      AreaTbl::insert([
+    $action=  AreaTbl::insert([
         'unid'=> $uuid ,
         'area_index'=> $area_index,
         'area_name'=> $area_name,
@@ -48,13 +52,35 @@ class AreaController extends Controller
         'edit_time' => Carbon::now(),
       ]);
     }
+  //  return back();
 
+   return response()->json(['result'=> $action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
-return back();
-  //  return route('area.index', compact("dataArea"));
   }
 
   public function edit(Request $request){
+    $unid       =isset($request->unid) ? $request->unid:'';
+    $area_index   = isset($request->area_index) ? $request->area_index : '0';
+    $area_name    = isset($request->area_name) ? $request->area_name : '';
+    $area_owner   = isset($request->area_owner) ? $request->area_owner : '';
+    $username='5s';
+    $update=false;
+    if($unid !='') {
+
+        $update =AreaTbl::where('unid', '=', $unid)->update([
+        'area_index'=> $area_index,
+        'area_name'=> $area_name,
+        'area_owner'=> $area_owner,
+        'edit_by'=> $username,
+        'edit_time'=> date("Y-m-d H:i:s"),
+      ]);
+
+    }
+    if($update){
+        return response()->json(['result'=> true],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    } else {
+        return response()->json(['result'=>false],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
 
   }
   public function editfield(Request $request){
