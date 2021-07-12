@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\AuditpositionTbl;
 use App\Models\AreaTbl;
 use App\Models\AuditorTbl;
+use App\Models\AuditAreaTbl;
 
 class AuditorController extends Controller
 {
@@ -207,6 +208,46 @@ class AuditorController extends Controller
     return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }
 
+
+public function addauditarea(Request $request){
+  $auditor_unid =isset($request->auditor_unid) ? $request->auditor_unid : '';
+  $check_unid=isset($request->check_unid) ? $request->check_unid : '';
+  $action=false;
+  AuditAreaTbl::where('auditor_unid','=',$auditor_unid)->delete();
+
+  $Auditor  =AuditorTbl::where('unid','=',$auditor_unid)->first();
+  $Position =AuditpositionTbl::where('unid','=',$Auditor->audit_position_unid)->first();
+
+  $username='5s';
+
+  foreach (explode(';',$check_unid) as $row){
+    //dd($row);
+      $uuid = $this->genUnid();
+      $area_unid =$row;
+      if($area_unid!=''){
+        $Area     =AreaTbl::where('unid','=',$area_unid)->first();
+        $action=  AuditAreaTbl::insert([
+        'unid'=> $uuid ,
+        'position_name_eng' => $Position->position_name_eng ,
+         'auditor_unid'=> $auditor_unid,
+         'auditor_name'=> $Auditor->auditor_name,
+         'area_unid'=>  $area_unid,
+         'area_index'=> $Area->area_index ,
+         'area_name'=> $Area->area_name,
+         'area_owner'=> $Area->area_owner,
+         'status'=> "Y",
+         'create_by' => $username,
+         'create_time' => carbon::now(),
+        'edit_by' => $username,
+        'edit_time' => Carbon::now(),
+        ]);
+      }
+
+  }
+
+
+  return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+}
 
   public function editfield(Request $request){
 

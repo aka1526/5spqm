@@ -47,3 +47,4 @@ Route::get('/auditor/member/get',        [AuditorController::class,'memberget'])
 Route::post('/auditor/member/add',     [AuditorController::class,'memberadd'])->name('auditor.member.add');
 Route::post('/auditor/member/edit',  [AuditorController::class,'memberedit'])->name('auditor.member.edit');
 Route::post('/auditor/member/delete',  [AuditorController::class,'memberdelete'])->name('auditor.member.delete');
+Route::post('/auditor/member/addauditarea',     [AuditorController::class,'addauditarea'])->name('auditor.member.addauditarea');

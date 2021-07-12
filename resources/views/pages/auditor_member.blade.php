@@ -80,6 +80,7 @@
               <input  type="hidden" id="audit_position_unid" name="audit_position_unid" value="{{  $dataAuditposition->unid }}">
               <input  type="hidden" id="audit_position" name="audit_position" value="{{  $dataAuditposition->position_name }}">
 
+
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
@@ -93,6 +94,7 @@
                     </div>
 
                     <div class="row">
+                       @if($dataAuditposition->position_name_eng !="TOP")
                         <div class="col-sm-8 form-group">
                           <div class="form-group">
                           <label>กำหนดพื้นที่</label>
@@ -106,6 +108,7 @@
                            </select>
                           </div>
                       </div>
+                      @endif
                         <div class="col-md-6 form-group">
                           <label >กลุ่ม</label>
                           <select class="form-control input-sm" id="auditor_group" name="auditor_group"  {{ strtolower($dataAuditposition->position_name_eng ) =='self' ? 'disabled' : 'required' }} >
@@ -117,7 +120,7 @@
                               <option value="E">E</option>
                           </select>
                         </div>
-                       @if($dataAuditposition->position_name_eng =="TOP")  
+                       @if($dataAuditposition->position_name_eng =="TOP")
                         <div class="col-md-12 form-group">
                             <label>กำหนดพื้นที่  </label>
                             <div class="row">
@@ -126,7 +129,7 @@
                                       @foreach ($dataArea as $key => $row)
                                       @if($key <=6)
                                       <label class="ui-checkbox ui-checkbox-info">
-                                         <input type="checkbox" value="{{ $row->unid}}" >
+                                         <input type="checkbox" class="check_box" value="{{ $row->unid}}" >
                                          <span class="input-span"></span>{{ $row->area_name }}
                                        </label>
                                       @endif
@@ -138,7 +141,7 @@
                                       @foreach ($dataArea as $key => $row)
                                         @if($key>6)
                                         <label class="ui-checkbox ui-checkbox-info">
-                                           <input type="checkbox" value="{{ $row->unid}}" >
+                                           <input type="checkbox" class="check_box" value="{{ $row->unid}}" >
                                            <span class="input-span"></span>{{ $row->area_name }}
                                          </label>
                                         @endif
@@ -286,5 +289,33 @@ $(".btn-edit").on('click',function (e){
                  }
           });
       });
+
+      $(".check_box").on('click', function () {
+          var check_unid = "";
+          var auditor_unid =$("#unid").val();
+         
+          $(":checkbox").each(function () {
+              var ischecked = $(this).is(":checked");
+              if (ischecked) {
+                  check_unid += $(this).val() + ";";
+              }
+          });
+
+          // your awesome code calling ajax
+          var url ="{{route('auditor.member.addauditarea') }}";
+
+            $.ajax({
+              type: "POST",
+              url: url,
+              data: {auditor_unid:auditor_unid,check_unid:check_unid,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
+              success: function(data)
+              {
+              //  console.log(data);
+                  //alert(data); // show response from the php script.
+              }
+            });
+          //
+      });
+
 </script>
 @endsection
