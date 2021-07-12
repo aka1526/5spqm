@@ -79,9 +79,7 @@
               <input  type="hidden" id="unid" name="unid" value="">
               <input  type="hidden" id="audit_position_unid" name="audit_position_unid" value="{{  $dataAuditposition->unid }}">
               <input  type="hidden" id="audit_position" name="audit_position" value="{{  $dataAuditposition->position_name }}">
-              <input  type="hidden" id="auditor_group" name="auditor_group" value="">
-
-
+             
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
