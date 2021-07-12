@@ -113,11 +113,11 @@
                           <label >กลุ่ม</label>
                           <select class="form-control input-sm" id="auditor_group" name="auditor_group"  {{ strtolower($dataAuditposition->position_name_eng ) =='self' ? 'disabled' : 'required' }} >
                               <option value=""></option>
-                              <option value="A">GROUP A</option>
-                              <option value="B">GROUP B</option>
-                              <option value="C">GROUP C</option>
-                              <option value="D">GROUP D</option>
-                              <option value="E">GROUP E</option>
+                              <option value="A">A</option>
+                              <option value="B">B</option>
+                              <option value="C">C</option>
+                              <option value="D">D</option>
+                              <option value="E">E</option>
                           </select>
                         </div>
                     </div>
@@ -203,6 +203,7 @@ $(".btn-edit").on('click',function (e){
              console.log(data);
            var res= data.data;
            $("#unid").val(res.unid);
+           alert(res.auditor_group);
              $("#auditor_name").val(res.auditor_name);
              $("#audit_position_unid").val(res.audit_position_unid);
             $("#audit_position").val(res.audit_position);
