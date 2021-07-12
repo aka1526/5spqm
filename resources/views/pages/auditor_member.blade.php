@@ -104,11 +104,11 @@
                                @foreach ($dataArea as $key => $row)
                                 <option value="{{ $row->unid}}">{{ $row->area_name }}</option>
                                 @endforeach
-
                            </select>
                           </div>
                       </div>
                       @endif
+
                         <div class="col-md-6 form-group">
                           <label >กลุ่ม</label>
                           <select class="form-control input-sm" id="auditor_group" name="auditor_group"  {{ strtolower($dataAuditposition->position_name_eng ) =='self' ? 'disabled' : 'required' }} >
@@ -120,40 +120,11 @@
                               <option value="E">E</option>
                           </select>
                         </div>
-                       @if($dataAuditposition->position_name_eng =="TOP")
-                        <div class="col-md-12 form-group">
-                            <label>กำหนดพื้นที่  </label>
-                            <div class="row">
-                                <div class="col-6 m-b-20">
-                                    <div class="check-list">
-                                      @foreach ($dataArea as $key => $row)
-                                      @if($key <=6)
-                                      <label class="ui-checkbox ui-checkbox-info">
-                                         <input type="checkbox" class="check_box" value="{{ $row->unid}}" >
-                                         <span class="input-span"></span>{{ $row->area_name }}
-                                       </label>
-                                      @endif
-                                       @endforeach
-                                    </div>
-                                </div>
-                                <div class="col-6 m-b-20">
-                                    <div class="check-list">
-                                      @foreach ($dataArea as $key => $row)
-                                        @if($key>6)
-                                        <label class="ui-checkbox ui-checkbox-info">
-                                           <input type="checkbox" class="check_box" value="{{ $row->unid}}" >
-                                           <span class="input-span"></span>{{ $row->area_name }}
-                                         </label>
-                                        @endif
-                                       @endforeach
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        @endif
+
+
                     </div>
-
+<div id="areaauditdata"></div>
            </form>
          </div>
          <div class="modal-footer">
@@ -219,6 +190,7 @@ $(".btn-delete").on('click',function (e){
 
 $(".btn-edit").on('click',function (e){
  e.preventDefault();
+
  var unid =$(this).data('unid');
  var url = "{{ route('auditor.member.get')}}";
   $("#FrmAuditor").attr('action', "{{ route('auditor.member.edit')}}");
@@ -228,11 +200,9 @@ $(".btn-edit").on('click',function (e){
            data: {unid:unid}, // serializes the form's elements.
            success: function(data)
            {
-             console.log(data);
+              //console.log(data.AuditArea);
            var res= data.data;
-           if(res){
-             $('#OpenFrmSelf').modal('show');
-           }
+
            $("#unid").val(res.unid);
 
             $("#auditor_name").val(res.auditor_name);
@@ -244,8 +214,10 @@ $(".btn-edit").on('click',function (e){
             $("#auditor_name").val(res.auditor_name);
             $("#auditor_area").val(res.auditor_area);
             $("#area_name").val(res.area_name);
-
-
+            $("#areaauditdata").html(data.AuditArea);
+            if(res){
+              $('#OpenFrmSelf').modal('show');
+            }
            }
          });
    });
@@ -291,9 +263,9 @@ $(".btn-edit").on('click',function (e){
       });
 
       $(".check_box").on('click', function () {
-          var check_unid = "";
+      /*    var check_unid = "";
           var auditor_unid =$("#unid").val();
-         
+
           $(":checkbox").each(function () {
               var ischecked = $(this).is(":checked");
               if (ischecked) {
@@ -313,9 +285,34 @@ $(".btn-edit").on('click',function (e){
               //  console.log(data);
                   //alert(data); // show response from the php script.
               }
-            });
+            });*/
           //
       });
+function addarea(itemUnid){
+  var check_unid = "";
+  var auditor_unid =$("#unid").val();
 
+  $(":checkbox").each(function () {
+        var ischecked = $(this).is(":checked");
+        if (ischecked) {
+            check_unid += $(this).val() + ";";
+        }
+  });
+//alert(check_unid);
+  // your awesome code calling ajax
+  var url ="{{route('auditor.member.addauditarea') }}";
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {auditor_unid:auditor_unid,check_unid:check_unid,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
+      success: function(data)
+      {
+      //  console.log(data);
+          //alert(data); // show response from the php script.
+      }
+    });
+  //
+}
 </script>
 @endsection

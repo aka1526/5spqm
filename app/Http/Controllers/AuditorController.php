@@ -113,6 +113,7 @@ class AuditorController extends Controller
     $dataAuditposition =AuditpositionTbl::where('unid','=',$unid)->orderBy('position_no')->first();
     $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
     $dataAuditor =AuditorTbl::where('status','=','Y')->where('audit_position_unid','=',$unid)->orderBy('auditor_item')->get();
+
     $datamember="";
      return view('pages.auditor_member',compact('dataAuditposition','datamember','dataArea','dataAuditor'));
 
@@ -157,10 +158,57 @@ class AuditorController extends Controller
 
   }
 
+public function getListArea($AuditUnid=null,$area_unid=null){
+  $AuditArea =AuditAreaTbl::where('auditor_unid','=',$AuditUnid)->where('area_unid','=',$area_unid)->count();
+  $check="";
+  if($AuditArea>0){
+    $check="Checked";
+  }
+
+  return $check ;
+}
   public function memberget(Request $request){
     $unid= isset($request->unid) ? $request->unid :'';
     $dataset =AuditorTbl::where('unid','=',$unid)->first();
-    return response()->json(['result'=> 'success','data'=> $dataset],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    $Arealist =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
+
+
+    $html='
+      <div class="col-md-12 form-group" >
+          <label>กำหนดพื้นที่  </label>
+          <div class="row">';
+
+        $html.= ' <div class="col-6 m-b-20">
+                    <div class="check-list">';
+                    foreach ($Arealist as $key => $row) {
+                        if($key <=3){
+                          $html.='
+                               <label class="ui-checkbox ui-checkbox-info">
+                                 <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\');" class="check_box" value="'.$row->unid.'" '.$this->getListArea($unid,$row->unid).' >
+                                 <span class="input-span"></span>'.$row->area_name.'
+                               </label>';
+                        }
+
+                      }
+            $html.='</div>';
+        $html.='</div>';
+        $html .='<div class="col-6 m-b-20">
+                    <div class="check-list">';
+                    foreach ($Arealist as $key => $row) {
+                        if($key >3){
+                          $html.='
+                               <label class="ui-checkbox ui-checkbox-info">
+                                 <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\')" class="check_box" value="'.$row->unid.'" '.$this->getListArea($unid,$row->unid).' >
+                                 <span class="input-span"></span>'.$row->area_name.'
+                               </label>';
+                        }
+
+                      }
+            $html.='</div>';
+          $html.='</div>';
+        $html.='</div>';
+      $html.='</div>';
+    return response()->json(['result'=> 'success','data'=> $dataset,'AuditArea'=> $html],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }
 
 
