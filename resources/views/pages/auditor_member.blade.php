@@ -124,20 +124,25 @@
                                 <div class="col-6 m-b-20">
                                     <div class="check-list">
                                       @foreach ($dataArea as $key => $row)
-                                        <label class="ui-checkbox ui-checkbox-info">
-                                           <input type="checkbox" value="{{ $row->unid}}">
-                                           <span class="input-span"></span>{{ $row->area_name }}
-                                         </label>
+                                      @if($key <=6)
+                                      <label class="ui-checkbox ui-checkbox-info">
+                                         <input type="checkbox" value="{{ $row->unid}}">
+                                         <span class="input-span"></span>{{ $row->area_name }}
+                                       </label>
+                                      @endif
                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-6 m-b-20">
                                     <div class="check-list">
+                                      @foreach ($dataArea as $key => $row)
+                                        @if($key>6)
                                         <label class="ui-checkbox ui-checkbox-info">
-                                            <input type="checkbox">
-                                            <span class="input-span"></span>Primary
-                                          </label>
-
+                                           <input type="checkbox" value="{{ $row->unid}}">
+                                           <span class="input-span"></span>{{ $row->area_name }}
+                                         </label>
+                                        @endif
+                                       @endforeach
                                     </div>
                                 </div>
                             </div>
