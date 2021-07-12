@@ -79,7 +79,7 @@
               <input  type="hidden" id="unid" name="unid" value="">
               <input  type="hidden" id="audit_position_unid" name="audit_position_unid" value="{{  $dataAuditposition->unid }}">
               <input  type="hidden" id="audit_position" name="audit_position" value="{{  $dataAuditposition->position_name }}">
-             
+
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
@@ -106,8 +106,7 @@
                            </select>
                           </div>
                       </div>
-
-                        <div class="col-sm-4 form-group">
+                        <div class="col-md-6 form-group">
                           <label >กลุ่ม</label>
                           <select class="form-control input-sm" id="auditor_group" name="auditor_group"  {{ strtolower($dataAuditposition->position_name_eng ) =='self' ? 'disabled' : 'required' }} >
                               <option value=""></option>
@@ -118,11 +117,34 @@
                               <option value="E">E</option>
                           </select>
                         </div>
+
+                        <div class="col-md-12 form-group">
+                            <label>กำหนดพื้นที่  </label>
+                            <div class="row">
+                                <div class="col-6 m-b-20">
+                                    <div class="check-list">
+                                      @foreach ($dataArea as $key => $row)
+                                        <label class="ui-checkbox ui-checkbox-info">
+                                           <input type="checkbox" value="{{ $row->unid}}">
+                                           <span class="input-span"></span>{{ $row->area_name }}
+                                         </label>
+                                       @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-6 m-b-20">
+                                    <div class="check-list">
+                                        <label class="ui-checkbox ui-checkbox-info">
+                                            <input type="checkbox">
+                                            <span class="input-span"></span>Primary
+                                          </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
-
-               <div class="form-group">
-
-               </div>
 
            </form>
          </div>
