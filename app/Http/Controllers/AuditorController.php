@@ -171,7 +171,7 @@ public function getListArea($AuditUnid=null,$area_unid=null){
     $unid= isset($request->unid) ? $request->unid :'';
     $dataset =AuditorTbl::where('unid','=',$unid)->first();
     $Arealist =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
-
+    $maxItem=6;
 
     $html='
       <div class="col-md-12 form-group" >
@@ -181,7 +181,7 @@ public function getListArea($AuditUnid=null,$area_unid=null){
         $html.= ' <div class="col-6 m-b-20">
                     <div class="check-list">';
                     foreach ($Arealist as $key => $row) {
-                        if($key <=3){
+                        if($key <=$maxItem){
                           $html.='
                                <label class="ui-checkbox ui-checkbox-info">
                                  <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\');" class="check_box" value="'.$row->unid.'" '.$this->getListArea($unid,$row->unid).' >
@@ -195,7 +195,7 @@ public function getListArea($AuditUnid=null,$area_unid=null){
         $html .='<div class="col-6 m-b-20">
                     <div class="check-list">';
                     foreach ($Arealist as $key => $row) {
-                        if($key >3){
+                        if($key >$maxItem){
                           $html.='
                                <label class="ui-checkbox ui-checkbox-info">
                                  <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\')" class="check_box" value="'.$row->unid.'" '.$this->getListArea($unid,$row->unid).' >
