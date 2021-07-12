@@ -113,9 +113,10 @@
                           <label >กลุ่ม</label>
                           <select class="form-control input-sm" id="auditor_group" name="auditor_group"  {{ strtolower($dataAuditposition->position_name_eng ) =='self' ? 'disabled' : 'required' }} >
                               <option value=""></option>
-                              <option value="A">GROUP A {{ $dataAuditposition->position_name_eng}}</option>
+                              <option value="A">GROUP A</option>
                               <option value="B">GROUP B</option>
-                              <option value="D">GROUP C</option>
+                              <option value="C">GROUP C</option>
+                              <option value="D">GROUP D</option>
                               <option value="E">GROUP E</option>
                           </select>
                         </div>
