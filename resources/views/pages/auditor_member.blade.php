@@ -16,7 +16,7 @@
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">รายชื่อสมาชิกทีม {{ $dataAuditposition->position_name }}  </div>
+                                <div class="ibox-title">รายชื่อสมาชิกทีม {{ isset($dataAuditposition->position_name) ? $dataAuditposition->position_name : '' }}  </div>
                                 <div>
                                     <a class="btn btn-warning btn-sm btn-membernew" href="/auditor"><i class="fa fa-backward"></i> กลับ</a>
                                     <a class="btn btn-info btn-sm btn-membernew" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มสมาชิก</a>
