@@ -64,7 +64,7 @@
 
    <!-- Modal -->
    <div class="modal fade" id="OpenFrmSelf" name="OpenFrmSelf" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-dialog  modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header bg-primary ">
            <h5 class="modal-title text-white" id="exampleModalLongTitle">ข้อมูลพื้นที่การตรวจ</h5>
@@ -117,7 +117,7 @@
                               <option value="E">E</option>
                           </select>
                         </div>
-
+                       @if($dataAuditposition->position_name_eng =="TOP")  
                         <div class="col-md-12 form-group">
                             <label>กำหนดพื้นที่  </label>
                             <div class="row">
@@ -126,7 +126,7 @@
                                       @foreach ($dataArea as $key => $row)
                                       @if($key <=6)
                                       <label class="ui-checkbox ui-checkbox-info">
-                                         <input type="checkbox" value="{{ $row->unid}}">
+                                         <input type="checkbox" value="{{ $row->unid}}" >
                                          <span class="input-span"></span>{{ $row->area_name }}
                                        </label>
                                       @endif
@@ -138,7 +138,7 @@
                                       @foreach ($dataArea as $key => $row)
                                         @if($key>6)
                                         <label class="ui-checkbox ui-checkbox-info">
-                                           <input type="checkbox" value="{{ $row->unid}}">
+                                           <input type="checkbox" value="{{ $row->unid}}" >
                                            <span class="input-span"></span>{{ $row->area_name }}
                                          </label>
                                         @endif
@@ -148,7 +148,7 @@
                             </div>
 
                         </div>
-
+                        @endif
                     </div>
 
            </form>
