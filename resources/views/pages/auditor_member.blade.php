@@ -202,20 +202,22 @@ $(".btn-edit").on('click',function (e){
            {
              console.log(data);
            var res= data.data;
+           if(res){
+             $('#OpenFrmSelf').modal('show');
+           }
            $("#unid").val(res.unid);
-           alert(res.auditor_group);
-             $("#auditor_name").val(res.auditor_name);
-             $("#audit_position_unid").val(res.audit_position_unid);
+
+            $("#auditor_name").val(res.auditor_name);
+            $("#audit_position_unid").val(res.audit_position_unid);
             $("#audit_position").val(res.audit_position);
             $("#auditor_group").val(res.auditor_group);
+
             $("#auditor_item").val(res.auditor_item);
             $("#auditor_name").val(res.auditor_name);
             $("#auditor_area").val(res.auditor_area);
             $("#area_name").val(res.area_name);
 
-             if(res){
-               $('#OpenFrmSelf').modal('show');
-             }
+
            }
          });
    });
