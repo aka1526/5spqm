@@ -133,10 +133,11 @@ class AuditorController extends Controller
     $area_name = isset($area->area_name) ? $area->area_name : '';
     $username='5s';
     $action= false;
-    if($unid =='') {
+
+    $CountAuditor =AuditorTbl::where('unid','=',$unid)->count();
+    if($CountAuditor==0) {
         $uuid = $this->genUnid();
         $action=  AuditorTbl::insert([
-
           'unid'=> $uuid ,
           'audit_position_unid' => $audit_position_unid ,
           'audit_position' => $audit_position,
@@ -151,6 +152,20 @@ class AuditorController extends Controller
           'edit_by' => $username,
           'edit_time' => Carbon::now(),
           ]);
+    } else {
+
+      $action =AuditorTbl::where('unid', '=', $unid)->update([
+        'audit_position_unid' => $audit_position_unid ,
+        'audit_position' => $audit_position,
+        'auditor_group' => $auditor_group,
+        'auditor_area' => $auditor_area ,
+        'area_name' => $area_name ,
+        'auditor_item' => $auditor_item ,
+        'auditor_name' => $auditor_name,
+      'edit_by'=> $username,
+      'edit_time'=> date("Y-m-d H:i:s"),
+    ]);
+      $action=true;
     }
   //  return back();
 
@@ -258,15 +273,75 @@ public function getListArea($AuditUnid=null,$area_unid=null){
 
 
 public function addauditarea(Request $request){
+
   $auditor_unid =isset($request->auditor_unid) ? $request->auditor_unid : '';
   $check_unid=isset($request->check_unid) ? $request->check_unid : '';
   $action=false;
   AuditAreaTbl::where('auditor_unid','=',$auditor_unid)->delete();
 
+
+
+/*
+  auditor_item:auditor_item,
+  auditor_unid:auditor_unid,
+  audit_position_unid:audit_position_unid,
+  auditor_name:auditor_name,
+  */
+  if($auditor_unid==''){
+
+    $audit_position_unid    = isset($request->audit_position_unid) ? $request->audit_position_unid : '';
+    $audit_position         = isset($request->audit_position) ? $request->audit_position : '';
+    $auditor_group          = isset($request->auditor_group) ? $request->auditor_group : '';
+    $auditor_area           = isset($request->auditor_area) ? $request->auditor_area : '';
+    $auditor_item           = isset($request->auditor_item ) ? $request->auditor_item  : '1';
+    $auditor_name           = isset($request->auditor_name) ? $request->auditor_name : '';
+    $period_type            = isset($request->period_type) ? $request->period_type : '';
+    $area                   = AreaTbl::where('unid','=',$auditor_area)->first();
+    $area_name              = isset($area->area_name) ? $area->area_name : '';
+    $username='5s';
+    $Auditposition=  AuditpositionTbl::where('unid','=',$audit_position_unid)->first();
+    $auditor_unid = $this->genUnid();
+
+    if($Auditposition->position_name_eng=='SELF'){
+      $action=  AuditorTbl::insert([
+        'unid'=> $auditor_unid ,
+        'audit_position_unid' => $audit_position_unid ,
+        'audit_position' => $audit_position,
+        'auditor_group' => $auditor_group,
+        'auditor_area' => $auditor_area ,
+        'area_name' => $area_name ,
+        'auditor_item' => $auditor_item ,
+        'auditor_name' => $auditor_name,
+        'status'=> 'Y',
+        'create_by' => $username,
+        'create_time' => carbon::now(),
+        'edit_by' => $username,
+        'edit_time' => Carbon::now(),
+        ]);
+    } else {
+      $action=  AuditorTbl::insert([
+        'unid'=> $auditor_unid ,
+        'audit_position_unid' => $audit_position_unid ,
+        'audit_position' => $audit_position,
+        'auditor_group' => $auditor_group,
+        'auditor_area' => "" ,
+        'area_name' => "" ,
+        'auditor_item' => $auditor_item ,
+        'auditor_name' => $auditor_name,
+        'status'=> 'Y',
+        'create_by' => $username,
+        'create_time' => carbon::now(),
+        'edit_by' => $username,
+        'edit_time' => Carbon::now(),
+        ]);
+    }
+
+
+  }
+  $username='5s';
+
   $Auditor  =AuditorTbl::where('unid','=',$auditor_unid)->first();
   $Position =AuditpositionTbl::where('unid','=',$Auditor->audit_position_unid)->first();
-
-  $username='5s';
 
   foreach (explode(';',$check_unid) as $row){
     //dd($row);
@@ -294,7 +369,7 @@ public function addauditarea(Request $request){
   }
 
 
-  return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+  return response()->json(['result'=>$action,'auditor_unid'=>$auditor_unid],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 }
 
   public function editfield(Request $request){

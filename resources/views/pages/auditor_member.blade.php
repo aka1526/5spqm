@@ -29,7 +29,9 @@
                                         <tr>
                                             <th>#</th>
                                             <th>ชื่อทีมตรวจ</th>
+                                            @if( $dataAuditposition->position_name_eng =='SELF' )
                                             <th>พื้นที่</th>
+                                            @endif
                                             <th>ทีมตรวจ</th>
                                             <th>Action</th>
                                         </tr>
@@ -39,7 +41,10 @@
                                       <tr>
                                           <td>{{ $row->auditor_item }}</td>
                                           <td>{{ $row->auditor_name }}</td>
+
+                                          @if( $dataAuditposition->position_name_eng =='SELF' )
                                           <td>{{ $row->area_name }}</td>
+                                          @endif
                                           <td>{{ $row->auditor_group }}</td>
                                           <td>
                                             <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
@@ -67,8 +72,8 @@
      <div class="modal-dialog  modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header bg-primary ">
-           <h5 class="modal-title text-white" id="exampleModalLongTitle">ข้อมูลพื้นที่การตรวจ</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <h5 class="modal-title text-white" id="exampleModalLongTitle">ข้อมูลสมาชิก</h5>
+           <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
          </div>
@@ -94,7 +99,7 @@
                     </div>
 
                     <div class="row">
-                       @if($dataAuditposition->position_name_eng !="TOP")
+                       <!-- @if($dataAuditposition->position_name_eng !="TOP")
                         <div class="col-sm-8 form-group">
                           <div class="form-group">
                           <label>กำหนดพื้นที่</label>
@@ -107,7 +112,7 @@
                            </select>
                           </div>
                       </div>
-                      @endif
+                      @endif -->
 
                         <div class="col-md-6 form-group">
                           <label >กลุ่ม</label>
@@ -120,15 +125,12 @@
                               <option value="E">E</option>
                           </select>
                         </div>
-
-
-
                     </div>
-<div id="areaauditdata"></div>
+                    <div id="areaauditdata"></div>
            </form>
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
            <button type="button" class="btn btn-primary btn-save" name="btn-save" id="btn-save" >Save</button>
          </div>
        </div>
@@ -164,7 +166,7 @@ $(".btn-delete").on('click',function (e){
                           {
                             if(data.result){
                               Swal.fire({
-                                title: 'คุณต้องการลบข้อมูล?',
+                                title: 'ลบข้อมูลเรียบร้อย?',
                                 icon: 'success',
                                 timer : 1200,
                               }).then(() => {
@@ -172,7 +174,7 @@ $(".btn-delete").on('click',function (e){
                               });
                             } else {
                               Swal.fire({
-                                title: 'คุณต้องการลบข้อมูล?',
+                                title: 'เกิดข้อผิดพลาด?',
                                 icon: 'error',
                                 timer : 1200,
                               }).then(() => {
@@ -224,6 +226,18 @@ $(".btn-edit").on('click',function (e){
 
 
    $(".btn-membernew").on('click',function (e){
+     var unid =$(this).data('unid');
+     var url = "{{ route('auditor.member.get')}}";
+     $.ajax({
+               type: "get",
+               url: url,
+               data: {unid:unid}, // serializes the form's elements.
+               success: function(data)
+               {
+                // console.log(data.AuditArea);
+                 $("#areaauditdata").html(data.AuditArea);
+                }
+      });
       $('#OpenFrmSelf').modal('show');
   });
 
@@ -262,7 +276,7 @@ $(".btn-edit").on('click',function (e){
           });
       });
 
-      $(".check_box").on('click', function () {
+$(".check_box").on('click', function () {
       /*    var check_unid = "";
           var auditor_unid =$("#unid").val();
 
@@ -287,10 +301,15 @@ $(".btn-edit").on('click',function (e){
               }
             });*/
           //
-      });
-function addarea(itemUnid){
+});
+
+function addarea(auditor_area){
   var check_unid = "";
+  var auditor_item =$("#auditor_item").val();
   var auditor_unid =$("#unid").val();
+  var audit_position_unid =$("#audit_position_unid").val();
+  var audit_position =$("#audit_position").val();
+  var auditor_name =$("#auditor_name").val();
 
   $(":checkbox").each(function () {
         var ischecked = $(this).is(":checked");
@@ -298,21 +317,35 @@ function addarea(itemUnid){
             check_unid += $(this).val() + ";";
         }
   });
-//alert(check_unid);
-  // your awesome code calling ajax
-  var url ="{{route('auditor.member.addauditarea') }}";
 
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: {auditor_unid:auditor_unid,check_unid:check_unid,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
-      success: function(data)
-      {
-      //  console.log(data);
-          //alert(data); // show response from the php script.
+  //alert(auditor_name);
+  // your awesome code calling ajax
+
+var url ="{{route('auditor.member.addauditarea') }}";
+$.ajax({
+ type: "POST",
+  url: url,
+  data: {
+    auditor_item:auditor_item,
+    auditor_unid:auditor_unid,
+    auditor_area : auditor_area,
+    audit_position_unid:audit_position_unid,
+    audit_position:audit_position,
+    auditor_name:auditor_name,
+    check_unid:check_unid,
+    "_token": "{{ csrf_token() }}"}, // serializes the form's elements.
+  success: function(data){
+      //console.log(data);
+      $("#unid").val(data.auditor_unid);
+
       }
     });
   //
 }
+
+$(".btn-close").on('click', function () {
+  location.reload();
+  });
+
 </script>
 @endsection
