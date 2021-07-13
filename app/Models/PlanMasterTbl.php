@@ -19,10 +19,13 @@ class PlanMasterTbl extends Model
   protected $fillable = [
          'unid',
          'area_unid',
+         'area_index',
+         'area_name', 
+         'area_owner',
          'position_type',
          'groups',
-          'datestart',
-           'dateend',
+         'datestart',
+         'dateend'
 
      ];
 
