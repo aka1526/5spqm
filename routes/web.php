@@ -51,11 +51,12 @@ Route::post('/auditor/member/addauditarea',     [AuditorController::class,'addau
 
 
 Route::get('/plan',            [PlanController::class,'index'])->name('plan.index');
+Route::get('/plan/get',        [PlanController::class,'get'])->name('plan.get');
 Route::post('/plan/add',       [PlanController::class,'add'])->name('plan.add');
 Route::post('/plan/edit',      [PlanController::class,'edit'])->name('plan.edit');
 Route::post('/plan/delete',    [PlanController::class,'delete'])->name('plan.delete');
 Route::post('/plan/editfield', [PlanController::class,'editfield'])->name('plan.editfield');
-Route::get('/plan/get',        [PlanController::class,'get'])->name('plan.get');
+
 
 
 

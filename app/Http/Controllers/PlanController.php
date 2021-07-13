@@ -10,7 +10,8 @@ class PlanController extends Controller
    return view('pages.plan_index');
  }
  public function get(Request $request){
-
+   dd($request);
+  return view('pages.plan_add');
  }
  public function add(Request $request){
 
