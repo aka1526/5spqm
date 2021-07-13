@@ -2,6 +2,15 @@
 @section('title')
 {{ config('app.name') }}
 @endsection
+
+<!-- @yield('cssheader') -->
+<!-- @yield('jsheader') -->
+@section('cssheader')
+<link href="/assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+ <link href="/assets/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+@endsection
+
+
 @section('page-sidebar')
 @include('pages.page_sidemenu')
 @endsection
@@ -9,42 +18,58 @@
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-               <a href="">
-                <div class="ibox bg-success color-white widget-stat">
-                    <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">TOP Audit</h2>
-                        <div class="m-b-5">สร้างแผนตรวจประเมินพื้นที่</div><i class="fa fa-calendar widget-stat-icon"></i>
-                        <div><i class="fa fa-level-up m-r-5"></i><small>TOP AUDIT</small></div>
-                    </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <a href="">
-                <div class="ibox bg-info color-white widget-stat">
-                    <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">Committee Audit</h2>
-                        <div class="m-b-5">สร้างแผนตรวจประเมินพื้นที่</div><i class="fa fa-calendar widget-stat-icon"></i>
-                        <div><i class="fa fa-level-up m-r-5"></i><small>Committee Audit</small></div>
-                    </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-md-6">
-             <a href="">
-                <div class="ibox bg-warning color-white widget-stat">
-                    <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">Self Audit</h2>
-                        <div class="m-b-5">สร้างแผนตรวจประเมินพื้นที่</div><i class="fa fa-calendar widget-stat-icon"></i>
-                        <div><i class="fa fa-level-up m-r-5"></i><small>Self Audit</small></div>
-                    </div>
-                </div>
-              </a>
-            </div>
+      <div class="row">
+                   <div class="col-xl-12">
+                              <div class="ibox ibox-primary">
+                                  <div class="ibox-head">
+                                      <div class="ibox-title">สร้างแผนตรวจ  {{ $dataPosition->position_name }}
+                                      </div>
+                                      <div >
+                                        <div class="form-group" id="date_5">
+                                             <label class="font-normal"></label>
+                                             <div class="input-daterange input-group" id="datepicker">
+                                                 <input class="input-sm form-control" type="text" name="start" value="{{ date('d/m/Y') }}">
+                                                 <span class="input-group-addon p-l-10 p-r-10">to</span>
+                                                 <input class="input-sm form-control" type="text" name="end" value=" {{ \Carbon\Carbon::now()->endOfYear()->format('d/m/Y')}}">
+                                             </div>
+                                         </div>
+                                      </div>
+                                      <div>
+                                          <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มแผนตรวจ</a>
+                                      </div>
+                                  </div>
+                                  <div class="ibox-body ">
+                                      <table class="table table-bordered">
+                                          <thead class="">
+                                              <tr>
+                                                  <th>#</th>
+                                                  <th>พื้นที่</th>
+                                                  <th>หัวหน้าพื้นที่</th>
+                                                  <th>ความถี่</th>
+                                                  <th>Action</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                            @foreach ($dataArea as $key => $row)
+                                            <tr>
+                                               <td>{{ $row->area_index}}</td>
+                                               <td>{{ $row->area_name}}</td>
+                                               <td>{{ $row->area_owner}}</td>
+                                                <td>{{ $dataPosition->auditor_period}}</td>
+                                               <td>
+                                                 <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="b30a86eb99e04624966c295c5ede35fb" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
 
-        </div>
+                                               </td>
+                                             </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+
+                 </div>
 
 
         <style>
@@ -74,5 +99,20 @@
 @endsection
 
 @section('jsfooter')
-    <!-- <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script> -->
+<script src="/assets/vendors/moment/min/moment.min.js" type="text/javascript"></script>
+<script src="/assets/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="/assets/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+
+
+    $('#date_5 .input-daterange').datepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true,
+        format: "dd/mm/yyyy"
+    });
+ 
+});
+</script>
 @endsection

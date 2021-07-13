@@ -14,9 +14,10 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('tbl_groups', function (Blueprint $table) {
-          $table->string('unid',50)->primary();
+          $table->string('unid',50)->nullable();
           $table->integer('group_index')->nullable()->default(1);
-          $table->string('group_name',50)->nullable()->default('');
+          $table->string('group_position',50)->nullable();  
+          $table->string('group_name',50)->primary();
         });
     }
 

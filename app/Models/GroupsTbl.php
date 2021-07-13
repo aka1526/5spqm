@@ -11,7 +11,7 @@ class GroupsTbl extends Model
   const CREATED_AT = 'create_time';
   const UPDATED_AT = 'edit_time';
 
-  protected $primaryKey = "unid";
+  protected $primaryKey = "group_name";
   protected $keyType = 'string';
   public $incrementing = false;
   public $timestamps = false;
@@ -20,6 +20,7 @@ class GroupsTbl extends Model
          'unid',
          'group_index',
          'group_name',
+         'group_position',
 
      ];
 
