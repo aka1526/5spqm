@@ -35,6 +35,7 @@
                                          </div>
                                       </div>
                                       <div>
+                                        <a class="btn btn-warning btn-sm " href="/plan"><i class="fa fa-backward"></i> กลับ</a>
                                           <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มแผนตรวจ</a>
                                       </div>
                                   </div>
@@ -46,19 +47,27 @@
                                                   <th>พื้นที่</th>
                                                   <th>หัวหน้าพื้นที่</th>
                                                   <th>ความถี่</th>
-                                                  <th>Action</th>
+                                                  <th>กลุ่ม/ทีม</th>
                                               </tr>
                                           </thead>
                                           <tbody>
-                                            @foreach ($dataArea as $key => $row)
+                                            @foreach ($dataPlanMaster as $key => $row)
                                             <tr>
                                                <td>{{ $row->area_index}}</td>
                                                <td>{{ $row->area_name}}</td>
                                                <td>{{ $row->area_owner}}</td>
                                                 <td>{{ $dataPosition->auditor_period}}</td>
                                                <td>
-                                                 <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="b30a86eb99e04624966c295c5ede35fb" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
+                                                 <div class="form-group ">
+                                                  <select class="form-control input-sm col-sm-4" id="groups" name="groups">
 
+                                                      @foreach ($dataGroups as $key => $rowGroup)
+                                                          <option value="{{ $rowGroup->group_index }}" {{ $row->groups==$rowGroup->group_name ? 'selected' :'' }}>{{ $rowGroup->group_name }}</option>
+                                                      @endforeach
+
+                                                  </select>
+                                              </div>
+                                                 <!-- <button class="btn btn-info" type="button" onclick=""><i class="fa fa-calendar"></i> สร้างแผน</button> -->
                                                </td>
                                              </tr>
                                             @endforeach
@@ -112,7 +121,7 @@ $(document).ready(function(){
         autoclose: true,
         format: "dd/mm/yyyy"
     });
- 
+
 });
 </script>
 @endsection
