@@ -1,66 +1,76 @@
 @extends('pages.page_stley')
-
 @section('title')
 {{ config('app.name') }}
 @endsection
-
-@extends('pages.page_sidemenu')
-<!-- @include('pages.page_sidemenu') -->
-
+@section('page-sidebar')
+@include('pages.page_sidemenu')
+@endsection
 @section('content-wrapper')
 <div class="content-wrapper">
+    <!-- START PAGE CONTENT-->
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+               <a href="">
+                <div class="ibox bg-success color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">TOP Audit</h2>
+                        <div class="m-b-5">สร้างแผนตรวจประเมินพื้นที่</div><i class="fa fa-calendar widget-stat-icon"></i>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>TOP AUDIT</small></div>
+                    </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <a href="">
+                <div class="ibox bg-info color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">Committee Audit</h2>
+                        <div class="m-b-5">สร้างแผนตรวจประเมินพื้นที่</div><i class="fa fa-calendar widget-stat-icon"></i>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>Committee Audit</small></div>
+                    </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+             <a href="">
+                <div class="ibox bg-warning color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">Self Audit</h2>
+                        <div class="m-b-5">สร้างแผนตรวจประเมินพื้นที่</div><i class="fa fa-calendar widget-stat-icon"></i>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>Self Audit</small></div>
+                    </div>
+                </div>
+              </a>
+            </div>
 
-       <div class="page-content fade-in-up">
-           <div class="row">
-               <div class="col">
-                   <div class="ibox ibox-primary">
-                       <div class="ibox-head ">
-                           <div class="ibox-title">กำหนดแผนการตรวจ</div>
-                           <div class="ibox-tools">
-
-                           </div>
-                       </div>
-                       <div class="ibox-body">
-                           <form>
-                               <div class="row">
-                                   <div class="col-sm-6 form-group">
-                                       <label>พื้นที่</label>
-                                       <input class="form-control" type="text" placeholder="First Name">
-                                   </div>
-                                   <div class="col-sm-6 form-group">
-                                       <label>ความถี่</label>
-                                       <input class="form-control" type="text" placeholder="First Name">
-                                   </div>
-                               </div>
-                               <div class="form-group">
-                                   <label>Email</label>
-                                   <input class="form-control" type="text" placeholder="Email address">
-                               </div>
-                               <div class="form-group">
-                                   <label>Password</label>
-                                   <input class="form-control" type="password" placeholder="Password">
-                               </div>
-                               <div class="form-group">
-                                   <label class="ui-checkbox">
-                                       <input type="checkbox">
-                                       <span class="input-span"></span>Remamber me</label>
-                               </div>
-                               <div class="form-group">
-                                   <button class="btn btn-default" type="submit">Submit</button>
-                               </div>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-
-           </div>
+        </div>
 
 
-       </div>
-       <!-- END PAGE CONTENT-->
+        <style>
+            .visitors-table tbody tr td:last-child {
+                display: flex;
+                align-items: center;
+            }
 
-   </div>
+            .visitors-table .progress {
+                flex: 1;
+            }
 
+            .visitors-table .progress-parcent {
+                text-align: right;
+                margin-left: 10px;
+            }
+        </style>
+
+    </div>
+    <!-- END PAGE CONTENT-->
+    <!-- <footer class="page-footer">
+        <div class="font-13">2018 © <b>AdminCAST</b> - All rights reserved.</div>
+        <a class="px-4" href="http://themeforest.net/item/adminca-responsive-bootstrap-4-3-angular-4-admin-dashboard-template/20912589" target="_blank">BUY PREMIUM</a>
+        <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
+    </footer> -->
+</div>
 @endsection
 
 @section('jsfooter')

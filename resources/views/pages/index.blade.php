@@ -1,10 +1,10 @@
 @extends('pages.page_stley')
-
 @section('title')
 {{ config('app.name') }}
 @endsection
-
-@extends('pages.page_sidemenu')
+@section('page-sidebar')
+@include('pages.page_sidemenu')
+@endsection
 @section('content-wrapper')
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->

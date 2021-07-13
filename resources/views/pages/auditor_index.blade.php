@@ -4,7 +4,6 @@
 {{ config('app.name') }}
 @endsection
 @section('page-sidebar')
-
 @include('pages.page_sidemenu')
 @endsection
 @section('content-wrapper')

@@ -9,8 +9,13 @@
               </div>
               <ul class="side-menu metismenu">
                   <li>
-                      <a class="active" href="index.html"><i class="sidebar-item-icon fa fa-th-large"></i>
+                      <a class="active" href="{{ route('dashboard.index')}}"><i class="sidebar-item-icon fa fa-th-large"></i>
                           <span class="nav-label">Dashboard</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a class="active" href="{{ route('plan.index')}}"><i class="sidebar-item-icon fa fa-calendar"></i>
+                          <span class="nav-label">แผนตรวจประเมิน</span>
                       </a>
                   </li>
                   <li class="heading">ตั้งค่าระบบ</li>
