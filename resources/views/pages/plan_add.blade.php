@@ -59,7 +59,7 @@
                                                 <td>{{ $dataPosition->auditor_period}}</td>
                                                <td>
                                                  <div class="form-group ">
-                                                  <select class="form-control input-sm col-sm-6" id="groups" name="groups">
+                                                  <select class="form-control input-sm col-sm" id="groups" name="groups">
 
                                                       @foreach ($dataGroups as $key => $rowGroup)
                                                           <option value="{{ $rowGroup->group_index }}" {{ $row->groups==$rowGroup->group_name ? 'selected' :'' }}>{{ $rowGroup->group_name }}</option>
