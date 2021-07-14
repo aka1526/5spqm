@@ -5,6 +5,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Form5sController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,3 +69,11 @@ Route::post('/dashboard/edit',      [DashboardController::class,'edit'])->name('
 Route::post('/dashboard/delete',    [DashboardController::class,'delete'])->name('dashboard.delete');
 Route::post('/dashboard/editfield', [DashboardController::class,'editfield'])->name('dashboard.editfield');
 Route::get('/dashboard/get',        [DashboardController::class,'get'])->name('dashboard.get');
+
+
+Route::get('/form5s',            [Form5sController::class,'index'])->name('form5s.index');
+Route::get('/form5s/get',        [Form5sController::class,'get'])->name('form5s.get');
+Route::post('/form5s/add',       [Form5sController::class,'add'])->name('form5s.add');
+Route::post('/form5s/edit',      [Form5sController::class,'edit'])->name('form5s.edit');
+Route::post('/form5s/delete',    [Form5sController::class,'delete'])->name('form5s.delete');
+Route::post('/form5s/editfield', [Form5sController::class,'editfield'])->name('form5s.editfield');

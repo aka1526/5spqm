@@ -18,6 +18,11 @@
                           <span class="nav-label">แผนตรวจประเมิน</span>
                       </a>
                   </li>
+                  <li>
+                      <a class="active" href="{{ route('form5s.index')}}"><i class="sidebar-item-icon fa fa-calendar"></i>
+                          <span class="nav-label">แบบฟอร์มการตรวจพื้นที่</span>
+                      </a>
+                  </li>
                   <li class="heading">ตั้งค่าระบบ</li>
                   <li>
                       <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
