@@ -16,9 +16,9 @@
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
+                                <div class="ibox-title">แบบฟอร์มการตรวจพื้นที่ระบบ 5ส</div>
                                 <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มพื้นที่</a>
+                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มฟอร์ม</a>
                                 </div>
                             </div>
 
