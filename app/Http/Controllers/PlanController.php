@@ -67,5 +67,25 @@ class PlanController extends Controller
  public function editfield(Request $request){
 
  }
+ public function planmasterupdatefield(Request $request){
+    $unid=isset($request->unid) ?$request->unid : '';
+    $field =isset($request->field) ?$request->field : '';
+    $val=isset($request->val) ?$request->val : '';
+
+    $action=false;
+
+    $count =PlanMasterTbl::where('unid','=',$unid)->count();
+
+    if($count>0){
+      PlanMasterTbl::where('unid','=',$unid)->update([
+          $field => $val,
+      ]);
+    }
+
+
+  return response()->json(['result'=> $action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+
+ }
 
 }

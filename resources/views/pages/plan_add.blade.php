@@ -22,22 +22,47 @@
                    <div class="col-xl-12">
                               <div class="ibox ibox-primary">
                                   <div class="ibox-head">
-                                      <div class="ibox-title">สร้างแผนตรวจ  {{ $dataPosition->position_name }}
-                                      </div>
+                                      <div class="ibox-title">สร้างแผนตรวจ  {{ $dataPosition->position_name }}</div>
+                                      <div class="ibox-title">วันที่   </div>
                                       <div >
-                                        <div class="form-group" id="date_5">
+                                        <div class="form-group" id="date_2">
                                              <label class="font-normal"></label>
-                                             <div class="input-daterange input-group" id="datepicker">
-                                                 <input class="input-sm form-control" type="text" name="start" value="{{ date('d/m/Y') }}">
-                                                 <span class="input-group-addon p-l-10 p-r-10">to</span>
-                                                 <input class="input-sm form-control" type="text" name="end" value=" {{ \Carbon\Carbon::now()->endOfYear()->format('d/m/Y')}}">
+                                             <div class="input-group date">
+                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                 <input class="form-control" type="text" value="07/11/2017">
                                              </div>
                                          </div>
                                       </div>
-                                      <div>
-                                        <a class="btn btn-warning btn-sm " href="/plan"><i class="fa fa-backward"></i> กลับ</a>
-                                          <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มแผนตรวจ</a>
-                                      </div>
+
+                                      <div class="ibox-title">กลุ่มเริ่มต้น   </div>
+                                      <div >
+
+                                           @if($dataPosition->position_name_eng =='SELF')
+                                              <input  type="hidden" id="groups" name="groups" value="">
+                                             @else
+                                             <div class="form-group" >
+                                               <label class="font-normal"></label>
+                                                <select class="form-control input-sm col-sm Groupcheck" id="groups" name="groups" >
+                                                    <option value="">--เลือก--</option>
+                                                  @foreach ($dataGroups as $key => $rowGroup)
+                                                      <option value="{{ $rowGroup->group_index }}"  >{{ $rowGroup->group_name }}</option>
+                                                  @endforeach
+                                                  </select>
+                                              </div >
+                                           @endif
+
+
+
+                                     </div>
+
+                                      <div class="ibox-tools">
+
+                                        <a class="  btn btn-warning btn-sm " href="/plan"><i class="fa fa-backward"></i> กลับ</a>
+                                          <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> แผน</a>
+
+                                  </div>
+
+
                                   </div>
                                   <div class="ibox-body ">
                                       <table class="table table-bordered">
@@ -59,14 +84,16 @@
                                                 <td>{{ $dataPosition->auditor_period}}</td>
                                                <td>
                                                  <div class="form-group ">
-                                                  <select class="form-control input-sm col-sm" id="groups" name="groups">
-
+                                                  <select class="form-control input-sm col-sm Groupcheck" id="groups" name="groups" data-unid="{{ $row->unid}}">
+                                                      @if($dataPosition->position_name_eng !='SELF')
+                                                        <option value="">--เลือก--</option>
+                                                      @endif
                                                       @foreach ($dataGroups as $key => $rowGroup)
                                                           <option value="{{ $rowGroup->group_index }}" {{ $row->groups==$rowGroup->group_name ? 'selected' :'' }}>{{ $rowGroup->group_name }}</option>
                                                       @endforeach
 
                                                   </select>
-                                              </div>
+                                                </div>
                                                  <!-- <button class="btn btn-info" type="button" onclick=""><i class="fa fa-calendar"></i> สร้างแผน</button> -->
                                                </td>
                                              </tr>
@@ -113,15 +140,41 @@
 <script src="/assets/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
+    // $('#date_5 .input-daterange').datepicker({
+    //     keyboardNavigation: false,
+    //     forceParse: false,
+    //     autoclose: true,
+    //     format: "dd/mm/yyyy"
+    // });
+
+    $('#date_2 .input-group.date').datepicker({
+       startView: 1,
+       todayBtn: "linked",
+       keyboardNavigation: false,
+       forceParse: false,
+       autoclose: true,
+       format: "dd/mm/yyyy"
+   });
+
+});
 
 
-    $('#date_5 .input-daterange').datepicker({
-        keyboardNavigation: false,
-        forceParse: false,
-        autoclose: true,
-        format: "dd/mm/yyyy"
-    });
+$('.Groupcheck').on('change',function () {
+  var unid =$(this).data('unid');
+  var val =$(this).val();
+  var field='';
+//  alert(val);
+   var url ="{{ route('planmaster.updatefield')}}";
+        $.ajax({
+           type: "POST",
+           url: url,
+           data: {unid:unid,field:field,val:val}, // serializes the form's elements.
+           success: function(data)
+           {
+               //alert(data); // show response from the php script.
+           }
 
+});
 });
 </script>
 @endsection
