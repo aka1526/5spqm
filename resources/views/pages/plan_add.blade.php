@@ -69,6 +69,17 @@
 
                                   </div>
                                  </form>
+                                 @if (session()->has('result'))
+                                    <script type="text/javascript">
+                                      Swal.fire({
+                                          icon: "{{ session('result') }}",
+                                          title: "{{ session('title') }}",
+                                          showConfirmButton: false,
+                                          timer: 1500
+                                        });
+                                      </script>
+                                  @endif
+
                                   <div class="ibox-body ">
                                       <table class="table table-bordered">
                                           <thead class="">

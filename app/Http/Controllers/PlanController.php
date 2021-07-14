@@ -118,6 +118,13 @@ class PlanController extends Controller
       //$plan_groups='A';
       $Area  =  AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
       $item = $IndexStart >0 ? $IndexStart -1 : 0;
+
+      $countCheck= PlanPositionTbl::where('position_type','=',$position_type)
+        ->where('plan_date','=',$plan_date)->count();
+
+        if($countCheck>0){
+            return back()->with('result', 'error')->with('title', 'ข้อมูลซ้ำ');
+        }
         foreach ($Area as $key => $rowArea) {
 
           $plan_groups  = $AuditGroups[$item]->group_name ;
@@ -125,21 +132,21 @@ class PlanController extends Controller
                   $uuid = $this->genUnid();
                   PlanPositionTbl::insert([
                     'unid' => $uuid
-                  ,'plan_year'  => $plan_year
-                  ,'plan_month' => $plan_month
-                  ,'plan_date' => $plan_date
-                  ,'plan_area_unid' => $rowArea->unid
-                  ,'plan_area_index' => $rowArea->area_index
-                  ,'plan_area_name' => $rowArea->area_name
-                  ,'plan_area_owner' => $rowArea->area_owner
-                  ,'position_type' => $position_type
-                  ,'plan_groups' =>  $plan_groups
-                  ,'plan_status' => 'Y'
-                  ,'create_by' => $username
-                  ,'create_time' => Carbon::now()->format('Y-m-d')
-                  ,'edit_by' => $username
-                  ,'edit_time' => Carbon::now()->format('Y-m-d')
-                 ]);
+                    ,'plan_year'  => $plan_year
+                    ,'plan_month' => $plan_month
+                    ,'plan_date' => $plan_date
+                    ,'plan_area_unid' => $rowArea->unid
+                    ,'plan_area_index' => $rowArea->area_index
+                    ,'plan_area_name' => $rowArea->area_name
+                    ,'plan_area_owner' => $rowArea->area_owner
+                    ,'position_type' => $position_type
+                    ,'plan_groups' =>  $plan_groups
+                    ,'plan_status' => 'Y'
+                    ,'create_by' => $username
+                    ,'create_time' => Carbon::now()->format('Y-m-d')
+                    ,'edit_by' => $username
+                    ,'edit_time' => Carbon::now()->format('Y-m-d')
+                   ]);
 
                   PlanMasterTbl::where('area_unid','=',$rowArea->unid)
                   ->where('position_type','=',$position_type)->update([
@@ -150,7 +157,7 @@ class PlanController extends Controller
              $item = $item >= $IndexTotal ? 0 : $item ;
          }
     }
-    return back();
+        return back()->with('result', 'success')->with('title', 'บันทึกสำเร็จ'); 
  }
 
 
