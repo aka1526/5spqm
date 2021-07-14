@@ -150,6 +150,7 @@ class PlanController extends Controller
              $item = $item >= $IndexTotal ? 0 : $item ;
          }
     }
+    return back();
  }
 
 
