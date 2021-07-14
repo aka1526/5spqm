@@ -29,7 +29,7 @@
                                              <label class="font-normal"></label>
                                              <div class="input-group date">
                                                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                 <input class="form-control" type="text" value="07/11/2017">
+                                                 <input class="form-control" type="text" value="{{ date('d/m/Y')}}">
                                              </div>
                                          </div>
                                       </div>
