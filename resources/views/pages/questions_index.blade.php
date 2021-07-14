@@ -27,8 +27,8 @@
                                     <thead class="">
                                         <tr>
                                             <th>#</th>
-                                            <th>พื้นที่</th>
-                                            <th>หัวหน้าพื้นที่</th>
+                                            <th>ชื่อแบบฟอร์ม</th>
+                                            <th>ผู้ตรวจ</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -37,7 +37,7 @@
                                     <tr>
                                         <td>{{ $row->area_index }}</td>
                                         <td>{{ $row->area_name }}</td>
-                                        <td>{{ $row->area_owner }}</td>
+                                         <td>{{ $row->area_name }}</td>
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>

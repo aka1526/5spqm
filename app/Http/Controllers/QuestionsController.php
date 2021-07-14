@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\AreaTbl;
 
 
-class Form5sController extends Controller
+class QuestionsController extends Controller
 {
 
   protected  $paging =10;
@@ -22,7 +22,7 @@ class Form5sController extends Controller
 
   public function index(Request $request){
    $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
-    return view('pages.form5s_index',compact('dataArea'));
+    return view('pages.questions_index',compact('dataArea'));
   }
   public function get(Request $request){
     $unid= isset($request->unid) ? $request->unid :'';
