@@ -19,7 +19,7 @@
                       </a>
                   </li>
                   <li>
-                      <a class="active" href="{{ route('form5s.index')}}"><i class="sidebar-item-icon fa fa-calendar"></i>
+                      <a class="active" href="{{ route('questions.index')}}"><i class="sidebar-item-icon fa fa-calendar"></i>
                           <span class="nav-label">แบบฟอร์มการตรวจพื้นที่</span>
                       </a>
                   </li>
