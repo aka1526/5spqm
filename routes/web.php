@@ -58,6 +58,7 @@ Route::post('/plan/delete',    [PlanController::class,'delete'])->name('plan.del
 Route::post('/plan/editfield', [PlanController::class,'editfield'])->name('plan.editfield');
 
 Route::post('/planmaster/updatefield',      [PlanController::class,'planmasterupdatefield'])->name('planmaster.updatefield');
+Route::post('/planmaster/createplan',      [PlanController::class,'planmastercreateplan'])->name('planmaster.createplan');
 
 
 

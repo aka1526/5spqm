@@ -21,6 +21,9 @@
       <div class="row">
                    <div class="col-xl-12">
                               <div class="ibox ibox-primary">
+                                 <form name="frmPlan" id="frmPlan"  method="POST" action="{{ route('planmaster.createplan')}}" enctype="multipart/form-data" >
+                                    @csrf
+                                    <input  type="hidden" id='position_type' name='position_type' value="{{ $dataPosition->position_name_eng }}">
                                   <div class="ibox-head">
                                       <div class="ibox-title">สร้างแผนตรวจ  {{ $dataPosition->position_name }}</div>
                                       <div class="ibox-title">วันที่   </div>
@@ -29,7 +32,7 @@
                                              <label class="font-normal"></label>
                                              <div class="input-group date">
                                                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                 <input class="form-control" type="text" value="{{ date('d/m/Y')}}">
+                                                 <input class="form-control" type="text" id='plandate' name='plandate' value="{{ date('d/m/Y')}}">
                                              </div>
                                          </div>
                                       </div>
@@ -42,7 +45,7 @@
                                              @else
                                              <div class="form-group" >
                                                <label class="font-normal"></label>
-                                                <select class="form-control input-sm col-sm Groupcheck" id="groups" name="groups" >
+                                                <select class="form-control input-sm col-sm" id="groups" name="groups" >
                                                     <option value="">--เลือก--</option>
                                                   @foreach ($dataGroups as $key => $rowGroup)
                                                       <option value="{{ $rowGroup->group_index }}"  >{{ $rowGroup->group_name }}</option>
@@ -58,12 +61,14 @@
                                       <div class="ibox-tools">
 
                                         <a class="  btn btn-warning btn-sm " href="/plan"><i class="fa fa-backward"></i> กลับ</a>
-                                          <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> แผน</a>
+                                          <!-- <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> แผน</a> -->
+                                  <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-bell"></i> แผน</button>
 
                                   </div>
 
 
                                   </div>
+                                 </form>
                                   <div class="ibox-body ">
                                       <table class="table table-bordered">
                                           <thead class="">

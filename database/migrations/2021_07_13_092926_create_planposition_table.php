@@ -22,10 +22,14 @@ class CreatePlanpositionTable extends Migration
           $table->integer('plan_area_index')->nullable()->default(0);
           $table->string('plan_area_name',200)->nullable()->default('');
           $table->string('plan_area_owner',200)->nullable()->default('');
-          $table->string('plan_position_type',50)->nullable()->default('');
+          $table->string('position_type',50)->nullable()->default('');
           $table->string('plan_groups',50)->nullable()->default('');
           $table->string('plan_status')->nullable()->default('Y');
 
+          $table->string('create_by',200)->nullable();
+          $table->string('create_time',50)->nullable();
+          $table->string('edit_by',200)->nullable();
+          $table->string('edit_time',50)->nullable();
         });
     }
 
