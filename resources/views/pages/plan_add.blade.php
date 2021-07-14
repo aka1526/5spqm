@@ -72,6 +72,7 @@
                                                   <th>พื้นที่</th>
                                                   <th>หัวหน้าพื้นที่</th>
                                                   <th>ความถี่</th>
+                                                  <th>วันที่ล่าสุด</th>
                                                   <th>กลุ่ม/ทีม</th>
                                               </tr>
                                           </thead>
@@ -80,22 +81,11 @@
                                             <tr>
                                                <td>{{ $row->area_index}}</td>
                                                <td>{{ $row->area_name}}</td>
-                                               <td>{{ $row->area_owner}}</td>
-                                                <td>{{ $dataPosition->auditor_period}}</td>
-                                               <td>
-                                                 <div class="form-group ">
-                                                  <select class="form-control input-sm col-sm Groupcheck" id="groups" name="groups" data-unid="{{ $row->unid}}">
-                                                      @if($dataPosition->position_name_eng !='SELF')
-                                                        <option value="">--เลือก--</option>
-                                                      @endif
-                                                      @foreach ($dataGroups as $key => $rowGroup)
-                                                          <option value="{{ $rowGroup->group_index }}" {{ $row->groups==$rowGroup->group_name ? 'selected' :'' }}>{{ $rowGroup->group_name }}</option>
-                                                      @endforeach
+                                               <td>{{ $row->area_owner }}</td>
+                                              <td>{{ $dataPosition->auditor_period}}</td>
+                                              <td>{{ ($row->datestart !='') ?  date('d-m-Y',strtotime($row->datestart)) : '' }}</td>
 
-                                                  </select>
-                                                </div>
-                                                 <!-- <button class="btn btn-info" type="button" onclick=""><i class="fa fa-calendar"></i> สร้างแผน</button> -->
-                                               </td>
+                                               <td>  {{  ($row->groups !='') ? $row->groups :'-' }}</td>
                                              </tr>
                                             @endforeach
 
