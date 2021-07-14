@@ -45,7 +45,7 @@
                                              @else
                                              <div class="form-group" >
                                                <label class="font-normal"></label>
-                                                <select class="form-control input-sm col-sm" id="groups" name="groups" >
+                                                <select class="form-control input-sm col-sm" id="groups" name="groups" required>
                                                     <option value="">--เลือก--</option>
                                                   @foreach ($dataGroups as $key => $rowGroup)
                                                       <option value="{{ $rowGroup->group_index }}"  >{{ $rowGroup->group_name }}</option>
