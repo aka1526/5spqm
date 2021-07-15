@@ -34,7 +34,7 @@
                                     <tbody>
                                     @foreach ($dtPlan as $key => $row)
                                     <tr>
-                                        <td class="text-center"><h4> {{ date("d", strtotime($row->plan_date)) }}</h4></td>
+                                        <td class="text-center"> {{ date("d", strtotime($row->plan_date)) }}</td>
                                          <td>{{ $row->plan_area_name }}</td>
                                         <td>{{ $row->plan_area_owner }}</td>
                                         <td>
