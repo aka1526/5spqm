@@ -37,7 +37,7 @@ class CheckController extends Controller
       $html .=' <div class="col-sm-3">
                   <div class="alert bg-white ">
                       <a class="btn btn-success btn-block color-'.$monthNum.'" href="#" target="_blank"><h2>'.$monthNum.'. '.  $monthName.'</h2></a>
-                      </p>
+                     
                    </div>
                </div>';
   }
