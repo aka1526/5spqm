@@ -13,6 +13,8 @@
 
                  <div class="ibox-title "> แผนการตรวจพื้นที่ ประจำปี
                    <div class="btn-group ml-3">
+                                  <input class="form-control" type="hidden" id="area_index"  name="area_index" value=""  >
+
                                   <button class="btn btn-info" id="docyear" name="docyear" value="{{ date('Y')}}">{{ date('Y')}}</button>
                                   <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
                                   <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(56px, 33px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -120,9 +122,11 @@ border-color: #3333ff;
   $('.btn-month').on('click',function(){
     var m= $(this).data('month');
     var y= $("#docyear").val();
+    var pv= $(this).data('pv');
+
     var url ="{{route('check.get')}}" ;
     if (m>0) {
-        window.location.href = url+'/'+y+'/'+m;
+        window.location.href = url+'/'+pv+'/'+y+'/'+m;
       }
   });
     </script>

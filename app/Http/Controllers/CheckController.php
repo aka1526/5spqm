@@ -8,6 +8,8 @@ use DB;
 use Illuminate\Support\Str;
 use App\Models\AreaTbl;
 
+use App\Models\PlanPositionTbl;
+
 
 class CheckController extends Controller
 {
@@ -26,6 +28,8 @@ class CheckController extends Controller
   }
 
   public function yearmonth(Request $request){
+
+    $pv =isset($request->pv) ? $request->pv : '';
   //  $unid= isset($request->unid) ? $request->unid :'';
   //  $dataArea =AreaTbl::where('unid','=',$unid)->first();
   //  return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
@@ -37,7 +41,7 @@ class CheckController extends Controller
       $html .=' <div class="col-sm-3">
                   <div class="alert bg-white ">
                       <form id="m'.$monthNum.'" action="" method="post" >
-                      <button type="button" class="btn btn-success btn-block btn-month color-'.$monthNum.'" data-month="'.$monthNum.'" href="#" target="_blank"><h2>'.$monthNum.'. '.  $monthName.'</h2></button>
+                      <button type="button" class="btn btn-success btn-block btn-month color-'.$monthNum.'" data-month="'.$monthNum.'"  data-pv="'.$pv .'" target="_blank"><h2>'.$monthNum.'. '.  $monthName.'</h2></button>
                       </form >
                    </div>
                </div>';
@@ -51,11 +55,15 @@ class CheckController extends Controller
 
 
 
-  public function get(Request $request,$year=null,$moth=null){
+  public function get(Request $request,$pv=null,$year=null,$moth=null){
       $unid= isset($request->unid) ? $request->unid :'';
-     $dataArea =AreaTbl::where('unid','!=',$unid)->get();
+      $dataArea =AreaTbl::where('unid','!=',$unid)->get();
+      $position_type= isset($request->pv) ?strtoupper($request->pv ) :'';
+
+      $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
+      ->where('plan_year','=',$year)->where('plan_month','=',$moth)->orderBy('plan_date')->get();
     // return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-   return view('pages.check_plan',compact('dataArea'));
+   return view('pages.check_plan',compact('dtPlan'));
   }
   public function add(Request $request){
     $unid       =isset($request->unid) ? $request->unid:'';

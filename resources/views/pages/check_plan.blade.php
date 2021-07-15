@@ -33,14 +33,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($dataArea as $key => $row)
+                                    @foreach ($dtPlan as $key => $row)
                                     <tr>
-                                        <td>{{ $row->area_index }}</td>
-                                        <td>{{ $row->area_name }}</td>
-                                        <td>{{ $row->area_owner }}</td>
+                                        <td>{{ $row->plan_area_index }}</td>
+                                        <td>{{ $row->plan_area_name }}</td>
+                                        <td>{{ $row->plan_area_owner }}</td>
                                         <td>
-                                          <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
-                                          <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+                                          <button class="btn btn btn-primary   m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
+
+                                            <i class="fa fa-pencil font-14"></i> ตรวจประเมินพื้นที่</button>
+
                                       </td>
                                     </tr>
                                      @endforeach
@@ -77,7 +79,7 @@
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dataArea)+1}}" required>
+                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dtPlan)+1}}" required>
                         </div>
                         <div class="col-sm-10 form-group">
                             <label>ชื่อพื้นที่</label>

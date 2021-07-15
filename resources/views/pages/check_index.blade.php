@@ -11,7 +11,7 @@
     <div class="page-content fade-in-up">
         <div class="row">
             <div class="col-lg-4 col-md-6">
-               <a href="{{ route('check.yearmonth') }}">
+                 <a href="{{ route('check.yearmonth').'?pv=TOP' }}">
                 <div class="ibox bg-success color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">TOP Audit</h2>
@@ -22,7 +22,7 @@
               </a>
             </div>
             <div class="col-lg-4 col-md-6">
-              <a href="{{ route('check.yearmonth') }}">
+                <a href="{{ route('check.yearmonth').'?pv=COMMIT' }}">
                 <div class="ibox bg-info color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Committee Audit</h2>
@@ -33,7 +33,7 @@
               </a>
             </div>
             <div class="col-lg-4 col-md-6">
-              <a href="{{ route('check.yearmonth').'?pv=Self' }}">
+              <a href="{{ route('check.yearmonth').'?pv=SELF' }}">
                 <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Self Audit</h2>
