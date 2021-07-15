@@ -116,5 +116,14 @@ border-color: #3333ff;
           $("#docyear").val(y);
           $("#docyear").text(y);
       }
+
+  $('.btn-month').on('click',function(){
+    var m= $(this).data('month');
+    var y= $("#docyear").val();
+    var url ="{{route('check.get')}}" ;
+    if (m>0) {
+        window.location.href = url+'/'+y+'/'+m;
+      }
+  });
     </script>
 @endsection

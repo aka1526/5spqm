@@ -36,8 +36,9 @@ class CheckController extends Controller
 
       $html .=' <div class="col-sm-3">
                   <div class="alert bg-white ">
-                      <a class="btn btn-success btn-block color-'.$monthNum.'" data-munth="'.$monthNum.'" href="#" target="_blank"><h2>'.$monthNum.'. '.  $monthName.'</h2></a>
-
+                      <form id="m'.$monthNum.'" action="" method="post" >
+                      <button type="button" class="btn btn-success btn-block btn-month color-'.$monthNum.'" data-month="'.$monthNum.'" href="#" target="_blank"><h2>'.$monthNum.'. '.  $monthName.'</h2></button>
+                      </form >
                    </div>
                </div>';
   }
@@ -50,11 +51,11 @@ class CheckController extends Controller
 
 
 
-  public function get(Request $request){
-    $unid= isset($request->unid) ? $request->unid :'';
-    $dataArea =AreaTbl::where('unid','=',$unid)->first();
-    return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-
+  public function get(Request $request,$year=null,$moth=null){
+      $unid= isset($request->unid) ? $request->unid :'';
+     $dataArea =AreaTbl::where('unid','!=',$unid)->get();
+    // return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+   return view('pages.check_plan',compact('dataArea'));
   }
   public function add(Request $request){
     $unid       =isset($request->unid) ? $request->unid:'';

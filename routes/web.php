@@ -87,8 +87,8 @@ Route::post('/questions/deleteitem',      [QuestionsController::class,'deleteite
 
 
 Route::get('/check',            [CheckController::class,'index'])->name('check.index');
-Route::get('/check/get',        [CheckController::class,'get'])->name('check.get');
 Route::get('/check/yearmonth',    [CheckController::class,'yearmonth'])->name('check.yearmonth');
+Route::get('/check/get/{year?}/{month?}',        [CheckController::class,'get'])->name('check.get');
 
 Route::post('/check/add',       [CheckController::class,'add'])->name('check.add');
 Route::get('/check/edit/{unid}',[CheckController::class,'editunid'])->name('check.editunid');
