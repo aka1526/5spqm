@@ -15,7 +15,7 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('tbl_positions', function (Blueprint $table) {
           $table->string('unid',50)->primary();
-          $table->integer('position_index',50)->nullable()->default(1);
+          $table->integer('position_index')->nullable();
           $table->string('positions_type',50)->nullable()->default('');
           $table->string('position_name',200)->nullable()->default('');
           $table->string('create_by',200)->nullable()->default('');
