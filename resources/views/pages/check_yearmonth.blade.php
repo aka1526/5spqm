@@ -47,13 +47,13 @@
  <style>
 .color-1 {
 color: #fff;
-background-color: #7f8c8d;
-border-color: #7f8c8d;
+background-color: #1a1aff;
+border-color: #1a1aff;
 }
 .color-2 {
 color: #fff;
-background-color: #7f8c8d;
-border-color: #7f8c8d;
+background-color: #1a1aff;
+border-color: #1a1aff;
 }
 .color-3 {
 color: #fff;
