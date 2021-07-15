@@ -40,7 +40,7 @@
                                         <td>
                                           <button class="btn btn btn-primary   m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                            <i class="fa fa-pencil font-14"></i> ตรวจประเมินพื้นที่</button>
+                                            <i class="fa fa-pencil font-14"></i> ตรวจ</button>
 
                                       </td>
                                     </tr>
