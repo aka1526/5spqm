@@ -8,11 +8,17 @@
                       <div class="font-strong">Admin</div><small>Administrator</small></div>
               </div>
               <ul class="side-menu metismenu">
-                  <li>
+                  <!-- <li>
                       <a class="active" href="{{ route('dashboard.index')}}"><i class="sidebar-item-icon fa fa-th-large"></i>
                           <span class="nav-label">Dashboard</span>
                       </a>
+                  </li> -->
+                  <li>
+                      <a class="active" href="{{ route('check.index')}}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                          <span class="nav-label">ตรวจประเมินพื้นที่</span>
+                      </a>
                   </li>
+
                   <li>
                       <a class="active" href="{{ route('plan.index')}}"><i class="sidebar-item-icon fa fa-calendar"></i>
                           <span class="nav-label">แผนตรวจประเมิน</span>

@@ -6,7 +6,7 @@ use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuestionsController;
-
+use App\Http\Controllers\CheckController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,3 +84,14 @@ Route::post('/questions/additem',       [QuestionsController::class,'additem'])-
 Route::get('/questions/getitem',        [QuestionsController::class,'getitem'])->name('questions.getitem');
 Route::post('/questions/edititem',      [QuestionsController::class,'edititem'])->name('questions.edititem');
 Route::post('/questions/deleteitem',      [QuestionsController::class,'deleteitem'])->name('questions.deleteitem');
+
+
+Route::get('/check',            [CheckController::class,'index'])->name('check.index');
+Route::get('/check/get',        [CheckController::class,'get'])->name('check.get');
+Route::get('/check/yearmonth',    [CheckController::class,'yearmonth'])->name('check.yearmonth');
+
+Route::post('/check/add',       [CheckController::class,'add'])->name('check.add');
+Route::get('/check/edit/{unid}',[CheckController::class,'editunid'])->name('check.editunid');
+Route::post('/check/edit',      [CheckController::class,'edit'])->name('check.edit');
+Route::post('/check/delete',    [CheckController::class,'delete'])->name('check.delete');
+Route::post('/check/editfield', [CheckController::class,'editfield'])->name('check.editfield');
