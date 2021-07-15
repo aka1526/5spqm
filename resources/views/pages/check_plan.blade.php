@@ -17,14 +17,15 @@
 
                             <div class="ibox-head">
                                 <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
-                             
+
                             </div>
 
                             <div class="ibox-body ">
                                 <table class="table table-bordered">
                                     <thead class="">
                                         <tr>
-                                            <th>#</th>
+                                             
+                                              <th>วันที่</th>
                                             <th>พื้นที่</th>
                                             <th>หัวหน้าพื้นที่</th>
                                             <th>Action</th>
@@ -33,6 +34,7 @@
                                     <tbody>
                                     @foreach ($dtPlan as $key => $row)
                                     <tr>
+                                        <td class="text-center"><h4> {{ date("d-m-Y", strtotime($row->plan_date)) }}</h4></td>
                                         <td>{{ $row->plan_area_index }}</td>
                                         <td>{{ $row->plan_area_name }}</td>
                                         <td>{{ $row->plan_area_owner }}</td>
