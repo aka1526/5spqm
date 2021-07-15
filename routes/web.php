@@ -74,6 +74,7 @@ Route::get('/dashboard/get',        [DashboardController::class,'get'])->name('d
 Route::get('/questions',            [QuestionsController::class,'index'])->name('questions.index');
 Route::get('/questions/get',        [QuestionsController::class,'get'])->name('questions.get');
 Route::post('/questions/add',       [QuestionsController::class,'add'])->name('questions.add');
+Route::get('/questions/edit/{unid}',      [QuestionsController::class,'editunid'])->name('questions.editunid');
 Route::post('/questions/edit',      [QuestionsController::class,'edit'])->name('questions.edit');
 Route::post('/questions/delete',    [QuestionsController::class,'delete'])->name('questions.delete');
 Route::post('/questions/editfield', [QuestionsController::class,'editfield'])->name('questions.editfield');

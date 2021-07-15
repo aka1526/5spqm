@@ -10,6 +10,9 @@ use App\Models\AreaTbl;
 use App\Models\QuestionsTbl;
 use App\Models\QuestionspositionTbl;
 use App\Models\QuestionsAreaTbl;
+use App\Models\QuestionsItemTbl;
+use App\Models\PositionsTbl;
+
 class QuestionsController extends Controller
 {
 
@@ -28,10 +31,28 @@ class QuestionsController extends Controller
   public function get(Request $request){
      $unid= isset($request->unid) ? $request->unid :'';
 
-
-    $Arealist =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
-
+     $dtQuestions =QuestionsTbl::where('unid','=',$unid)->first();
+     $dtQuestionsposition = QuestionspositionTbl::where('ques_unid','=',$unid)->get();
+     $Arealist =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
+     $dtPositions = PositionsTbl::where('status','=','Y')->orderBy('position_index')->get();
     $maxItem=6;
+    $htmlPosition="";
+
+    $htmlPosition.='<div class="col-md">
+                      <div class="form-group">
+                        <h4> ผู้ตรวจประเมินพื้นที่</h4>
+                        <div class="m-b-10">';
+          foreach ($dtPositions as $key => $item) {
+          $htmlPosition.='  <label class="ui-checkbox ui-checkbox-inline ui-checkbox-success">
+                                <input type="checkbox" id="position_type" name="position_type[]" value="'.$item->positions_type.'"
+                                '. $this->getPositionCheck($unid,$item->positions_type).' >
+                                <span class="input-span"></span>'.$item->position_name.'</label> ';
+
+          }
+
+        $htmlPosition.='</div>
+                    </div>
+                  </div>';
 
     $html='
       <div class="col-md-12 form-group" >
@@ -70,7 +91,11 @@ class QuestionsController extends Controller
         $html.='</div>';
       $html.='</div>';
 
-    return response()->json(['result'=> 'success','area'=> $html],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    return response()->json([
+        'result'=> 'success'
+        ,'data' =>$dtQuestions
+        ,'position' =>$htmlPosition
+        ,'area'=> $html],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
   }
   public function add(Request $request){
@@ -81,11 +106,7 @@ class QuestionsController extends Controller
     $ques_header    = isset($request->ques_header) ? $request->ques_header : '';
     $position_type  = isset($request->position_type) ? $request->position_type : '';
     $areaitem   = isset($request->areaitem) ? $request->areaitem : '';
-/*
-    $validated = $request->validate([
-         'position_type' =>'required',
-          'areaitem' =>'required',
-    ]);*/
+
 
     $this->validate(
         $request,
@@ -100,14 +121,6 @@ class QuestionsController extends Controller
     );
 
 
-    // return Validator::make($position_type, [
-    //
-    //     'position_type' =>'required', //not checkbox
-    // ]);
-    // return Validator::make($areaitem, [
-    //
-    //     'areaitem' =>'required', //not checkbox
-    // ]);
 
     $ques_rev="00";
     $username='5s';
@@ -125,8 +138,6 @@ class QuestionsController extends Controller
           'edit_by' => $username,
           'edit_time' => Carbon::now(),
         ]);
-      //  use App\Models\QuestionspositionTbl;
-        //use App\Models\QuestionsAreaTbl;
 
         if($action && ($position_type !='')){
 
@@ -170,26 +181,78 @@ return back();
   }
 
   public function edit(Request $request){
+
     $unid       =isset($request->unid) ? $request->unid:'';
-    $area_index   = isset($request->area_index) ? $request->area_index : '0';
-    $area_name    = isset($request->area_name) ? $request->area_name : '';
-    $area_owner   = isset($request->area_owner) ? $request->area_owner : '';
+    $ques_index   = isset($request->ques_index) ? $request->ques_index : '1';
+    $ques_header    = isset($request->ques_header) ? $request->ques_header : '';
+    $position_type  = isset($request->position_type) ? $request->position_type : '';
+    $areaitem   = isset($request->areaitem) ? $request->areaitem : '';
+
+    $ques_rev="00";
     $username='5s';
     $action=false;
+
+        $this->validate(
+            $request,
+            [
+              'position_type' => 'required'
+              ,  'areaitem' => 'required'
+            ],
+            [
+              'position_type.required' => 'เกิดข้อผิดพลาด คุณไม่ได้เลือกผู้ตรวจประเมิน'
+              ,'areaitem.required' => 'เกิดข้อผิดพลาด คุณไม่ได้เลือกพื้นที่ตรวจ'
+            ]
+        );
     if($unid !='') {
 
-        $action =AreaTbl::where('unid', '=', $unid)->update([
-        'area_index'=> $area_index,
-        'area_name'=> $area_name,
-        'area_owner'=> $area_owner,
-        'edit_by'=> $username,
-        'edit_time'=> date("Y-m-d H:i:s"),
-      ]);
+      $action=  QuestionsTbl::where('unid','=',$unid)->update([
+              'ques_index'=> $ques_index,
+              'ques_rev'=> $ques_rev,
+              'ques_header'=> $ques_header,
+               'edit_by' => $username,
+              'edit_time' => Carbon::now(),
+            ]);
+
+      if($action && ($position_type !='')){
+        QuestionspositionTbl::where('ques_unid','=',$unid)->delete();
+        foreach ($position_type as $key => $ps_type) {
+          QuestionspositionTbl::insert([
+            'unid' => $this->genUnid()
+            ,'ques_unid' => $unid
+            ,'position_type' => $ps_type
+            ,  'status'=> 'Y'
+            ,'create_by' => $username
+            ,'create_time' => carbon::now()
+            ,'edit_by' => $username
+            ,'edit_time' => Carbon::now()
+          ]);
+        }
+
+      }
+
+      if($action && $areaitem !=''){
+          QuestionsAreaTbl::where('ques_unid','=',$unid)->delete();
+        foreach ($areaitem as $key => $ar_type) {
+            $Area =AreaTbl::where('unid','=',$ar_type)->first();
+          QuestionsAreaTbl::insert([
+              'unid' =>  $this->genUnid()
+              ,'ques_unid' => $unid
+              ,'area_index'=> $Area->area_index
+              ,'area_unid'=> $Area->unid
+              ,'area_name'=> $Area->area_name
+              ,'create_by'=> $username
+              ,'create_time'=>Carbon::now()
+              ,'edit_by'=> $username
+              ,'edit_time'=>Carbon::now()
+              ,'status'=>"Y"
+          ]);
+        }
+      }
 
     }
 
- return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-
+    //return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+  return back();
   }
 
   public function delete(Request $request){
@@ -207,13 +270,28 @@ return back();
 
   }
 
-  public function getListArea($AuditUnid=null,$area_unid=null){
-    //$AuditArea =AuditAreaTbl::where('auditor_unid','=',$AuditUnid)->where('area_unid','=',$area_unid)->count();
-    //$check="";
-    //if($AuditArea>0){
-      $check="Checked";
-    //}
+  public function editunid(Request $request,$unid=null){
 
+      $unid =isset($unid) ? $unid :'';
+      $dtQuestions =QuestionsTbl::where('unid', '=',$unid)->first();
+      $dtQuestionsItem=  QuestionsItemTbl::where('item_refunid','=',$unid)->orderBy('item_index')->get();
+      return view('pages.questions_item',compact('unid','dtQuestions','dtQuestionsItem')) ;
+  }
+
+
+
+
+  public function getListArea($AuditUnid=null,$area_unid=null){
+    $AuditArea =QuestionsAreaTbl::where('ques_unid','=',$AuditUnid)->where('area_unid','=',$area_unid)->count();
+    $check="";
+    if($AuditArea>0){$check="Checked";}
+    return $check ;
+  }
+
+  public function getPositionCheck($ques_unid=null,$position_type=null){
+    $data =QuestionspositionTbl::where('ques_unid','=',$ques_unid)->where('position_type','=',$position_type)->count();
+    $check="";
+    if($data>0){$check="Checked";}
     return $check ;
   }
 }

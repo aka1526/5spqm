@@ -10,25 +10,20 @@
 <div class="content-wrapper">
        <div class="page-content fade-in-up">
 
-         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
            <div class="row">
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">แบบฟอร์มการตรวจพื้นที่ระบบ 5ส</div>
-                                <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มฟอร์ม</a>
-                                </div>
+                                <div class="ibox-title">{{ $dtQuestions->ques_header }}</div>
+                                <div class="ibox-tools">
+
+                                         <a class="  btn btn-warning btn-sm " href="/questions"><i class="fa fa-backward"></i> กลับ</a>
+                                           <!-- <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> แผน</a> -->
+                                   <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-plus-square"></i> เพิ่มหัวข้อ</button>
+
+                                   </div>
                             </div>
 
                             <div class="ibox-body ">
@@ -36,21 +31,18 @@
                                     <thead class="">
                                         <tr>
                                             <th>#</th>
-                                            <th>ชื่อแบบฟอร์ม</th>
-                                            <th>หัวข้อการตรวจ</th>
-                                            <th>สร้างเมื่อวันที่</th>
+                                            <th>พื้นที่</th>
+                                            <th>หัวหน้าพื้นที่</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($dataQuestions as $key => $row)
+                                    @foreach ($dtQuestionsItem as $key => $row)
                                     <tr>
-                                        <td>{{ $row->ques_index }}</td>
-                                        <td>{{ $row->ques_header }}</td>
-                                          <td>
-                                            <a href="/questions/edit/{{ $row->unid }}" class="btn btn btn-danger btn-xs m-r-5 " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="เพิ่มหัวข้อการตรวจ" ><i class="fa fa-plus font-14"></i> หัวข้อ</a>
-                                          </td>
-                                         <td>{{ $row->create_time }}</td>
+                                        <td>{{ $row->item_index }}</td>
+                                        <td>{{ $row->item_toppic }}</td>
+                                        <td>{{ $row->item_desc }}</td>
+                                        <td>{{ $row->create_time }}</td>
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -77,47 +69,41 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header bg-primary ">
-           <h5 class="modal-title text-white" id="exampleModalLongTitle">แบบฟอร์มการตรวจพื้นที่ระบบ 5ส</h5>
+           <h5 class="modal-title text-white" id="exampleModalLongTitle">หัวข้อตรวจประเมิน {{ $dtQuestions->ques_header }}</h5>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
          </div>
          <div class="modal-body ">
-           <form id="FrmQuestions" name="FrmQuestions" action="{{ route('questions.add')}}" method="post" enctype="multipart/form-data">
+           <form id="FrmArea" name="FrmArea" action="{{ route('area.add')}}" method="post" enctype="multipart/form-data">
              @csrf
-              <input  type="hidden" id="unid" name="unid" value="">
+              <input  type="hidden" id="unidref" name="unidref" value="{{ $dtQuestions->unid }}">
 
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="ques_index" min="1" max="20" name="ques_index" placeholder="ลำดับ" value="{{ count($dataQuestions)+1}}" required>
+                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dtQuestionsItem)+1}}" required>
                         </div>
-                        <!-- <div class="col-sm-2 form-group">
-                            <label>Rev.</label>
-                            <input class="form-control" type="text" id="ques_rev" min="1" max="20" name="ques_rev" placeholder="ลำดับ" value="00">
-                        </div> -->
-                        <div class="col-sm-8 form-group">
-                            <label>ชื่อแบบฟอร์ม</label>
-                             <input class="form-control" type="text" id="ques_header" name="ques_header" placeholder="ชื่อแบบฟอร์ม" required>
+                        <div class="col-sm-10 form-group">
+                            <label>ชื่อพื้นที่</label>
+                             <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
                         </div>
                     </div>
-
-                    <div class="row" id="position">
-
-                    </div>
-                    <div class="row" id="areas" ></div>
 
                <div class="form-group">
-                  <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-                   <button class="btn btn-primary " name="btn-save" id="btn-save"  type="submit">บันทึก</button>
+                   <label >หัวหน้าพื้นที่</label>
+                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
                </div>
+<!--
+               <div class="form-group">
+                   <button class="btn btn-primary " type="submit">Submit</button>
+               </div> -->
            </form>
-
          </div>
-         <!-- <div class="modal-footer">
+         <div class="modal-footer">
            <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
            <button type="button" class="btn btn-primary btn-save" name="btn-save" id="btn-save" >Save</button>
-         </div> -->
+         </div>
        </div>
      </div>
    </div>
@@ -177,57 +163,32 @@ $(".btn-delete").on('click',function (e){
 $(".btn-edit").on('click',function (e){
  e.preventDefault();
  var unid =$(this).data('unid');
-
- var url = "{{ route('questions.get')}}";
- $("#FrmQuestions").attr('action', "{{ route('questions.edit')}}");
+ var url = "{{ route('area.get')}}";
+ $("#FrmArea").attr('action', "{{ route('area.edit')}}");
  $.ajax({
            type: "get",
            url: url,
            data: {unid:unid}, // serializes the form's elements.
            success: function(data)
            {
-             var res= data.result;
-              if(res){
-                $("#unid").val(data.data.unid);
-                $("#ques_index").val(data.data.ques_index);
-                $("#ques_header").val(data.data.ques_header);
-
-                $("#position").html(data.position);
-                $("#areas").html(data.area);
-
-                 $('#OpenFrmArea').modal('show');
-              }
+           var res= data.data;
+             $("#unid").val(res.unid);
+             $("#area_index").val(res.area_index);
+             $("#area_name").val(res.area_name);
+             $("#area_owner").val(res.area_owner);
+             if(res){
+               $('#OpenFrmArea').modal('show');
              }
+           }
          });
    });
 
 
    $(".btn-new").on('click',function (e){
-
-    var url ="{{route('questions.get')}}";
-    var unid ="";
-     $.ajax({
-               type: "get",
-               url: url,
-               data: {unid:unid,"_token": "{{ csrf_token() }}"},
-               success: function(data)
-               {
-                   var res= data.result;
-                    if(res){
-                        $("#unid").val('');
-                        $("#ques_index").val('{{ count($dataQuestions)+1 }}')
-                        $("#ques_header").val('');
-                        $("#position").html(data.position);
-                        $("#areas").html(data.area);
-                        $('#OpenFrmArea').modal('show');
-                     }
-               }
-             });
-
-
+      $('#OpenFrmArea').modal('show');
   });
 
-   $(".btn-save2").on('click',function (e){
+   $(".btn-save").on('click',function (e){
           e.preventDefault();
           var form = $("#FrmArea");
           var url = form.attr('action');
@@ -260,33 +221,6 @@ $(".btn-edit").on('click',function (e){
                    }
                  }
           });
-      });
-
-      $(".check_box").on('click', function () {
-            /*    var check_unid = "";
-                var auditor_unid =$("#unid").val();
-
-                $(":checkbox").each(function () {
-                    var ischecked = $(this).is(":checked");
-                    if (ischecked) {
-                        check_unid += $(this).val() + ";";
-                    }
-                });
-
-                // your awesome code calling ajax
-                var url ="{{route('auditor.member.addauditarea') }}";
-
-                  $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: {auditor_unid:auditor_unid,check_unid:check_unid,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
-                    success: function(data)
-                    {
-                    //  console.log(data);
-                        //alert(data); // show response from the php script.
-                    }
-                  });*/
-                //
       });
 </script>
 @endsection
