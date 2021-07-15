@@ -24,7 +24,7 @@
                                 <table class="table table-bordered">
                                     <thead class="">
                                         <tr>
-                                             
+
                                               <th>วันที่</th>
                                             <th>พื้นที่</th>
                                             <th>หัวหน้าพื้นที่</th>
@@ -35,8 +35,7 @@
                                     @foreach ($dtPlan as $key => $row)
                                     <tr>
                                         <td class="text-center"><h4> {{ date("d-m-Y", strtotime($row->plan_date)) }}</h4></td>
-                                        <td>{{ $row->plan_area_index }}</td>
-                                        <td>{{ $row->plan_area_name }}</td>
+                                         <td>{{ $row->plan_area_name }}</td>
                                         <td>{{ $row->plan_area_owner }}</td>
                                         <td>
                                           <button class="btn btn btn-primary   m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
