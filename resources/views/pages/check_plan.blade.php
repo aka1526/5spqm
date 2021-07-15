@@ -17,9 +17,7 @@
 
                             <div class="ibox-head">
                                 <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
-                                <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มพื้นที่</a>
-                                </div>
+                             
                             </div>
 
                             <div class="ibox-body ">
