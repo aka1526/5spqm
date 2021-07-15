@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Cookie;
 use DB;
 use Illuminate\Support\Str;
 use App\Models\AreaTbl;
@@ -330,6 +331,7 @@ class QuestionsController extends Controller
             ,'status'=>"Y"
         ]);
 
+        Cookie::queue('item_toppic',$item_toppic, 60);
     }
      return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 

@@ -34,7 +34,7 @@
                                             <th class="text-center">ลำดับ</th>
                                             <th>รายละเอีดยการตรวจ</th>
                                             <th>สร้างเมื่อ</th>
-                                            <th>Action</th>
+                                            <th width="80px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-sm-10 form-group">
                             <label>หัวข้อการตรวจ</label>
-                             <input class="form-control" type="text" id="item_toppic" name="item_toppic" placeholder="หัวข้อการตรวจ" required>
+                             <input class="form-control" type="text" id="item_toppic" name="item_toppic"value="" placeholder="หัวข้อการตรวจ" required>
                         </div>
                     </div>
 
@@ -190,7 +190,7 @@ $(".btn-edit").on('click',function (e){
    $(".btn-newitem").on('click',function (e){
       $("#unid").val('');
       $("#item_index").val("{{ count($dtQuestionsItem)+1 }}");
-      $("#item_toppic").val('');
+      $("#item_toppic").val("{{ Cookie::get('item_toppic') }}");
       $("#item_desc").html('');
       $('#OpenFrmArea').modal('show');
   });
