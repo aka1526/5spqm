@@ -10,6 +10,15 @@
 <div class="content-wrapper">
        <div class="page-content fade-in-up">
 
+         @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
            <div class="row">
              <div class="col-xl-12">
@@ -33,11 +42,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($dataArea as $key => $row)
+                                    @foreach ($dataQuestions as $key => $row)
                                     <tr>
-                                        <td>{{ $row->area_index }}</td>
-                                        <td>{{ $row->area_name }}</td>
-                                         <td>{{ $row->area_name }}</td>
+                                        <td>{{ $row->ques_index }}</td>
+                                        <td>{{ $row->ques_header }}</td>
+                                         <td>{{ $row->create_time }}</td>
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -70,35 +79,59 @@
            </button>
          </div>
          <div class="modal-body ">
-           <form id="FrmArea" name="FrmArea" action="{{ route('area.add')}}" method="post" enctype="multipart/form-data">
+           <form id="FrmQuestions" name="FrmQuestions" action="{{ route('questions.add')}}" method="post" enctype="multipart/form-data">
              @csrf
               <input  type="hidden" id="unid" name="unid" value="">
 
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dataArea)+1}}" required>
+                            <input class="form-control" type="number" id="ques_index" min="1" max="20" name="ques_index" placeholder="ลำดับ" value="{{ count($dataQuestions)+1}}" required>
                         </div>
-                        <div class="col-sm-10 form-group">
-                            <label>ชื่อพื้นที่</label>
-                             <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
+                        <!-- <div class="col-sm-2 form-group">
+                            <label>Rev.</label>
+                            <input class="form-control" type="text" id="ques_rev" min="1" max="20" name="ques_rev" placeholder="ลำดับ" value="00">
+                        </div> -->
+                        <div class="col-sm-8 form-group">
+                            <label>ชื่อแบบฟอร์ม</label>
+                             <input class="form-control" type="text" id="ques_header" name="ques_header" placeholder="ชื่อแบบฟอร์ม" required>
                         </div>
                     </div>
 
+                    <div class="row">
+                      <div class="col-md">
+                        <div class="form-group">
+                              <h4> ผู้ตรวจประเมินพื้นที่</h4>
+                              <div class="m-b-10">
+                                  <label class="ui-checkbox ui-checkbox-inline ui-checkbox-success">
+                                      <input type="checkbox" id="position_type" name="position_type[]" value="SELF">
+                                      <span class="input-span"></span>หัวหน้าพื้นที่</label>
+                                  <label class="ui-checkbox ui-checkbox-inline ui-checkbox-success">
+                                      <input type="checkbox" id="commit" name="position_type[]" value="COMMIT">
+                                      <span class="input-span"></span>คณะกรรมการ</label>
+                                  <label class="ui-checkbox ui-checkbox-inline ui-checkbox-success">
+                                      <input type="checkbox" id="top" name="position_type[]"  value="TOP">
+                                      <span class="input-span"></span>ผู้บริหาร</label>
+                              </div>
+
+                          </div>
+                      </div>
+
+
+                    </div>
+                    <div class="row" id="areas" ></div>
+
                <div class="form-group">
-                   <label >หัวหน้าพื้นที่</label>
-                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
+                  <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+                   <button class="btn btn-primary " name="btn-save" id="btn-save"  type="submit">บันทึก</button>
                </div>
-<!--
-               <div class="form-group">
-                   <button class="btn btn-primary " type="submit">Submit</button>
-               </div> -->
            </form>
+
          </div>
-         <div class="modal-footer">
+         <!-- <div class="modal-footer">
            <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
            <button type="button" class="btn btn-primary btn-save" name="btn-save" id="btn-save" >Save</button>
-         </div>
+         </div> -->
        </div>
      </div>
    </div>
@@ -180,10 +213,31 @@ $(".btn-edit").on('click',function (e){
 
 
    $(".btn-new").on('click',function (e){
-      $('#OpenFrmArea').modal('show');
+
+    var url ="{{route('questions.get')}}";
+    var unid ="";
+     $.ajax({
+               type: "get",
+               url: url,
+               data: {unid:unid,"_token": "{{ csrf_token() }}"},
+               success: function(data)
+               {
+                   var res= data.result;
+                   console.log(data.area);
+                       $("#areas").html(data.area);
+                     // $("#area_index").val(res.area_index);
+                     // $("#area_name").val(res.area_name);
+                     // $("#area_owner").val(res.area_owner);
+                     if(res){
+                       $('#OpenFrmArea').modal('show');
+                     }
+               }
+             });
+
+
   });
 
-   $(".btn-save").on('click',function (e){
+   $(".btn-save2").on('click',function (e){
           e.preventDefault();
           var form = $("#FrmArea");
           var url = form.attr('action');
@@ -216,6 +270,33 @@ $(".btn-edit").on('click',function (e){
                    }
                  }
           });
+      });
+
+      $(".check_box").on('click', function () {
+            /*    var check_unid = "";
+                var auditor_unid =$("#unid").val();
+
+                $(":checkbox").each(function () {
+                    var ischecked = $(this).is(":checked");
+                    if (ischecked) {
+                        check_unid += $(this).val() + ";";
+                    }
+                });
+
+                // your awesome code calling ajax
+                var url ="{{route('auditor.member.addauditarea') }}";
+
+                  $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {auditor_unid:auditor_unid,check_unid:check_unid,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
+                    success: function(data)
+                    {
+                    //  console.log(data);
+                        //alert(data); // show response from the php script.
+                    }
+                  });*/
+                //
       });
 </script>
 @endsection
