@@ -61,6 +61,7 @@ class CheckController extends Controller
       $position_type= isset($request->pv) ?strtoupper($request->pv ) :'';
 
       $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
+      ->where('plan_area_unid','=','36863c6e0e654ba7b3907fc986418405')
       ->where('plan_year','=',$year)->where('plan_month','=',$moth)->orderBy('plan_date')->orderBy('plan_area_index')->get();
     // return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
    return view('pages.check_plan',compact('dtPlan'));
