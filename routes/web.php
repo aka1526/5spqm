@@ -19,7 +19,7 @@ use App\Http\Controllers\CheckController;
 */
 
 Route::get('/', function () {
-    return view('pages.index');
+    return view('pages.check_index');
 });
 
 Route::get('/plan',       [PlanController::class,'index'])->name('plan.index');
