@@ -21,7 +21,7 @@
 
                                          <a class="  btn btn-warning btn-sm " href="/questions"><i class="fa fa-backward"></i> กลับ</a>
                                            <!-- <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> แผน</a> -->
-                                   <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-plus-square"></i> เพิ่มหัวข้อ</button>
+                                   <button type="submit" class="btn btn-info btn-sm btn-newitem"><i class="fa fa-plus-square"></i> เพิ่มหัวข้อ</button>
 
                                    </div>
                             </div>
@@ -30,19 +30,22 @@
                                 <table class="table table-bordered">
                                     <thead class="">
                                         <tr>
-                                            <th>#</th>
-                                            <th>พื้นที่</th>
-                                            <th>หัวหน้าพื้นที่</th>
+                                            <th>หัวข้อการตรวจ</th>
+                                            <th class="text-center">ลำดับ</th>
+                                            <th>รายละเอีดยการตรวจ</th>
+                                            <th>สร้างเมื่อ</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($dtQuestionsItem as $key => $row)
                                     <tr>
-                                        <td>{{ $row->item_index }}</td>
+
                                         <td>{{ $row->item_toppic }}</td>
+                                        <td class="text-center">{{ $row->item_index }}</td>
                                         <td>{{ $row->item_desc }}</td>
                                         <td>{{ $row->create_time }}</td>
+
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -69,35 +72,32 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header bg-primary ">
-           <h5 class="modal-title text-white" id="exampleModalLongTitle">หัวข้อตรวจประเมิน {{ $dtQuestions->ques_header }}</h5>
+           <h5 class="modal-title text-white" id="exampleModalLongTitle"> <i class="fa fa-list-ol"></i> {{ $dtQuestions->ques_header }}</h5>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
          </div>
          <div class="modal-body ">
-           <form id="FrmArea" name="FrmArea" action="{{ route('area.add')}}" method="post" enctype="multipart/form-data">
+           <form id="FrmArea" name="FrmArea" action="{{ route('questions.additem')}}" method="post" enctype="multipart/form-data">
              @csrf
-              <input  type="hidden" id="unidref" name="unidref" value="{{ $dtQuestions->unid }}">
-
+              <input  type="hidden" id="unid" name="unid" value="">
+              <input  type="hidden" id="item_refunid" name="item_refunid" value="{{ $dtQuestions->unid }}">
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dtQuestionsItem)+1}}" required>
+                            <input class="form-control" type="number" id="item_index" name="item_index" min="1" max="20"  placeholder="ลำดับ" value="{{ count($dtQuestionsItem)+1}}" required>
                         </div>
                         <div class="col-sm-10 form-group">
-                            <label>ชื่อพื้นที่</label>
-                             <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
+                            <label>หัวข้อการตรวจ</label>
+                             <input class="form-control" type="text" id="item_toppic" name="item_toppic" placeholder="หัวข้อการตรวจ" required>
                         </div>
                     </div>
 
                <div class="form-group">
-                   <label >หัวหน้าพื้นที่</label>
-                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
+                   <label >รายละเอีดยการตรวจ</label>
+                   <textarea id="item_desc" name="item_desc" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
                </div>
-<!--
-               <div class="form-group">
-                   <button class="btn btn-primary " type="submit">Submit</button>
-               </div> -->
+
            </form>
          </div>
          <div class="modal-footer">
@@ -117,7 +117,7 @@
 $(".btn-delete").on('click',function (e){
 
     var unid =$(this).data('unid');
-    var url = "{{ route('area.delete')}}";
+    var url = "{{ route('questions.deleteitem')}}";
         Swal.fire({
             title: 'คุณต้องการลบข้อมูล?',
             icon: 'warning',
@@ -163,28 +163,35 @@ $(".btn-delete").on('click',function (e){
 $(".btn-edit").on('click',function (e){
  e.preventDefault();
  var unid =$(this).data('unid');
- var url = "{{ route('area.get')}}";
- $("#FrmArea").attr('action', "{{ route('area.edit')}}");
+
+ var url = "{{ route('questions.getitem')}}";
+ $("#FrmArea").attr('action', "{{ route('questions.edititem')}}");
  $.ajax({
            type: "get",
            url: url,
            data: {unid:unid}, // serializes the form's elements.
            success: function(data)
            {
+            // console.log(data);
            var res= data.data;
-             $("#unid").val(res.unid);
-             $("#area_index").val(res.area_index);
-             $("#area_name").val(res.area_name);
-             $("#area_owner").val(res.area_owner);
+              $("#unid").val(res.unid);
+              $("#item_refunid").val(res.item_refunid);
+              $("#item_index").val(res.item_index);
+              $("#item_toppic").val(res.item_toppic);
+              $("#item_desc").html(res.item_desc);
              if(res){
                $('#OpenFrmArea').modal('show');
-             }
+           }
            }
          });
    });
 
 
-   $(".btn-new").on('click',function (e){
+   $(".btn-newitem").on('click',function (e){
+      $("#unid").val('');
+      $("#item_index").val("{{ count($dtQuestionsItem)+1 }}");
+      $("#item_toppic").val('');
+      $("#item_desc").html('');
       $('#OpenFrmArea').modal('show');
   });
 

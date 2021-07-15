@@ -78,3 +78,9 @@ Route::get('/questions/edit/{unid}',      [QuestionsController::class,'editunid'
 Route::post('/questions/edit',      [QuestionsController::class,'edit'])->name('questions.edit');
 Route::post('/questions/delete',    [QuestionsController::class,'delete'])->name('questions.delete');
 Route::post('/questions/editfield', [QuestionsController::class,'editfield'])->name('questions.editfield');
+
+
+Route::post('/questions/additem',       [QuestionsController::class,'additem'])->name('questions.additem');
+Route::get('/questions/getitem',        [QuestionsController::class,'getitem'])->name('questions.getitem');
+Route::post('/questions/edititem',      [QuestionsController::class,'edititem'])->name('questions.edititem');
+Route::post('/questions/deleteitem',      [QuestionsController::class,'deleteitem'])->name('questions.deleteitem');

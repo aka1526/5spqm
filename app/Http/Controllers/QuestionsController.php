@@ -13,6 +13,7 @@ use App\Models\QuestionsAreaTbl;
 use App\Models\QuestionsItemTbl;
 use App\Models\PositionsTbl;
 
+
 class QuestionsController extends Controller
 {
 
@@ -177,7 +178,7 @@ class QuestionsController extends Controller
     }
 
    //return response()->json(['result'=> $action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-return back();
+    return back();
   }
 
   public function edit(Request $request){
@@ -260,7 +261,15 @@ return back();
     $action=false;
     if($unid !='') {
 
-        $action =AreaTbl::where('unid', '=', $unid)->delete();
+        $action =QuestionsTbl::where('unid', '=', $unid)->delete();
+        if($action){
+            QuestionspositionTbl::where('ques_unid','=',$unid)->delete();
+            QuestionsAreaTbl::where('ques_unid','=',$unid)->delete();
+            QuestionsItemTbl::where('item_refunid','=',$unid)->delete();
+        }
+
+
+
     }
 
  return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
@@ -294,4 +303,95 @@ return back();
     if($data>0){$check="Checked";}
     return $check ;
   }
+
+
+    public function additem(Request $request){
+
+    $item_refunid   =isset($request->item_refunid) ? $request->item_refunid : '';
+    $item_index     =isset($request->item_index) ? $request->item_index : '1';
+    $item_toppic    =isset($request->item_toppic) ? $request->item_toppic : '';
+    $item_desc      =isset($request->item_desc) ? $request->item_desc : '';
+
+    $username='5s';
+    $action=false;
+
+    if($item_refunid!=''){
+
+      $action=  QuestionsItemTbl::insert([
+            'unid' =>  $this->genUnid()
+            ,'item_refunid' => $item_refunid
+            ,'item_index'=> $item_index
+            ,'item_toppic'=> $item_toppic
+            ,'item_desc'=> $item_desc
+            ,'create_by'=> $username
+            ,'create_time'=>Carbon::now()
+            ,'edit_by'=> $username
+            ,'edit_time'=>Carbon::now()
+            ,'status'=>"Y"
+        ]);
+
+    }
+     return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+    }
+
+
+    public function getitem(Request $request){
+        $unid =$request->unid;
+        $dtItem =QuestionsItemTbl::where('unid','=',$unid)->first();
+
+      return response()->json([
+          'result'=> 'success'
+          ,'data'=> $dtItem],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+
+    public function edititem(Request $request){
+      $unid            =isset($request->unid ) ? $request->unid  : '';
+      $item_refunid   =isset($request->item_refunid) ? $request->item_refunid : '';
+      $item_index     =isset($request->item_index) ? $request->item_index : '1';
+      $item_toppic    =isset($request->item_toppic) ? $request->item_toppic : '';
+      $item_desc      =isset($request->item_desc) ? $request->item_desc : '';
+
+      $username='5s';
+      $action=false;
+
+      if($item_refunid!=''){
+
+        $action=  QuestionsItemTbl::where('unid','=',$unid)->update([
+               'item_refunid' => $item_refunid
+              ,'item_index'=> $item_index
+              ,'item_toppic'=> $item_toppic
+              ,'item_desc'=> $item_desc
+
+              ,'edit_by'=> $username
+              ,'edit_time'=>Carbon::now()
+              ,'status'=>"Y"
+          ]);
+
+      }
+
+      return response()->json([
+          'result'=> 'success'
+          ,'data'=> $action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function deleteitem(Request $request){
+      $unid            =isset($request->unid ) ? $request->unid  : '';
+      $count  =QuestionsItemTbl::where('unid','=',$unid)->count();
+
+      $username='5s';
+      $action=false;
+
+      if( $count>0){
+
+      $action=  QuestionsItemTbl::where('unid','=',$unid)->delete();
+
+      }
+
+      return response()->json([
+          'result'=> 'success'
+          ,'data'=> $action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
 }

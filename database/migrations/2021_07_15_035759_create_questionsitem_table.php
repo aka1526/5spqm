@@ -19,11 +19,12 @@ class CreateQuestionsitemTable extends Migration
           $table->integer('item_index')->nullable()->default(0);
           $table->string('item_toppic',200)->nullable()->default('');
           $table->string('item_desc',200)->nullable()->default('');
+          $table->string('status',50)->nullable()->default('Y');
           $table->string('create_by',200)->nullable()->default('');
           $table->string('create_time',50)->nullable()->default('');
           $table->string('edit_by',200)->nullable()->default('');
           $table->string('edit_time',50)->nullable()->default('');
-          $table->string('status',50)->nullable()->default('Y');
+
 
         });
     }

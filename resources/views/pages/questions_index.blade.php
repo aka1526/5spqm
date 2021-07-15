@@ -131,7 +131,7 @@
 $(".btn-delete").on('click',function (e){
 
     var unid =$(this).data('unid');
-    var url = "{{ route('area.delete')}}";
+    var url = "{{ route('questions.delete')}}";
         Swal.fire({
             title: 'คุณต้องการลบข้อมูล?',
             icon: 'warning',
@@ -150,7 +150,7 @@ $(".btn-delete").on('click',function (e){
                           {
                             if(data.result){
                               Swal.fire({
-                                title: 'คุณต้องการลบข้อมูล?',
+                                title: 'ลบข้อมูลสำเร็จ?',
                                 icon: 'success',
                                 timer : 1200,
                               }).then(() => {
@@ -158,7 +158,7 @@ $(".btn-delete").on('click',function (e){
                               });
                             } else {
                               Swal.fire({
-                                title: 'คุณต้องการลบข้อมูล?',
+                                title: 'เกิดข้อผิดพลาด?',
                                 icon: 'error',
                                 timer : 1200,
                               }).then(() => {
