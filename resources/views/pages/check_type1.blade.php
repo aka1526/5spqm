@@ -165,27 +165,46 @@ $(".btn-edit").on('click',function (e){
                  }
           });
       });
- $(".btn-next").on('click',function (e){
-alert('dsfsdfs') ;
+ // $(".btn-next").on('click',function (e){
+ //   alert('dsfsdfs') ;
+ //
+ //   var url    = "{{ route('result.getnext') }}";
+ //   var ans    = $(this).data('ans');
+ //   var next   = $(this).data('next');
+ //
+ //     $.ajax({
+ //             type: "POST",
+ //             url: url,
+ //             data:{ans:ans,next:next,"_token": "{{ csrf_token() }}"},
+ //             success: function(data)
+ //             {
+ //              console.log(data);
+ //               if(data){
+ //                   $("#check-data").html(data.html);
+ //               }
+ //             }
+ //     });
+ //
+ //
+ //   });
+  function getResult(ans,next) {
 
-   var url    = "{{ route('result.getnext') }}";
-   var ans    = $(this).data('ans');
-   var next   = $(this).data('next');
-
-     $.ajax({
-             type: "POST",
-             url: url,
-             data:{ans:ans,next:next,"_token": "{{ csrf_token() }}"},
-             success: function(data)
-             {
-              console.log(data);
-               if(data){
-                   $("#check-data").html(data.html);
-               }
-             }
-     });
+      alert(ans) ;
+      var url    = "{{ route('result.getnext') }}";
 
 
-   });
+        $.ajax({
+                type: "POST",
+                url: url,
+                data:{ans:ans,next:next,"_token": "{{ csrf_token() }}"},
+                success: function(data)
+                {
+                 console.log(data);
+                  if(data){
+                      $("#check-data").html(data.html);
+                  }
+                }
+        });
+   }
 </script>
 @endsection
