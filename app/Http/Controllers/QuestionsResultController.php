@@ -103,7 +103,19 @@ class QuestionsResultController extends Controller
                                <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
                               </div>
                            </td>
-                       </tr> ';
+                       </tr>
+
+                       <div class="container">
+                           <div class="row">
+                             <div class="col-md text-center">
+                               <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
+                               <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
+                             </div>
+
+                           </div>
+                         </div>
+                         <p/>
+                         ';
            }
          }
              if($TotalRow == ($RowCurrent-1)){
