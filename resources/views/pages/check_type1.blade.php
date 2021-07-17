@@ -166,7 +166,7 @@ $(".btn-edit").on('click',function (e){
           });
       });
  $(".btn-next").on('click',function (e){
-   alert('dsfsd');
+   $("#check-data").html('');
    });
 </script>
 @endsection
