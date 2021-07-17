@@ -178,11 +178,14 @@ $(".btn-edit").on('click',function (e){
              data:{ans:ans,next:next,"_token": "{{ csrf_token() }}"},
              success: function(data)
              {
-               console.log(data);
+            //   console.log(data);
+               if(data.result){
+                   $("#check-data").html(data.data);
+               }
              }
      });
 
-    $("#check-data").html('');
+
    });
 </script>
 @endsection
