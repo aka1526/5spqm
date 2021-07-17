@@ -24,6 +24,12 @@ class QuestionsResultController extends Controller
     $uuid = (string) Str::uuid();
    $uuid = str_replace("-","",$uuid);
     return $uuid;
-}
+  }
+
+  public function get(Request $request){
+
+    return response()->json(['result'=> 'success','data'=> $request ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+  }
 
 }

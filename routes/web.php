@@ -7,6 +7,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\CheckController;
+use App\Http\Controllers\QuestionsResultController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,3 +97,6 @@ Route::post('/check/edit',      [CheckController::class,'edit'])->name('check.ed
 Route::post('/check/delete',    [CheckController::class,'delete'])->name('check.delete');
 Route::post('/check/editfield', [CheckController::class,'editfield'])->name('check.editfield');
 Route::post('/check/checked', [CheckController::class,'checked'])->name('check.checked');
+
+
+Route::post('/result/get', [QuestionsResultController::class,'get'])->name('result.get');

@@ -166,7 +166,23 @@ $(".btn-edit").on('click',function (e){
           });
       });
  $(".btn-next").on('click',function (e){
-   $("#check-data").html('');
+
+
+   var url    = "route('result.get')";
+   var ans    = $(this).data('ans');
+   var next   = $(this).data('next');
+
+     $.ajax({
+             type: "POST",
+             url: url,
+             data:{ans:ans,next:next,"_token": "{{ csrf_token() }}"},
+             success: function(data)
+             {
+               console.log(data);
+             }
+     });
+
+    $("#check-data").html('');
    });
 </script>
 @endsection
