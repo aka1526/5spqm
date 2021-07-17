@@ -29,11 +29,11 @@ class QuestionsResultController extends Controller
 
   public function getnext(Request $request){
 
-   $ans = isset($request->ans) ? $request->ans :'';
-   $next = isset($request->next) ? $request->next :'';
+         $ans = isset($request->ans) ? $request->ans :'';
+         $next = isset($request->next) ? $request->next :'';
 
 
-           $html .=' ';
+           $html ='';
            $TotalRow = count($QuestionsResult);
            $RowBack= 0;
            $RowCurrent=0 ;
