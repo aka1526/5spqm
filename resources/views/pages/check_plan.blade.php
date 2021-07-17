@@ -25,9 +25,9 @@
                                     <thead class="">
                                         <tr>
                                             <th>วันที่</th>
-                                            <th>พื้นที่</th>
+                                            <th >พื้นที่</th>
                                                @if($pv !='SELF')
-                                                <th>กลุ่ม</th>
+                                                <th  class="text-center">กลุ่ม</th>
                                                 @endif
                                             <th>หัวหน้าพื้นที่</th>
                                             <th>Action</th>
