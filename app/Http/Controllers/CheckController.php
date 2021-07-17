@@ -284,6 +284,7 @@ class CheckController extends Controller
 if($datatype==1){
 
   $html .='
+  <div class="row">
   <div class="col-xl-12">
   <table class="table table-bordered">
       <thead class="">
@@ -346,6 +347,7 @@ if($datatype==1){
 
          $html .='  </tbody>
                  </table>
+               </div>
                </div>';
 
 }

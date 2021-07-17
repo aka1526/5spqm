@@ -37,11 +37,11 @@
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
                             <div class="ibox-body ">
-                              <div class="row">
+
 
                                       {!! $html !!}
-                                  
-                          </div>
+
+
                                 <div class="row">
                                   <div  class="col-md-6">
                                     <div class="form-group row">
