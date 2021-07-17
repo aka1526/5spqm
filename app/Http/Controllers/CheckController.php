@@ -358,7 +358,7 @@ class CheckController extends Controller
                  <div  class="col-md-6">
                    <div class="form-group row">
                                <div class="col-sm-10 ml-sm-auto">
-                                   <button class="btn btn-info" type="submit">ส่งคะแนน</button>
+                                   <button class="btn btn-info" type="submit">ส่งคะแนน 444</button>
                                </div>
                            </div>
                  </div>
