@@ -16,7 +16,7 @@
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
+                                <div class="ibox-title">ตารางพื้นที่การตรวจ </div>
 
                             </div>
 
@@ -26,7 +26,9 @@
                                         <tr>
                                             <th>วันที่</th>
                                             <th>พื้นที่</th>
-                                              <!-- <th>กลุ่ม</th> -->
+                                               @if($pv !='SELF')
+                                                <th>กลุ่ม</th>
+                                                @endif
                                             <th>หัวหน้าพื้นที่</th>
                                             <th>Action</th>
                                         </tr>
@@ -36,7 +38,10 @@
                                     <tr>
                                         <td class="text-center"> {{ date("d", strtotime($row->plan_date)) }}</td>
                                          <td>{{ $row->plan_area_name }}</td>
-                                         <!-- <td>{{ $row->plan_groups }}</td> -->
+
+                                         @if($pv !='SELF')
+                                       <td>{{ $row->plan_groups }}</td>
+                                          @endif
                                         <td>{{ $row->plan_area_owner }}</td>
                                         <td>
                                           <button class="btn btn btn-primary   m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
