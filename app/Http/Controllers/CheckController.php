@@ -417,7 +417,7 @@ if($datatype==2){
           <div class="container">
               <div class="row">
                 <div class="col-md text-center">
-                  <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowBack.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
+                  <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'" > <i class="fa fa-step-backward"></i>กลับ</button>
                     <button class="btn btn-info" >'.$row->result_index.' / '.count($QuestionsResult).'  </button>
                   <button class="btn btn-primary btn-next" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
                 </div>
