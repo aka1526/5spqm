@@ -282,6 +282,23 @@ class CheckController extends Controller
 //$datatype =$agent->isDesktop() ? 1 : 2 ;
 
 if($datatype==1){
+
+  $html .='
+  <div class="col-xl-12">
+  <table class="table table-bordered">
+      <thead class="">
+          <tr>
+
+              <th>หัวข้อตรวจ</th>
+              <th>ลำดับ</th>
+              <th>รายละเอียดการตรวจ</th>
+              <th class="text-center" width="80px">แก้ไข</th>
+              <th class="text-center" width="80px">พอใช้</th>
+              <th class="text-center" width="80px">ดีเยี่ยม</th>
+          </tr>
+      </thead>
+      <tbody>
+  ';
   foreach ($QuestionsResult as $key => $row) {
     if($row->result_type=='VALUE'){
         if($result_toppic_next != $row->result_toppic){
@@ -326,6 +343,10 @@ if($datatype==1){
                       </tr> ';
            }
          }
+
+         $html .='  </tbody>
+                 </table>
+               </div>';
 
 }
 
