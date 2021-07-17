@@ -355,7 +355,7 @@ if($datatype==1){
 if($datatype==2){
       $html .=' ';
         foreach ($QuestionsResult as $key => $row) {
-          if($key>=0){
+          if($keyช=0){
 
             // result_type
           $html .='
@@ -397,7 +397,6 @@ if($datatype==2){
           </div>
           <div class="container">
               <div class="row">
-
                 <div class="col-md text-center">
                   <button class="btn btn-warning"> <i class="fa fa-step-backward"></i>กลับ</button>
                   <button class="btn btn-primary"> ถัดไป <i class="fa fa-step-forward"></i></button>
