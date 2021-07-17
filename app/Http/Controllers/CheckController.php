@@ -362,6 +362,9 @@ if($datatype==2){
           <div class="ibox">
                   <div class="ibox-head">
                       <div class="ibox-title">'.$row->result_toppic.'</div>
+                      <div>
+                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มฟอร์ม</a>
+                                </div>
                   </div>
                   <div class="ibox-body">
                       <div class="table-responsive">
@@ -402,7 +405,7 @@ if($datatype==2){
                                       </td>
                                   </tr>
 
-                                 
+
                               </tbody>
                           </table>
                       </div>
