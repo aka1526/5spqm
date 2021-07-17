@@ -168,17 +168,12 @@ class CheckController extends Controller
   public function checked(Request $request){
     $year   = Cookie::get('DOC_YEAR')   !='' ? Cookie::get('DOC_YEAR') : '';
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
-    $pv =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
+    $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
 
     $username='5s';
     Cookie::queue('AREA_UNID',$request->area_unid);
-    //dd($year,$month,$pv,$area_unid);
-    //use App\Models\QuestionspositionTbl;
-    //use App\Models\QuestionsItemTbl;
-  //  $QuestionspositionTbl = QuestionspositionTbl::where('position_type','=',$pv)->where('status','=','Y')->first();
-    //$ques_unid = $QuestionspositionTbl->ques_unid;
-  //  $QuestionsArea = QuestionsAreaTbl::where('area_unid','=',$area_unid)->where('ques_unid','=',$ques_unid)->first();
+
    $Questions = QuestionsTbl::select('tbl_questions.*')
                       ->leftJoin("tbl_questions_position", "tbl_questions_position.ques_unid", "=", "tbl_questions.unid")
                       ->leftJoin("tbl_questions_area", "tbl_questions_area.ques_unid", "=", "tbl_questions.unid")
@@ -190,7 +185,7 @@ class CheckController extends Controller
 
   $CountResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
             ->where('positions_type','=',$pv)
-            ->where('area_unid','=',$area_unid)->count();
+            ->where('area_unid','=',$area_unid)->dd();
   if($CountResult==0){
       $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
       $Positions =PositionsTbl::where('positions_type','=',$pv)->first();
