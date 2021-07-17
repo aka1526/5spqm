@@ -179,7 +179,7 @@ class CheckController extends Controller
                       ->leftJoin("tbl_questions_area", "tbl_questions_area.ques_unid", "=", "tbl_questions.unid")
                       ->where('tbl_questions_position.position_type','=',$pv)
                       ->where('tbl_questions_area.area_unid','=',$area_unid)
-                      ->first();
+                      ->dd();
  $ques_unid =$Questions->unid;
   $QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
 
