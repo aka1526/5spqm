@@ -427,7 +427,7 @@ if($datatype==2){
             <p/>
           ';
         }
-          if($TotalRow >= $RowCurrent){
+          if($TotalRow == ($RowCurrent-1)){
             $html .='<div class="row">
           <div  class="col-md-6">
             <div class="form-group row">
