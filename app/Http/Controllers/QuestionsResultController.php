@@ -29,8 +29,8 @@ class QuestionsResultController extends Controller
 
   public function getnext(Request $request){
 
-         $ans = isset($request->ans) ? $request->ans :'';
-         $next = isset($request->next) ? $request->next-1 : 0;
+         $ans   = isset($request->ans) ? $request->ans :'';
+         $next  = isset($request->next) ? $request->next : 0;
          $QuestionsResult=  QuestionsResultTbl::where('unid_ans','=',$ans)
                 ->orderBy('result_index')->get();
 
@@ -44,20 +44,18 @@ class QuestionsResultController extends Controller
              $RowBack= ($row->result_index)-1 > 0 ? $row->result_index-1 : 0;
              $RowCurrent= $row->result_index ;
              $RowNext= ($row->result_index)+1 < $TotalRow ? ($row->result_index)+1 : $TotalRow  ;
-             if( $key ==$next){
+             if( $row->result_index == $next){
 
-
-               // result_type
              $html .='
-           <div class="row">
-             <div class="col-md-12">
-               <div class="ibox">
-                       <div class="ibox-head">
-                           <div class="ibox-title">'.$row->result_toppic.'</div>
-                           <div>
-                               <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
+               <div class="row">
+                 <div class="col-md-12">
+                   <div class="ibox">
+                           <div class="ibox-head">
+                               <div class="ibox-title">'.$row->result_toppic.'</div>
+                               <div>
+                                   <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
+                               </div>
                            </div>
-                       </div>
                        <div class="ibox-body">
                            <div class="row">
                              <div class="col-md-8">
