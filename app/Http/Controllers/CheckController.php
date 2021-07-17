@@ -360,39 +360,45 @@ if($datatype==2){
             // result_type
           $html .='
         <div class="row">
-        <div class="col">
-          <div class="ibox">
-                  <div class="ibox-head">
-                      <div class="ibox-title">'.$row->result_toppic.'</div>
-                      <div>
-                          <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
-                      </div>
-                  </div>
-                  <div class="ibox-body">
-                      <div class="row">
-                        <div class="col-md-8">
-                           <p> <strong> ข้อที่ '.$row->result_index.') </strong> '.$row->result_desc.' </p>
+          <div class="col-md-12">
+            <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">'.$row->result_toppic.'</div>
+                        <div>
+                            <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
                         </div>
-                        <div class="col-md-4">
-                        <div class="form-group">
-                                  <label>คะแนนตรวจประเมิน</label>
+                    </div>
+                    <div class="ibox-body">
+                        <div class="row">
+                          <div class="col-md-8">
+                             <p> <strong> ข้อที่ '.$row->result_index.') </strong> '.$row->result_desc.' </p>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                                    <label>คะแนนตรวจประเมิน</label>
 
-                                  <div>
-                                      <label class="ui-radio ui-radio-inline">
-                                          <input type="radio" name="test">
-                                          <span class="input-span"></span>แก้ไข</label>
-                                      <label class="ui-radio ui-radio-inline">
-                                          <input type="radio" name="test">
-                                          <span class="input-span"></span>พอใช้</label>
-                                      <label class="ui-radio ui-radio-inline">
-                                          <input type="radio" name="test">
-                                          <span class="input-span"></span>ดีเยี่ยม</label>
-                                  </div>
-                              </div>
+                                    <div>
+                                        <label class="ui-radio ui-radio-inline">
+                                            <input type="radio" name="test">
+                                            <span class="input-span"></span>แก้ไข</label>
+                                        <label class="ui-radio ui-radio-inline">
+                                            <input type="radio" name="test">
+                                            <span class="input-span"></span>พอใช้</label>
+                                        <label class="ui-radio ui-radio-inline">
+                                            <input type="radio" name="test">
+                                            <span class="input-span"></span>ดีเยี่ยม</label>
+                                    </div>
+                                </div>
+                          </div>
                         </div>
-                      </div>
-                  </div>
+                    </div>
+                </div>
               </div>
+          </div>
+          <div class="row">
+            <div class="col-md-auto">
+              <button class="btn btn-primary">Primary</button>
+              <button class="btn btn-primary">Primary</button>
             </div>
           </div>
           ';
