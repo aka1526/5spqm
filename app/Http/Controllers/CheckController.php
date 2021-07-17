@@ -359,7 +359,7 @@ if($datatype==2){
           $html .='
           <div class="ibox">
                   <div class="ibox-head">
-                      <div class="ibox-title">Responsive Table</div>
+                      <div class="ibox-title">'.$row->result_toppic.'</div>
                   </div>
                   <div class="ibox-body">
                       <div class="table-responsive">
