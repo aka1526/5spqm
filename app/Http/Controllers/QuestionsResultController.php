@@ -13,6 +13,7 @@ use App\Models\QuestionspositionTbl;
 use App\Models\QuestionsAreaTbl;
 use App\Models\QuestionsItemTbl;
 use App\Models\PositionsTbl;
+use App\Models\QuestionsResultTbl;
 
 
 class QuestionsResultController extends Controller
