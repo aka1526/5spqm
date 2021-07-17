@@ -190,7 +190,10 @@ $(".btn-edit").on('click',function (e){
   function getResult(ans,next) {
 
       var url    = "{{ route('result.getnext') }}";
-
+if(next==0){
+  alert(next);
+  return;
+}
 
         $.ajax({
                 type: "POST",
