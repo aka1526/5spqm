@@ -16,8 +16,8 @@ class CreateQuestionsTable extends Migration
         Schema::create('tbl_questions', function (Blueprint $table) {
           $table->string('unid',50)->primary();
           $table->integer('ques_index')->nullable()->default(0);
-          $table->string('ques_rev')->nullable()->default('00');
-          $table->string('ques_header')->nullable()->default('');
+          $table->string('ques_rev',50)->nullable()->default('00');
+          $table->string('ques_header',200)->nullable()->default('');
           $table->string('create_by',200)->nullable()->default('');
           $table->string('create_time',50)->nullable()->default('');
           $table->string('edit_by',200)->nullable()->default('');

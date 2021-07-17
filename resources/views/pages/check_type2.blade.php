@@ -16,10 +16,9 @@
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">ตารางพื้นที่การตรวจ </div>
+                                <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
                                 <div>
-                                    <a class="btn btn-warning btn-sm " href="/check/yearmonth?pv={{ $pv }}"><i class="fa fa-backward"></i> กลับ</a>
-
+                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มพื้นที่</a>
                                 </div>
                             </div>
 
@@ -27,47 +26,22 @@
                                 <table class="table table-bordered">
                                     <thead class="">
                                         <tr>
-                                            <th>วันที่</th>
-                                            <th >พื้นที่</th>
-                                               @if($pv !='SELF')
-                                                <th  class="text-center">กลุ่ม</th>
-                                                @endif
+                                            <th>#</th>
+                                            <th>พื้นที่</th>
                                             <th>หัวหน้าพื้นที่</th>
-                                            <th>Action1</th>
-                                            <th>Action2</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($dtPlan as $key => $row)
+                                    @foreach ($dataArea as $key => $row)
                                     <tr>
-                                        <td class="text-center"> {{ date("d", strtotime($row->plan_date)) }}</td>
-                                         <td>{{ $row->plan_area_name }}</td>
-
-                                         @if($pv !='SELF')
-                                       <td  class="text-center">{{ $row->plan_groups }}</td>
-                                          @endif
-                                        <td>{{ $row->plan_area_owner }}</td>
+                                        <td>{{ $row->area_index }}</td>
+                                        <td>{{ $row->area_name }}</td>
+                                        <td>{{ $row->area_owner }}</td>
                                         <td>
-                                          <form name="testForm" id="testForm" action="{{route('check.checked')}}"  method="POST"  enctype="multipart/form-data" >
-                                            @csrf
-                                            <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
-
-                                          <button  type=submit class="btn btn btn-primary   m-r-5 " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
-
-                                          <i class="fa fa-pencil font-14 btn-check"></i> แบบ 1</button>
-                                          </form>
-
+                                          <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fa fa-pencil font-14"></i></button>
+                                          <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
                                       </td>
-                                      <td>
-                                        <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
-                                          @csrf
-                                            <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
-                                        <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
-
-                                          <i class="fa fa-pencil font-14 btn-check"></i> แบบ 2</button>
-                                        </form>
-
-                                    </td>
                                     </tr>
                                      @endforeach
 
@@ -103,7 +77,7 @@
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dtPlan)+1}}" required>
+                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dataArea)+1}}" required>
                         </div>
                         <div class="col-sm-10 form-group">
                             <label>ชื่อพื้นที่</label>

@@ -15,10 +15,11 @@ class CreateQuestionsareaTable extends Migration
     {
       Schema::create('tbl_questions_area', function (Blueprint $table) {
         $table->string('unid',50)->primary();
-        $table->string('ques_unid')->nullable()->default('');
+        $table->string('ques_unid',50)->nullable()->default('');
+        $table->string('position_type',50)->nullable()->default('');
         $table->integer('area_index')->nullable()->default(0);
-        $table->string('area_unid')->nullable()->default('');
-        $table->string('area_name')->nullable()->default('');
+        $table->string('area_unid',50)->nullable()->default('');
+        $table->string('area_name',200)->nullable()->default('');
         $table->string('create_by',200)->nullable()->default('');
         $table->string('create_time',50)->nullable()->default('');
         $table->string('edit_by',200)->nullable()->default('');

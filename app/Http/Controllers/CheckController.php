@@ -8,9 +8,13 @@ use DB;
 use Cookie;
 use Illuminate\Support\Str;
 use App\Models\AreaTbl;
-
+use App\Models\PositionsTbl;
 use App\Models\PlanPositionTbl;
-
+use App\Models\QuestionsAreaTbl;
+use App\Models\QuestionspositionTbl;
+use App\Models\QuestionsItemTbl;
+use App\Models\QuestionsTbl;
+use App\Models\QuestionsResultTbl;
 
 class CheckController extends Controller
 {
@@ -84,11 +88,14 @@ class CheckController extends Controller
 
       $year= Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
       $pv =  Cookie::get('DOC_PV') !=''   ? strtoupper(Cookie::get('DOC_PV')) :strtoupper($pv) ;
-      $position_type =$pv;
-      // $position_type= isset($request->pv) ? strtoupper($request->pv ) :'';
 
+
+      $position_type =$pv;
+       Cookie::queue('DOC_MONTH',$moth);
       $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
-      ->where('plan_area_unid','=','36863c6e0e654ba7b3907fc986418405')
+    //  ->where('plan_area_unid','=','36863c6e0e654ba7b3907fc986418405') //web
+      ->where('plan_area_unid','=','b30a86eb99e04624966c295c5ede35fb') // Test
+
       ->where('plan_year','=',$year)->where('plan_month','=',$moth)->orderBy('plan_date')->orderBy('plan_area_index')->get();
     // return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
    return view('pages.check_plan',compact('dtPlan','pv'));
@@ -158,4 +165,164 @@ class CheckController extends Controller
   public function editfield(Request $request){
 
   }
+  public function checked(Request $request){
+    $year   = Cookie::get('DOC_YEAR')   !='' ? Cookie::get('DOC_YEAR') : '';
+    $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
+    $pv =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
+    $area_unid =isset($request->area_unid) ? $request->area_unid :'';
+
+    $username='5s';
+    Cookie::queue('AREA_UNID',$request->area_unid);
+    //dd($year,$month,$pv,$area_unid);
+    //use App\Models\QuestionspositionTbl;
+    //use App\Models\QuestionsItemTbl;
+  //  $QuestionspositionTbl = QuestionspositionTbl::where('position_type','=',$pv)->where('status','=','Y')->first();
+    //$ques_unid = $QuestionspositionTbl->ques_unid;
+  //  $QuestionsArea = QuestionsAreaTbl::where('area_unid','=',$area_unid)->where('ques_unid','=',$ques_unid)->first();
+   $Questions = QuestionsTbl::select('tbl_questions.*')
+                      ->leftJoin("tbl_questions_position", "tbl_questions_position.ques_unid", "=", "tbl_questions.unid")
+                      ->leftJoin("tbl_questions_area", "tbl_questions_area.ques_unid", "=", "tbl_questions.unid")
+                      ->where('tbl_questions_position.position_type','=',$pv)
+                      ->where('tbl_questions_area.area_unid','=',$area_unid)
+                      ->first();
+ $ques_unid =$Questions->unid;
+  $QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
+
+  $CountResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
+            ->where('positions_type','=',$pv)
+            ->where('area_unid','=',$area_unid)->count();
+  if($CountResult==0){
+      $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
+      $Positions =PositionsTbl::where('positions_type','=',$pv)->first();
+      $Area =AreaTbl::where('unid','=',$area_unid)->first();
+      $rowTotal=0;
+      foreach ($QuestionsItem as $key => $item) {
+        $rowTotal++;
+            QuestionsResultTbl::insert([
+              'unid' =>  $this->genUnid()
+              ,'ques_unid' => $Questions->unid
+              ,'ques_rev' => $Questions->ques_rev
+              ,'ques_header' => $Questions->ques_header
+              ,'positions_type' => $pv
+              ,'position_name' => $Positions->position_name
+              ,'area_unid' =>$Area->unid
+              ,'area_name' =>$Area->area_name
+              ,'area_owner' =>$Area->area_owner
+              ,'result_index' =>$item->item_index
+              ,'result_toppic' =>$item->item_toppic
+              ,'result_desc' =>$item->item_desc
+              ,'result_val' => 0
+              ,'status'=>"Y"
+              ,'result_type' => "VALUE"
+              ,'create_by'=> $username
+              ,'create_time'=>Carbon::now()
+              ,'edit_by'=> $username
+              ,'edit_time'=>Carbon::now()
+            ]);
+      }
+
+      ///
+      $rowTotal =$rowTotal+1;
+      QuestionsResultTbl::insert([
+        'unid' =>  $this->genUnid()
+        ,'ques_unid' => $Questions->unid
+        ,'ques_rev' => $Questions->ques_rev
+        ,'ques_header' => $Questions->ques_header
+        ,'positions_type' => $pv
+        ,'position_name' => $Positions->position_name
+        ,'area_unid' =>$Area->unid
+        ,'area_name' =>$Area->area_name
+        ,'area_owner' =>$Area->area_owner
+        ,'result_index' => $rowTotal
+        ,'result_toppic' => 'สิ่งที่ควรปรับปรุง'
+        ,'result_desc' => ""
+        ,'result_val' => 0
+        ,'status'=>"Y"
+          ,'result_type' => "TEXT"
+        ,'create_by'=> $username
+        ,'create_time'=>Carbon::now()
+        ,'edit_by'=> $username
+        ,'edit_time'=>Carbon::now()
+      ]);
+
+      $rowTotal =$rowTotal+1;
+      QuestionsResultTbl::insert([
+        'unid' =>  $this->genUnid()
+        ,'ques_unid' => $Questions->unid
+        ,'ques_rev' => $Questions->ques_rev
+        ,'ques_header' => $Questions->ques_header
+        ,'positions_type' => $pv
+        ,'position_name' => $Positions->position_name
+        ,'area_unid' =>$Area->unid
+        ,'area_name' =>$Area->area_name
+        ,'area_owner' =>$Area->area_owner
+        ,'result_index' => $rowTotal
+        ,'result_toppic' => 'สิ่งที่ดี เป็นตัวอย่างได้'
+        ,'result_desc' => ""
+        ,'result_val' => 0
+        ,'status'=>"Y"
+        ,'result_type' => "TEXT"
+        ,'create_by'=> $username
+        ,'create_time'=>Carbon::now()
+        ,'edit_by'=> $username
+        ,'edit_time'=>Carbon::now()
+      ]);
+
+  }
+
+  $QuestionsResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
+            ->where('positions_type','=',$pv)
+            ->where('area_unid','=',$area_unid)->orderBy('result_index')->get();
+  $html ='';
+  $result_toppic_befor='';
+  $result_toppic_next='';
+foreach ($QuestionsResult as $key => $row) {
+  if($row->result_type=='VALUE'){
+      if($result_toppic_next != $row->result_toppic){
+        $result_toppic_next = $row->result_toppic;
+        $result_toppic_befor= $row->result_toppic;
+      } else {
+        $result_toppic_befor='';
+      }
+
+    $html .='<tr>
+                 <td><strong>'.$result_toppic_befor.'</strong></td>
+                 <td class="text-center">'.$row->result_index.'</td>
+                 <td>'.$row->result_desc.'</td>
+
+                 <td class="text-center">
+                   <label class="ui-radio ui-radio-success">
+                    <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                    <span class="input-span"></span>
+                     </label>
+                 </td>
+                 <td class="text-center">
+                   <label class="ui-radio ui-radio-success">
+                    <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                    <span class="input-span"></span>
+                     </label>
+                 </td>
+                 <td class="text-center">
+                   <label class="ui-radio ui-radio-success">
+                    <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                    <span class="input-span"></span>
+                     </label>
+                 </td>
+             </tr>';
+         } else {
+          $html .=' <tr>
+                       <td colspan="6">
+                          <div class="form-group">
+                            <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
+                            <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
+                           </div>
+                        </td>
+                    </tr> ';
+         }
+       }
+
+    return view('pages.check_type1',compact('Questions','QuestionsResult','html')) ;
+  }
+
+
 }

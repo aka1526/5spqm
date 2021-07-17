@@ -15,8 +15,8 @@ class CreateQuestionspositionTable extends Migration
     {
         Schema::create('tbl_questions_position', function (Blueprint $table) {
           $table->string('unid',50)->primary();
-          $table->string('ques_unid')->nullable()->default('');
-          $table->string('position_type')->nullable()->default('');
+          $table->string('ques_unid',50)->nullable()->default('');
+          $table->string('position_type',50)->nullable()->default('');
           $table->string('create_by',200)->nullable()->default('');
           $table->string('create_time',50)->nullable()->default('');
           $table->string('edit_by',200)->nullable()->default('');

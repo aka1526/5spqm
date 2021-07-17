@@ -148,7 +148,7 @@ class QuestionsController extends Controller
               'unid' => $this->genUnid()
               ,'ques_unid' => $uuid
               ,'position_type' => $ps_type
-              ,  'status'=> 'Y'
+              ,'status'=> 'Y'
               ,'create_by' => $username
               ,'create_time' => carbon::now()
               ,'edit_by' => $username
@@ -164,6 +164,7 @@ class QuestionsController extends Controller
             QuestionsAreaTbl::insert([
                 'unid' =>  $this->genUnid()
                 ,'ques_unid' => $uuid
+                ,'position_type'=> ''
                 ,'area_index'=> $Area->area_index
                 ,'area_unid'=> $Area->unid
                 ,'area_name'=> $Area->area_name
