@@ -363,7 +363,7 @@ if($datatype==2){
                   <div class="ibox-head">
                       <div class="ibox-title">'.$row->result_toppic.'</div>
                       <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i>ลำดับที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
+                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
                                 </div>
                   </div>
                   <div class="ibox-body">
