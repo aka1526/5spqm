@@ -46,9 +46,9 @@
                                             <th>หัวข้อตรวจ</th>
                                             <th>ลำดับ</th>
                                             <th>รายละเอียดการตรวจ</th>
-                                            <th class="text-center" width="80px">แก้ไข</th>
-                                            <th class="text-center" width="80px">พอใช้</th>
-                                            <th class="text-center" width="80px">ดีเยี่ยม</th>
+                                            <th class="text-center" width="80px">0</th>
+                                            <th class="text-center" width="80px">1</th>
+                                            <th class="text-center" width="80px">3</th>
                                         </tr>
                                     </thead>
                                     <tbody>
