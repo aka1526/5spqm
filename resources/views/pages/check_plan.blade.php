@@ -33,8 +33,8 @@
                                                 <th  class="text-center">กลุ่ม</th>
                                                 @endif
                                             <th>หัวหน้าพื้นที่</th>
-                                            <th>Action1</th>
-                                            <th>Action2</th>
+                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,24 +51,14 @@
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}"  method="POST"  enctype="multipart/form-data" >
                                             @csrf
                                             <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
-                                            <input type="hidden" id="datatype" name="datatype" value="1">
-                                          <button  type=submit class="btn btn btn-primary   m-r-5 " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                          <i class="fa fa-pencil font-14 btn-check"></i> แบบ 1</button>
+                                            <button  type=submit class="btn btn btn-primary   m-r-5 " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
+
+                                          <i class="fa fa-pencil font-14 btn-check"></i>ตรวจประเมินพื้นที่</button>
                                           </form>
 
                                       </td>
-                                      <td>
-                                        <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
-                                          @csrf
-                                            <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
-                                            <input type="hidden" id="datatype" name="datatype" value="2">
-                                        <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                          <i class="fa fa-pencil font-14 btn-check"></i> แบบ 2</button>
-                                        </form>
-
-                                    </td>
                                     </tr>
                                      @endforeach
 
