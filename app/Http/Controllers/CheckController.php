@@ -374,17 +374,15 @@ if($datatype==2){
         $RowNext=0  ;
 
         foreach ($QuestionsResult as $key => $row) {
-          $RowBack= ($row->result_index)-1 > 0 ? $row->result_index-1 : 0;
+          $RowBack=  0;
           $RowCurrent= $row->result_index ;
           $RowNext= ($row->result_index)+1 < $TotalRow ? ($row->result_index)+1 : $TotalRow  ;
           if($key==0){
 
-
-            // result_type
           $html .='
-        <div class="row">
-          <div class="col-md-12">
-            <div class="ibox">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title">'.$row->result_toppic.'</div>
 
@@ -419,9 +417,9 @@ if($datatype==2){
           <div class="container">
               <div class="row">
                 <div class="col-md text-center">
-                  <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'"   data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowBack.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
+                  <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowBack.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
                     <button class="btn btn-info" >'.$row->result_index.' / '.count($QuestionsResult).'  </button>
-                  <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
+                  <button class="btn btn-primary btn-next" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
                 </div>
 
               </div>

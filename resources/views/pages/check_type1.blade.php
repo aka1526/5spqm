@@ -188,7 +188,7 @@ $(".btn-edit").on('click',function (e){
  //
  //   });
   function getResult(ans,next) {
- 
+
       var url    = "{{ route('result.getnext') }}";
 
 
@@ -205,5 +205,6 @@ $(".btn-edit").on('click',function (e){
                 }
         });
    }
+
 </script>
 @endsection
