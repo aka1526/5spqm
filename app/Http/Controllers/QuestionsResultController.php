@@ -45,7 +45,7 @@ class QuestionsResultController extends Controller
              $RowCurrent= $row->result_index ;
              $RowNext= ($row->result_index)+1 < $TotalRow ? ($row->result_index)+1 : $TotalRow  ;
              if( $row->result_index == $next){
-
+               if($row->result_type=='VALUE'){
              $html .='
                <div class="row">
                  <div class="col-md-12">
@@ -95,6 +95,17 @@ class QuestionsResultController extends Controller
                <p/>
              ';
            }
+         } else {
+
+           $html .=' <tr>
+                        <td colspan="6">
+                           <div class="form-group">
+                             <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
+                             <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
+                            </div>
+                         </td>
+                     </tr> ';
+         }
              if($TotalRow == ($RowCurrent-1)){
                $html .='<div class="row">
                            <div  class="col-md-6">
