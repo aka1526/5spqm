@@ -190,19 +190,14 @@ $(".btn-edit").on('click',function (e){
   function getResult(ans,next) {
 
       var url    = "{{ route('result.getnext') }}";
-if(next==0){
-  alert(next);
-  return;
-}
-
-        $.ajax({
+           $.ajax({
                 type: "POST",
                 url: url,
                 data:{ans:ans,next:next,"_token": "{{ csrf_token() }}"},
                 success: function(data)
                 {
-                 console.log(data);
-                  if(data){
+                 // console.log(data);
+                  if(data.result){
                       $("#check-data").html(data.html);
                   }
                 }

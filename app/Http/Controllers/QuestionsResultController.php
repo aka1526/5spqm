@@ -31,6 +31,11 @@ class QuestionsResultController extends Controller
 
          $ans   = isset($request->ans) ? $request->ans :'';
          $next  = isset($request->next) ? $request->next : 0;
+
+         if($next==0){
+
+             return response()->json(['result'=> false,'html'=> $html ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+         }
          $QuestionsResult=  QuestionsResultTbl::where('unid_ans','=',$ans)
                 ->orderBy('result_index')->get();
 
@@ -141,7 +146,7 @@ class QuestionsResultController extends Controller
            }
 
 
-    return response()->json(['result'=> 'success','html'=> $html ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    return response()->json(['result'=> true,'html'=> $html ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
   }
 
