@@ -48,7 +48,7 @@
                                             <th>รายละเอียดการตรวจ</th>
                                             <th class="text-center" width="80px">แก้ไข</th>
                                             <th class="text-center" width="80px">พอใช้</th>
-                                            <th class="text-center" width="80px">ดีเยี่่ยม</th>
+                                            <th class="text-center" width="80px">ดีเยี่ยม</th>
                                         </tr>
                                     </thead>
                                     <tbody>
