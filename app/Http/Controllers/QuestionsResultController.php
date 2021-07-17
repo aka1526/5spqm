@@ -94,17 +94,17 @@ class QuestionsResultController extends Controller
                </div>
                <p/>
              ';
-           }
-         } else {
+           }else {
 
-           $html .=' <tr>
-                        <td colspan="6">
-                           <div class="form-group">
-                             <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
-                             <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
-                            </div>
-                         </td>
-                     </tr> ';
+             $html .=' <tr>
+                          <td colspan="6">
+                             <div class="form-group">
+                               <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
+                               <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
+                              </div>
+                           </td>
+                       </tr> ';
+           }
          }
              if($TotalRow == ($RowCurrent-1)){
                $html .='<div class="row">
