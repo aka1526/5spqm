@@ -372,7 +372,7 @@ if($datatype==2){
                               <thead>
                                   <tr>
 
-                                      <th>รายละเอียดการตรวจ</th>
+                                      <th>'.$row->result_index.') รายละเอียดการตรวจ</th>
                                       <th>แก้ไข</th>
                                       <th>พอใช้</th>
                                       <th>ดีเยี่ยม</th>
@@ -381,7 +381,7 @@ if($datatype==2){
                               </thead>
                               <tbody>
                                   <tr>
-                                     
+
                                       <td> '.$row->result_desc.'</td>
                                       <td class="text-center">
                                         <label class="ui-radio ui-radio-success">
