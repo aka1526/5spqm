@@ -33,7 +33,7 @@ class QuestionsResultController extends Controller
          $next  = isset($request->next) ? $request->next : 0;
 
          if($next==0){
-
+            $html="";
              return response()->json(['result'=> false,'html'=> $html ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
          }
          $QuestionsResult=  QuestionsResultTbl::where('unid_ans','=',$ans)
