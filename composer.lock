@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01bf3983378d687b6415f4ffa56ebd1b",
+    "content-hash": "b2d030f8d2a25f68d3f78ec75c910d9c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -932,17 +932,152 @@
             "time": "2021-06-30T20:03:07+00:00"
         },
         {
-            "name": "laravel/framework",
-            "version": "v8.49.2",
+            "name": "jaybizzle/crawler-detect",
+            "version": "v1.2.106",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "d9b43ee080b4d51344b2e578aa667f85040471a2"
+                "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+                "reference": "78bf6792cbf9c569dc0bf2465481978fd2ed0de9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d9b43ee080b4d51344b2e578aa667f85040471a2",
-                "reference": "d9b43ee080b4d51344b2e578aa667f85040471a2",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/78bf6792cbf9c569dc0bf2465481978fd2ed0de9",
+                "reference": "78bf6792cbf9c569dc0bf2465481978fd2ed0de9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.5|^6.5|^9.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\CrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "email": "m@rkbee.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+            "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+            "keywords": [
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "php crawler detect"
+            ],
+            "support": {
+                "issues": "https://github.com/JayBizzle/Crawler-Detect/issues",
+                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.106"
+            },
+            "time": "2021-05-24T20:30:32+00:00"
+        },
+        {
+            "name": "jenssegers/agent",
+            "version": "v2.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/agent.git",
+                "reference": "daa11c43729510b3700bc34d414664966b03bffe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/agent/zipball/daa11c43729510b3700bc34d414664966b03bffe",
+                "reference": "daa11c43729510b3700bc34d414664966b03bffe",
+                "shasum": ""
+            },
+            "require": {
+                "jaybizzle/crawler-detect": "^1.2",
+                "mobiledetect/mobiledetectlib": "^2.7.6",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5.0|^6.0|^7.0"
+            },
+            "suggest": {
+                "illuminate/support": "Required for laravel service providers"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Jenssegers\\Agent\\AgentServiceProvider"
+                    ],
+                    "aliases": {
+                        "Agent": "Jenssegers\\Agent\\Facades\\Agent"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Agent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect",
+            "homepage": "https://github.com/jenssegers/agent",
+            "keywords": [
+                "Agent",
+                "browser",
+                "desktop",
+                "laravel",
+                "mobile",
+                "platform",
+                "user agent",
+                "useragent"
+            ],
+            "support": {
+                "issues": "https://github.com/jenssegers/agent/issues",
+                "source": "https://github.com/jenssegers/agent/tree/v2.6.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jenssegers",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/jenssegers/agent",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-06-13T08:05:20+00:00"
+        },
+        {
+            "name": "laravel/framework",
+            "version": "v8.50.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "d892dbacbe3859cf9303ccda98ac8d782141d5ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d892dbacbe3859cf9303ccda98ac8d782141d5ae",
+                "reference": "d892dbacbe3859cf9303ccda98ac8d782141d5ae",
                 "shasum": ""
             },
             "require": {
@@ -952,7 +1087,7 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
-                "league/commonmark": "^1.3",
+                "league/commonmark": "^1.3|^2.0",
                 "league/flysystem": "^1.1",
                 "monolog/monolog": "^2.0",
                 "nesbot/carbon": "^2.31",
@@ -1097,7 +1232,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-07-06T14:06:38+00:00"
+            "time": "2021-07-13T12:41:53+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1419,17 +1554,79 @@
             "time": "2021-01-18T20:58:21+00:00"
         },
         {
-            "name": "monolog/monolog",
-            "version": "2.3.0",
+            "name": "mobiledetect/mobiledetectlib",
+            "version": "2.8.37",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "df991fd88693ab703aa403413d83e15f688dae33"
+                "url": "https://github.com/serbanghita/Mobile-Detect.git",
+                "reference": "9841e3c46f5bd0739b53aed8ac677fa712943df7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/df991fd88693ab703aa403413d83e15f688dae33",
-                "reference": "df991fd88693ab703aa403413d83e15f688dae33",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/9841e3c46f5bd0739b53aed8ac677fa712943df7",
+                "reference": "9841e3c46f5bd0739b53aed8ac677fa712943df7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8.35||~5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Mobile_Detect.php"
+                ],
+                "psr-0": {
+                    "Detection": "namespaced/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Serban Ghita",
+                    "email": "serbanghita@gmail.com",
+                    "homepage": "http://mobiledetect.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
+            "homepage": "https://github.com/serbanghita/Mobile-Detect",
+            "keywords": [
+                "detect mobile devices",
+                "mobile",
+                "mobile detect",
+                "mobile detector",
+                "php mobile detect"
+            ],
+            "support": {
+                "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.37"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/serbanghita",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-19T21:22:57+00:00"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9738e495f288eec0b187e310b7cdbbb285777dbe",
+                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe",
                 "shasum": ""
             },
             "require": {
@@ -1500,7 +1697,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.3.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.3.1"
             },
             "funding": [
                 {
@@ -1512,7 +1709,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-05T11:34:13+00:00"
+            "time": "2021-07-14T11:56:39+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -5096,16 +5293,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.10.2",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "43688227bbf27c43bc1ad83af224f135b6ef0ff4"
+                "reference": "dc6818335f50ccf0b90284784718ea9a82604286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/43688227bbf27c43bc1ad83af224f135b6ef0ff4",
-                "reference": "43688227bbf27c43bc1ad83af224f135b6ef0ff4",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/dc6818335f50ccf0b90284784718ea9a82604286",
+                "reference": "dc6818335f50ccf0b90284784718ea9a82604286",
                 "shasum": ""
             },
             "require": {
@@ -5113,7 +5310,6 @@
                 "ext-mbstring": "*",
                 "facade/flare-client-php": "^1.6",
                 "facade/ignition-contracts": "^1.0.2",
-                "filp/whoops": "^2.4",
                 "illuminate/support": "^7.0|^8.0",
                 "monolog/monolog": "^2.0",
                 "php": "^7.2.5|^8.0",
@@ -5169,7 +5365,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2021-06-11T06:57:25+00:00"
+            "time": "2021-07-12T15:55:51+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -5291,16 +5487,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.13.0",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "2edbc73a4687d9085c8f20f398eebade844e8424"
+                "reference": "fdf92f03e150ed84d5967a833ae93abffac0315b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/2edbc73a4687d9085c8f20f398eebade844e8424",
-                "reference": "2edbc73a4687d9085c8f20f398eebade844e8424",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/fdf92f03e150ed84d5967a833ae93abffac0315b",
+                "reference": "fdf92f03e150ed84d5967a833ae93abffac0315b",
                 "shasum": ""
             },
             "require": {
@@ -5350,7 +5546,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.13.0"
+                "source": "https://github.com/filp/whoops/tree/2.14.0"
             },
             "funding": [
                 {
@@ -5358,7 +5554,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-04T12:00:00+00:00"
+            "time": "2021-07-13T12:00:00+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -5413,16 +5609,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.8.4",
+            "version": "v1.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "164ab771c8ccef341a07a21fae2ee3b770ec2e9a"
+                "reference": "51ecfe0f048f8f8e6c5617e02a1f67ca22817c98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/164ab771c8ccef341a07a21fae2ee3b770ec2e9a",
-                "reference": "164ab771c8ccef341a07a21fae2ee3b770ec2e9a",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/51ecfe0f048f8f8e6c5617e02a1f67ca22817c98",
+                "reference": "51ecfe0f048f8f8e6c5617e02a1f67ca22817c98",
                 "shasum": ""
             },
             "require": {
@@ -5469,7 +5665,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-07-06T16:57:00+00:00"
+            "time": "2021-07-15T07:35:41+00:00"
         },
         {
             "name": "mockery/mockery",

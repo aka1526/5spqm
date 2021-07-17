@@ -15,6 +15,7 @@ use App\Models\QuestionspositionTbl;
 use App\Models\QuestionsItemTbl;
 use App\Models\QuestionsTbl;
 use App\Models\QuestionsResultTbl;
+use Jenssegers\Agent\Agent;
 
 class CheckController extends Controller
 {
@@ -272,6 +273,13 @@ class CheckController extends Controller
   $html ='';
   $result_toppic_befor='';
   $result_toppic_next='';
+ $agent = new Agent();
+
+// $agent->isDesktop();
+// $agent->isMobile();
+// $agent->isTablet();
+//
+$datatype =$agent->isDesktop() ? 1 : 2;
 
 if($datatype==1){
   foreach ($QuestionsResult as $key => $row) {
