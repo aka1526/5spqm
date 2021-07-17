@@ -356,6 +356,8 @@ if($datatype==2){
       $html .=' ';
         foreach ($QuestionsResult as $key => $row) {
           if($key==0){
+
+            // result_type
           $html .='
           <div class="ibox">
                   <div class="ibox-head">
@@ -377,12 +379,9 @@ if($datatype==2){
                               <tbody>
                                   <tr>
                                       <td>
-                                          <label class="ui-checkbox">
-                                              <input type="checkbox">
-                                              <span class="input-span"></span>
-                                          </label>
+                                       '.$row->result_index.'
                                       </td>
-                                      <td>iphone case</td>
+                                      <td> '.$row->result_desc.'</td>
                                       <td>$1200</td>
                                       <td>33%</td>
                                       <td>02/08/2017</td>
