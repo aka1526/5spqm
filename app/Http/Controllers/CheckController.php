@@ -359,7 +359,7 @@ if($datatype==2){
 
             // result_type
           $html .='
-        <div class="row">
+        <div class="row active-visible">  
           <div class="col-md-12">
             <div class="ibox">
                     <div class="ibox-head">
