@@ -393,7 +393,7 @@ if($datatype==2){
                                         <label class="ui-radio ui-radio-success">
                                             <input type="radio" name="test">
                                             <span class="input-span"></span>พอใช้</label>
-                                        <label class="ui-radio uui-radio-success">
+                                        <label class="ui-radio ui-radio-success">
                                             <input type="radio" name="test">
                                             <span class="input-span"></span>ดีเยี่ยม</label>
                                     </div>
