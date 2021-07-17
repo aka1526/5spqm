@@ -370,6 +370,10 @@ if($datatype==1){
 if($datatype==2){
         $html .=' ';
         $TotalRow = count($QuestionsResult);
+        $RowBack= 0;
+        $RowCurrent=0 ;
+        $RowNext=0  ;
+
         foreach ($QuestionsResult as $key => $row) {
           $RowBack= ($row->result_index)-1 > 0 ? $row->result_index-1 : 0;
           $RowCurrent= $row->result_index ;
@@ -432,7 +436,7 @@ if($datatype==2){
                         <div  class="col-md-6">
                           <div class="form-group row">
                                       <div class="col-sm-10 ml-sm-auto">
-                                          <button class="btn btn-info" type="submit">ส่งคะแนน '.$RowCurrent.'</button>
+                                          <button class="btn btn-info" type="submit">ส่งคะแนน '.$RowCurrent.$TotalRow.'</button>
                                       </div>
                                   </div>
                         </div>
