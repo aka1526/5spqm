@@ -396,18 +396,10 @@ if($datatype==2){
               </div>
           </div>
           <div class="container">
-              <div class="row">
-                <div class="col">
 
-                </div>
-                <div class="col-md-auto">
                   <button class="btn btn-primary">Primary</button>
                   <button class="btn btn-primary">Primary</button>
-                </div>
-                <div class="col">
 
-                </div>
-              </div>
             </div>
             <p/>
           ';
