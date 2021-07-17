@@ -421,8 +421,8 @@ if($datatype==2){
           <div class="container">
               <div class="row">
                 <div class="col-md text-center">
-                  <button class="btn btn-warning"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'"> <i class="fa fa-step-backward"></i>กลับ</button>
-                  <button class="btn btn-primary"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'"> ถัดไป <i class="fa fa-step-forward"></i></button>
+                  <button class="btn btn-warning btn-back"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'"> <i class="fa fa-step-backward"></i>กลับ</button>
+                  <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'"> ถัดไป <i class="fa fa-step-forward"></i></button>
                 </div>
 
               </div>
