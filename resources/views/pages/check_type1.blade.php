@@ -166,7 +166,7 @@ $(".btn-edit").on('click',function (e){
           });
       });
  $(".btn-next").on('click',function (e){
-
+alert('dsfsdfs') ;
 
    var url    = "{{ route('result.getnext') }}";
    var ans    = $(this).data('ans');
@@ -178,9 +178,9 @@ $(".btn-edit").on('click',function (e){
              data:{ans:ans,next:next,"_token": "{{ csrf_token() }}"},
              success: function(data)
              {
-            //   console.log(data);
+              console.log(data);
                if(data){
-                   $("#check-data").html(data.data);
+                   $("#check-data").html(data.html);
                }
              }
      });

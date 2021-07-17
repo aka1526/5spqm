@@ -35,7 +35,7 @@ class QuestionsResultController extends Controller
 
          $QuestionsResult=  QuestionsResultTbl::where('unid_ans','=',$ans)
                 ->orderBy('result_index')->get();
-                   
+
            $html ='';
            $TotalRow = count($QuestionsResult);
            $RowBack= 0;
@@ -113,7 +113,7 @@ class QuestionsResultController extends Controller
            }
 
 
-    return response()->json(['result'=> 'success','data'=> $html ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    return response()->json(['result'=> 'success','html'=> $html ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
   }
 
