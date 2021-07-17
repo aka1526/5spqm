@@ -52,9 +52,7 @@ class QuestionsResultController extends Controller
                    <div class="ibox">
                            <div class="ibox-head">
                                <div class="ibox-title">'.$row->result_toppic.'</div>
-                               <div>
-                                   <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
-                               </div>
+                             
                            </div>
                        <div class="ibox-body">
                            <div class="row">
@@ -87,6 +85,7 @@ class QuestionsResultController extends Controller
                  <div class="row">
                    <div class="col-md text-center">
                      <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
+                     <button class="btn btn-info" > <i class="fa fa-step-backward"></i> '.$row->result_index.' / '.count($QuestionsResult).'  </button>
                      <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
                    </div>
 
@@ -102,9 +101,7 @@ class QuestionsResultController extends Controller
                    <div class="ibox">
                        <div class="ibox-head">
                            <div class="ibox-title">'.$row->result_toppic.'</div>
-                           <div>
-                               <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
-                           </div>
+
                        </div>
                        <div class="ibox-body">
                            <div class="form-group">
@@ -120,6 +117,7 @@ class QuestionsResultController extends Controller
                            <div class="row">
                              <div class="col-md text-center">
                                <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
+                                <button class="btn btn-info" > <i class="fa fa-step-backward"></i> '.$row->result_index.' / '.count($QuestionsResult).'  </button>
                                <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
                              </div>
 
