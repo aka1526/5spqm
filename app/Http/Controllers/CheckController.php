@@ -396,7 +396,6 @@ if($datatype==2){
               </div>
           </div>
           <div class="container">
-
               <div class="row">
                 <div class="col">
 
@@ -410,7 +409,7 @@ if($datatype==2){
                 </div>
               </div>
             </div>
-
+            <p/>
           ';
         }
         }
