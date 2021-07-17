@@ -93,7 +93,7 @@ class CheckController extends Controller
       $position_type =$pv;
        Cookie::queue('DOC_MONTH',$moth);
       $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
-      ->where('plan_area_unid','=','4976b787b8c74d249c6fbbe80374780f') //web line 3
+      ->where('plan_area_unid','=','319bf8c4dad7499ca5552fd3ab52f6c1') //web line 3
     //  ->where('plan_area_unid','=','b30a86eb99e04624966c295c5ede35fb') // Test
 
       ->where('plan_year','=',$year)->where('plan_month','=',$moth)->orderBy('plan_date')->orderBy('plan_area_index')->get();
