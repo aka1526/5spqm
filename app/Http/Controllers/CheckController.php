@@ -429,14 +429,14 @@ if($datatype==2){
         }
           if($TotalRow == ($RowCurrent-1)){
             $html .='<div class="row">
-          <div  class="col-md-6">
-            <div class="form-group row">
-                        <div class="col-sm-10 ml-sm-auto">
-                            <button class="btn btn-info" type="submit">ส่งคะแนน</button>
+                        <div  class="col-md-6">
+                          <div class="form-group row">
+                                      <div class="col-sm-10 ml-sm-auto">
+                                          <button class="btn btn-info" type="submit">ส่งคะแนน '.$RowCurrent.'</button>
+                                      </div>
+                                  </div>
                         </div>
-                    </div>
-          </div>
-        </div>';
+                      </div>';
           }
         }
 
