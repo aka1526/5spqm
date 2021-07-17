@@ -355,7 +355,7 @@ if($datatype==1){
 if($datatype==2){
       $html .=' ';
         foreach ($QuestionsResult as $key => $row) {
-          if($keyช=0){
+          if($key==0){
 
             // result_type
           $html .='
