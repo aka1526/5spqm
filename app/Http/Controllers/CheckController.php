@@ -359,6 +359,7 @@ if($datatype==2){
 
             // result_type
           $html .='
+        <div class="row">
           <div class="ibox">
                   <div class="ibox-head">
                       <div class="ibox-title">'.$row->result_toppic.'</div>
@@ -391,6 +392,7 @@ if($datatype==2){
                       </div>
                   </div>
               </div>
+              </div>  
           ';
         }
         }
