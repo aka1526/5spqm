@@ -96,14 +96,25 @@ class QuestionsResultController extends Controller
              ';
            }else {
 
-             $html .=' <tr>
-                          <td colspan="6">
-                             <div class="form-group">
-                               <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
-                               <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
-                              </div>
-                           </td>
-                       </tr>
+             $html .='
+                <div class="row">
+                  <div class="col-md-12">
+                   <div class="ibox">
+                       <div class="ibox-head">
+                           <div class="ibox-title">'.$row->result_toppic.'</div>
+                           <div>
+                               <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
+                           </div>
+                       </div>
+                       <div class="ibox-body">
+                           <div class="form-group">
+                           <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
+                           <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                        <div class="container">
                            <div class="row">
