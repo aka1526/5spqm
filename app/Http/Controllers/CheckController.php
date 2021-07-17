@@ -353,13 +353,18 @@ if($datatype==1){
 }
 
 if($datatype==2){
-      $html .=' ';
+        $html .=' ';
+        $TotalRow = count($QuestionsResult);
         foreach ($QuestionsResult as $key => $row) {
+          $RowBack= ($row->result_index)-1 > 0 ? $row->result_index-1 : 0;
+          $RowCurrent= $row->result_index ;
+          $RowNext= ($row->result_index)+1 < $TotalRow ? ($row->result_index)+1 : $TotalRow  ;
           if($key==0){
+
 
             // result_type
           $html .='
-        <div class="row active-visible">  
+        <div class="row">
           <div class="col-md-12">
             <div class="ibox">
                     <div class="ibox-head">
@@ -398,8 +403,8 @@ if($datatype==2){
           <div class="container">
               <div class="row">
                 <div class="col-md text-center">
-                  <button class="btn btn-warning"> <i class="fa fa-step-backward"></i>กลับ</button>
-                  <button class="btn btn-primary"> ถัดไป <i class="fa fa-step-forward"></i></button>
+                  <button class="btn btn-warning"  data-current="'. $RowCurrent .'" data-back="'.$RowBack.'"> <i class="fa fa-step-backward"></i>กลับ</button>
+                  <button class="btn btn-primary"  data-current="'. $RowCurrent .'" data-next="'.$RowNext.'"> ถัดไป <i class="fa fa-step-forward"></i></button>
                 </div>
 
               </div>
