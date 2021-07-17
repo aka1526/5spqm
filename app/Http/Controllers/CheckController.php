@@ -368,12 +368,12 @@ if($datatype==2){
                           <table class="table">
                               <thead>
                                   <tr>
-                                      <th width="50px"></th>
-                                      <th>Product</th>
-                                      <th>Price</th>
-                                      <th>Data</th>
-                                      <th>Last Name</th>
-                                      <th>Actions</th>
+                                      <th width="50px">ลำดับ</th>
+                                      <th>รายละเอียดการตรวจ</th>
+                                      <th>แก้ไข</th>
+                                      <th>พอใช้</th>
+                                      <th>ดีเยี่ยม</th>
+
                                   </tr>
                               </thead>
                               <tbody>
@@ -382,46 +382,27 @@ if($datatype==2){
                                        '.$row->result_index.'
                                       </td>
                                       <td> '.$row->result_desc.'</td>
-                                      <td>$1200</td>
-                                      <td>33%</td>
-                                      <td>02/08/2017</td>
-                                      <td>
-                                          <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                                          <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          <label class="ui-checkbox">
-                                              <input type="checkbox">
-                                              <span class="input-span"></span>
+                                      <td class="text-center">
+                                        <label class="ui-radio ui-radio-success">
+                                         <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                                         <span class="input-span"></span>
                                           </label>
                                       </td>
-                                      <td>Car covers</td>
-                                      <td>$3280</td>
-                                      <td>42%</td>
-                                      <td>08/10/2017</td>
-                                      <td>
-                                          <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                                          <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          <label class="ui-checkbox">
-                                              <input type="checkbox">
-                                              <span class="input-span"></span>
+                                      <td class="text-center">
+                                        <label class="ui-radio ui-radio-success">
+                                         <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                                         <span class="input-span"></span>
                                           </label>
                                       </td>
-                                      <td>Compressors</td>
-                                      <td>$7400</td>
-                                      <td>56%</td>
-                                      <td>14/11/2017</td>
-                                      <td>
-                                          <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                                          <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+                                      <td class="text-center">
+                                        <label class="ui-radio ui-radio-success">
+                                         <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                                         <span class="input-span"></span>
+                                          </label>
                                       </td>
                                   </tr>
+
+                                 
                               </tbody>
                           </table>
                       </div>
