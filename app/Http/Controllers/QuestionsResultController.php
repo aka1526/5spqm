@@ -33,6 +33,9 @@ class QuestionsResultController extends Controller
          $next = isset($request->next) ? $request->next :'';
 
 
+         $QuestionsResult=  QuestionsResultTbl::where('unid_ans','=',$ans)
+                ->orderBy('result_index')->get();
+                   
            $html ='';
            $TotalRow = count($QuestionsResult);
            $RowBack= 0;
