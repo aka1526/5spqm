@@ -50,7 +50,7 @@ class CheckController extends Controller
 
 
 
-  return view('pages.check_yearmonth',compact('html'));
+  return view('pages.check_yearmonth',compact('html','pv'));
   }
 
 

@@ -12,6 +12,7 @@
              <div class="ibox-head">
 
                  <div class="ibox-title "> แผนการตรวจพื้นที่ ประจำปี
+
                    <div class="btn-group ml-3">
                                   <input class="form-control" type="hidden" id="area_index"  name="area_index" value=""  >
 
@@ -31,7 +32,10 @@
                                   </ul>
                               </div>
                  </div>
+                 <div>
+                     <a class="btn btn-warning btn-sm " href="/check"><i class="fa fa-backward"></i> กลับ</a>
 
+                 </div>
 
              </div>
              <div class="ibox-body">

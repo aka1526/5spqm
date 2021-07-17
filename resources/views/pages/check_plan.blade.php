@@ -17,7 +17,10 @@
 
                             <div class="ibox-head">
                                 <div class="ibox-title">ตารางพื้นที่การตรวจ </div>
+                                <div>
+                                    <a class="btn btn-warning btn-sm " href="/check/yearmonth?pv={{ $pv }}"><i class="fa fa-backward"></i> กลับ</a>
 
+                                </div>
                             </div>
 
                             <div class="ibox-body ">
