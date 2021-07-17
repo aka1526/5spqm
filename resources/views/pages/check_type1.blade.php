@@ -38,24 +38,9 @@
                         <div class="ibox ibox-primary">
                             <div class="ibox-body ">
                               <div class="row">
-                                <div class="col-xl-12">
-                                <table class="table table-bordered">
-                                    <thead class="">
-                                        <tr>
 
-                                            <th>หัวข้อตรวจ</th>
-                                            <th>ลำดับ</th>
-                                            <th>รายละเอียดการตรวจ</th>
-                                            <th class="text-center" width="80px">แก้ไข</th>
-                                            <th class="text-center" width="80px">พอใช้</th>
-                                            <th class="text-center" width="80px">ดีเยี่ยม</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
                                       {!! $html !!}
-                                    </tbody>
-                                </table>
-                              </div>
+                                  
                           </div>
                                 <div class="row">
                                   <div  class="col-md-6">
