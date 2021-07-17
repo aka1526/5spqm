@@ -399,8 +399,8 @@ if($datatype==2){
               <div class="row">
 
                 <div class="col-md text-center">
-                  <button class="btn btn-primary">Primary</button>
-                  <button class="btn btn-primary">Primary</button>
+                  <button class="btn btn-primary"> <i class="fa fa-cloud-upload"></i>Primary</button>
+                  <button class="btn btn-primary">Primary <i class="fa fa-cloud-upload"></i></button>
                 </div>
 
               </div>
