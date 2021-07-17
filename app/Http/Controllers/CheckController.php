@@ -165,12 +165,13 @@ class CheckController extends Controller
   public function editfield(Request $request){
 
   }
+
   public function checked(Request $request){
     $year   = Cookie::get('DOC_YEAR')   !='' ? Cookie::get('DOC_YEAR') : '';
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
     $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
-
+    $datatype  =isset($request->datatype) ? $request->datatype : 1;
     $username='5s';
     Cookie::queue('AREA_UNID',$request->area_unid);
 
@@ -271,50 +272,65 @@ class CheckController extends Controller
   $html ='';
   $result_toppic_befor='';
   $result_toppic_next='';
-foreach ($QuestionsResult as $key => $row) {
-  if($row->result_type=='VALUE'){
-      if($result_toppic_next != $row->result_toppic){
-        $result_toppic_next = $row->result_toppic;
-        $result_toppic_befor= $row->result_toppic;
-      } else {
-        $result_toppic_befor='';
-      }
 
-    $html .='<tr>
-                 <td><strong>'.$result_toppic_befor.'</strong></td>
-                 <td class="text-center">'.$row->result_index.'</td>
-                 <td>'.$row->result_desc.'</td>
+if($datatype==1){
+  foreach ($QuestionsResult as $key => $row) {
+    if($row->result_type=='VALUE'){
+        if($result_toppic_next != $row->result_toppic){
+          $result_toppic_next = $row->result_toppic;
+          $result_toppic_befor= $row->result_toppic;
+        } else {
+          $result_toppic_befor='';
+        }
 
-                 <td class="text-center">
-                   <label class="ui-radio ui-radio-success">
-                    <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                    <span class="input-span"></span>
-                     </label>
-                 </td>
-                 <td class="text-center">
-                   <label class="ui-radio ui-radio-success">
-                    <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                    <span class="input-span"></span>
-                     </label>
-                 </td>
-                 <td class="text-center">
-                   <label class="ui-radio ui-radio-success">
-                    <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                    <span class="input-span"></span>
-                     </label>
-                 </td>
-             </tr>';
-         } else {
-          $html .=' <tr>
-                       <td colspan="6">
-                          <div class="form-group">
-                            <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
-                            <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
-                           </div>
-                        </td>
-                    </tr> ';
+      $html .='<tr>
+                   <td><strong>'.$result_toppic_befor.'</strong></td>
+                   <td class="text-center">'.$row->result_index.'</td>
+                   <td>'.$row->result_desc.'</td>
+
+                   <td class="text-center">
+                     <label class="ui-radio ui-radio-success">
+                      <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                      <span class="input-span"></span>
+                       </label>
+                   </td>
+                   <td class="text-center">
+                     <label class="ui-radio ui-radio-success">
+                      <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                      <span class="input-span"></span>
+                       </label>
+                   </td>
+                   <td class="text-center">
+                     <label class="ui-radio ui-radio-success">
+                      <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                      <span class="input-span"></span>
+                       </label>
+                   </td>
+               </tr>';
+           } else {
+            $html .=' <tr>
+                         <td colspan="6">
+                            <div class="form-group">
+                              <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
+                              <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
+                             </div>
+                          </td>
+                      </tr> ';
+           }
          }
-       }
+
+}
+
+if($datatype==2){
+    foreach ($QuestionsResult as $key => $row) {
+      $html .='
+
+      ';
+    }
+}
+
+
+
 
     return view('pages.check_type1',compact('Questions','QuestionsResult','html')) ;
   }
