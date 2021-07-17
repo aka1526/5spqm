@@ -330,9 +330,11 @@ if($datatype==1){
 }
 
 if($datatype==2){
-      $html .=' <div class="row">';
+      $html .=' ';
         foreach ($QuestionsResult as $key => $row) {
-          $html .=' <div class="col-md-6">
+          $html .='
+<div class="row">
+           <div class="col-md-6">
                              <div class="ibox">
                                  <div class="ibox-head">
                                      <div class="ibox-title">Horizontal Form</div>
@@ -374,10 +376,10 @@ if($datatype==2){
                                  </div>
                              </div>
                          </div>
-
+ </div>
           ';
         }
-    $html .=' </div>';
+    $html .='';
 }
 
 
