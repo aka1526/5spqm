@@ -93,7 +93,7 @@ class CheckController extends Controller
       $position_type =$pv;
        Cookie::queue('DOC_MONTH',$moth);
       $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
-      ->where('plan_area_unid','=','36863c6e0e654ba7b3907fc986418405') //web
+      ->where('plan_area_unid','=','a8c0d04e39864747886e94a9a338b4d6') //web
     //  ->where('plan_area_unid','=','b30a86eb99e04624966c295c5ede35fb') // Test
 
       ->where('plan_year','=',$year)->where('plan_month','=',$moth)->orderBy('plan_date')->orderBy('plan_area_index')->get();
@@ -179,13 +179,13 @@ class CheckController extends Controller
                       ->leftJoin("tbl_questions_area", "tbl_questions_area.ques_unid", "=", "tbl_questions.unid")
                       ->where('tbl_questions_position.position_type','=',$pv)
                       ->where('tbl_questions_area.area_unid','=',$area_unid)
-                      ->dd();
+                      ->first();
  $ques_unid =$Questions->unid;
   $QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
 
   $CountResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
             ->where('positions_type','=',$pv)
-            ->where('area_unid','=',$area_unid)->dd();
+            ->where('area_unid','=',$area_unid)->count();
   if($CountResult==0){
       $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
       $Positions =PositionsTbl::where('positions_type','=',$pv)->first();
