@@ -30,9 +30,7 @@ class QuestionsResultController extends Controller
   public function getnext(Request $request){
 
          $ans = isset($request->ans) ? $request->ans :'';
-         $next = isset($request->next) ? $request->next :'';
-
-
+         $next = isset($request->next) ? $request->next-1 : 0;
          $QuestionsResult=  QuestionsResultTbl::where('unid_ans','=',$ans)
                 ->orderBy('result_index')->get();
 
@@ -46,7 +44,7 @@ class QuestionsResultController extends Controller
              $RowBack= ($row->result_index)-1 > 0 ? $row->result_index-1 : 0;
              $RowCurrent= $row->result_index ;
              $RowNext= ($row->result_index)+1 < $TotalRow ? ($row->result_index)+1 : $TotalRow  ;
-             if($RowNext==$next){
+             if( $key ==$next){
 
 
                // result_type
