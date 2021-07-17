@@ -387,13 +387,13 @@ if($datatype==2){
                                     <label>คะแนนตรวจประเมิน</label>
 
                                     <div>
-                                        <label class="ui-radio ui-radio-inline">
+                                        <label class="ui-radio ui-radio-success">
                                             <input type="radio" name="test">
                                             <span class="input-span"></span>แก้ไข</label>
-                                        <label class="ui-radio ui-radio-inline">
+                                        <label class="ui-radio ui-radio-success">
                                             <input type="radio" name="test">
                                             <span class="input-span"></span>พอใช้</label>
-                                        <label class="ui-radio ui-radio-inline">
+                                        <label class="ui-radio uui-radio-success">
                                             <input type="radio" name="test">
                                             <span class="input-span"></span>ดีเยี่ยม</label>
                                     </div>
