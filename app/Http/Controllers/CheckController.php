@@ -373,9 +373,9 @@ if($datatype==2){
                                   <tr>
 
                                       <th>'.$row->result_index.') รายละเอียดการตรวจ</th>
-                                      <th>แก้ไข</th>
-                                      <th>พอใช้</th>
-                                      <th>ดีเยี่ยม</th>
+                                      <th width="80px">แก้ไข</th>
+                                      <th width="80px">พอใช้</th>
+                                      <th width="80px">ดีเยี่ยม</th>
 
                                   </tr>
                               </thead>
