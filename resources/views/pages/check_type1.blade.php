@@ -168,7 +168,7 @@ $(".btn-edit").on('click',function (e){
  $(".btn-next").on('click',function (e){
 
 
-   var url    = "route('result.get')";
+   var url    = "route('result.getnext')";
    var ans    = $(this).data('ans');
    var next   = $(this).data('next');
 

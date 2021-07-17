@@ -26,7 +26,7 @@ class QuestionsResultController extends Controller
     return $uuid;
   }
 
-  public function get(Request $request){
+  public function getnext(Request $request){
 
     return response()->json(['result'=> 'success','data'=> $request ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 

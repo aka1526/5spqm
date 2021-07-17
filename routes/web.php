@@ -99,4 +99,4 @@ Route::post('/check/editfield', [CheckController::class,'editfield'])->name('che
 Route::post('/check/checked', [CheckController::class,'checked'])->name('check.checked');
 
 
-Route::post('/result/get', [QuestionsResultController::class,'get'])->name('result.get');
+Route::post('/result/getnext', [QuestionsResultController::class,'getnext'])->name('result.getnext');
