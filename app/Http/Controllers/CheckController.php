@@ -352,7 +352,18 @@ if($datatype==1){
          $html .='  </tbody>
                  </table>
                </div>
-               </div>';
+               </div>
+
+               <div class="row">
+                 <div  class="col-md-6">
+                   <div class="form-group row">
+                               <div class="col-sm-10 ml-sm-auto">
+                                   <button class="btn btn-info" type="submit">ส่งคะแนน</button>
+                               </div>
+                           </div>
+                 </div>
+               </div>
+               ';
 
 }
 
@@ -416,8 +427,20 @@ if($datatype==2){
             <p/>
           ';
         }
+          if($TotalRow >= $RowCurrent){
+            $html .='<div class="row">
+          <div  class="col-md-6">
+            <div class="form-group row">
+                        <div class="col-sm-10 ml-sm-auto">
+                            <button class="btn btn-info" type="submit">ส่งคะแนน</button>
+                        </div>
+                    </div>
+          </div>
+        </div>';
+          }
         }
-    $html .='';
+
+
 }
 
 
