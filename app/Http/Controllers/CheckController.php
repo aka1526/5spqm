@@ -363,49 +363,31 @@ if($datatype==2){
                   <div class="ibox-head">
                       <div class="ibox-title">'.$row->result_toppic.'</div>
                       <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
-                                </div>
+                          <a class="btn btn-info btn-sm btn-new" href="javascript:;"> รายการที่ '.$row->result_index.' / '.count($QuestionsResult).' </a>
+                      </div>
                   </div>
                   <div class="ibox-body">
-                      <div class="table-responsive">
-                          <table class="table">
-                              <thead>
-                                  <tr>
+                      <div class="row">
+                        <div class="col-md-8">
+                           <p>'.$row->result_desc.' </p>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="form-group">
+                                  <label>คะแนนตรวจประเมิน</label>
 
-                                      <th>'.$row->result_index.') รายละเอียดการตรวจ</th>
-                                      <th width="80px">แก้ไข</th>
-                                      <th width="80px">พอใช้</th>
-                                      <th width="80px">ดีเยี่ยม</th>
-
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-
-                                      <td> '.$row->result_desc.'</td>
-                                      <td class="text-center">
-                                        <label class="ui-radio ui-radio-success">
-                                         <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                                         <span class="input-span"></span>
-                                          </label>
-                                      </td>
-                                      <td class="text-center">
-                                        <label class="ui-radio ui-radio-success">
-                                         <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                                         <span class="input-span"></span>
-                                          </label>
-                                      </td>
-                                      <td class="text-center">
-                                        <label class="ui-radio ui-radio-success">
-                                         <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                                         <span class="input-span"></span>
-                                          </label>
-                                      </td>
-                                  </tr>
-
-
-                              </tbody>
-                          </table>
+                                  <div>
+                                      <label class="ui-radio ui-radio-inline">
+                                          <input type="radio" name="test">
+                                          <span class="input-span"></span>แก้ไข</label>
+                                      <label class="ui-radio ui-radio-inline">
+                                          <input type="radio" name="test">
+                                          <span class="input-span"></span>พอใช้</label>
+                                      <label class="ui-radio ui-radio-inline">
+                                          <input type="radio" name="test">
+                                          <span class="input-span"></span>ดีเยี่ยม</label>
+                                  </div>
+                              </div>
+                        </div>
                       </div>
                   </div>
               </div>
