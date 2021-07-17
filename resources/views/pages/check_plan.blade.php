@@ -40,7 +40,7 @@
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
-                                       <td>{{ $row->plan_groups }}</td>
+                                       <td  class="text-center">{{ $row->plan_groups }}</td>
                                           @endif
                                         <td>{{ $row->plan_area_owner }}</td>
                                         <td>
