@@ -193,6 +193,7 @@ class CheckController extends Controller
       $Positions =PositionsTbl::where('positions_type','=',$pv)->first();
       $Area =AreaTbl::where('unid','=',$area_unid)->first();
       $rowTotal=0;
+      $unid_ans =$this->genUnid();
       foreach ($QuestionsItem as $key => $item) {
         $rowTotal++;
             QuestionsResultTbl::insert([
@@ -215,6 +216,7 @@ class CheckController extends Controller
               ,'create_time'=>Carbon::now()
               ,'edit_by'=> $username
               ,'edit_time'=>Carbon::now()
+              ,'unid_ans' => $unid_ans
             ]);
       }
 
@@ -240,6 +242,7 @@ class CheckController extends Controller
         ,'create_time'=>Carbon::now()
         ,'edit_by'=> $username
         ,'edit_time'=>Carbon::now()
+          ,'unid_ans' => $unid_ans
       ]);
 
       $rowTotal =$rowTotal+1;
@@ -263,6 +266,7 @@ class CheckController extends Controller
         ,'create_time'=>Carbon::now()
         ,'edit_by'=> $username
         ,'edit_time'=>Carbon::now()
+        ,'unid_ans' => $unid_ans
       ]);
 
   }
@@ -403,8 +407,8 @@ if($datatype==2){
           <div class="container">
               <div class="row">
                 <div class="col-md text-center">
-                  <button class="btn btn-warning"  data-current="'. $RowCurrent .'" data-back="'.$RowBack.'"> <i class="fa fa-step-backward"></i>กลับ</button>
-                  <button class="btn btn-primary"  data-current="'. $RowCurrent .'" data-next="'.$RowNext.'"> ถัดไป <i class="fa fa-step-forward"></i></button>
+                  <button class="btn btn-warning"  data-unid_ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'"> <i class="fa fa-step-backward"></i>กลับ</button>
+                  <button class="btn btn-primary"  data-unid_ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'"> ถัดไป <i class="fa fa-step-forward"></i></button>
                 </div>
 
               </div>
