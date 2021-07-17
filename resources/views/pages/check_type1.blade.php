@@ -188,8 +188,7 @@ $(".btn-edit").on('click',function (e){
  //
  //   });
   function getResult(ans,next) {
-
-      alert(ans) ;
+ 
       var url    = "{{ route('result.getnext') }}";
 
 
