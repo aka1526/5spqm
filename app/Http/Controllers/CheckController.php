@@ -355,6 +355,7 @@ if($datatype==1){
 if($datatype==2){
       $html .=' ';
         foreach ($QuestionsResult as $key => $row) {
+          if($key==0){
           $html .='
           <div class="ibox">
                   <div class="ibox-head">
@@ -428,6 +429,7 @@ if($datatype==2){
                   </div>
               </div>
           ';
+        }
         }
     $html .='';
 }
