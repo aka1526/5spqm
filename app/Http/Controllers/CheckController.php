@@ -81,7 +81,11 @@ class CheckController extends Controller
   public function get(Request $request,$pv=null,$year=null,$moth=null){
       $unid= isset($request->unid) ? $request->unid :'';
       $dataArea =AreaTbl::where('unid','!=',$unid)->get();
-      $position_type= isset($request->pv) ?strtoupper($request->pv ) :'';
+
+      $year= Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
+      $pv =  Cookie::get('DOC_PV') !=''   ? strtoupper(Cookie::get('DOC_PV')) :strtoupper($pv) ;
+      $position_type =$pv;
+      // $position_type= isset($request->pv) ? strtoupper($request->pv ) :'';
 
       $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
       ->where('plan_area_unid','=','36863c6e0e654ba7b3907fc986418405')
