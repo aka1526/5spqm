@@ -36,7 +36,7 @@
            <div class="row">
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
-                            <div class="ibox-body ">
+                            <div class="ibox-body" id="check-data">
                               {!! $html !!}
                             </div>
                         </div>
