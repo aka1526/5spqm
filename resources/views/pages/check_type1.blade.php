@@ -179,7 +179,7 @@ $(".btn-edit").on('click',function (e){
              success: function(data)
              {
             //   console.log(data);
-               if(data.result){
+               if(data){
                    $("#check-data").html(data.data);
                }
              }
