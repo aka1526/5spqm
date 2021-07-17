@@ -285,7 +285,7 @@ class CheckController extends Controller
 //
 //$datatype =$agent->isDesktop() ? 1 : 2 ;
 
-if($datatype==1){
+  if($datatype==1){
 
   $html .='
   <div class="row">
@@ -364,8 +364,7 @@ if($datatype==1){
                  </div>
                </div>
                ';
-
-}
+             }
 
 if($datatype==2){
         $html .=' ';
@@ -443,9 +442,7 @@ if($datatype==2){
                       </div>';
           }
         }
-
-
-}
+      }
 
 
 

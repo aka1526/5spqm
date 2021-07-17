@@ -37,23 +37,8 @@
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
                             <div class="ibox-body ">
-
-
-                                      {!! $html !!}
-
-
-                                <div class="row">
-                                  <div  class="col-md-6">
-                                    <div class="form-group row">
-                                                <div class="col-sm-10 ml-sm-auto">
-                                                    <button class="btn btn-info" type="submit">ส่งคะแนน</button>
-                                                </div>
-                                            </div>
-                                  </div>
-                                </div>
+                              {!! $html !!}
                             </div>
-
-
                         </div>
                     </div>
 
