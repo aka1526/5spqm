@@ -279,7 +279,7 @@ class CheckController extends Controller
 // $agent->isMobile();
 // $agent->isTablet();
 //
-$datatype =$agent->isDesktop() ? 1 : 2;
+//$datatype =$agent->isDesktop() ? 1 : 2 ;
 
 if($datatype==1){
   foreach ($QuestionsResult as $key => $row) {
