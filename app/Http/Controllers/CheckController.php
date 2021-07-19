@@ -406,10 +406,10 @@ if($datatype==2){
                                     <label class="h4 m-0 text-danger mb-3 ">คะแนนตรวจประเมิน</label>
 
                                     <div >
-                                        <label class="ui-radio ui-radio-success">
+                                        <label class="ui-radio ui-radio-danger">
                                             <input type="radio" name="test">
                                             <span class="input-span"></span>แก้ไข</label>
-                                        <label class="ui-radio ui-radio-success">
+                                        <label class="ui-radio ui-radio-warning">
                                             <input type="radio" name="test">
                                             <span class="input-span"></span>พอใช้</label>
                                         <label class="ui-radio ui-radio-success">
