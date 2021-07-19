@@ -407,7 +407,7 @@ if($datatype==2){
 
                                     <div >
                                         <label class="ui-radio ui-radio-danger" data-toggle="tooltip" data-original-title="0 คะแนน">
-                                            <input type="radio" name="check_box" value="0" onclick="saveResult(\''.$row->unid.'\')" >
+                                            <input type="radio" name="check_box" value="0" onclick="saveResult(\''.$row->unid.'\',\''.$row->unid.'\')" >
                                             <span class="input-span"></span>แก้ไข</label>
                                         <label class="ui-radio ui-radio-warning" data-toggle="tooltip" data-original-title="3 คะแนน">
                                             <input type="radio" name="check_box" value="3" onclick="saveResult(\''.$row->unid.'\')" >
