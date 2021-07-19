@@ -217,5 +217,20 @@ var url="{{ route('result.scoresave')}}";
     });
 
 }
+
+function SaveComment(unid,comment){
+var url="{{ route('result.scoresave')}}";
+  $.ajax({
+            type: "POST",
+            url: url,
+            data:{unid:unid,score:score,"_token": "{{ csrf_token() }}"},
+            success: function(data)
+            {
+              console.log(data);
+            }
+    });
+
+}
+
 </script>
 @endsection
