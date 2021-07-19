@@ -66,7 +66,7 @@ class QuestionsResultController extends Controller
                              </div>
                              <div class="col-md-4">
                              <div class="form-group">
-                                        <label class="h4 m-0 text-danger">คะแนนตรวจประเมิน</label>
+                                        <label class="h4 m-0 text-danger mb-3 ">คะแนนตรวจประเมิน</label>
 
                                         <div >
                                             <label class="ui-radio ui-radio-danger" data-toggle="tooltip" data-original-title="0 คะแนน">
