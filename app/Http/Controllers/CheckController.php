@@ -393,7 +393,7 @@ if($datatype==2){
               <div class="col-md-12">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">หัวข้อตรวจ :: '.$row->result_toppic.'</div>
+                        <div class="ibox-title">หัวข้อตรวจ : '.$row->result_toppic.'</div>
 
                     </div>
                     <div class="ibox-body">
