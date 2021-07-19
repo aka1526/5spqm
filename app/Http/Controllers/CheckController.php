@@ -314,7 +314,7 @@ class CheckController extends Controller
         }
 
         if($result_toppic_befor!='') {
-          $html .='<tr>
+          $html .='<tr class="btn-info">
                  <td colspan="6"><strong>'.$result_toppic_befor.'</strong></td>
 
              </tr>';
