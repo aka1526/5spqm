@@ -287,20 +287,21 @@ class CheckController extends Controller
 
   if($datatype==1){
 
+    // <thead class="btn-primary">
+    //     <tr>
+    //
+    //         <th>ลำดับ</th>
+    //         <th>รายละเอียดการตรวจ</th>
+    //         <th class="text-center" width="80px">แก้ไข</th>
+    //         <th class="text-center" width="80px">พอใช้</th>
+    //         <th class="text-center" width="80px">ดีเยี่ยม</th>
+    //     </tr>
+    // </thead>
   $html .='
   <div class="row">
   <div class="col-xl-12">
   <table class="table table-bordered">
-      // <thead class="btn-primary">
-      //     <tr>
-      //
-      //         <th>ลำดับ</th>
-      //         <th>รายละเอียดการตรวจ</th>
-      //         <th class="text-center" width="80px">แก้ไข</th>
-      //         <th class="text-center" width="80px">พอใช้</th>
-      //         <th class="text-center" width="80px">ดีเยี่ยม</th>
-      //     </tr>
-      // </thead>
+
       <tbody>
   ';
   foreach ($QuestionsResult as $key => $row) {
@@ -314,7 +315,7 @@ class CheckController extends Controller
 
         if($result_toppic_befor!='') {
           $html .='<tr class="btn-info">
-                 <td colspan="3"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
+                 <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
                  <td class="text-center" width="80px">แก้ไข</td>
                  <td class="text-center" width="80px">พอใช้</td>
                  <td class="text-center" width="80px">ดีเยี่ยม</td>
