@@ -291,7 +291,7 @@ class CheckController extends Controller
   <div class="row">
   <div class="col-xl-12">
   <table class="table table-bordered">
-      <thead class="">
+      <thead class="btn-primary">
           <tr>
 
               <th>หัวข้อตรวจ</th>
