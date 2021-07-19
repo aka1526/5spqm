@@ -344,7 +344,7 @@ class CheckController extends Controller
                </tr>';
            } else {
 
-             $htnl='<tr class="btn-info">
+             $htnl .='<tr class="btn-info">
                  <td colspan="6"><strong> '.$row->result_toppic.'</strong></td>
 
              </tr>';
