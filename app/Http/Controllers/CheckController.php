@@ -294,7 +294,6 @@ class CheckController extends Controller
       <thead class="btn-primary">
           <tr>
 
-              <th width="100px" >หัวข้อตรวจ</th>
               <th>ลำดับ</th>
               <th>รายละเอียดการตรวจ</th>
               <th class="text-center" width="80px">แก้ไข</th>
@@ -315,12 +314,12 @@ class CheckController extends Controller
 
         if($result_toppic_befor!='') {
           $html .='<tr class="btn-info">
-                 <td colspan="6"><strong>'.$result_toppic_befor.'</strong></td>
+                 <td colspan="6"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
 
              </tr>';
         }
             $html .='<tr>
-                   <td> </td>
+
                    <td class="text-center">'.$row->result_index.'</td>
                    <td>'.$row->result_desc.'</td>
 
@@ -345,7 +344,7 @@ class CheckController extends Controller
                </tr>';
            } else {
             $html .=' <tr>
-                         <td colspan="6">
+                         <td colspan="5">
                             <div class="form-group">
                               <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
                               <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
