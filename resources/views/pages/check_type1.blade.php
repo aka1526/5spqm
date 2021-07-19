@@ -222,7 +222,7 @@ function SaveComment(unid){
 
 var url="{{ route('result.commentsave')}}";
 var comment = $('#audit_comment').val();
-alert(comment);
+ 
   $.ajax({
             type: "POST",
             url: url,
