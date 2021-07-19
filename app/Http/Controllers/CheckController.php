@@ -313,8 +313,14 @@ class CheckController extends Controller
           $result_toppic_befor='';
         }
 
-      $html .='<tr>
-                   <td><strong>'.$result_toppic_befor.'</strong></td>
+        if($result_toppic_befor!='') {
+          $html .='<tr>
+                 <td colspan="6"><strong>'.$result_toppic_befor.'</strong></td>
+
+             </tr>';
+        }
+            $html .='<tr>
+                   <td> </td>
                    <td class="text-center">'.$row->result_index.'</td>
                    <td>'.$row->result_desc.'</td>
 
