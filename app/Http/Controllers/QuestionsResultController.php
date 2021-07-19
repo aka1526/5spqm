@@ -155,12 +155,12 @@ class QuestionsResultController extends Controller
   $unid   =isset($request->unid) ? $request->unid : '' ;
   $score  =isset($request->score)? $request->score : 0 ;
   $count  =QuestionsResultTbl::where('unid','=',$unid)->count();
-  $action=false;
+  $action =false;
     if($count>0){
-      $type  =QuestionsResultTbl::where('unid','=',$unid)->first();
-      if($type=='VALUE'){
-        $action =QuestionsResultTbl::where('unid','=',$unid)->update([
-          'result_val'=> $score,
+      $Result  =QuestionsResultTbl::where('unid','=',$unid)->first();
+      if($Result->type =='VALUE'){
+        $action = QuestionsResultTbl::where('unid','=',$unid)->update([
+          'result_val' => $score,
         ]);
       }
     }
