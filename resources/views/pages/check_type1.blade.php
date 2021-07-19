@@ -218,7 +218,8 @@ var url="{{ route('result.scoresave')}}";
 
 }
 
-function SaveComment(unid,comment){
+function SaveComment(unid){
+  alert(unid);
 var url="{{ route('result.scoresave')}}";
   $.ajax({
             type: "POST",
