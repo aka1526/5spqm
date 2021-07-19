@@ -219,8 +219,10 @@ var url="{{ route('result.scoresave')}}";
 }
 
 function SaveComment(unid){
-  alert(unid);
-var url="{{ route('result.scoresave')}}";
+
+var url="{{ route('result.commentsave')}}";
+var comment = $('#audit_comment').val();
+alert(comment);
   $.ajax({
             type: "POST",
             url: url,

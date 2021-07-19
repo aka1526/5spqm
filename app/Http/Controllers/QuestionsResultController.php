@@ -110,7 +110,7 @@ class QuestionsResultController extends Controller
                        <div class="ibox-body">
                            <div class="form-group">
                            <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
-                           <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" onchange="SaveComment(\''.$row->unid.'\')" placeholder="'.$row->result_toppic.'"></textarea>
+                           <textarea class="form-control"  id="audit_comment" name="audit_comment" data-unid="'.$row->unid.'" rows="3" onchange="SaveComment(\''.$row->unid.'\')" placeholder="'.$row->result_toppic.'"></textarea>
                           </div>
                       </div>
                     </div>
