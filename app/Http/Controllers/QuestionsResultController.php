@@ -158,7 +158,7 @@ class QuestionsResultController extends Controller
   $action =false;
     if($count>0){
       $Result  =QuestionsResultTbl::where('unid','=',$unid)->first();
-      if($Result->type =='VALUE'){
+      if($Result->result_type =='VALUE'){
         $action = QuestionsResultTbl::where('unid','=',$unid)->update([
           'result_val' => $score,
         ]);
