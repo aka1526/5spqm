@@ -403,7 +403,7 @@ if($datatype==2){
                           </div>
                           <div class="col-md-4">
                           <div class="form-group">
-                                    <label class="h4 m-0 text-danger mb-3">คะแนนตรวจประเมิน</label>
+                                    <label class="h4 m-0 text-danger mb-3 ">คะแนนตรวจประเมิน</label>
 
                                     <div >
                                         <label class="ui-radio ui-radio-success">
