@@ -204,5 +204,8 @@ $(".btn-edit").on('click',function (e){
         });
    }
 
+function saveResult(unid,score){
+  alert(score);
+}
 </script>
 @endsection
