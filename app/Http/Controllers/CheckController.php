@@ -408,13 +408,13 @@ if($datatype==2){
                                     <div >
                                         <label class="ui-radio ui-radio-danger" data-toggle="tooltip" data-original-title="0 คะแนน">
                                             <input type="radio" name="check_box" value="0" onclick="saveResult(\''.$row->unid.'\',\'0\')" >
-                                            <span class="input-span"></span>แก้ไข</label>
+                                            <span class="input-span"></span>แก้ไข (0)</label>
                                         <label class="ui-radio ui-radio-warning" data-toggle="tooltip" data-original-title="3 คะแนน">
                                             <input type="radio" name="check_box" value="3" onclick="saveResult(\''.$row->unid.'\',\'3\')" >
-                                            <span class="input-span"></span>พอใช้</label>
+                                            <span class="input-span"></span>พอใช้ (3)</label>
                                         <label class="ui-radio ui-radio-success" data-toggle="tooltip" data-original-title="5 คะแนน">
                                             <input type="radio" name="check_box" value="5" onclick="saveResult(\''.$row->unid.'\',\'5\')" >
-                                            <span class="input-span"></span>ดีเยี่ยม</label>
+                                            <span class="input-span"></span>ดีเยี่ยม (5)</label>
                                     </div>
                                 </div>
                           </div>
