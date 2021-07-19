@@ -205,7 +205,7 @@ $(".btn-edit").on('click',function (e){
    }
 
 function saveResult(unid,score){
-var url="{{ route()}}";
+var url="{{ route('result.scoresave')}}";
   $.ajax({
             type: "POST",
             url: url,
