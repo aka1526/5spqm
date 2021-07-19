@@ -344,7 +344,7 @@ class CheckController extends Controller
                </tr>';
            } else {
 
-             $html .='<tr class="btn-info"><td colspan="6"><strong> '.$row->result_toppic.'</strong></td></tr>';
+             $html .='<tr class="btn-warning"><td colspan="6"><strong> '.$row->result_toppic.'</strong></td></tr>';
 
              $html .=' <tr>
                          <td colspan="5">
