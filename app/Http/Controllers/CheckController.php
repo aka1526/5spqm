@@ -412,7 +412,7 @@ if($datatype==2){
                                         <label class="ui-radio ui-radio-warning mr-2" data-toggle="tooltip" data-original-title="3 คะแนน">
                                             <input type="radio" name="check_box" value="3" onclick="saveResult(\''.$row->unid.'\',\'3\')" >
                                             <span class="input-span"></span>พอใช้ (3)</label>
-                                        <label class="ui-radio ui-radio-success" data-toggle="tooltip" data-original-title="5 คะแนน">
+                                        <label class="ui-radio ui-radio-success mt-2" data-toggle="tooltip" data-original-title="5 คะแนน">
                                             <input type="radio" name="check_box" value="5" onclick="saveResult(\''.$row->unid.'\',\'5\')" >
                                             <span class="input-span"></span>ดีเยี่ยม (5)</label>
                                     </div>
