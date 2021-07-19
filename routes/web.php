@@ -101,3 +101,4 @@ Route::post('/check/checked', [CheckController::class,'checked'])->name('check.c
 
 Route::post('/result/getnext', [QuestionsResultController::class,'getnext'])->name('result.getnext');
 Route::post('/result/getback', [QuestionsResultController::class,'getback'])->name('result.getback');
+Route::post('/result/score', [QuestionsResultController::class,'scoresave'])->name('result.scoresave');

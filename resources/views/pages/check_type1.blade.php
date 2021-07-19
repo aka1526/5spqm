@@ -205,7 +205,17 @@ $(".btn-edit").on('click',function (e){
    }
 
 function saveResult(unid,score){
-  alert(score);
+var url="{{ route()}}";
+  $.ajax({
+            type: "POST",
+            url: url,
+            data:{unid:unid,score:score,"_token": "{{ csrf_token() }}"},
+            success: function(data)
+            {
+              console.log(data);
+            }
+    });
+
 }
 </script>
 @endsection

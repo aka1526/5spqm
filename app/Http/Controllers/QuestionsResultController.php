@@ -149,4 +149,22 @@ class QuestionsResultController extends Controller
 
   }
 
+
+  public function scoresave(Request $request){
+
+  $unid   =isset($request->unid) ? $request->unid : '';
+  $score  =isset($request->score)? $request->score : 0 ;
+  $count  =QuestionsResultTbl::where('unid','=',$unid)->count();
+  $action=false;
+    if($count>0){
+      $type  =QuestionsResultTbl::where('unid','=',$unid)->first();
+      if($type=='VALUE'){
+        $action =QuestionsResultTbl::where('unid','=',$unid)->update([
+          'result_val'=> $score ;
+        ]);
+      }
+    }
+      return response()->json(['result'=> $action  ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+  }
+
 }
