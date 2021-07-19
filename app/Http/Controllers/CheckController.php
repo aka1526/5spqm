@@ -294,7 +294,7 @@ class CheckController extends Controller
       <thead class="btn-primary">
           <tr>
 
-              <th>หัวข้อตรวจ</th>
+              <th width="80px" >หัวข้อตรวจ</th>
               <th>ลำดับ</th>
               <th>รายละเอียดการตรวจ</th>
               <th class="text-center" width="80px">แก้ไข</th>
