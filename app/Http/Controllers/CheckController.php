@@ -344,15 +344,10 @@ class CheckController extends Controller
                </tr>';
            } else {
 
-             $htnl .='<tr class="btn-info">
-                 <td colspan="6"><strong> '.$row->result_toppic.'</strong></td>
+             $html .='<tr class="btn-info"><td colspan="6"><strong> '.$row->result_toppic.'</strong></td></tr>';
 
-             </tr>';
-
-                         $html .=' <tr>
+             $html .=' <tr>
                          <td colspan="5">
-
-
                               <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'"></textarea>
 
                           </td>
