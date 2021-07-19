@@ -326,19 +326,19 @@ class CheckController extends Controller
                    <td class="text-center"><strong>'.$row->result_index.'</strong></td>
                    <td>'.$row->result_desc.'</td>
 
-                   <td class="text-center" data-toggle="tooltip" data-original-title="เพิ่มหัวข้อการตรวจ">
+                   <td class="text-center" data-toggle="tooltip" data-original-title="0 คะแนน">
                      <label class="ui-radio ui-radio-danger">
                       <input type="radio"  id="check_'.$row->unid.'" name="check_'.$row->unid.'">
                       <span class="input-span"></span>
                        </label>
                    </td>
-                   <td class="text-center">
+                   <td class="text-center" data-toggle="tooltip" data-original-title="3 คะแนน">
                      <label class="ui-radio ui-radio-warning">
                       <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
                       <span class="input-span"></span>
                        </label>
                    </td>
-                   <td class="text-center">
+                   <td class="text-center" data-toggle="tooltip" data-original-title="5 คะแนน">
                      <label class="ui-radio ui-radio-success">
                       <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
                       <span class="input-span"></span>
