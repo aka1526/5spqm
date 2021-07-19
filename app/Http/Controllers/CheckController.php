@@ -324,13 +324,13 @@ class CheckController extends Controller
                    <td>'.$row->result_desc.'</td>
 
                    <td class="text-center">
-                     <label class="ui-radio ui-radio-success">
+                     <label class="ui-radio ui-radio-danger">
                       <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
                       <span class="input-span"></span>
                        </label>
                    </td>
                    <td class="text-center">
-                     <label class="ui-radio ui-radio-success">
+                     <label class="ui-radio ui-radio-warning">
                       <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
                       <span class="input-span"></span>
                        </label>
