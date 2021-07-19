@@ -152,7 +152,7 @@ class QuestionsResultController extends Controller
 
   public function scoresave(Request $request){
 
-  $unid   =isset($request->unid) ? $request->unid : '';
+  $unid   =isset($request->unid) ? $request->unid : '' ;
   $score  =isset($request->score)? $request->score : 0 ;
   $count  =QuestionsResultTbl::where('unid','=',$unid)->count();
   $action=false;
@@ -160,7 +160,7 @@ class QuestionsResultController extends Controller
       $type  =QuestionsResultTbl::where('unid','=',$unid)->first();
       if($type=='VALUE'){
         $action =QuestionsResultTbl::where('unid','=',$unid)->update([
-          'result_val'=> $score ;
+          'result_val'=> $score,
         ]);
       }
     }
