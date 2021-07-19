@@ -161,6 +161,7 @@ class QuestionsResultController extends Controller
       if($Result->result_type =='VALUE'){
         $action = QuestionsResultTbl::where('unid','=',$unid)->update([
           'result_val' => $score,
+          'audit_check' => 'Y'
         ]);
       }
     }
