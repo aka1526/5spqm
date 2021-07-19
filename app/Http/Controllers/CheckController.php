@@ -326,9 +326,9 @@ class CheckController extends Controller
                    <td class="text-center"><strong>'.$row->result_index.'</strong></td>
                    <td>'.$row->result_desc.'</td>
 
-                   <td class="text-center">
+                   <td class="text-center" data-toggle="tooltip" data-original-title="เพิ่มหัวข้อการตรวจ">
                      <label class="ui-radio ui-radio-danger">
-                      <input type="radio" data-toggle="tooltip" data-original-title="เพิ่มหัวข้อการตรวจ" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
+                      <input type="radio"  id="check_'.$row->unid.'" name="check_'.$row->unid.'">
                       <span class="input-span"></span>
                        </label>
                    </td>
