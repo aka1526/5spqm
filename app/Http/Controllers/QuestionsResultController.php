@@ -169,4 +169,23 @@ class QuestionsResultController extends Controller
       return response()->json(['result'=> $action  ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }
 
+  public function commentsave(Request $request){
+
+  $unid   =isset($request->unid) ? $request->unid : '' ;
+  $audit_comment  =isset($request->comment)? $request->comment : '' ;
+  $count  =QuestionsResultTbl::where('unid','=',$unid)->count();
+  $action =false;
+    if($count>0){
+      $Result  =QuestionsResultTbl::where('unid','=',$unid)->first();
+      if($Result->result_type =='TEXT'){
+        $action = QuestionsResultTbl::where('unid','=',$unid)->update([
+          'audit_comment' => $audit_comment,
+          'audit_check' => 'Y'
+        ]);
+      }
+    }
+      return response()->json(['result'=> $action  ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+  }
+
+
 }

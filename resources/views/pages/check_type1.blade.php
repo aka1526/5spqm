@@ -226,7 +226,7 @@ alert(comment);
   $.ajax({
             type: "POST",
             url: url,
-            data:{unid:unid,score:score,"_token": "{{ csrf_token() }}"},
+            data:{unid:unid,comment:comment,"_token": "{{ csrf_token() }}"},
             success: function(data)
             {
               console.log(data);
