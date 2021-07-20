@@ -400,7 +400,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
            }
          }
 
-         $html .='<tr class="btn-warning"><td colspan="2"><strong> รวมคะแนน </strong></td>
+         $html .='<tr class="btn-danger"><td colspan="2"><strong> รวมคะแนน </strong></td>
                  <td class="text-center" >
                    <div>
                       <span class="h4 m-0">  '.$totalscroe.'</span>
