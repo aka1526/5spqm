@@ -254,7 +254,7 @@ function final(ans) {
                              timer: 1300
                            }).then((result) => {
 
-                             location.href = "{{ route('check.checked')}}";
+                             location.href = "{{ route('check.index')}}";
                            })
 
                  } else {
