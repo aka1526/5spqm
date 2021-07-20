@@ -218,7 +218,7 @@ class QuestionsResultController extends Controller
         $NoCheck = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')->where('audit_check','=','N')->get();
         $_NotCheck='';
           foreach ($NoCheck as $key => $value) {
-            $_NotCheck .= 'ตรวจพบ ข้อ .'.$value->result_index.' <br/>';
+            $_NotCheck .= 'ข้อ .'.$value->result_index.' <br/>';
           }
 
         if($_NotCheck!=''){
