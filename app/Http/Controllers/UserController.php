@@ -6,24 +6,26 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Str;
-use App\Models\AreaTbl;
-use App\Models\GroupsTbl;
-use App\Models\AuditpositionTbl;
-use App\Models\AuditAreaTbl;
-use App\Models\PlanMasterTbl;
-use App\Models\PlanPositionTbl;
+use Illuminate\Support\Facades\Hash;
 
-class PlanController extends Controller
+// use App\Models\AreaTbl;
+// use App\Models\GroupsTbl;
+// use App\Models\AuditpositionTbl;
+// use App\Models\AuditAreaTbl;
+// use App\Models\PlanMasterTbl;
+// use App\Models\PlanPositionTbl;
+
+class UserController extends Controller
 {
 
   public function genUnid(){
     $uuid = (string) Str::uuid();
-    $uuid = str_replace("-","",$uuid);
+   $uuid = str_replace("-","",$uuid);
     return $uuid;
 }
 
  public function index(Request $request){
-   return view('pages.plan_index');
+   return view('pages.user_index');
  }
  public function get(Request $request){
    //dd($request);

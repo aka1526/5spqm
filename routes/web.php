@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\QuestionsResultController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,3 +105,10 @@ Route::post('/result/getback', [QuestionsResultController::class,'getback'])->na
 Route::post('/result/score', [QuestionsResultController::class,'scoresave'])->name('result.scoresave');
 Route::post('/result/commentsave', [QuestionsResultController::class,'commentsave'])->name('result.commentsave');
 Route::post('/result/final', [QuestionsResultController::class,'final'])->name('result.final');
+
+Route::get('/user',            [CheckController::class,'index'])->name('user.index');
+Route::get('/user/get',        [QuestionsController::class,'get'])->name('user.get');
+Route::post('/user/add',       [CheckController::class,'add'])->name('user.add');
+Route::post('/user/edit',      [CheckController::class,'edit'])->name('user.edit');
+Route::post('/user/delete',    [CheckController::class,'delete'])->name('user.delete');
+Route::post('/user/editfield', [CheckController::class,'editfield'])->name('user.editfield');
