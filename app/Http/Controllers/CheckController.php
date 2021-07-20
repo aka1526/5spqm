@@ -169,7 +169,7 @@ class CheckController extends Controller
   }
 
   public function checked(Request $request){
-    dd($request);
+  //  dd($request);
     $year   = Cookie::get('DOC_YEAR')   !='' ? Cookie::get('DOC_YEAR') : '';
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
     $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
