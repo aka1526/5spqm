@@ -285,29 +285,29 @@ if($counSummary==0){
 
     QuestionsResultTbl::insert([
       'unid' => $this->genUnid()
-      'plan_date' => Carbon::now()->format('Y-m-d')
-      'plan_unid' => ''
-      'plan_date' => ''
-      'plan_year' => $year
-      'plan_month' => $month
-      'doc_status' =>
-      'questions_unid' => $Questions->unid
-      'questions_rev' => $Questions->ques_rev
-      'questions_header' => $Questions->ques_header
-      'total_item' => $countItem
-      'total_score' => ($countItem*5)
-      'area_score' => 0
-      'area_unid' => $Area->unid
-      'area_name' => $Area->area_name
-      'area_owner' => $Area->area_owner
-      'auditor_unid' => $username
-      'auditor_name' => $username
-      'auditor_position' => $pv
-      'position_name' => $Positions->position_name
-      'create_by' =>$username
-      'create_time' => Carbon::now()
-      'edit_by' =>$username
-      'edit_time' => Carbon::now()
+      ,'plan_date' => Carbon::now()->format('Y-m-d')
+      ,'plan_unid' => ''
+      ,'plan_date' => ''
+      ,'plan_year' => $year
+      ,'plan_month' => $month
+      ,'doc_status' =>
+      ,'questions_unid' => $Questions->unid
+      ,'questions_rev' => $Questions->ques_rev
+      ,'questions_header' => $Questions->ques_header
+      ,'total_item' => $countItem
+      ,'total_score' => ($countItem*5)
+      ,'area_score' => 0
+      ,'area_unid' => $Area->unid
+      ,'area_name' => $Area->area_name
+      ,'area_owner' => $Area->area_owner
+      ,'auditor_unid' => $username
+      ,'auditor_name' => $username
+      ,'auditor_position' => $pv
+      ,'position_name' => $Positions->position_name
+      ,'create_by' =>$username
+      ,'create_time' => Carbon::now()
+      ,'edit_by' =>$username
+      ,'edit_time' => Carbon::now()
       ]);
 }
 
