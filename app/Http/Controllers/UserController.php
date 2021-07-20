@@ -21,7 +21,7 @@ class UserController extends Controller
 
   public function genUnid(){
     $uuid = (string) Str::uuid();
-   $uuid = str_replace("-","",$uuid);
+    $uuid = str_replace("-","",$uuid);
     return $uuid;
 }
 
@@ -30,42 +30,39 @@ class UserController extends Controller
    return view('pages.user_index',compact('User'));
  }
  public function get(Request $request){
-
-   //dd($request);
-   $pv = isset($request->pv) ? $request->pv : '';
-
-    $dataGroups =GroupsTbl::where('group_position','=',$pv)
-    ->orderBy('group_position')->orderBy('group_index')->get();
-
-   $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
-
-   foreach ($dataArea as $key => $row) {
-        $count =PlanMasterTbl::where('position_type','=',$pv)->where('area_unid', '=',$row->unid)->count();
-        $uuid = $this->genUnid();
-        if($count==0){
-          PlanMasterTbl::insert([
-            'unid' => $uuid,
-            'area_unid' => $row->unid ,
-            'area_index' => $row->area_index ,
-            'area_name' => $row->area_name ,
-            'area_owner' => $row->area_owner ,
-            'position_type' => $pv,
-            'groups' => "",
-          //  'datestart' => Carbon::now()->format('Y-m-d'),
-            //'dateend'=> Carbon::now()->endOfYear()->format('Y-m-d'),
-          ]);
-
-        }
-
-   }
-
-   $dataPlanMaster =PlanMasterTbl::where('position_type','=',$pv)->orderBy('area_index')->get();
-
-   $dataPosition =AuditpositionTbl::where('position_name_eng','=',$pv)->first();
-
-  return view('pages.plan_add',compact('dataGroups','dataArea','dataPlanMaster','pv','dataPosition'));
+   $unid  =isset($request->unid) ? $request->unid :'';
+   $user  =UserTbl::where('unid','=',$unid)->first();
+   $action=false;
+   if($user){  $action =true; }
+     return response()->json(['result'=> $action,'data' => $user ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
  }
  public function add(Request $request){
+   $user_login =isset($request->user_login) ? $request->user_login :'';
+   $user_name =isset($request->user_name) ? $request->user_name :'';
+   $user_password =isset($request->user_password) ? $request->user_password :'';
+   $user_password=Hash::make($user_password);
+   $count =UserTbl::where('user_login','=',$user_login)->count();
+
+    $username='s5';
+    $action=false;
+    $uuid = $this->genUnid();
+    if($count==0){
+      $action=  UserTbl::insert([
+          'unid' => $uuid
+          ,'user_login' => $user_login
+          ,'user_name' => $user_name
+          ,'user_password' => $user_password
+          ,'user_status' => 'Y'
+          ,'create_by' => $username
+          ,'create_time' => Carbon::now()->format('Y-m-d')
+          ,'edit_by' => $username
+          ,'edit_time' => Carbon::now()->format('Y-m-d')
+         ]);
+    }
+
+
+     return response()->json(['result'=> $action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
 
  }
  public function edit(Request $request){

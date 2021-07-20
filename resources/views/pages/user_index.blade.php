@@ -14,11 +14,10 @@
            <div class="row">
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
-
                             <div class="ibox-head">
                                 <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
                                 <div>
-                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มพื้นที่</a>
+                                    <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</a>
                                 </div>
                             </div>
 
@@ -27,15 +26,16 @@
                                     <thead class="">
                                         <tr>
                                             <th>#</th>
-                                            <th>พื้นที่</th>
-                                            <th>หัวหน้าพื้นที่</th>
+                                            <th>User Login</th>
+                                            <th>ชื่อผู้ใช้งาน</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($User as $key => $row)
                                     <tr>
-                                        <td>{{ $row->user_id }}</td>
+                                        <td>{{ $key=$key+1 }}</td>
+                                        <td>{{ $row->user_login }}</td>
                                         <td>{{ $row->user_name }}</td>
 
                                         <td>
@@ -70,25 +70,25 @@
            </button>
          </div>
          <div class="modal-body ">
-           <form id="FrmArea" name="FrmArea" action="{{ route('area.add')}}" method="post" enctype="multipart/form-data">
+           <form id="FrmArea" name="FrmArea" action="{{ route('user.add')}}" method="post" enctype="multipart/form-data">
              @csrf
               <input  type="hidden" id="unid" name="unid" value="">
 
               <div class="row">
 
                         <div class="col-sm-4 form-group">
-                            <label>Login Id</label>
-                             <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
+                            <label>User Login</label>
+                             <input class="form-control" type="text" id="user_login" name="user_login" placeholder="User Login" required required autocomplete="off">
                         </div>
 
 
                <div class="col-sm-4 form-group">
                    <label >ชื่อผู้ใช้งาน</label>
-                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
+                   <input class="form-control" type="text" id="user_name" name="user_name" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
                </div>
-               <div class="col-sm-4 form-group">
+               <div class="col-sm-4 form-group" id="pwd">
                    <label >รหัสผ่าน</label>
-                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
+                   <input class="form-control" type="password" id="user_password" name="user_password" placeholder="รหัสผ่าน" required required autocomplete="off">
                </div>
                  </div>
 <!--
@@ -160,28 +160,28 @@ $(".btn-delete").on('click',function (e){
 $(".btn-edit").on('click',function (e){
  e.preventDefault();
  var unid =$(this).data('unid');
- var url = "{{ route('area.get')}}";
- $("#FrmArea").attr('action', "{{ route('area.edit')}}");
+ var url = "{{ route('user.get')}}";
+ $("#FrmArea").attr('action', "{{ route('user.edit')}}");
  $.ajax({
            type: "get",
            url: url,
            data: {unid:unid}, // serializes the form's elements.
-           success: function(data)
-           {
-           var res= data.data;
-             $("#unid").val(res.unid);
-             $("#area_index").val(res.area_index);
-             $("#area_name").val(res.area_name);
-             $("#area_owner").val(res.area_owner);
-             if(res){
-               $('#OpenFrmArea').modal('show');
-             }
+           success: function(data){
+             var res= data.data;
+               $("#unid").val(res.unid);
+               $("#user_login").val(res.user_login);
+               $("#user_name").val(res.user_name);
+               $("#pwd").hide();
+               if(res){
+                 $('#OpenFrmArea').modal('show');
+               }
            }
          });
    });
 
 
    $(".btn-new").on('click',function (e){
+      $("#pwd").show();
       $('#OpenFrmArea').modal('show');
   });
 
