@@ -48,7 +48,7 @@
                                        <td  class="text-center">{{ $row->plan_groups }}</td>
                                           @endif
                                         <td>{{ $row->plan_area_owner }}</td>
-                                        <td class="text-center">{{ $row->area_score > 0 :  $row->area_score : '0' }}</td>
+                                        <td class="text-center">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</td>
                                       <td>
                                         @if($row->doc_status !='Y')
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
