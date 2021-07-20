@@ -220,7 +220,7 @@ class QuestionsResultController extends Controller
           $Totalscore= QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')
                  ->selectRaw("SUM(result_val) as score")
                  ->groupBy('unid_ans')->get();
-          if($Totalscore[0]->score>0){
+          if($Totalscore->score>0){
           $score =  $Totalscore[0]->score;
           }
 
