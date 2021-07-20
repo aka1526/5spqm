@@ -285,7 +285,7 @@ if($counSummary==0){
 
     QuestionsResultTbl::insert([
       'unid' => $this->genUnid()
-      'plan_date' => Carbon::now()->format('Y-m-d');
+      'plan_date' => Carbon::now()->format('Y-m-d')
       'plan_unid' => ''
       'plan_date' => ''
       'plan_year' => $year
