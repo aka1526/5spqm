@@ -33,7 +33,7 @@
 
                         <li>
                             <a href="{{ route('questions.index')}}">แบบฟอร์มการตรวจพื้นที่</a>
-                           
+
                         </li>
 
                           <li>
@@ -42,7 +42,9 @@
                           <li>
                               <a href="{{ route('area.index')}}">พื้นที่การตรวจ</a>
                           </li>
-
+                          <li>
+                              <a href="{{ route('area.index')}}">ข้อมูลผู้ใช้งาน/user Login</a>
+                          </li>
                       </ul>
                   </li>
 
