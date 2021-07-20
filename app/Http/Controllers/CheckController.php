@@ -185,9 +185,10 @@ class CheckController extends Controller
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
     $plan_unid =isset($request->plan_unid) ? $request->plan_unid :'';
 
-    $agent = new Agent();
-    $datatype =$agent->isDesktop() ? 1 : 2 ;
-    $datatype=2;
+  //  $agent = new Agent();
+  //  $datatype =$agent->isDesktop() ? 1 : 2 ;
+    $C_PlanPosition = PlanPositionTbl::where('unid','=',$plan_unid)->where('doc_status','=','Y')->count();
+    $datatype= $C_PlanPosition > 0 ? 2 : 1;
     $username='5s';
     Cookie::queue('AREA_UNID',$request->area_unid);
 
