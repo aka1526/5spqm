@@ -236,7 +236,7 @@ var comment = $('#audit_comment').val();
 }
 
 function final(ans) {
-  var unid = $('$unid').val();
+  var unid = $('#unid').val();
   alert(unid);
     var url    = "{{ route('result.final') }}";
          $.ajax({
