@@ -256,11 +256,11 @@ function final(ans) {
                           },
                         })
                  } else {
-                 
+
                          Swal.fire({
                               icon: 'error',
                               title: 'กรุณาให้คะแนน',
-                              text: data.data,
+                              html: data.data,
                               showConfirmButton: false,
                               timer: 1500
                             })
