@@ -251,7 +251,10 @@ function final(ans) {
                              icon: 'success',
                              title: 'ส่งคะแนน',
                              text: data.data,
-                             timer: 1200
+                             timer: 1300
+                           }).then((result) => {
+
+                             location.href = "{{ route('check.checked')}}";
                            })
 
                  } else {
