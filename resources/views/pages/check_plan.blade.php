@@ -65,7 +65,7 @@
                                               <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
                                               <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
 
-                                          <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
+                                          <button type=submit class="btn btn btn-warning   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
                                             <i class="fa fa-pencil font-14 btn-check"></i> คะนนประเมินพื้นที่ </button>
                                           </form>
