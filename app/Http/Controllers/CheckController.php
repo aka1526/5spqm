@@ -290,7 +290,7 @@ if($counSummary==0){
       ,'plan_date' => ''
       ,'plan_year' => $year
       ,'plan_month' => $month
-      ,'doc_status' =>
+      ,'doc_status' =>'N'
       ,'questions_unid' => $Questions->unid
       ,'questions_rev' => $Questions->ques_rev
       ,'questions_header' => $Questions->ques_header
