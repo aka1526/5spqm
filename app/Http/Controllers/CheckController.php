@@ -15,6 +15,7 @@ use App\Models\QuestionspositionTbl;
 use App\Models\QuestionsItemTbl;
 use App\Models\QuestionsTbl;
 use App\Models\QuestionsResultTbl;
+use App\Models\SummaryResultTbl;
 use Jenssegers\Agent\Agent;
 
 class CheckController extends Controller
@@ -172,7 +173,7 @@ class CheckController extends Controller
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
     $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
-     $agent = new Agent();
+    $agent = new Agent();
     $datatype =$agent->isDesktop() ? 1 : 2 ;
     $datatype=2;
     $username='5s';
@@ -190,10 +191,13 @@ class CheckController extends Controller
   $CountResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
             ->where('positions_type','=',$pv)
             ->where('area_unid','=',$area_unid)->count();
+
+$Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
+$Positions =PositionsTbl::where('positions_type','=',$pv)->first();
+$Area =AreaTbl::where('unid','=',$area_unid)->first();
+
   if($CountResult==0){
-      $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
-      $Positions =PositionsTbl::where('positions_type','=',$pv)->first();
-      $Area =AreaTbl::where('unid','=',$area_unid)->first();
+
       $rowTotal=0;
       $unid_ans =$this->genUnid();
       foreach ($QuestionsItem as $key => $item) {
@@ -239,7 +243,7 @@ class CheckController extends Controller
         ,'result_desc' => ""
         ,'result_val' => 0
         ,'status'=>"Y"
-          ,'result_type' => "TEXT"
+        ,'result_type' => "TEXT"
         ,'create_by'=> $username
         ,'create_time'=>Carbon::now()
         ,'edit_by'=> $username
@@ -255,7 +259,7 @@ class CheckController extends Controller
         ,'ques_header' => $Questions->ques_header
         ,'positions_type' => $pv
         ,'position_name' => $Positions->position_name
-        ,'area_unid' =>$Area->unid
+        ,'area_unid' => $Area->unid
         ,'area_name' =>$Area->area_name
         ,'area_owner' =>$Area->area_owner
         ,'result_index' => $rowTotal
@@ -265,13 +269,46 @@ class CheckController extends Controller
         ,'status'=>"Y"
         ,'result_type' => "TEXT"
         ,'create_by'=> $username
-        ,'create_time'=>Carbon::now()
+        ,'create_time'=> Carbon::now()
         ,'edit_by'=> $username
         ,'edit_time'=>Carbon::now()
         ,'unid_ans' => $unid_ans
       ]);
 
   }
+
+$counSummary=SummaryResultTbl::where('questions_unid','=',$Questions->unid)->count();
+
+if($counSummary==0){
+    $countItem = QuestionsResultTbl::where('unid_ans','=',$unid_ans)->where('result_type','=','VALUE')->count();
+
+    QuestionsResultTbl::insert([
+      'unid' => $this->genUnid()
+      'doc_date' => Carbon::now()->format('Y-m-d');
+      'plan_unid' => ''
+      'plan_date' => ''
+      'plan_year' => $year
+      'plan_month' => $month
+      'doc_status' =>
+      'questions_unid' => $Questions->unid
+      'questions_rev' => $Questions->ques_rev
+      'questions_header' => $Questions->ques_header
+      'total_item' => $countItem
+      'total_score' => ($countItem*5)
+      'area_score' => 0
+      'area_unid' => $Area->unid
+      'area_name' => $Area->area_name
+      'area_owner' => $Area->area_owner
+      'auditor_unid' => $username
+      'auditor_name' => $username
+      'auditor_position' => $pv
+      'position_name' => $Positions->position_name
+      'create_by' =>$username
+      'create_time' => Carbon::now()
+      'edit_by' =>$username
+      'edit_time' => Carbon::now()
+      ]);
+}
 
   $QuestionsResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
             ->where('positions_type','=',$pv)
