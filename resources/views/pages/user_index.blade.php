@@ -37,7 +37,7 @@
                                     <tr>
                                         <td>{{ $row->user_id }}</td>
                                         <td>{{ $row->user_name }}</td>
-                                       
+
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fas fa-pencil-alt font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -77,7 +77,7 @@
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($dataArea)+1}}" required>
+                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($User)+1}}" required>
                         </div>
                         <div class="col-sm-10 form-group">
                             <label>ชื่อพื้นที่</label>
