@@ -169,6 +169,7 @@ class CheckController extends Controller
   }
 
   public function checked(Request $request){
+    dd($request);
     $year   = Cookie::get('DOC_YEAR')   !='' ? Cookie::get('DOC_YEAR') : '';
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
     $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
@@ -284,7 +285,7 @@ if($counSummary==0){
 
     QuestionsResultTbl::insert([
       'unid' => $this->genUnid()
-      'doc_date' => Carbon::now()->format('Y-m-d');
+      'plan_date' => Carbon::now()->format('Y-m-d');
       'plan_unid' => ''
       'plan_date' => ''
       'plan_year' => $year
