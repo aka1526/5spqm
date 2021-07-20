@@ -75,10 +75,7 @@
               <input  type="hidden" id="unid" name="unid" value="">
 
               <div class="row">
-                        <div class="col-sm-2 form-group">
-                            <label>ลำดับ</label>
-                            <input class="form-control" type="number" id="area_index" min="1" max="20" name="area_index" placeholder="ลำดับ" value="{{ count($User)+1}}" required>
-                        </div>
+                       
                         <div class="col-sm-10 form-group">
                             <label>ชื่อพื้นที่</label>
                              <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
