@@ -32,8 +32,8 @@
                                                @if($pv !='SELF')
                                                 <th  class="text-center">กลุ่ม</th>
                                                 @endif
-                                            <th>หัวหน้าพื้นที่</th>
-                                            <th>ระดับคะแนน</th>
+                                            <th class="text-center">หัวหน้าพื้นที่</th>
+                                            <th class="text-center">ระดับคะแนน</th>
 
                                             <th>Action</th>
                                         </tr>
