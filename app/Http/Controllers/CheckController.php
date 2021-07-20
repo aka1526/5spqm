@@ -187,8 +187,8 @@ class CheckController extends Controller
 
   //  $agent = new Agent();
   //  $datatype =$agent->isDesktop() ? 1 : 2 ;
-    $C_PlanPosition = SummaryResultTbl::where('plan_unid','=',$plan_unid)->where('doc_status','=','Y')->count();
-    $datatype= $C_PlanPosition > 0 ? 2 : 1;
+    $PlanStatus = SummaryResultTbl::where('plan_unid','=',$plan_unid)->where('doc_status','=','Y')->count();
+    $datatype= $PlanStatus > 0 ? 2 : 1;
     $username='5s';
     Cookie::queue('AREA_UNID',$request->area_unid);
 
@@ -378,9 +378,8 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
         if($result_toppic_befor!='') {
           $html .='<tr class="btn-info">
                  <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
-                 <td class="text-center" width="80px">แก้ไข</td>
-                 <td class="text-center" width="80px">พอใช้</td>
-                 <td class="text-center" width="80px">ดีเยี่ยม</td>
+                 <td class="text-center" width="80px">ระดับคะแนน</td>
+
              </tr>';
         }
             $html .='<tr>
@@ -388,24 +387,11 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
                    <td class="text-center"><strong>'.$row->result_index.'</strong></td>
                    <td>'.$row->result_desc.'</td>
 
-                   <td class="text-center" data-toggle="tooltip" data-original-title="0 คะแนน">
-                     <label class="ui-radio ui-radio-danger">
-                      <input type="radio"  id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                      <span class="input-span"></span>
-                       </label>
+                   <td class="text-center" data-toggle="tooltip" data-original-title="ระดับคะแนน">
+                    '.$row->result_val.'
                    </td>
-                   <td class="text-center" data-toggle="tooltip" data-original-title="3 คะแนน">
-                     <label class="ui-radio ui-radio-warning">
-                      <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                      <span class="input-span"></span>
-                       </label>
-                   </td>
-                   <td class="text-center" data-toggle="tooltip" data-original-title="5 คะแนน">
-                     <label class="ui-radio ui-radio-success">
-                      <input type="radio" id="check_'.$row->unid.'" name="check_'.$row->unid.'">
-                      <span class="input-span"></span>
-                       </label>
-                   </td>
+
+
                </tr>';
            } else {
 
