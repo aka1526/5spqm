@@ -34,7 +34,7 @@
                                                 @endif
                                             <th>หัวหน้าพื้นที่</th>
 
-                                            <th>Action2</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
