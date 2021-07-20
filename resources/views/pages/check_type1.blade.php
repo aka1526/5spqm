@@ -212,7 +212,7 @@ var url="{{ route('result.scoresave')}}";
             data:{unid:unid,score:score,"_token": "{{ csrf_token() }}"},
             success: function(data)
             {
-              console.log(data);
+            //  console.log(data);
             }
     });
 
@@ -222,14 +222,14 @@ function SaveComment(unid){
 
 var url="{{ route('result.commentsave')}}";
 var comment = $('#audit_comment').val();
- 
+
   $.ajax({
             type: "POST",
             url: url,
             data:{unid:unid,comment:comment,"_token": "{{ csrf_token() }}"},
             success: function(data)
             {
-              console.log(data);
+              //console.log(data);
             }
     });
 

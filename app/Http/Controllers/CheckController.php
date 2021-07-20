@@ -172,7 +172,8 @@ class CheckController extends Controller
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
     $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
-    $datatype  =isset($request->datatype) ? $request->datatype : 1;
+    $datatype =$agent->isDesktop() ? 1 : 2 ;
+    $datatype=2;
     $username='5s';
     Cookie::queue('AREA_UNID',$request->area_unid);
 
@@ -283,7 +284,7 @@ class CheckController extends Controller
 // $agent->isMobile();
 // $agent->isTablet();
 //
-//$datatype =$agent->isDesktop() ? 1 : 2 ;
+//
 
   if($datatype==1){
 
