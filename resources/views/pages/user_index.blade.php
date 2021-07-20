@@ -15,7 +15,7 @@
              <div class="col-xl-12">
                         <div class="ibox ibox-primary">
                             <div class="ibox-head">
-                                <div class="ibox-title">ตารางพื้นที่การตรวจ</div>
+                                <div class="ibox-title">รายชื่อผู้ใช้งาน</div>
                                 <div>
                                     <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</a>
                                 </div>
@@ -64,7 +64,7 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header bg-primary ">
-           <h5 class="modal-title text-white" id="exampleModalLongTitle">ข้อมูลพื้นที่การตรวจ</h5>
+           <h5 class="modal-title text-white" id="exampleModalLongTitle">ข้อมูลผู้ใช้งาน</h5>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
