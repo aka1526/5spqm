@@ -246,23 +246,21 @@ function final(ans) {
               {
                 console.log(data);
                 if(data.result){
-                  Swal.fire(data.data, '', {
-                          icon : "success",
-                          timer: 1300,
-                          buttons: {
-                            confirm: {
-                              className : 'btn btn-info'
-                            }
-                          },
-                        })
+
+                        Swal.fire({
+                             icon: 'success',
+                             title: 'ส่งคะแนน',
+                             text: data.data,
+                             timer: 1200
+                           })
+
                  } else {
 
                          Swal.fire({
                               icon: 'error',
                               title: 'กรุณาให้คะแนน',
                               html: data.data,
-                              //showConfirmButton: false,
-                              //timer: 1500
+
                             })
                  }
               }

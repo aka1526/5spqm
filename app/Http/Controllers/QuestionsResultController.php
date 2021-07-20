@@ -241,7 +241,7 @@ class QuestionsResultController extends Controller
           ,'edit_time'=>Carbon::now()
         ]);
 
-          return response()->json(['result'=> true,'data'=> 'บันทึกข้อมูลสำเร็จ'],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+          return response()->json(['result'=> true,'data'=> 'ส่งคะแนนสำเร็จ'],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }
 
 
