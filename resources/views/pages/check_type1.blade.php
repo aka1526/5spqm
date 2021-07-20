@@ -16,6 +16,10 @@
              <div class="ibox ibox-primary">
                <div class="ibox-head">
                    <div class="ibox-title">{{ $QuestionsResult[0]->ques_header }}</div>
+                   <div>
+                       <a class="btn btn-warning btn-sm " href="/check/get/{{ Cookie::get('DOC_PV').'/'.Cookie::get('DOC_YEAR').'/'.Cookie::get('DOC_MONTH') }}"><i class="fa fa-backward"></i> กลับ</a>
+
+                   </div>
                </div>
 
                   <div class="ibox-body ">
