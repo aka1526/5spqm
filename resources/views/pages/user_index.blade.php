@@ -75,17 +75,22 @@
               <input  type="hidden" id="unid" name="unid" value="">
 
               <div class="row">
-                       
-                        <div class="col-sm-10 form-group">
-                            <label>ชื่อพื้นที่</label>
+
+                        <div class="col-sm-4 form-group">
+                            <label>Login Id</label>
                              <input class="form-control" type="text" id="area_name" name="area_name" placeholder="ชื่อพื้นที่" required>
                         </div>
-                    </div>
 
-               <div class="form-group">
-                   <label >หัวหน้าพื้นที่</label>
+
+               <div class="col-sm-4 form-group">
+                   <label >ชื่อผู้ใช้งาน</label>
                    <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
                </div>
+               <div class="col-sm-4 form-group">
+                   <label >รหัสผ่าน</label>
+                   <input class="form-control" type="text" id="area_owner" name="area_owner" placeholder="หัวหน้าพื้นที่" required >
+               </div>
+                 </div>
 <!--
                <div class="form-group">
                    <button class="btn btn-primary " type="submit">Submit</button>
