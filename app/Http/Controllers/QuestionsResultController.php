@@ -214,13 +214,23 @@ class QuestionsResultController extends Controller
         $ans   =isset($request->ans ) ? $request->ans  : '' ;
         $unid   =isset($request->unid ) ? $request->unid  : '' ;
       //  $Count  =QuestionsResultTbl::where('unid','=',$unid)->count();
+
+        $NoCheck = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')->where('audit_check','=','N')->get();
+        $_NotCheck='';
+          foreach ($NoCheck as $key => $value) {
+            $_NotCheck .= 'ตรวจพบ ข้อ .'.$value->result_index.' <br/>';
+          }
+
+        if($_NotCheck!=''){
+            return response()->json(['result'=> false,'data'=>  $_NotCheck],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+        }
         $username='5s';
         $score=0;
         if($ans !=''){
-          $Totalscore = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')
-                   ->selectRaw("SUM(result_val) as score")
-                   ->groupBy('unid_ans')->get();
-                   dd($Totalscore);
+          $Score = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')->get();
+          foreach ($Score as $key => $val) {
+            $score = $score+$val->result_val ;
+          }
 
         }
 
@@ -230,6 +240,8 @@ class QuestionsResultController extends Controller
           ,'edit_by'=> $username
           ,'edit_time'=>Carbon::now()
         ]);
+
+          return response()->json(['result'=> true,'data'=> 'บันทึกข้อมูลสำเร็จ'],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }
 
 

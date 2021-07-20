@@ -245,9 +245,27 @@ function final(ans) {
               success: function(data)
               {
                 console.log(data);
-                // if(data.result){
-                //     $("#check-data").html(data.html);
-                // }
+                if(data.result){
+                  swal(data.data, '', {
+                          icon : "success",
+                          timer: 1300,
+                          buttons: {
+                            confirm: {
+                              className : 'btn btn-info'
+                            }
+                          },
+                        })
+                 } else {
+                   swal('กรุณาให้คะแนน ข้อที่ ',data.data, {
+                           icon : "error",
+                           timer: 1300,
+                           buttons: {
+                             confirm: {
+                               className : 'btn btn-info'
+                             }
+                           },
+                         })
+                 }
               }
       });
  }
