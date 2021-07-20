@@ -26,7 +26,7 @@ class UserController extends Controller
 }
 
  public function index(Request $request){
-    $User =UserTbl::all()->orderBy('user_name')->get();
+    $User =UserTbl::orderBy('user_name')->get();
    return view('pages.user_index',compact('User'));
  }
  public function get(Request $request){
