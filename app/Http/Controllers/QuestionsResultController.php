@@ -14,7 +14,7 @@ use App\Models\QuestionsAreaTbl;
 use App\Models\QuestionsItemTbl;
 use App\Models\PositionsTbl;
 use App\Models\QuestionsResultTbl;
-
+use App\Models\SummaryResultTbl;
 
 class QuestionsResultController extends Controller
 {
@@ -211,11 +211,27 @@ class QuestionsResultController extends Controller
   }
 
   public function final(Request $request){
-      $unid   =isset($request->ans ) ? $request->ans  : '' ;
-      $count  =QuestionsResultTbl::where('ans_unid','=',$unid)->count();
-      if($count>0){
+        $ans   =isset($request->ans ) ? $request->ans  : '' ;
+        $unid   =isset($request->unid ) ? $request->unid  : '' ;
+        $Count  =QuestionsResultTbl::where('unid','=',$unid)->count();
+        $username='5s';
+        $score=0;
+        if($Count>0){
+          $Totalscore= QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')
+                 ->selectRaw("SUM(result_val) as score")
+                 ->groupBy('unid_ans')->get();
+          if($Totalscore[0]->score>0){
+          $score =  $Totalscore[0]->score;
+          }
 
-      }
+        }
+
+        SummaryResultTbl::where('ans_unid','=',$ans)->update([
+          'rea_score'=> $score
+          ,'doc_status' => 'Y'
+          ,'edit_by'=> $username
+          ,'edit_time'=>Carbon::now()
+        ]);
   }
 
 
