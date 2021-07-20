@@ -65,9 +65,9 @@
                                               <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
                                               <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
 
-                                          <button type=submit class="btn btn btn-warning   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="คะแนนตรวจประเมินพื้นที่" >
+                                          <button type=submit class="btn btn btn-warning   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="คะแนนตรวจประเมิน" >
 
-                                            <i class="fas fa-thumbs-up"></i> คะแนนตรวจประเมินพื้นที่ </button>
+                                            <i class="fas fa-thumbs-up"></i> คะแนนตรวจประเมิน</button>
                                           </form>
                                         @endif
 
