@@ -213,14 +213,14 @@ class QuestionsResultController extends Controller
   public function final(Request $request){
         $ans   =isset($request->ans ) ? $request->ans  : '' ;
         $unid   =isset($request->unid ) ? $request->unid  : '' ;
-        $Count  =QuestionsResultTbl::where('unid','=',$unid)->count();
+      //  $Count  =QuestionsResultTbl::where('unid','=',$unid)->count();
         $username='5s';
         $score=0;
-        if($Count>0){
-          $Totalscore= QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')
-                 ->selectRaw("SUM(result_val) as score")
-                 ->groupBy('unid_ans')->get();
-                 dd($Totalscore);
+        if($ans !=''){
+          $Totalscore = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')
+                   ->selectRaw("SUM(result_val) as score")
+                   ->groupBy('unid_ans')->get();
+                   dd($Totalscore);
 
         }
 
