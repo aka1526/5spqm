@@ -49,7 +49,7 @@
                                         <td>{{ $row->plan_area_owner }}</td>
 
                                       <td>
-                                        @if($row->doc_status =='Y')
+                                        @if($row->doc_status !='Y')
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
                                             @csrf
                                               <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
