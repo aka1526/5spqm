@@ -256,15 +256,14 @@ function final(ans) {
                           },
                         })
                  } else {
-                   Swal.fire('กรุณาให้คะแนน ข้อที่ ',data.data, {
-                           icon : "error",
-                           timer: 1300,
-                           buttons: {
-                             confirm: {
-                               className : 'btn btn-info'
-                             }
-                           },
-                         })
+                 
+                         Swal.fire({
+                              icon: 'error',
+                              title: 'กรุณาให้คะแนน',
+                              text: data.data,
+                              showConfirmButton: false,
+                              timer: 1500
+                            })
                  }
               }
       });
