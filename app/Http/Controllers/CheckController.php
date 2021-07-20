@@ -385,7 +385,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
             $html .='<tr>
 
                    <td class="text-center"><strong>'.$row->result_index.'</strong></td>
-                   <td>'.$row->result_desc.'</td>
+                   <td><div><span class="h2 m-0">'.$row->result_desc.'</span></div></td>
 
                    <td class="text-center" data-toggle="tooltip" data-original-title="ระดับคะแนน">
                     '.$row->result_val.'
