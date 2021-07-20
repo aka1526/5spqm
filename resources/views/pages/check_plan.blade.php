@@ -56,7 +56,7 @@
 
                                         <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                          <i class="fa fa-pencil font-14 btn-check"></i> ตรวจประเมินพื้นที่</button>
+                                          <i class="fa fa-pencil font-14 btn-check"></i> ตรวจประเมินพื้นที่ {{ $row->doc_status}}</button>
                                         </form>
 
                                     </td>
