@@ -39,6 +39,7 @@ class SummaryResultTbl extends Model
    ,'create_time'
    ,'edit_by'
    ,'edit_time'
+   ,'ans_unid'
      ];
 
 }

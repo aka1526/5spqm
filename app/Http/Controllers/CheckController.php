@@ -85,6 +85,7 @@ class CheckController extends Controller
     }
 
   public function get(Request $request,$pv=null,$year=null,$moth=null){
+
       $unid= isset($request->unid) ? $request->unid :'';
       $dataArea =AreaTbl::where('unid','!=',$unid)->get();
 
@@ -92,13 +93,20 @@ class CheckController extends Controller
       $pv =  Cookie::get('DOC_PV') !=''   ? strtoupper(Cookie::get('DOC_PV')) :strtoupper($pv) ;
 
 
+
       $position_type =$pv;
        Cookie::queue('DOC_MONTH',$moth);
-      $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
-      ->where('plan_area_unid','=','319bf8c4dad7499ca5552fd3ab52f6c1') //web line 3
+
+      $dtPlan =PlanPositionTbl::select('tbl_planposition.*','doc_status')
+      ->leftJoin("tbl_result_summary", "tbl_result_summary.plan_unid", "=", "tbl_planposition.unid")
+      ->where('tbl_planposition.position_type','=',$position_type)
+      ->where('tbl_planposition.plan_area_unid','=','319bf8c4dad7499ca5552fd3ab52f6c1') //web line 3
     //  ->where('plan_area_unid','=','b30a86eb99e04624966c295c5ede35fb') // Test
 
-      ->where('plan_year','=',$year)->where('plan_month','=',$moth)->orderBy('plan_date')->orderBy('plan_area_index')->get();
+      ->where('tbl_planposition.plan_year','=',$year)
+      ->where('tbl_planposition.plan_month','=',$moth)
+      ->orderBy('tbl_planposition.plan_date')
+      ->orderBy('tbl_planposition.plan_area_index')->get();
     // return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
    return view('pages.check_plan',compact('dtPlan','pv'));
   }
