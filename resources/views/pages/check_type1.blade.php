@@ -261,8 +261,8 @@ function final(ans) {
                               icon: 'error',
                               title: 'กรุณาให้คะแนน',
                               html: data.data,
-                              showConfirmButton: false,
-                              timer: 1500
+                              //showConfirmButton: false,
+                              //timer: 1500
                             })
                  }
               }
