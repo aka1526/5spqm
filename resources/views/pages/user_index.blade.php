@@ -28,7 +28,8 @@
                                             <th>#</th>
                                             <th>User Login</th>
                                             <th>ชื่อผู้ใช้งาน</th>
-                                            <th>Action</th>
+                                            <th width="120px">เปลี่ยนรหัส</th>
+                                            <th width="120px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,8 +38,10 @@
                                         <td>{{ $key=$key+1 }}</td>
                                         <td>{{ $row->user_login }}</td>
                                         <td>{{ $row->user_name }}</td>
-
-                                        <td>
+                                        <td class="text-center">
+                                          <button class="btn btn btn-primary btn-xs m-r-5 btn-pwd" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fas fa-key font-14"></i></button>
+                                        </td>
+                                        <td class="text-center">
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fas fa-pencil-alt font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
                                       </td>
@@ -76,13 +79,13 @@
 
               <div class="row">
 
-                        <div class="col-sm-4 form-group">
+                        <div class="col-sm-4 form-group" id="login">
                             <label>User Login</label>
                              <input class="form-control" type="text" id="user_login" name="user_login" placeholder="User Login" required required autocomplete="off">
                         </div>
 
 
-               <div class="col-sm-4 form-group">
+               <div class="col-sm-4 form-group" id="uname">
                    <label >ชื่อผู้ใช้งาน</label>
                    <input class="form-control" type="text" id="user_name" name="user_name" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
                </div>
@@ -173,6 +176,9 @@ $(".btn-edit").on('click',function (e){
                $("#user_name").val(res.user_name);
                $("#pwd").hide();
                if(res){
+                 $("#login").show();
+                 $("#uname").show();
+                  $('#user_name').prop("readonly", false);
                  $('#OpenFrmArea').modal('show');
                }
            }
@@ -180,10 +186,53 @@ $(".btn-edit").on('click',function (e){
    });
 
 
-   $(".btn-new").on('click',function (e){
+   $(".btn-pwd").on('click',function (e){
+
       $("#pwd").show();
-      $('#OpenFrmArea').modal('show');
+      $("#login").hide();
+      $("#uname").show();
+      var unid =$(this).data('unid');
+     var url = "{{ route('user.get')}}";
+      $("#FrmArea").attr('action', "{{ route('user.pwd')}}");
+      $.ajax({
+                type: "get",
+                url: url,
+                data: {unid:unid}, // serializes the form's elements.
+                success: function(data){
+                   //console.log(data);
+                    var res= data.data;
+                    $("#unid").val(res.unid);
+
+                    $("#user_login").val(res.user_login);
+                    $("#user_name").val(res.user_name);
+                    $('#user_name').prop("readonly", true);
+                    $("#pwd").attr('');
+                    if(res){
+
+                      $("#pwd").show();
+                      $('#OpenFrmArea').modal('show');
+                    }
+                }
+            });
+
   });
+
+  $(".btn-new").on('click',function (e){
+     $("#pwd").show();
+     $("#login").show();
+     $("#uname").show();
+       $('#user_name').prop("readonly", false);
+     $('#OpenFrmArea').modal('show');
+ });
+
+  $(".btn-secondary").on('click',function (e){
+          location.reload();
+   });
+
+   $(".close").on('click',function (e){
+           location.reload();
+    });
+
 
    $(".btn-save").on('click',function (e){
           e.preventDefault();

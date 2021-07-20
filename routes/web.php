@@ -110,5 +110,6 @@ Route::get('/user',            [UserController::class,'index'])->name('user.inde
 Route::get('/user/get',        [UserController::class,'get'])->name('user.get');
 Route::post('/user/add',       [UserController::class,'add'])->name('user.add');
 Route::post('/user/edit',      [UserController::class,'edit'])->name('user.edit');
+Route::post('/user/pwd',       [UserController::class,'pwd'])->name('user.pwd');
 Route::post('/user/delete',    [UserController::class,'delete'])->name('user.delete');
 Route::post('/user/editfield', [UserController::class,'editfield'])->name('user.editfield');

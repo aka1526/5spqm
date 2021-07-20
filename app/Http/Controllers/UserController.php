@@ -102,6 +102,31 @@ class UserController extends Controller
      return response()->json(['result'=> $action  ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
  }
 
+
+ public function pwd(Request $request){
+   $user_unid =isset($request->unid) ? $request->unid :'';
+   $user_password =isset($request->user_password) ? $request->user_password :'';
+   $user_password=Hash::make($user_password);
+   $count =UserTbl::where('unid','=',$user_unid)->count();
+
+    $username='s5';
+    $action=false;
+
+    if($count > 0){
+        $action=  UserTbl::where('unid','=',$user_unid)->update([
+          'user_password' => $user_password
+          ,'user_status' => 'Y'
+          ,'edit_by' => $username
+          ,'edit_time' => Carbon::now()->format('Y-m-d')
+         ]);
+    }
+
+
+     return response()->json(['result'=> $action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+ }
+
+
  public function editfield(Request $request){
 
  }
