@@ -172,6 +172,7 @@ class CheckController extends Controller
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
     $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
+     $agent = new Agent();
     $datatype =$agent->isDesktop() ? 1 : 2 ;
     $datatype=2;
     $username='5s';
@@ -278,7 +279,7 @@ class CheckController extends Controller
   $html ='';
   $result_toppic_befor='';
   $result_toppic_next='';
- $agent = new Agent();
+
 
 // $agent->isDesktop();
 // $agent->isMobile();
