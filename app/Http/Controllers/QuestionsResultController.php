@@ -227,7 +227,7 @@ class QuestionsResultController extends Controller
         }
 
         SummaryResultTbl::where('ans_unid','=',$ans)->update([
-          'rea_score'=> $score
+          'area_score'=> $score
           ,'doc_status' => 'Y'
           ,'edit_by'=> $username
           ,'edit_time'=>Carbon::now()
