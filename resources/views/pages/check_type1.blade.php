@@ -235,5 +235,24 @@ var comment = $('#audit_comment').val();
 
 }
 
+function final(ans) {
+  var unid = $('$unid').val();
+  alert(unid);
+    var url    = "{{ route('result.final') }}";
+         $.ajax({
+              type: "POST",
+              url: url,
+              data:{ans:ans,"_token": "{{ csrf_token() }}"},
+              success: function(data)
+              {
+                console.log(data);
+                // if(data.result){
+                //     $("#check-data").html(data.html);
+                // }
+              }
+      });
+ }
+
+
 </script>
 @endsection

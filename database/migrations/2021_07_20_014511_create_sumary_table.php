@@ -37,6 +37,8 @@ class CreateSumaryTable extends Migration
           $table->string('create_time',50)->nullable()->default('');
           $table->string('edit_by',200)->nullable()->default('');
           $table->string('edit_time',50)->nullable()->default('');
+          $table->string('ans_unid',50)->nullable()->default('');
+
 
         });
     }

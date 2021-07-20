@@ -126,7 +126,10 @@ class QuestionsResultController extends Controller
                        <div class="ibox-body">
                            <div class="form-group">
                            <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
-                           <textarea class="form-control"  id="audit_comment" name="audit_comment" data-unid="'.$row->unid.'" rows="3" onchange="SaveComment(\''.$row->unid.'\')" placeholder="'.$row->result_toppic.'">'.$row->audit_comment.'</textarea>
+                             <input type="hidden" name="unid" id="unid" value="'.$row->unid..'" >
+                           <textarea class="form-control"  id="audit_comment" name="audit_comment"
+                              data-unid="'.$row->unid.'" rows="3" onchange="SaveComment(\''.$row->unid.'\')" placeholder="'.$row->result_toppic.'">'.$row->audit_comment.'
+                            </textarea>
                           </div>
                       </div>
                     </div>
@@ -139,7 +142,7 @@ class QuestionsResultController extends Controller
                                <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowBack.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
                                 <button class="btn btn-info" >'.$row->result_index.' / '.count($QuestionsResult).'  </button>';
                                 if($row->result_index ==count($QuestionsResult)) {
-                                    $html .=' <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ส่งคะแนน <i class="fas fa-sign-in-alt"></i></button>';
+                                    $html .=' <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="final(\''.$row->unid_ans.'\')"> ส่งคะแนน <i class="fas fa-sign-in-alt"></i></button>';
                                 } else {
                                       $html .=' <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>';
                                 }
@@ -205,6 +208,14 @@ class QuestionsResultController extends Controller
       }
     }
       return response()->json(['result'=> $action  ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+  }
+
+  public function final(Request $request){
+      $unid   =isset($request->ans ) ? $request->ans  : '' ;
+      $count  =QuestionsResultTbl::where('ans_unid','=',$unid)->count();
+      if($count>0){
+
+      }
   }
 
 

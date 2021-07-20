@@ -103,3 +103,4 @@ Route::post('/result/getnext', [QuestionsResultController::class,'getnext'])->na
 Route::post('/result/getback', [QuestionsResultController::class,'getback'])->name('result.getback');
 Route::post('/result/score', [QuestionsResultController::class,'scoresave'])->name('result.scoresave');
 Route::post('/result/commentsave', [QuestionsResultController::class,'commentsave'])->name('result.commentsave');
+Route::post('/result/final', [QuestionsResultController::class,'final'])->name('result.final');

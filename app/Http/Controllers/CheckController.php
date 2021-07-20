@@ -320,6 +320,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
       ,'create_time' => Carbon::now()
       ,'edit_by' =>$username
       ,'edit_time' => Carbon::now()
+      ,'ans_unid' => $unid_ans
       ]);
 }
 
