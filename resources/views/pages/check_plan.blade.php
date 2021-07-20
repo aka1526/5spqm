@@ -33,6 +33,7 @@
                                                 <th  class="text-center">กลุ่ม</th>
                                                 @endif
                                             <th>หัวหน้าพื้นที่</th>
+                                            <th>ระดับคะแนน</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -44,10 +45,12 @@
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
-                                       <td  class="text-center">{{ $row->plan_groups }}</td>
+                                          <td  class="text-center">{{ $row->plan_groups }}</td>
                                           @endif
-                                        <td>{{ $row->plan_area_owner }}</td>
-
+                                        <td>{{ $row->area_score }}</td>
+                                        <td>
+                                          33
+                                        </td>
                                       <td>
                                         @if($row->doc_status !='Y')
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
@@ -73,6 +76,7 @@
 
 
                                     </td>
+
                                     </tr>
                                      @endforeach
 
