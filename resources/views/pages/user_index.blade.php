@@ -114,7 +114,7 @@
 $(".btn-delete").on('click',function (e){
 
     var unid =$(this).data('unid');
-    var url = "{{ route('area.delete')}}";
+    var url = "{{ route('user.delete')}}";
         Swal.fire({
             title: 'คุณต้องการลบข้อมูล?',
             icon: 'warning',
