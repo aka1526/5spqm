@@ -187,7 +187,7 @@ class CheckController extends Controller
 
   //  $agent = new Agent();
   //  $datatype =$agent->isDesktop() ? 1 : 2 ;
-    $C_PlanPosition = PlanPositionTbl::where('unid','=',$plan_unid)->where('doc_status','=','Y')->count();
+    $C_PlanPosition = SummaryResultTbl::where('plan_unid','=',$plan_unid)->where('doc_status','=','Y')->count();
     $datatype= $C_PlanPosition > 0 ? 2 : 1;
     $username='5s';
     Cookie::queue('AREA_UNID',$request->area_unid);
