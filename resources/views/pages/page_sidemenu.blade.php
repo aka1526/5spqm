@@ -24,19 +24,18 @@
                           <span class="nav-label">แผนตรวจประเมิน</span>
                       </a>
                   </li>
-                  <li>
-                      <a class="active" href="{{ route('questions.index')}}"><i class="sidebar-item-icon fa fa-calendar"></i>
-                          <span class="nav-label">แบบฟอร์มการตรวจพื้นที่</span>
-                      </a>
-                  </li>
+
                   <li class="heading">ตั้งค่าระบบ</li>
                   <li>
                       <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
                           <span class="nav-label">ข้อมูลพื้นฐาน</span><i class="fa fa-angle-left arrow"></i></a>
                       <ul class="nav-2-level collapse">
-                          <!-- <li>
-                              <a href="{{ route('plan.index')}}">แผนการตรวจ</a>
-                          </li> -->
+
+                        <li>
+                            <a href="{{ route('questions.index')}}">แบบฟอร์มการตรวจพื้นที่</a>
+                           
+                        </li>
+
                           <li>
                               <a href="{{ route('auditor.index')}}">ทีมตรวจ/Auditor</a>
                           </li>
