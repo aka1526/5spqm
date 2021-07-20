@@ -97,7 +97,7 @@ class CheckController extends Controller
       $position_type =$pv;
        Cookie::queue('DOC_MONTH',$moth);
 
-      $dtPlan =PlanPositionTbl::select('tbl_planposition.*','doc_status')
+      $dtPlan =PlanPositionTbl::select('tbl_planposition.*','doc_status','area_score','total_score')
       ->leftJoin("tbl_result_summary", "tbl_result_summary.plan_unid", "=", "tbl_planposition.unid")
       ->where('tbl_planposition.position_type','=',$position_type)
       ->where('tbl_planposition.plan_area_unid','=','319bf8c4dad7499ca5552fd3ab52f6c1') //web line 3

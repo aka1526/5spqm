@@ -45,12 +45,10 @@
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
-                                          <td  class="text-center">{{ $row->plan_groups }}</td>
+                                       <td  class="text-center">{{ $row->plan_groups }}</td>
                                           @endif
-                                        <td>{{ $row->area_score }}</td>
-                                        <td>
-                                          33
-                                        </td>
+                                        <td>{{ $row->plan_area_owner }}</td>
+                                         <td>{{ $row->area_score }}</td>
                                       <td>
                                         @if($row->doc_status !='Y')
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
