@@ -49,15 +49,28 @@
                                         <td>{{ $row->plan_area_owner }}</td>
 
                                       <td>
-                                        <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
-                                          @csrf
-                                            <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
-                                            <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
+                                        @if($row->doc_status =='Y')
+                                          <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
+                                            @csrf
+                                              <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
+                                              <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
 
-                                        <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
+                                          <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                          <i class="fa fa-pencil font-14 btn-check"></i> ตรวจประเมินพื้นที่ {{ $row->doc_status  }}</button>
-                                        </form>
+                                            <i class="fa fa-pencil font-14 btn-check"></i> ตรวจประเมินพื้นที่ </button>
+                                          </form>
+                                        @else
+                                          <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
+                                            @csrf
+                                              <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
+                                              <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
+
+                                          <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
+
+                                            <i class="fa fa-pencil font-14 btn-check"></i> คะนนประเมินพื้นที่ </button>
+                                          </form>
+                                        @endif
+
 
                                     </td>
                                     </tr>
