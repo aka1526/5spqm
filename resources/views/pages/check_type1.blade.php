@@ -246,7 +246,7 @@ function final(ans) {
               {
                 console.log(data);
                 if(data.result){
-                  swal(data.data, '', {
+                  Swal.fire(data.data, '', {
                           icon : "success",
                           timer: 1300,
                           buttons: {
@@ -256,7 +256,7 @@ function final(ans) {
                           },
                         })
                  } else {
-                   swal('กรุณาให้คะแนน ข้อที่ ',data.data, {
+                   Swal.fire('กรุณาให้คะแนน ข้อที่ ',data.data, {
                            icon : "error",
                            timer: 1300,
                            buttons: {
