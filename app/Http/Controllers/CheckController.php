@@ -388,13 +388,10 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
                    <td>'.$row->result_desc.'</td>
 
                    <td class="text-center" data-toggle="tooltip" data-original-title="ระดับคะแนน">
-                   <div>
-                                                 <span class="h2 m-0">  '.$row->result_val.'</span>
-
-                                             </div>
+                     <div>
+                        <span class="h3 m-0">  '.$row->result_val.'</span>
+                     </div>
                    </td>
-
-
                </tr>';
            } else {
 
