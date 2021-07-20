@@ -173,7 +173,10 @@ class CheckController extends Controller
     $year   = Cookie::get('DOC_YEAR')   !='' ? Cookie::get('DOC_YEAR') : '';
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
     $pv     =  Cookie::get('DOC_PV')        !=''  ? strtoupper(Cookie::get('DOC_PV')) : '' ;
+
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
+    $plan_unid =isset($request->plan_unid) ? $request->plan_unid :'';
+
     $agent = new Agent();
     $datatype =$agent->isDesktop() ? 1 : 2 ;
     $datatype=2;
@@ -196,6 +199,7 @@ class CheckController extends Controller
 $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
 $Positions =PositionsTbl::where('positions_type','=',$pv)->first();
 $Area =AreaTbl::where('unid','=',$area_unid)->first();
+$Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
   if($CountResult==0){
 
@@ -205,6 +209,10 @@ $Area =AreaTbl::where('unid','=',$area_unid)->first();
         $rowTotal++;
             QuestionsResultTbl::insert([
               'unid' =>  $this->genUnid()
+              ,'plan_unid' => $Plan->unid
+              ,'plan_date' => $Plan->plan_date
+              ,'plan_year' => $Plan->plan_year
+              ,'plan_month' => $Plan->plan_month
               ,'ques_unid' => $Questions->unid
               ,'ques_rev' => $Questions->ques_rev
               ,'ques_header' => $Questions->ques_header
@@ -231,6 +239,10 @@ $Area =AreaTbl::where('unid','=',$area_unid)->first();
       $rowTotal =$rowTotal+1;
       QuestionsResultTbl::insert([
         'unid' =>  $this->genUnid()
+        ,'plan_unid' => $Plan->unid
+        ,'plan_date' => $Plan->plan_date
+        ,'plan_year' => $Plan->plan_year
+        ,'plan_month' => $Plan->plan_month
         ,'ques_unid' => $Questions->unid
         ,'ques_rev' => $Questions->ques_rev
         ,'ques_header' => $Questions->ques_header
@@ -255,6 +267,10 @@ $Area =AreaTbl::where('unid','=',$area_unid)->first();
       $rowTotal =$rowTotal+1;
       QuestionsResultTbl::insert([
         'unid' =>  $this->genUnid()
+        ,'plan_unid' => $Plan->unid
+        ,'plan_date' => $Plan->plan_date
+        ,'plan_year' => $Plan->plan_year
+        ,'plan_month' => $Plan->plan_month
         ,'ques_unid' => $Questions->unid
         ,'ques_rev' => $Questions->ques_rev
         ,'ques_header' => $Questions->ques_header
@@ -282,14 +298,13 @@ $counSummary=SummaryResultTbl::where('questions_unid','=',$Questions->unid)->cou
 
 if($counSummary==0){
     $countItem = QuestionsResultTbl::where('unid_ans','=',$unid_ans)->where('result_type','=','VALUE')->count();
-
-    QuestionsResultTbl::insert([
+    SummaryResultTbl::insert([
       'unid' => $this->genUnid()
       ,'plan_date' => Carbon::now()->format('Y-m-d')
-      ,'plan_unid' => ''
-      ,'plan_date' => ''
-      ,'plan_year' => $year
-      ,'plan_month' => $month
+      ,'plan_unid' => $Plan->unid
+      ,'plan_date' => $Plan->plan_date
+      ,'plan_year' => $Plan->plan_year
+      ,'plan_month' => $Plan->plan_month
       ,'doc_status' =>'N'
       ,'questions_unid' => $Questions->unid
       ,'questions_rev' => $Questions->ques_rev
@@ -297,6 +312,7 @@ if($counSummary==0){
       ,'total_item' => $countItem
       ,'total_score' => ($countItem*5)
       ,'area_score' => 0
+      ,'audit_date' =>  Carbon::now()
       ,'area_unid' => $Area->unid
       ,'area_name' => $Area->area_name
       ,'area_owner' => $Area->area_owner
