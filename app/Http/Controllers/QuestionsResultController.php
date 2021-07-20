@@ -49,6 +49,8 @@ class QuestionsResultController extends Controller
              $RowBack= ($row->result_index)-1 > 0 ? $row->result_index-1 : 0;
              $RowCurrent= $row->result_index ;
              $RowNext= ($row->result_index)+1 < $TotalRow ? ($row->result_index)+1 : $TotalRow  ;
+             $audit_check = $row->audit_check;
+             $result_val  = $row->result_val;
              if( $row->result_index == $next){
                if($row->result_type=='VALUE'){
              $html .='
@@ -65,20 +67,34 @@ class QuestionsResultController extends Controller
                              </div>
                              <div class="col-md-4">
                              <div class="form-group">
-                                        <label class="h4 m-0 text-danger mb-3 ">คะแนนตรวจประเมิน</label>
+                                        <label class="h4 m-0 text-danger mb-3 ">คะแนนตรวจประเมิน</label>';
+                                        if($audit_check=='Y'){
+                                            $html .='<div >
+                                                <label class="ui-radio ui-radio-danger mr-2" data-toggle="tooltip" data-original-title="0 คะแนน">
+                                                    <input type="radio" name="check_box" value="0" onclick="saveResult(\''.$row->unid.'\',\'0\')" '. ( $result_val ==0 ? 'checked' : '' ).' >
+                                                    <span class="input-span"></span>แก้ไข (0)</label>
+                                                <label class="ui-radio ui-radio-warning mr-2"  data-toggle="tooltip" data-original-title="3 คะแนน">
+                                                    <input type="radio" name="check_box" value="3" onclick="saveResult(\''.$row->unid.'\',\'3\')" '. ( $result_val ==3 ? 'checked' : '' ).'>
+                                                    <span class="input-span"></span>พอใช้ (3)</label>
+                                                <label class="ui-radio ui-radio-success mt-2" data-toggle="tooltip" data-original-title="5 คะแนน">
+                                                    <input type="radio" name="check_box" value="5" onclick="saveResult(\''.$row->unid.'\',\'5\')" '. ( $result_val ==5 ? 'checked' : '' ).'>
+                                                    <span class="input-span"></span>ดีเยี่ยม (5)</label>
+                                            </div>';
+                                        } else {
+                                          $html .='<div >
+                                              <label class="ui-radio ui-radio-danger mr-2" data-toggle="tooltip" data-original-title="0 คะแนน">
+                                                  <input type="radio" name="check_box" value="0" onclick="saveResult(\''.$row->unid.'\',\'0\')" >
+                                                  <span class="input-span"></span>แก้ไข (0)</label>
+                                              <label class="ui-radio ui-radio-warning mr-2"  data-toggle="tooltip" data-original-title="3 คะแนน">
+                                                  <input type="radio" name="check_box" value="3" onclick="saveResult(\''.$row->unid.'\',\'3\')" >
+                                                  <span class="input-span"></span>พอใช้ (3)</label>
+                                              <label class="ui-radio ui-radio-success mt-2" data-toggle="tooltip" data-original-title="5 คะแนน">
+                                                  <input type="radio" name="check_box" value="5" onclick="saveResult(\''.$row->unid.'\',\'5\')" >
+                                                  <span class="input-span"></span>ดีเยี่ยม (5)</label>
+                                          </div>';
+                                        }
 
-                                        <div >
-                                            <label class="ui-radio ui-radio-danger mr-2" data-toggle="tooltip" data-original-title="0 คะแนน">
-                                                <input type="radio" name="check_box" value="0" onclick="saveResult(\''.$row->unid.'\',\'0\')" >
-                                                <span class="input-span"></span>แก้ไข (0)</label>
-                                            <label class="ui-radio ui-radio-warning mr-2"  data-toggle="tooltip" data-original-title="3 คะแนน">
-                                                <input type="radio" name="check_box" value="3" onclick="saveResult(\''.$row->unid.'\',\'3\')" >
-                                                <span class="input-span"></span>พอใช้ (3)</label>
-                                            <label class="ui-radio ui-radio-success mt-2" data-toggle="tooltip" data-original-title="5 คะแนน">
-                                                <input type="radio" name="check_box" value="5" onclick="saveResult(\''.$row->unid.'\',\'5\')" >
-                                                <span class="input-span"></span>ดีเยี่ยม (5)</label>
-                                        </div>
-                                   </div>
+                                   $html .='</div>
                              </div>
                            </div>
                        </div>
