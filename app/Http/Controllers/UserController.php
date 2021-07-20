@@ -8,6 +8,7 @@ use DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\UserTbl;
 // use App\Models\AreaTbl;
 // use App\Models\GroupsTbl;
 // use App\Models\AuditpositionTbl;
