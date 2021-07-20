@@ -34,7 +34,7 @@
                                             <th class="text-center">ลำดับ</th>
                                             <th>รายละเอีดยการตรวจ</th>
                                             <th>สร้างเมื่อ</th>
-                                            <th width="80px">Action</th>
+                                            <th width="100px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
