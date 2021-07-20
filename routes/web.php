@@ -106,9 +106,9 @@ Route::post('/result/score', [QuestionsResultController::class,'scoresave'])->na
 Route::post('/result/commentsave', [QuestionsResultController::class,'commentsave'])->name('result.commentsave');
 Route::post('/result/final', [QuestionsResultController::class,'final'])->name('result.final');
 
-Route::get('/user',            [CheckController::class,'index'])->name('user.index');
-Route::get('/user/get',        [QuestionsController::class,'get'])->name('user.get');
-Route::post('/user/add',       [CheckController::class,'add'])->name('user.add');
-Route::post('/user/edit',      [CheckController::class,'edit'])->name('user.edit');
-Route::post('/user/delete',    [CheckController::class,'delete'])->name('user.delete');
-Route::post('/user/editfield', [CheckController::class,'editfield'])->name('user.editfield');
+Route::get('/user',            [UserController::class,'index'])->name('user.index');
+Route::get('/user/get',        [UserController::class,'get'])->name('user.get');
+Route::post('/user/add',       [UserController::class,'add'])->name('user.add');
+Route::post('/user/edit',      [UserController::class,'edit'])->name('user.edit');
+Route::post('/user/delete',    [UserController::class,'delete'])->name('user.delete');
+Route::post('/user/editfield', [UserController::class,'editfield'])->name('user.editfield');
