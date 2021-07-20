@@ -43,7 +43,7 @@
                               <a href="{{ route('area.index')}}">พื้นที่การตรวจ</a>
                           </li>
                           <li>
-                              <a href="{{ route('area.index')}}">ข้อมูลผู้ใช้งาน/user Login</a>
+                              <a href="{{ route('area.index')}}">ข้อมูลผู้ใช้/user Login</a>
                           </li>
                       </ul>
                   </li>
