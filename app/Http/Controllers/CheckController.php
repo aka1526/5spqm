@@ -378,7 +378,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
         if($result_toppic_befor!='') {
           $html .='<tr class="btn-info">
                  <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
-                 <td class="text-center" width="80px">ระดับคะแนน</td>
+                 <td class="text-center" width="120px">ระดับคะแนน</td>
 
              </tr>';
         }
