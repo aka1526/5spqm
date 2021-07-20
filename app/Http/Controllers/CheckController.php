@@ -349,16 +349,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
   if($datatype==1){
 
-    // <thead class="btn-primary">
-    //     <tr>
-    //
-    //         <th>ลำดับ</th>
-    //         <th>รายละเอียดการตรวจ</th>
-    //         <th class="text-center" width="80px">แก้ไข</th>
-    //         <th class="text-center" width="80px">พอใช้</th>
-    //         <th class="text-center" width="80px">ดีเยี่ยม</th>
-    //     </tr>
-    // </thead>
+
   $html .='
   <div class="row">
   <div class="col-xl-12">
@@ -366,8 +357,10 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
       <tbody>
   ';
+  $totalscroe=0;
   foreach ($QuestionsResult as $key => $row) {
     if($row->result_type=='VALUE'){
+      $totalscroe=$totalscroe +$row->result_val;
         if($result_toppic_next != $row->result_toppic){
           $result_toppic_next = $row->result_toppic;
           $result_toppic_befor= $row->result_toppic;
@@ -389,10 +382,11 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
                    <td class="text-center" data-toggle="tooltip" data-original-title="ระดับคะแนน">
                      <div>
-                        <span class="h3 m-0">  '.$row->result_val.'</span>
+                        <span class="h4 m-0">  '.$row->result_val.'</span>
                      </div>
                    </td>
                </tr>';
+
            } else {
 
              $html .='<tr class="btn-warning"><td colspan="6"><strong> '.$row->result_toppic.'</strong></td></tr>';
@@ -406,22 +400,21 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
            }
          }
 
+         $html .='<tr class="btn-warning"><td colspan="2"><strong> รวมคะแนน </strong></td>
+                 <td class="text-center" >
+                   <div>
+                      <span class="h4 m-0">  '.$totalscroe.'</span>
+                   </div>
+                 </td>
+                 </tr>';
+
          $html .='  </tbody>
                  </table>
                </div>
                </div>
 
-               <div class="row">
-                 <div  class="col-md-6">
-                   <div class="form-group row">
-                               <div class="col-sm-10 ml-sm-auto">
-                                   <button class="btn btn-info" type="submit">ส่งคะแนน</button>
-                               </div>
-                           </div>
-                 </div>
-               </div>
                ';
-             }
+  }
 
 if($datatype==2){
         $html .=' ';
