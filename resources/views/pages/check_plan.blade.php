@@ -57,7 +57,7 @@
 
                                           <button type=submit class="btn btn btn-primary   m-r-5  " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                            <i class="fa fa-pencil font-14 btn-check"></i> ตรวจประเมินพื้นที่ </button>
+                                          <i class="fas fa-balance-scale font-14 btn-check"></i> ตรวจประเมินพื้นที่ </button>
                                           </form>
                                         @else
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
