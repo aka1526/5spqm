@@ -16,7 +16,7 @@
                     <input class="form-control" type="hidden" id="pv"  name="pv" value="{{ $pv}}"  >
                    <div class="btn-group ml-3">
 
-                        <button class="btn btn-info" id="docyear" name="docyear" value="{{ app('request')->input('docyear') }}">{{ app('request')->input('docyear') }}</button>
+                        <button class="btn btn-info" id="docyear" name="docyear" value="{{ app('request')->input('docyear')>0 ? app('request')->input('docyear')  : date('Y') }}">{{ app('request')->input('docyear')>0 ? app('request')->input('docyear')  : date('Y') }}</button>
                         <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
                         <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(56px, 33px, 0px); top: 0px; left: 0px; will-change: transform;">
                           <li>
