@@ -49,7 +49,7 @@ class CheckController extends Controller
 
      if($this->getMonthPlan($docyear,$monthNum,$pv)) {
 
-        $html  .=  ' <div class="col-sm-3">
+        $html  .=  ' <div class="col-sm-4">
                     <div class="alert bg-white ">
                         <form id="m'.$monthNum.'" action="" method="post" >
                         <button type="button" class="btn btn-success btn-block btn-month color-'.$monthNum.'" data-month="'.$monthNum.'"  data-pv="'.$pv .'" target="_blank"><h2>'.$monthNum.'. '.  $monthName.'</h2></button>
@@ -57,7 +57,7 @@ class CheckController extends Controller
                      </div>
                  </div>';
      } else {
-       $html  .=  ' <div class="col-sm-3">
+       $html  .=  ' <div class="col-sm-4">
                    <div class="alert bg-white ">
 
                        <button type="button" class="btn  btn-block  color-none disabled" data-month="'.$monthNum.'"  data-pv="'.$pv .'" target="_blank"><h2>'.$monthNum.'. '.  $monthName.'</h2></button>
