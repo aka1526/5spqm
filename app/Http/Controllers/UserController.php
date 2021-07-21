@@ -19,6 +19,8 @@ use App\Models\UserTbl;
 class UserController extends Controller
 {
 
+protected  $paging =10;
+
   public function genUnid(){
     $uuid = (string) Str::uuid();
     $uuid = str_replace("-","",$uuid);
@@ -26,7 +28,7 @@ class UserController extends Controller
 }
 
  public function index(Request $request){
-    $User =UserTbl::orderBy('user_name')->get();
+    $User =UserTbl::orderBy('user_name')->paginate($this->paging);
    return view('pages.user_index',compact('User'));
  }
  public function get(Request $request){

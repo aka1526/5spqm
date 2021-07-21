@@ -221,7 +221,7 @@ $(".btn-edit").on('click',function (e){
      $("#pwd").show();
      $("#login").show();
      $("#uname").show();
-       $('#user_name').prop("readonly", false);
+     $('#user_name').prop("readonly", false);
      $('#OpenFrmArea').modal('show');
  });
 
