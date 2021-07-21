@@ -35,7 +35,7 @@
                                     <tbody>
                                     @foreach ($User as $key => $row)
                                     <tr>
-                                        <td>{{ $key=$key+1 }}</td>
+                                        <td> {{ $User->firstItem() + $key }}</td>
                                         <td>{{ $row->user_login }}</td>
                                         <td>{{ $row->user_name }}</td>
                                         <td class="text-center">
