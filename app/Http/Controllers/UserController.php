@@ -28,8 +28,9 @@ protected  $paging =10;
 }
 
  public function index(Request $request){
+   $search='';
     $User =UserTbl::orderBy('user_name')->paginate($this->paging);
-   return view('pages.user_index',compact('User'));
+   return view('pages.user_index',compact('User','search'));
  }
  public function get(Request $request){
    $unid  =isset($request->unid) ? $request->unid :'';
