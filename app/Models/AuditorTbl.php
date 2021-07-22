@@ -22,6 +22,7 @@ class AuditorTbl extends Model
          'audit_position',
          'auditor_group',
          'auditor_item',
+         'auditor_unid',
          'auditor_name',
          'auditor_area',
          'area_name',

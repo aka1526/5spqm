@@ -222,7 +222,7 @@ $(".btn-edit").on('click',function (e){
           e.preventDefault();
           var form = $("#FrmAuditor");
           var url = form.attr('action');
-
+          
           $.ajax({
                  type: "POST",
                  url: url,

@@ -92,16 +92,16 @@
                         <div class="col-sm-10 form-group">
 
 
-        										<label class="col-sm-3 col-form-label">รหัสสินค้า</label>
+        										<label class="col-sm-3 col-form-label">ชื่อผู้ตรวจ</label>
         										<div class="col-sm-9">
         											<select class="form-control selectpicker" data-size="10"
-        											data-live-search="true" data-style="btn-primary" id="CODE_MASTER" name="CODE_MASTER">
-         										 <option value="">Select</option>
-         										 	@<?php foreach ($dtUser as $key => $value): ?>
-         										 				<option value="{{ $value->unid }}"  >{{ $value->user_name }}</option>
-         										 	<?php endforeach; ?>
+          											data-live-search="true" data-style="btn-primary" id="auditor_unid" name="auditor_unid" >
+           										 <option value="">Select</option>
+           										 	@foreach ($dtUser as $key => $value)
+           										 				<option value="{{ $value->unid }}"  >{{ $value->user_name }}</option>
+           										 	@endforeach
 
-         										</select>
+           										</select>
         										</div>
 
                             <!-- <label>ชื่อผู้ตรวจ</label> -->
@@ -190,6 +190,7 @@ $(".btn-edit").on('click',function (e){
  e.preventDefault();
 
  var unid =$(this).data('unid');
+
  var url = "{{ route('auditor.member.get')}}";
   $("#FrmAuditor").attr('action', "{{ route('auditor.member.edit')}}");
  $.ajax({
@@ -209,7 +210,9 @@ $(".btn-edit").on('click',function (e){
             $("#auditor_group").val(res.auditor_group);
 
             $("#auditor_item").val(res.auditor_item);
-            $("#auditor_name").val(res.auditor_name);
+          //  $("#auditor_unid").val(res.auditor_unid);
+            $('#auditor_unid').selectpicker('val', res.auditor_unid);
+          //  $("#auditor_name").val(res.auditor_name);
             $("#auditor_area").val(res.auditor_area);
             $("#area_name").val(res.area_name);
             $("#areaauditdata").html(data.AuditArea);
@@ -239,6 +242,11 @@ $(".btn-edit").on('click',function (e){
 
    $(".btn-save").on('click',function (e){
           e.preventDefault();
+          var auditor_unid =$('select[name=auditor_unid]').val();
+        if(auditor_unid==''){
+          $("#auditor_unid").focus(); 
+          return ;
+        }
           var form = $("#FrmAuditor");
           var url = form.attr('action');
 
@@ -248,6 +256,7 @@ $(".btn-edit").on('click',function (e){
                  data: form.serialize(),
                  success: function(data)
                  {
+                    console.log(data);
                    if(data.result){
                      Swal.fire({
                       icon: 'success',
@@ -302,10 +311,10 @@ $(".check_box").on('click', function () {
 function addarea(auditor_area){
   var check_unid = "";
   var auditor_item =$("#auditor_item").val();
-  var auditor_unid =$("#unid").val();
+  var auditor_unid =$("#auditor_unid").val();
   var audit_position_unid =$("#audit_position_unid").val();
   var audit_position =$("#audit_position").val();
-  var auditor_name =$("#auditor_name").val();
+  var auditor_name =$("#auditor_name").val('');
 
   $(":checkbox").each(function () {
         var ischecked = $(this).is(":checked");
@@ -327,12 +336,12 @@ $.ajax({
     auditor_area : auditor_area,
     audit_position_unid:audit_position_unid,
     audit_position:audit_position,
-    auditor_name:auditor_name,
+  //  auditor_name:auditor_name,
     check_unid:check_unid,
     "_token": "{{ csrf_token() }}"}, // serializes the form's elements.
   success: function(data){
-      //console.log(data);
-      $("#unid").val(data.auditor_unid);
+    //  console.log(data);
+      //$("#unid").val(data.auditor_unid);
 
       }
     });

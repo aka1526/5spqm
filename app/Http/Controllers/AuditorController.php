@@ -129,10 +129,18 @@ class AuditorController extends Controller
     $auditor_group    = isset($request->auditor_group) ? $request->auditor_group : '';
     $auditor_area   = isset($request->auditor_area) ? $request->auditor_area : '';
     $auditor_item   = isset($request->auditor_item ) ? $request->auditor_item  : '1';
-    $auditor_name     = isset($request->auditor_name) ? $request->auditor_name : '';
+
     $period_type     = isset($request->period_type) ? $request->period_type : '';
     $area = AreaTbl::where('unid','=',$auditor_area)->first();
     $area_name = isset($area->area_name) ? $area->area_name : '';
+    $auditor_unid     = isset($request->auditor_unid) ? $request->auditor_unid : '';
+    $auditor_name='';
+    if($auditor_unid !=''){
+      $auditor =UserTbl::where('unid','=',$auditor_unid)->first();
+      $auditor_name     =  $auditor->user_name;
+    }
+
+
     $username='5s';
     $action= false;
 
@@ -147,6 +155,7 @@ class AuditorController extends Controller
           //'auditor_area' => $auditor_area ,
         //  'area_name' => $area_name ,
           'auditor_item' => $auditor_item ,
+          'auditor_unid' => $auditor_unid,
           'auditor_name' => $auditor_name,
           'status'=> 'Y',
           'create_by' => $username,
@@ -162,7 +171,9 @@ class AuditorController extends Controller
         'auditor_group' => $auditor_group,
         //'auditor_area' => $auditor_area ,
         //'area_name' => $area_name ,
+
         'auditor_item' => $auditor_item ,
+        'auditor_unid' => $auditor_unid,
         'auditor_name' => $auditor_name,
       'edit_by'=> $username,
       'edit_time'=> date("Y-m-d H:i:s"),
@@ -175,8 +186,10 @@ class AuditorController extends Controller
 
   }
 
-public function getListArea($AuditUnid=null,$area_unid=null){
-  $AuditArea =AuditAreaTbl::where('auditor_unid','=',$AuditUnid)->where('area_unid','=',$area_unid)->count();
+public function getListArea($AuditUnid=null,$area_unid=null,$position=null){
+  $AuditArea =AuditAreaTbl::where('auditor_unid','=',$AuditUnid)
+  ->where('position_name_eng','=',$position)
+  ->where('area_unid','=',$area_unid)->count();
   $check="";
   if($AuditArea>0){
     $check="Checked";
@@ -187,21 +200,29 @@ public function getListArea($AuditUnid=null,$area_unid=null){
   public function memberget(Request $request){
     $unid= isset($request->unid) ? $request->unid :'';
     $dataset =AuditorTbl::where('unid','=',$unid)->first();
+    $position_unid = $dataset->audit_position_unid;
+    $auditunid = $dataset->auditor_unid;
+    $Auditposition =AuditpositionTbl::where('unid','=',$position_unid)->first();
+    $position =$Auditposition->position_name_eng;
+
     $Arealist =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
+
     $maxItem=6;
 
     $html='
       <div class="col-md-12 form-group" >
-          <label>กำหนดพื้นที่  </label>
+          <label>กำหนดพื้นที่   </label>
           <div class="row">';
 
         $html.= ' <div class="col-6 m-b-20">
                     <div class="check-list">';
                     foreach ($Arealist as $key => $row) {
+                      $_areaunid= $row->unid ;
                         if($key <=$maxItem){
+
                           $html.='
                                <label class="ui-checkbox ui-checkbox-info">
-                                 <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\');" class="check_box" value="'.$row->unid.'" '.$this->getListArea($unid,$row->unid).' >
+                                 <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\');" class="check_box" value="'.$row->unid.'" '.$this->getListArea($auditunid,$_areaunid,$position).' >
                                  <span class="input-span"></span>'.$row->area_name.'
                                </label>';
                         }
@@ -212,10 +233,11 @@ public function getListArea($AuditUnid=null,$area_unid=null){
         $html .='<div class="col-6 m-b-20">
                     <div class="check-list">';
                     foreach ($Arealist as $key => $row) {
+                        $_areaunid= $row->unid ;
                         if($key >$maxItem){
                           $html.='
                                <label class="ui-checkbox ui-checkbox-info">
-                                 <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\')" class="check_box" value="'.$row->unid.'" '.$this->getListArea($unid,$row->unid).' >
+                                 <input type="checkbox" id="'.$row->unid.'" name="'.$row->unid.'" onchange="addarea(\''.$row->unid.'\')" class="check_box" value="'.$row->unid.'" '.$this->getListArea($auditunid,$_areaunid,$position).' >
                                  <span class="input-span"></span>'.$row->area_name.'
                                </label>';
                         }
@@ -230,14 +252,24 @@ public function getListArea($AuditUnid=null,$area_unid=null){
 
 
   public function memberedit(Request $request){
-
+  //  dd($request);
     $unid       =isset($request->unid) ? $request->unid:'';
     $audit_position_unid    = isset($request->audit_position_unid) ? $request->audit_position_unid : '';
     $audit_position    = isset($request->audit_position) ? $request->audit_position : '';
     $auditor_group    = isset($request->auditor_group) ? $request->auditor_group : '';
     $auditor_area   = isset($request->auditor_area) ? $request->auditor_area : '';
     $auditor_item   = isset($request->auditor_item ) ? $request->auditor_item  : '1';
-    $auditor_name     = isset($request->auditor_name) ? $request->auditor_name : '';
+
+
+    $auditor_unid     = isset($request->auditor_unid) ? $request->auditor_unid : '';
+    $auditor_name ='';
+    if($auditor_unid !=''){
+      $auditor =UserTbl::where('unid','=',$auditor_unid)->first();
+      $auditor_name     =  $auditor->user_name;
+    }
+
+
+
     $period_type     = isset($request->period_type) ? $request->period_type : '';
     $area = AreaTbl::where('unid','=',$auditor_area)->first();
     $Auditposition=  AuditpositionTbl::where('unid','=',$audit_position_unid)->first();
@@ -246,21 +278,19 @@ public function getListArea($AuditUnid=null,$area_unid=null){
     $action=false;
     if($unid !='') {
 
-        $action =AuditorTbl::where('unid', '=', $unid)->update([
-          'audit_position_unid' => $audit_position_unid ,
-          'audit_position' => $audit_position,
-          'auditor_group' => $auditor_group,
-          // 'auditor_area' => $auditor_area ,
-          // 'area_name' => $area_name ,
-          'auditor_item' => $auditor_item ,
-          'auditor_name' => $auditor_name,
-        'edit_by'=> $username,
-        'edit_time'=> date("Y-m-d H:i:s"),
+        $action =AuditorTbl::where('unid', '=', $unid)->where('audit_position_unid', '=', $audit_position_unid)->update([
+          'audit_position' => $audit_position
+          ,'auditor_group' => $auditor_group
+          ,'auditor_item' => $auditor_item
+          ,'auditor_unid' => $auditor_unid
+          ,'auditor_name' => $auditor_name
+          ,'edit_by'=> $username
+          ,'edit_time'=> date("Y-m-d H:i:s")
       ]);
 
     }
 
-
+  //  dd($action);
 
  return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
@@ -282,22 +312,34 @@ public function addauditarea(Request $request){
 
   $auditor_unid =isset($request->auditor_unid) ? $request->auditor_unid : '';
   $check_unid=isset($request->check_unid) ? $request->check_unid : '';
-  $action=false;
-  AuditAreaTbl::where('auditor_unid','=',$auditor_unid)->delete();
-
   $audit_position_unid    = isset($request->audit_position_unid) ? $request->audit_position_unid : '';
   $audit_position         = isset($request->audit_position) ? $request->audit_position : '';
   $auditor_group          = isset($request->auditor_group) ? $request->auditor_group : '';
   $auditor_area           = isset($request->auditor_area) ? $request->auditor_area : '';
   $auditor_item           = isset($request->auditor_item ) ? $request->auditor_item  : '1';
-  $auditor_name           = isset($request->auditor_name) ? $request->auditor_name : '';
+  //$auditor_name           = isset($request->auditor_name) ? $request->auditor_name : '';
   $period_type            = isset($request->period_type) ? $request->period_type : '';
-  $area                   = AreaTbl::where('unid','=',$auditor_area)->first();
-  $area_name              = isset($area->area_name) ? $area->area_name : '';
-  $username='5s';
-  $Auditposition=  AuditpositionTbl::where('unid','=',$audit_position_unid)->first();
 
-  if($auditor_unid==''){
+  //$area_name              = isset($area->area_name) ? $area->area_name : '';
+
+  $auditor_unid     = isset($request->auditor_unid) ? $request->auditor_unid : '';
+  $auditor_name ='';
+  if($auditor_unid !=''){
+    $auditor =UserTbl::where('unid','=',$auditor_unid)->first();
+    $auditor_name     =  $auditor->user_name;
+  }
+  $Auditposition=  AuditpositionTbl::where('unid','=',$audit_position_unid)->first();
+  $position_name_eng =$Auditposition->position_name_eng;
+
+  $action=false;
+
+  $area  = AreaTbl::where('unid','=',$auditor_area)->first();
+  $area_name = $area->area_name;
+  AuditAreaTbl::where('auditor_unid','=',$auditor_unid)->where('position_name_eng','=',$position_name_eng )->delete();
+
+  $username='5s';
+
+/*  if($auditor_unid==''){
      $auditor_unid = $this->genUnid();
 
     if($Auditposition->position_name_eng=='SELF'){
@@ -336,31 +378,33 @@ public function addauditarea(Request $request){
         'edit_time' => Carbon::now(),
         ]);
     }
-
-
-  }
+  }*/
 
 
     if($Auditposition->position_name_eng=='SELF'){
+      //dd($area_name,$auditor_area);
+      //  AreaTbl::where('unid', '=', $auditor_area)->dd();
             AreaTbl::where('unid', '=', $auditor_area)->update([
               'area_owner' =>$auditor_name,
              ]);
-
-           AuditorTbl::where('unid','=',$auditor_unid)->update([
+             //AuditorTbl::where('auditor_unid','=',$auditor_unid)->where('audit_position_unid','=',$audit_position_unid)->dd();
+           AuditorTbl::where('auditor_unid','=',$auditor_unid)
+           ->where('audit_position_unid','=',$audit_position_unid)->update([
                'auditor_area' => $auditor_area ,
                'area_name' => $area_name ,
-             ]);
+             ]) ;
     }
 
   $username='5s';
 
-  $Auditor  =AuditorTbl::where('unid','=',$auditor_unid)->first();
+  $Auditor  =AuditorTbl::where('auditor_unid','=',$auditor_unid)->where('audit_position_unid','=',$audit_position_unid)->first();
   $Position =AuditpositionTbl::where('unid','=',$Auditor->audit_position_unid)->first();
 
   foreach (explode(';',$check_unid) as $row){
     //dd($row);
       $uuid = $this->genUnid();
       $area_unid =$row;
+
       if($area_unid!=''){
         $Area     =AreaTbl::where('unid','=',$area_unid)->first();
         $action=  AuditAreaTbl::insert([
@@ -383,7 +427,7 @@ public function addauditarea(Request $request){
   }
 
 
-  return response()->json(['result'=>$action,'auditor_unid'=>$auditor_unid],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+  return response()->json(['result'=>$action],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 }
 
   public function editfield(Request $request){
