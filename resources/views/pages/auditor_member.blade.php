@@ -90,8 +90,23 @@
                             <input class="form-control" type="number" id="auditor_item" min="1" max="20" name="auditor_item" placeholder="ลำดับ" value="{{ count($dataAuditor)+1}}" required>
                         </div>
                         <div class="col-sm-10 form-group">
-                            <label>ชื่อผู้ตรวจ</label>
-                             <input class="form-control" type="text" id="auditor_name" name="auditor_name" placeholder="ชื่อผู้ตรวจ" required>
+
+
+        										<label class="col-sm-3 col-form-label">รหัสสินค้า</label>
+        										<div class="col-sm-9">
+        											<select class="form-control selectpicker" data-size="10"
+        											data-live-search="true" data-style="btn-primary" id="CODE_MASTER" name="CODE_MASTER">
+         										 <option value="">Select</option>
+         										 	@<?php foreach ($dtUser as $key => $value): ?>
+         										 				<option value="{{ $value->unid }}"  >{{ $value->user_name }}</option>
+         										 	<?php endforeach; ?>
+
+         										</select>
+        										</div>
+
+                            <!-- <label>ชื่อผู้ตรวจ</label> -->
+
+                             <!-- <input class="form-control" type="text" id="auditor_name" name="auditor_name" placeholder="ชื่อผู้ตรวจ" required> -->
                         </div>
 
                     </div>
@@ -103,7 +118,7 @@
                               @foreach ($dtGroup  as $key => $grow)
                                 <option value="{{ $grow->group_name }}">{{ $grow->group_name }}</option>
                               @endforeach
-                             
+
                           </select>
                         </div>
                     </div>

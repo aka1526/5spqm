@@ -10,6 +10,7 @@
     <link href="/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/assets/vendors/font-awesome/css/all.min.css" rel="stylesheet" />
     <link href="/assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
+    <link href="/assets/vendors/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
     <!-- PLUGINS STYLES-->
     <link href="/assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
     <!-- THEME STYLES-->
@@ -90,6 +91,8 @@
     <script src="/assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
     <script src="/assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap-select/dist/js/bootstrap-select.min.js" type="text/javascript"></script>
+
     <!-- PAGE LEVEL PLUGINS-->
     <script src="/assets/vendors/chart.js/dist/Chart.min.js" type="text/javascript"></script>
     <script src="/assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>

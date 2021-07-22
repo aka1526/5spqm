@@ -11,7 +11,7 @@ use App\Models\GroupsTbl;
 use App\Models\AreaTbl;
 use App\Models\AuditorTbl;
 use App\Models\AuditAreaTbl;
-
+use App\Models\UserTbl;
 class AuditorController extends Controller
 {
 
@@ -115,8 +115,9 @@ class AuditorController extends Controller
     $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
     $dataAuditor =AuditorTbl::where('status','=','Y')->where('audit_position_unid','=',$unid)->orderBy('auditor_item')->get();
     $dtGroup  = GroupsTbl::where('group_position','=',$dataAuditposition->position_name_eng)->orderBy('group_index')->get();
+    $dtUser =UserTbl::where('user_status','=','Y')->orderBy('user_name')->get();
     $datamember="";
-     return view('pages.auditor_member',compact('dataAuditposition','dtGroup','datamember','dataArea','dataAuditor'));
+     return view('pages.auditor_member',compact('dataAuditposition','dtUser','dtGroup','datamember','dataArea','dataAuditor'));
 
   }
 
