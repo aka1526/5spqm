@@ -84,8 +84,6 @@
               <input  type="hidden" id="unid" name="unid" value="">
               <input  type="hidden" id="audit_position_unid" name="audit_position_unid" value="{{  $dataAuditposition->unid }}">
               <input  type="hidden" id="audit_position" name="audit_position" value="{{  $dataAuditposition->position_name }}">
-
-
               <div class="row">
                         <div class="col-sm-2 form-group">
                             <label>ลำดับ</label>
@@ -97,32 +95,15 @@
                         </div>
 
                     </div>
-
                     <div class="row">
-                       <!-- @if($dataAuditposition->position_name_eng !="TOP")
-                        <div class="col-sm-8 form-group">
-                          <div class="form-group">
-                          <label>กำหนดพื้นที่</label>
-
-                           <select class="form-control input-sm" id="auditor_area" name="auditor_area"  {{ strtolower($dataAuditposition->position_name_eng )  !='self' ? 'disabled' : 'required' }} >
-                               <option value="">ทั้งหมด</option>
-                               @foreach ($dataArea as $key => $row)
-                                <option value="{{ $row->unid}}">{{ $row->area_name }}</option>
-                                @endforeach
-                           </select>
-                          </div>
-                      </div>
-                      @endif -->
-
                         <div class="col-md-6 form-group">
                           <label >กลุ่ม</label>
                           <select class="form-control input-sm" id="auditor_group" name="auditor_group"  {{ strtolower($dataAuditposition->position_name_eng ) =='self' ? 'disabled' : 'required' }} >
                               <option value=""></option>
-                              <option value="A">A</option>
-                              <option value="B">B</option>
-                              <option value="C">C</option>
-                              <option value="D">D</option>
-                              <option value="E">E</option>
+                              @foreach ($dtGroup  as $key => $grow)
+                                <option value="{{ $grow->group_name }}">{{ $grow->group_name }}</option>
+                              @endforeach
+                             
                           </select>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Str;
 use App\Models\AuditpositionTbl;
+use App\Models\GroupsTbl;
 use App\Models\AreaTbl;
 use App\Models\AuditorTbl;
 use App\Models\AuditAreaTbl;
@@ -113,9 +114,9 @@ class AuditorController extends Controller
     $dataAuditposition =AuditpositionTbl::where('unid','=',$unid)->orderBy('position_no')->first();
     $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
     $dataAuditor =AuditorTbl::where('status','=','Y')->where('audit_position_unid','=',$unid)->orderBy('auditor_item')->get();
-
+    $dtGroup  = GroupsTbl::where('group_position','=',$dataAuditposition->position_name_eng)->orderBy('group_index')->get();
     $datamember="";
-     return view('pages.auditor_member',compact('dataAuditposition','datamember','dataArea','dataAuditor'));
+     return view('pages.auditor_member',compact('dataAuditposition','dtGroup','datamember','dataArea','dataAuditor'));
 
   }
 
