@@ -16,6 +16,7 @@ use App\Models\QuestionsItemTbl;
 use App\Models\QuestionsTbl;
 use App\Models\QuestionsResultTbl;
 use App\Models\SummaryResultTbl;
+use App\Models\UserTbl;
 use Jenssegers\Agent\Agent;
 
 class CheckController extends Controller
@@ -30,7 +31,13 @@ class CheckController extends Controller
 }
 
   public function index(Request $request){
-   $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
+
+    $AUDIT_UNID =Cookie::get('AUDIT_UNID') !='' ? Cookie::get('AUDIT_UNID')  :''  ;
+  if($AUDIT_UNID==''){
+      return view('pages.user_login');
+  }
+
+    $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
     return view('pages.check_index',compact('dataArea'));
   }
 
