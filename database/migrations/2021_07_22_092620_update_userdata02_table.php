@@ -14,7 +14,6 @@ class UpdateUserdata02Table extends Migration
     public function up()
     {
         Schema::table('tbl_user', function (Blueprint $table) {
-            $table->datetime('last_login_datetime')->nullable();
             $table->string('user_level',50)->nullable()->default('');
         });
     }
