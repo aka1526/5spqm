@@ -26,7 +26,7 @@
               @endforeach
           @else
             <div class="col-lg-6 col-md-6  text-center">
-            <a href="/check" class=" btn btn-danger  m-b-5 font-strong mt-5 "><h3><i class="fas fa-user-lock"></i> กรุณา Login เข้าใช้งานระบบ </h3></a>
+            <a href="/check" class=" btn btn-danger  m-b-5 font-strong mt-5 "><h3><i class="fas fa-user-lock"></i> กรุณา Login ก่อน </h3></a>
               </div>
           @endif
 
