@@ -171,11 +171,13 @@ protected  $paging =10;
            $login  =Hash::check($user_password,$row->user_password);
            if ($login) {
               // Cookie::queue('USER_UNID',$row->unid ,0, null, 'p-quality.com');
+              $USER_UNID =$row->unid;
                Cookie::queue('USER_UNID',$row->unid);
                Cookie::queue('USER_ID',$row->user_login );
                Cookie::queue('USER_NAME',$row->user_name);
                Cookie::queue('USER_LEVEL',$row->user_level);
-               return view('pages.check_index');
+               return redirect()->route('check.index');
+               // return view('/check')->with('USER_UNID',$USER_UNID);
            }
       }
       return back()->with('login','รหัสผ่านไม่ถูกต้อง');
@@ -197,5 +199,17 @@ protected  $paging =10;
  }
 
 
+ public function login(Request $request){
+     return view('pages.user_login');
+ }
+ public function logout(Request $request){
+
+    Cookie::queue(Cookie::forget('USER_UNID'));
+    Cookie::queue(Cookie::forget('USER_ID'));
+    Cookie::queue(Cookie::forget('USER_NAME'));
+    Cookie::queue(Cookie::forget('USER_LEVEL'));
+
+     return view('pages.user_login');
+ }
 
 }

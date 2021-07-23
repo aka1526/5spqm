@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
 use Cookie;
+use Session;
 use Illuminate\Support\Str;
 use App\Models\AreaTbl;
 use App\Models\AuditorTbl;
@@ -39,11 +40,12 @@ class CheckController extends Controller
     // Cookie::queue('USER_NAME',$row->user_name);
     // Cookie::queue('USER_LEVEL',$row->user_level);
     //
-    $USER_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID')  :''  ;
+    //dd(Session::get('USER_UNID'));
+    $USER_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID')  : ''  ;
     if($USER_UNID==''){
         return view('pages.user_login');
     }
-
+ //  dd(Session::get('USER_UNID'));
   //  $position =AuditorTbl::where('auditor_unid','=', $USER_UNID)->orderBy('auditor_group')->get();
 
     $position = AuditorTbl::select('tbl_auditor.*','tbl_auditposition.position_name_eng','position_eng')

@@ -63,7 +63,7 @@
                             <img src="/assets/img/admin-avatar.png" />
                          </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                           <a class="dropdown-item" href="login.html"><i class="fa fa-power-off"></i>Logout</a>
+                           <a class="dropdown-item" href="/logout"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>
                     </li>
                 </ul>

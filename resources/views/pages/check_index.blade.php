@@ -11,7 +11,6 @@
     <div class="page-content fade-in-up">
         <div class="row justify-content-md-center">
           @if(isset($position))
-
               @foreach ($position as $key => $row)
                 <div class="col-lg-4 col-md-6">
                      <a href="{{ route('check.yearmonth').'?pv='.$row->position_name_eng }}">
@@ -26,7 +25,7 @@
                 </div>
               @endforeach
           @else
-            <h2 class="m-b-5 font-strong"> ไม่พบข้อมูลการตรวจประเมิน</h2>    
+            <h2 class="m-b-5 font-strong"> ไม่พบข้อมูลการตรวจประเมิน</h2>
           @endif
 
         </div>

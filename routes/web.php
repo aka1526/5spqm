@@ -115,4 +115,5 @@ Route::post('/user/delete',    [UserController::class,'delete'])->name('user.del
 Route::post('/user/editfield', [UserController::class,'editfield'])->name('user.editfield');
 
 Route::post('/login', [UserController::class,'login'])->name('user.login');
+Route::get('/logout', [UserController::class,'logout'])->name('user.logout');
 Route::post('/login/check', [UserController::class,'login_check'])->name('user.login_check');
