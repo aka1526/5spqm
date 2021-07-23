@@ -416,6 +416,7 @@ public function addauditarea(Request $request){
          'area_index'=> $Area->area_index ,
          'area_name'=> $Area->area_name,
          'area_owner'=> $Area->area_owner,
+         'auditor_group' => $Auditor->auditor_group,
          'status'=> "Y",
          'create_by' => $username,
          'create_time' => carbon::now(),
