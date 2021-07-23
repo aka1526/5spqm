@@ -10,22 +10,25 @@
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
         <div class="row justify-content-md-center">
-          @if(!isset($position))
-              <h2 class="m-b-5 font-strong"> ไม่พบข้อมูลการตรวจประเมิน</h2>
-          @endif
-          @foreach ($position as $key => $row)
-            <div class="col-lg-4 col-md-6">
-                 <a href="{{ route('check.yearmonth').'?pv='.$row->position_name_eng }}">
-                <div class="ibox bg-success color-white widget-stat">
-                    <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">{{ $row->audit_position}}</h2>
-                        <div class="m-b-5">ตรวจประเมินพื้นที่ </div><i class="ti-medall-alt widget-stat-icon"></i>
-                        <div><i class="fa fa-level-up m-r-5"></i><small>{{ $row->position_eng }}</small></div>
+          @if(isset($position))
+
+              @foreach ($position as $key => $row)
+                <div class="col-lg-4 col-md-6">
+                     <a href="{{ route('check.yearmonth').'?pv='.$row->position_name_eng }}">
+                    <div class="ibox bg-success color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ $row->audit_position}}</h2>
+                            <div class="m-b-5">ตรวจประเมินพื้นที่ </div><i class="ti-medall-alt widget-stat-icon"></i>
+                            <div><i class="fa fa-level-up m-r-5"></i><small>{{ $row->position_eng }}</small></div>
+                        </div>
                     </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-          @endforeach
+              @endforeach
+          @else
+            <h2 class="m-b-5 font-strong"> ไม่พบข้อมูลการตรวจประเมิน</h2>    
+          @endif
+
         </div>
 
 
