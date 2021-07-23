@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
+use Cookie;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 

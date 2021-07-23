@@ -18,23 +18,17 @@
             @endphp
         </div>
         @endif
+
         @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-        @if(Session::has('user_login'))
-          <div class="alert alert-danger">
-            {{ Session::get('user_login') }}
-            @php
-                Session::forget('user_login');
-            @endphp
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
         @endif
+
         <form id="login-form" action="{{ route('user.login_check')}}" method="post" enctype="multipart/form-data">
           @csrf
             <h2 class="login-title">ทีมตรวจประเมิน 5ส</h2>
