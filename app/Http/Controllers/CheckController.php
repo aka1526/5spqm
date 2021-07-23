@@ -520,6 +520,5 @@ if($datatype==2){
 
     return view('pages.check_type1',compact('Questions','QuestionsResult','html')) ;
   }
-
-
+ 
 }

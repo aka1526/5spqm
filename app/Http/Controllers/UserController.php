@@ -134,6 +134,34 @@ protected  $paging =10;
 
  }
 
+ public function login_check(Request $request){
+
+   $this->validate(
+           $request,
+           [
+               'user_login'             => 'required',
+               'user_password'          => 'required|min:6'
+           ],
+           [
+               'user_login.required'    => 'กรุณาใส่ User Name',
+               'user_password.required' => 'กรุณาใส่ Password',
+               'user_password.min'      => 'รหัสผ่านน้อยกว่า 6 ตัวอักษร',
+           ]
+       );
+
+    $user_login     =isset($request->user_login) ? $request->user_login :'';
+    $user_password  =isset($request->user_password) ? $request->user_password :'';
+
+    if($user_login==''){
+      return back();
+    }
+    $countUser = UserTbl::where('user_login','=',$user_login)->where('user_status','=','Y')->count();
+
+    if($countUser==0){
+        return back()->with('login','ไม่พบข้อมูลผู้ใช้งาน');
+    }
+
+ }
 
 
 

@@ -10,13 +10,38 @@
         <div class="brand">
             <a class="link" href="/">กลับสู่หน้าหลัก</a>
         </div>
+        @if(Session::has('login'))
+          <div class="alert alert-danger">
+            {{ Session::get('login') }}
+            @php
+                Session::forget('user_login');
+            @endphp
+        </div>
+        @endif
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        @if(Session::has('user_login'))
+          <div class="alert alert-danger">
+            {{ Session::get('user_login') }}
+            @php
+                Session::forget('user_login');
+            @endphp
+        </div>
+        @endif
         <form id="login-form" action="{{ route('user.login_check')}}" method="post" enctype="multipart/form-data">
           @csrf
             <h2 class="login-title">ทีมตรวจประเมิน 5ส</h2>
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                    <input class="form-control" type="text" name="user_name" id="user_name" placeholder="User Name" autocomplete="off">
+                    <input class="form-control" type="text" name="user_login" id="user_login" placeholder="User Name" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
@@ -35,12 +60,14 @@
 
 
         </form>
+
     </div>
     <!-- BEGIN PAGA BACKDROPS-->
     <div class="sidenav-backdrop backdrop"></div>
     <div class="preloader-backdrop">
         <div class="page-preloader">Loading</div>
     </div>
+
     <!-- END PAGA BACKDROPS-->
     <!-- CORE PLUGINS -->
 
@@ -55,7 +82,7 @@
 <!-- PAGE LEVEL PLUGINS -->
 <script src="/assets/vendors/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
 <!-- CORE SCRIPTS-->
-<script src="assets/js/app.js" type="text/javascript"></script>
+<script src="/assets/js/applogin.js" type="text/javascript"></script>
 <!-- PAGE LEVEL SCRIPTS-->
 <script type="text/javascript">
     $(function() {
