@@ -25,7 +25,7 @@
                 </div>
               @endforeach
           @else
-            <h2 class="m-b-5 font-strong"> ไม่พบข้อมูลการตรวจประเมิน</h2>
+            <a href="/check" class=" btn btn-danger m-b-5 font-strong mt-5"><i class="fas fa-user-lock"></i> กรุณา Login เข้าใช้งานระบบ </a>
           @endif
 
         </div>
