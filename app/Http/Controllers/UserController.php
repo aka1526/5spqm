@@ -164,9 +164,17 @@ protected  $paging =10;
 
       $check_password=Hash::make($user_password);
       $User = UserTbl::where('user_login','=',$user_login)
-      //->where('user_password','=',$check_password)
+      ->where('user_password','=',$check_password)
       ->where('user_status','=','Y')->get();
-      dd($User->count());
+      if($User){
+          Cookie::queue('AUDIT_UNID',$DOC_UNID, 60);
+          Cookie::queue('AUDIT_NAME',$DOC_UNID, 60);
+          Cookie::queue('AUDIT_GROUP',$DOC_UNID, 60);
+          Cookie::queue('AUDIT_LEVEL',$DOC_UNID, 60);
+
+      } else {
+          return back()->with('login','รหัสผ่านไม่ถูกต้อง');
+      }
  }
 
 
