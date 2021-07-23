@@ -7,9 +7,7 @@
 @section('body')
 <body class="bg-silver-300">
     <div class="content">
-        <div class="brand">
-            <a class="link" href="/">กลับสู่หน้าหลัก</a>
-        </div>
+
         @if(Session::has('login'))
           <div class="alert alert-danger">
             {{ Session::get('login') }}
@@ -49,7 +47,10 @@
                 <a href="#">ลืมรหัสผ่าน?</a>
             </div>
             <div class="form-group">
-                <button class="btn btn-info btn-block" type="submit">Login</button>
+                <button class="btn btn-info btn-block" type="submit"><i class="fas fa-user-check"></i> Login</button>
+            </div>
+            <div class="form-group">
+                <a href="/" class="btn btn-primary btn-block" ><i class="fas fa-home"></i> กลับสู่หน้าหลัก</a>
             </div>
 
 
