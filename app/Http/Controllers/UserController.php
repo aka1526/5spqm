@@ -162,6 +162,11 @@ protected  $paging =10;
         return back()->with('login','ไม่พบข้อมูลผู้ใช้งาน');
     }
 
+      $check_password=Hash::make($user_password);
+      $User = UserTbl::where('user_login','=',$user_login)
+      //->where('user_password','=',$check_password)
+      ->where('user_status','=','Y')->get();
+      dd($User->count());
  }
 
 
