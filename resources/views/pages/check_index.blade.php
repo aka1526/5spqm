@@ -9,41 +9,23 @@
 <div class="content-wrapper">
     <!-- START PAGE CONTENT-->
     <div class="page-content fade-in-up">
-        <div class="row">
+        <div class="row justify-content-md-center">
+          @if(!isset($position))
+              <h2 class="m-b-5 font-strong"> ไม่พบข้อมูลการตรวจประเมิน</h2>
+          @endif
+          @foreach ($position as $key => $row)
             <div class="col-lg-4 col-md-6">
-                 <a href="{{ route('check.yearmonth').'?pv=TOP' }}">
+                 <a href="{{ route('check.yearmonth').'?pv='.$row->position_name_eng }}">
                 <div class="ibox bg-success color-white widget-stat">
                     <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">TOP Audit</h2>
-                        <div class="m-b-5">ตรวจประเมินพื้นที่</div><i class="ti-medall-alt widget-stat-icon"></i>
-                        <div><i class="fa fa-level-up m-r-5"></i><small>TOP AUDIT</small></div>
+                        <h2 class="m-b-5 font-strong">{{ $row->audit_position}}</h2>
+                        <div class="m-b-5">ตรวจประเมินพื้นที่ </div><i class="ti-medall-alt widget-stat-icon"></i>
+                        <div><i class="fa fa-level-up m-r-5"></i><small>{{ $row->position_eng }}</small></div>
                     </div>
                 </div>
               </a>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <a href="{{ route('check.yearmonth').'?pv=COMMIT' }}">
-                <div class="ibox bg-info color-white widget-stat">
-                    <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">Committee Audit</h2>
-                        <div class="m-b-5">ตรวจประเมินพื้นที่</div><i class="ti-announcement widget-stat-icon"></i>
-                        <div><i class="fa fa-level-up m-r-5"></i><small>Committee Audit</small></div>
-                    </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <a href="{{ route('check.yearmonth').'?pv=SELF' }}">
-                <div class="ibox bg-warning color-white widget-stat">
-                    <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">Self Audit</h2>
-                        <div class="m-b-5">ตรวจประเมินพื้นที่</div><i class="ti-stamp widget-stat-icon"></i>
-                        <div><i class="fa fa-level-up m-r-5"></i><small>Self Audit</small></div>
-                    </div>
-                </div>
-              </a>
-            </div>
-
+          @endforeach
         </div>
 
 

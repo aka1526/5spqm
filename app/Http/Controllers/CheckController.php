@@ -8,6 +8,8 @@ use DB;
 use Cookie;
 use Illuminate\Support\Str;
 use App\Models\AreaTbl;
+use App\Models\AuditorTbl;
+use App\Models\AuditAreaTbl;
 use App\Models\PositionsTbl;
 use App\Models\PlanPositionTbl;
 use App\Models\QuestionsAreaTbl;
@@ -32,13 +34,26 @@ class CheckController extends Controller
 
   public function index(Request $request){
 
-    $AUDIT_UNID =Cookie::get('AUDIT_UNID') !='' ? Cookie::get('AUDIT_UNID')  :''  ;
-  if($AUDIT_UNID==''){
-      return view('pages.user_login');
-  }
+    // Cookie::queue('USER_UNID',$row->unid);
+    // Cookie::queue('USER_ID',$row->user_login );
+    // Cookie::queue('USER_NAME',$row->user_name);
+    // Cookie::queue('USER_LEVEL',$row->user_level);
+    //
+    $USER_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID')  :''  ;
+    if($USER_UNID==''){
+        return view('pages.user_login');
+    }
 
-    $dataArea =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
-    return view('pages.check_index',compact('dataArea'));
+  //  $position =AuditorTbl::where('auditor_unid','=', $USER_UNID)->orderBy('auditor_group')->get();
+
+    $position = AuditorTbl::select('tbl_auditor.*','tbl_auditposition.position_name_eng','position_eng')
+                        ->leftJoin("tbl_auditposition", "tbl_auditposition.unid", "=", "tbl_auditor.audit_position_unid")
+                        ->where('tbl_auditor.auditor_unid','=', $USER_UNID)
+                        ->orderBy('tbl_auditposition.position_no')
+                        ->get();
+
+
+    return view('pages.check_index',compact('position'));
   }
 
   public function yearmonth(Request $request){
@@ -520,5 +535,5 @@ if($datatype==2){
 
     return view('pages.check_type1',compact('Questions','QuestionsResult','html')) ;
   }
- 
+
 }
