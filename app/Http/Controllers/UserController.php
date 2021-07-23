@@ -170,11 +170,11 @@ protected  $paging =10;
       foreach ($User as $key => $row) {
            $login  =Hash::check($user_password,$row->user_password);
            if ($login) {
-
-               Cookie::queue('USER_UNID',$row->unid ,0, null, 'p-quality.com');
-               Cookie::queue('USER_ID',$row->user_login ,0, null, 'p-quality.com');
-               Cookie::queue('USER_NAME',$row->user_name,0, null, 'p-quality.com');
-               Cookie::queue('USER_LEVEL',$row->user_level,0, null, 'p-quality.com');
+              // Cookie::queue('USER_UNID',$row->unid ,0, null, 'p-quality.com');
+               Cookie::queue('USER_UNID',$row->unid);
+               Cookie::queue('USER_ID',$row->user_login );
+               Cookie::queue('USER_NAME',$row->user_name);
+               Cookie::queue('USER_LEVEL',$row->user_level);
                return view('pages.check_index');
            }
       }
