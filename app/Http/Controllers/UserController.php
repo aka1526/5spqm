@@ -10,10 +10,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\UserTbl;
-// use App\Models\AreaTbl;
+use App\Models\AreaTbl;
 // use App\Models\GroupsTbl;
 // use App\Models\AuditpositionTbl;
-// use App\Models\AuditAreaTbl;
+use App\Models\AuditorTbl;
+use App\Models\AuditAreaTbl;
 // use App\Models\PlanMasterTbl;
 // use App\Models\PlanPositionTbl;
 
@@ -162,19 +163,37 @@ protected  $paging =10;
         return back()->with('login','ไม่พบข้อมูลผู้ใช้งาน');
     }
 
-      $check_password=Hash::make($user_password);
+      //$check_password=Hash::make($user_password);
       $User = UserTbl::where('user_login','=',$user_login)
-      ->where('user_password','=',$check_password)
+      //->where('user_password','=',$check_password)
       ->where('user_status','=','Y')->get();
-      if($User){
-          Cookie::queue('AUDIT_UNID',$DOC_UNID, 60);
-          Cookie::queue('AUDIT_NAME',$DOC_UNID, 60);
-          Cookie::queue('AUDIT_GROUP',$DOC_UNID, 60);
-          Cookie::queue('AUDIT_LEVEL',$DOC_UNID, 60);
+      foreach ($User as $key => $row) {
+           $login  =Hash::check($user_password,$row->user_password);
+           if ($login) {
 
-      } else {
-          return back()->with('login','รหัสผ่านไม่ถูกต้อง');
+               Cookie::queue('USER_UNID',$row->unid ,0, null, 'p-quality.com');
+               Cookie::queue('USER_ID',$row->user_login ,0, null, 'p-quality.com');
+               Cookie::queue('USER_NAME',$row->user_name,0, null, 'p-quality.com');
+               Cookie::queue('USER_LEVEL',$row->user_level,0, null, 'p-quality.com');
+               return view('pages.check_index');
+           }
       }
+      return back()->with('login','รหัสผ่านไม่ถูกต้อง');
+
+     // $login  =Hash::check($user_password,$User->user_password);
+     //
+     //  if ($login) {
+     //
+     //      Cookie::queue('USER_UNID',$User->unid ,0, null, 'p-quality.com');
+     //      Cookie::queue('USER_ID',$User->user_login ,0, null, 'p-quality.com');
+     //      Cookie::queue('USER_NAME',$User->user_name,0, null, 'p-quality.com');
+     //      Cookie::queue('USER_LEVEL',$User->user_level,0, null, 'p-quality.com');
+     //
+     //
+     //      return view('pages.check_index');
+     //  } else {
+     //      return back()->with('login','รหัสผ่านไม่ถูกต้อง');
+     //  }
  }
 
 
