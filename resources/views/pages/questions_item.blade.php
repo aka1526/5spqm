@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-sm-10 form-group">
                             <label>หัวข้อการตรวจ</label>
-                             <input class="form-control" type="text" id="item_toppic" name="item_toppic"value="" placeholder="หัวข้อการตรวจ" required>
+                             <input class="form-control" type="text" id="item_toppic" name="item_toppic"value="" placeholder="หัวข้อการตรวจ" required autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
