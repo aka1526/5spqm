@@ -11,7 +11,8 @@ use Illuminate\Support\Str;
 use App\Models\AreaTbl;
 use App\Models\AuditorTbl;
 use App\Models\AuditAreaTbl;
-use App\Models\PositionsTbl;
+use App\Models\AuditpositionTbl;
+//use App\Models\PositionsTbl;
 use App\Models\PlanPositionTbl;
 use App\Models\QuestionsAreaTbl;
 use App\Models\QuestionspositionTbl;
@@ -233,8 +234,6 @@ class CheckController extends Controller
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
     $plan_unid =isset($request->plan_unid) ? $request->plan_unid :'';
 
-  //  $agent = new Agent();
-  //  $datatype =$agent->isDesktop() ? 1 : 2 ;
     $PlanStatus = SummaryResultTbl::where('plan_unid','=',$plan_unid)->where('doc_status','=','Y')->count();
     $datatype= $PlanStatus > 0 ? 1 : 2;
     $username='5s';
@@ -246,7 +245,14 @@ class CheckController extends Controller
                       ->where('tbl_questions_position.position_type','=',$pv)
                       ->where('tbl_questions_area.area_unid','=',$area_unid)
                       ->first();
- $ques_unid =$Questions->unid;
+
+ if($Questions ){
+     $ques_unid =$Questions->unid;
+   }else {
+   return back()->with('error','ไม่พบแบบประเมินพื้นที่');
+ }
+
+
   $QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
 
   $CountResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
@@ -254,7 +260,8 @@ class CheckController extends Controller
             ->where('area_unid','=',$area_unid)->count();
 
 $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
-$Positions =PositionsTbl::where('positions_type','=',$pv)->first();
+
+$Positions =AuditpositionTbl::where('position_name_eng','=',$pv)->first();
 $Area =AreaTbl::where('unid','=',$area_unid)->first();
 $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 

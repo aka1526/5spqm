@@ -24,6 +24,12 @@
                             </div>
 
                             <div class="ibox-body ">
+                              @if(Session::has('error'))
+                                    <div class="alert alert-danger">
+                                      {{ Session::get('error') }}
+
+                                  </div>
+                                  @endif
                                 <table class="table table-bordered">
                                     <thead class="">
                                         <tr>

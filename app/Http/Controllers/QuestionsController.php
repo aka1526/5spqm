@@ -8,11 +8,12 @@ use Cookie;
 use DB;
 use Illuminate\Support\Str;
 use App\Models\AreaTbl;
+use App\Models\AuditpositionTbl;
 use App\Models\QuestionsTbl;
 use App\Models\QuestionspositionTbl;
 use App\Models\QuestionsAreaTbl;
 use App\Models\QuestionsItemTbl;
-use App\Models\PositionsTbl;
+
 
 
 class QuestionsController extends Controller
@@ -36,7 +37,7 @@ class QuestionsController extends Controller
      $dtQuestions =QuestionsTbl::where('unid','=',$unid)->first();
      $dtQuestionsposition = QuestionspositionTbl::where('ques_unid','=',$unid)->get();
      $Arealist =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
-     $dtPositions = PositionsTbl::where('status','=','Y')->orderBy('position_index')->get();
+     $dtPositions = AuditpositionTbl::where('status','=','Y')->orderBy('position_no')->get();
     $maxItem=6;
     $htmlPosition="";
 
@@ -46,8 +47,8 @@ class QuestionsController extends Controller
                         <div class="m-b-10">';
           foreach ($dtPositions as $key => $item) {
           $htmlPosition.='  <label class="ui-checkbox ui-checkbox-inline ui-checkbox-success">
-                                <input type="checkbox" id="position_type" name="position_type[]" value="'.$item->positions_type.'"
-                                '. $this->getPositionCheck($unid,$item->positions_type).' >
+                                <input type="checkbox" id="position_type" name="position_type[]" value="'.$item->position_name_eng.'"
+                                '. $this->getPositionCheck($unid,$item->position_name_eng).' >
                                 <span class="input-span"></span>'.$item->position_name.'</label> ';
 
           }
@@ -101,7 +102,6 @@ class QuestionsController extends Controller
 
   }
   public function add(Request $request){
-  //  dd($request);
 
     $unid       =isset($request->unid) ? $request->unid:'';
     $ques_index   = isset($request->ques_index) ? $request->ques_index : '1';
@@ -144,6 +144,7 @@ class QuestionsController extends Controller
         if($action && ($position_type !='')){
 
           foreach ($position_type as $key => $ps_type) {
+
             QuestionspositionTbl::insert([
               'unid' => $this->genUnid()
               ,'ques_unid' => $uuid
@@ -300,7 +301,8 @@ class QuestionsController extends Controller
   }
 
   public function getPositionCheck($ques_unid=null,$position_type=null){
-    $data =QuestionspositionTbl::where('ques_unid','=',$ques_unid)->where('position_type','=',$position_type)->count();
+    $data =QuestionspositionTbl::where('ques_unid','=',$ques_unid)
+      ->where('position_type','=',$position_type)->count();
     $check="";
     if($data>0){$check="Checked";}
     return $check ;

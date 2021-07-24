@@ -262,31 +262,6 @@ $(".btn-edit").on('click',function (e){
           });
       });
 
-      $(".check_box").on('click', function () {
-            /*    var check_unid = "";
-                var auditor_unid =$("#unid").val();
 
-                $(":checkbox").each(function () {
-                    var ischecked = $(this).is(":checked");
-                    if (ischecked) {
-                        check_unid += $(this).val() + ";";
-                    }
-                });
-
-                // your awesome code calling ajax
-                var url ="{{route('auditor.member.addauditarea') }}";
-
-                  $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: {auditor_unid:auditor_unid,check_unid:check_unid,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
-                    success: function(data)
-                    {
-                    //  console.log(data);
-                        //alert(data); // show response from the php script.
-                    }
-                  });*/
-                //
-      });
 </script>
 @endsection
