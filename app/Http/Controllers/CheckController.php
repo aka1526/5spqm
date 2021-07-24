@@ -113,22 +113,46 @@ class CheckController extends Controller
       $unid= isset($request->unid) ? $request->unid :'';
       $dataArea =AreaTbl::where('unid','!=',$unid)->get();
 
-      $year= Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
-      $pv =  Cookie::get('DOC_PV') !=''   ? strtoupper(Cookie::get('DOC_PV')) :strtoupper($pv) ;
-
+      $year = Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
+      $pv   =  Cookie::get('DOC_PV') !=''   ? strtoupper(Cookie::get('DOC_PV')) :strtoupper($pv) ;
+      $area_unid = Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
 
 
       $position_type =$pv;
        Cookie::queue('DOC_MONTH',$moth);
 
+       $USER_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID') : '';
+       if($USER_UNID !=''){
+          $AuditArea =  AuditAreaTbl::where('auditor_unid','=',$USER_UNID)
+          ->where('status','=','Y')->orderBy('area_index')->get();
+       }
+
+       $plan_area_unid=array();
+       $auditor_group='';
+       foreach ($AuditArea as $key => $row) {
+              $plan_area_unid[] = $row->area_unid;
+               $auditor_group= $row->auditor_group;
+
+
+       }
+
+
       $dtPlan =PlanPositionTbl::select('tbl_planposition.*','doc_status','area_score','total_score')
       ->leftJoin("tbl_result_summary", "tbl_result_summary.plan_unid", "=", "tbl_planposition.unid")
       ->where('tbl_planposition.position_type','=',$position_type)
-      ->where('tbl_planposition.plan_area_unid','=','319bf8c4dad7499ca5552fd3ab52f6c1') //web line 3
+      ->where(function($query) use ($plan_area_unid) {
+                        if ($plan_area_unid != '') {
+                            return $query->whereIn('tbl_planposition.plan_area_unid', $plan_area_unid);
+                        }
+                    })
+    //  ->dd()
+
+    //  ->wherein('tbl_planposition.plan_area_unid','in','('.$plan_area_unid.')') //web line 3
     //  ->where('plan_area_unid','=','b30a86eb99e04624966c295c5ede35fb') // Test
 
       ->where('tbl_planposition.plan_year','=',$year)
       ->where('tbl_planposition.plan_month','=',$moth)
+      ->where('tbl_planposition.plan_groups','=',$auditor_group)
       ->orderBy('tbl_planposition.plan_date')
       ->orderBy('tbl_planposition.plan_area_index')->get();
     // return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
