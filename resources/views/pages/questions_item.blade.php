@@ -42,7 +42,7 @@
                                             <th>หัวข้อการตรวจ</th>
                                             <th class="text-center">ลำดับ</th>
                                             <th>รายละเอีดยการตรวจ</th>
-                                            <th>สร้างเมื่อ</th>
+                                            <th>ประเภท</th>
                                             <th width="100px">Action</th>
                                         </tr>
                                     </thead>
@@ -53,7 +53,7 @@
                                         <td>{{ $row->item_toppic }}</td>
                                         <td class="text-center">{{ $row->item_index }}</td>
                                         <td>{{ $row->item_desc }}</td>
-                                        <td>{{ $row->create_time }}</td>
+                                        <td>{{ $row->item_type }}</td>
 
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fas fa-pencil-alt font-14"></i></button>
@@ -105,7 +105,7 @@
                       <label>เกณฑ์การให้คะแนน</label>
 
                        <select  class="form-control" name="item_type" id="item_type" required>
-                           
+
                           <option  value="VALUE">คะแนน 0-5 </option>
                           <option  value="TEXT">ข้อเสนอแนะ</option>
 
