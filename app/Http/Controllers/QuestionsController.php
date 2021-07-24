@@ -28,8 +28,11 @@ class QuestionsController extends Controller
 }
 
   public function index(Request $request){
-   $dataQuestions =QuestionsTbl::where('status','=','Y')->orderBy('ques_index')->get();
-    return view('pages.questions_index',compact('dataQuestions'));
+    $dataQuestions =QuestionsTbl::where('status','=','Y')->orderBy('ques_index')->get();
+    $dataQuestionsArea =QuestionsAreaTbl::where('status','=','Y')->orderBy('ques_unid')->orderBy('area_index')->get();
+    $dataQuestionsposition = QuestionspositionTbl::where('status','=','Y')->orderBy('ques_unid')->get();
+    $dataAuditposition =AuditpositionTbl::where('status','=','Y')->get();
+    return view('pages.questions_index',compact('dataQuestions','dataQuestionsArea','dataQuestionsposition','dataAuditposition'));
   }
   public function get(Request $request){
      $unid= isset($request->unid) ? $request->unid :'';
@@ -366,7 +369,7 @@ class QuestionsController extends Controller
 
         $action=  QuestionsItemTbl::where('unid','=',$unid)->update([
                'item_refunid' => $item_refunid
-              ,'item_type'=> $item_type 
+              ,'item_type'=> $item_type
               ,'item_index'=> $item_index
               ,'item_toppic'=> $item_toppic
               ,'item_desc'=> $item_desc

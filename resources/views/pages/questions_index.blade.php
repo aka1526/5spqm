@@ -38,6 +38,8 @@
                                             <th>#</th>
                                             <th>ชื่อแบบฟอร์ม</th>
                                             <th>หัวข้อการตรวจ</th>
+                                            <th>พื้นที่</th>
+                                              <th>ผู้ตรวจประเมิน</th>
                                             <th>สร้างเมื่อวันที่</th>
                                             <th>Action</th>
                                         </tr>
@@ -50,7 +52,36 @@
                                           <td>
                                             <a href="/questions/edit/{{ $row->unid }}" class="btn btn btn-danger btn-xs m-r-5 " data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="เพิ่มหัวข้อการตรวจ" ><i class="fa fa-plus font-14"></i> หัวข้อ</a>
                                           </td>
-                                         <td>{{ $row->create_time }}</td>
+                                            <td>
+                                            @if(isset($dataQuestionsArea))
+                                              @foreach ($dataQuestionsArea as $key => $area)
+                                                @if($area->ques_unid == $row->unid  )
+                                                          {{ '- '.$area->area_name }}</br>
+                                                @endif
+                                              @endforeach
+                                            @else
+                                              -
+                                            @endif
+                                          </td>
+                                         <td>
+                                           @if(isset($dataQuestionsposition))
+                                             @foreach ($dataQuestionsposition as $key => $p)
+                                             @if($p->ques_unid == $row->unid  )
+
+
+                                               @foreach ($dataAuditposition as $key => $item)
+                                                  @if($p->position_type == $item->position_name_eng )
+                                                    - {{ $item->position_name }}<br/>
+                                                  @endif
+                                               @endforeach
+
+                                             @endif
+
+                                             @endforeach
+                                           @else
+                                             -
+                                           @endif
+                                         </td>
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fas fa-pencil-alt font-14"></i></button>
                                           <button class="btn btn-danger btn-xs btn-delete" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
