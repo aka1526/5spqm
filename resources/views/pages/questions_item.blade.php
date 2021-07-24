@@ -113,7 +113,7 @@
                   </div>
                <div class="form-group">
                    <label >รายละเอีดยการตรวจ/ข้อเสนอแนะ</label>
-                   <textarea id="item_desc" name="item_desc" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
+                   <textarea id="item_desc" name="item_desc" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 100px;" autocomplete="off"></textarea>
                </div>
 
            </form>
