@@ -290,7 +290,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
               ,'result_desc' =>$item->item_desc
               ,'result_val' => 0
               ,'status'=>"Y"
-              ,'result_type' => "VALUE"
+              ,'result_type' =>  $item->item_type
               ,'create_by'=> $username
               ,'create_time'=>Carbon::now()
               ,'edit_by'=> $username
@@ -300,6 +300,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
       }
 
       ///
+      /*
       $rowTotal =$rowTotal+1;
       QuestionsResultTbl::insert([
         'unid' =>  $this->genUnid()
@@ -355,6 +356,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
         ,'edit_time'=>Carbon::now()
         ,'unid_ans' => $unid_ans
       ]);
+      */
 
 
     $countItem = QuestionsResultTbl::where('unid_ans','=',$unid_ans)->where('result_type','=','VALUE')->count();

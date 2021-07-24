@@ -315,7 +315,7 @@ class QuestionsController extends Controller
     $item_index     =isset($request->item_index) ? $request->item_index : '1';
     $item_toppic    =isset($request->item_toppic) ? $request->item_toppic : '';
     $item_desc      =isset($request->item_desc) ? $request->item_desc : '';
-
+    $item_type      =isset($request->item_type ) ? $request->item_type  : '';
     $username='5s';
     $action=false;
 
@@ -324,6 +324,7 @@ class QuestionsController extends Controller
       $action=  QuestionsItemTbl::insert([
             'unid' =>  $this->genUnid()
             ,'item_refunid' => $item_refunid
+            ,'item_type'=> $item_type
             ,'item_index'=> $item_index
             ,'item_toppic'=> $item_toppic
             ,'item_desc'=> $item_desc
@@ -357,7 +358,7 @@ class QuestionsController extends Controller
       $item_index     =isset($request->item_index) ? $request->item_index : '1';
       $item_toppic    =isset($request->item_toppic) ? $request->item_toppic : '';
       $item_desc      =isset($request->item_desc) ? $request->item_desc : '';
-
+      $item_type      =isset($request->item_type ) ? $request->item_type  : '';
       $username='5s';
       $action=false;
 
@@ -365,6 +366,7 @@ class QuestionsController extends Controller
 
         $action=  QuestionsItemTbl::where('unid','=',$unid)->update([
                'item_refunid' => $item_refunid
+              ,'item_type'=> $item_type 
               ,'item_index'=> $item_index
               ,'item_toppic'=> $item_toppic
               ,'item_desc'=> $item_desc

@@ -101,9 +101,18 @@
                              <input class="form-control" type="text" id="item_toppic" name="item_toppic"value="" placeholder="หัวข้อการตรวจ" required>
                         </div>
                     </div>
+                    <div class="form-group">
+                      <label>เกณฑ์การให้คะแนน</label>
 
+                       <select  class="form-control" name="item_type" id="item_type" required>
+                          <option  value="">--เลือก--</option>
+                          <option  value="VALUE">คะแนน 0-5 </option>
+                          <option  value="TEXT">ข้อเสนอแนะ</option>
+
+                      </select>
+                  </div>
                <div class="form-group">
-                   <label >รายละเอีดยการตรวจ</label>
+                   <label >รายละเอีดยการตรวจ/ข้อเสนอแนะ</label>
                    <textarea id="item_desc" name="item_desc" class="form-control" rows="5" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
                </div>
 
@@ -185,6 +194,8 @@ $(".btn-edit").on('click',function (e){
            var res= data.data;
               $("#unid").val(res.unid);
               $("#item_refunid").val(res.item_refunid);
+              $("#item_type").val(res.item_type);
+
               $("#item_index").val(res.item_index);
               $("#item_toppic").val(res.item_toppic);
               $("#item_desc").html(res.item_desc);

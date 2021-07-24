@@ -10,7 +10,9 @@
               <ul class="side-menu metismenu">
 
                   <li>
-                      <a class="active" href="{{ route('check.index')}}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                      <a class="active" href="{{ route('check.index')}}">
+                        <i class="sidebar-item-icon fas fa-clipboard-check"></i>
+                       
                           <span class="nav-label">ตรวจประเมินพื้นที่</span>
                       </a>
                   </li>
