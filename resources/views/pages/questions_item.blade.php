@@ -105,7 +105,7 @@
                       <label>เกณฑ์การให้คะแนน</label>
 
                        <select  class="form-control" name="item_type" id="item_type" required>
-                          <option  value="">--เลือก--</option>
+                           
                           <option  value="VALUE">คะแนน 0-5 </option>
                           <option  value="TEXT">ข้อเสนอแนะ</option>
 
