@@ -108,7 +108,7 @@
        <div class="modal-content">
          <div class="modal-header bg-primary ">
            <h5 class="modal-title text-white" id="exampleModalLongTitle">แบบฟอร์มการตรวจพื้นที่ระบบ 5ส</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <button type="button" class="close pagereload" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
          </div>
@@ -138,7 +138,7 @@
                     <div class="row" id="areas" ></div>
 
                <div class="form-group">
-                  <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary pagereload " data-dismiss="modal">Close</button>
                    <button class="btn btn-primary " name="btn-save" id="btn-save"  type="submit">บันทึก</button>
                </div>
            </form>
@@ -291,7 +291,8 @@ $(".btn-edit").on('click',function (e){
                  }
           });
       });
-
-
+$(".pagereload").on('click',function (e){
+    location.reload();
+});
 </script>
 @endsection
