@@ -197,7 +197,7 @@ $(".btn-edit").on('click',function (e){
               $("#item_type").val(res.item_type);
 
               $("#item_index").val(res.item_index);
-              $("#item_toppic").val(res.item_toppic);
+              $("#item_toppic").val(decodeHtml(res.item_toppic));
               $("#item_desc").html(res.item_desc);
              if(res){
                $('#OpenFrmArea').modal('show');
@@ -253,5 +253,14 @@ $(".btn-edit").on('click',function (e){
       $(".pagereload").on('click',function (e){
           location.reload();
       });
+
+      function decodeHtml(text) {
+    return text
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/ , '<')
+        .replace(/&gt;/, '>')
+        .replace(/&quot;/g,'"')
+        .replace(/&#039;/g,"'");
+}
 </script>
 @endsection
