@@ -210,7 +210,7 @@ $(".btn-edit").on('click',function (e){
    $(".btn-newitem").on('click',function (e){
       $("#unid").val('');
       $("#item_index").val("{{ count($dtQuestionsItem)+1 }}");
-      $("#item_toppic").val("{{ Cookie::get('item_toppic') }}");
+      $("#item_toppic").val(decodeHtml("{{ Cookie::get('item_toppic') }}"));
       $("#item_desc").html('');
       $('#OpenFrmArea').modal('show');
   });
