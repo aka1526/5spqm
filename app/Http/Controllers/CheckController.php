@@ -379,6 +379,14 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
                    </td>
                </tr>';
       }elseif($row->result_type=='RANGE'){
+
+        $totalscroe=$totalscroe +$row->result_val;
+          if($result_toppic_next != $row->result_toppic){
+            $result_toppic_next = $row->result_toppic;
+            $result_toppic_befor= $row->result_toppic;
+          } else {
+            $result_toppic_befor='';
+          }
         if($result_toppic_befor!='') {
           $html .='<tr class="btn-info">
                  <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
