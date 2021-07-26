@@ -305,16 +305,30 @@ $html .=' </div>
         }
         $username='5s';
         $score=0;
+        $Totalscore=0;
+        $Totalitem=0;
         if($ans !=''){
-          $Score = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','!=','TEXT')->get();
+          $Score = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','!=','TEXT')orderby('result_index')->get();
+          $positions_type =$Score[0]->$positions_type
+
           foreach ($Score as $key => $val) {
+            $Totalitem++;
             $score = $score+$val->result_val ;
+          }
+
+          if($positions_type=='VALUE'){
+              $Totalscore= $Totalitem*5;
+          }
+          if($positions_type=='RANGE'){
+              $Totalscore= $Totalitem*10;
           }
 
         }
 
         SummaryResultTbl::where('ans_unid','=',$ans)->update([
           'area_score'=> $score
+          ,'total_item' => $Totalitem
+          ,'total_score' => $Totalscore
           ,'doc_status' => 'Y'
           ,'edit_by'=> $username
           ,'edit_time'=>Carbon::now()
