@@ -243,14 +243,20 @@ class QuestionsResultController extends Controller
 
 
   public function scoresave(Request $request){
-
+    dd($Result->result_type);
   $unid   =isset($request->unid) ? $request->unid : '' ;
-  $score  =isset($request->score)? $request->score : 0 ;
+  $score  =isset($request->score)? $request->score : '' ;
   $count  =QuestionsResultTbl::where('unid','=',$unid)->count();
   $action =false;
     if($count>0){
       $Result  =QuestionsResultTbl::where('unid','=',$unid)->first();
       if($Result->result_type =='VALUE'){
+        $action = QuestionsResultTbl::where('unid','=',$unid)->update([
+          'result_val' => $score,
+          'audit_check' => 'Y'
+        ]);
+      }
+      if($Result->result_type =='RANGE'){
         $action = QuestionsResultTbl::where('unid','=',$unid)->update([
           'result_val' => $score,
           'audit_check' => 'Y'
