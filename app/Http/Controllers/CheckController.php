@@ -506,6 +506,7 @@ if($datatype==2){
                           <div class="form-group">
                                     <label class="h4 m-0 text-danger mb-3 ">คะแนนตรวจประเมิน</label>';
                                     if($result_type=="VALUE"){
+
                                       if($audit_check=='Y'){
 
                                         $html .='  <div >

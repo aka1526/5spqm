@@ -53,10 +53,10 @@ class QuestionsResultController extends Controller
              $result_val  = $row->result_val;
              if( $row->result_index == $next){
                if($row->result_type=='VALUE'){
-             $html .='
-               <div class="row">
-                 <div class="col-md-12">
-                   <div class="ibox">
+                 $html .='
+                   <div class="row">
+                     <div class="col-md-12">
+                       <div class="ibox">
                            <div class="ibox-head">
                                <div class="ibox-title">หัวข้อตรวจ : '.$row->result_toppic.'</div>
                            </div>
@@ -94,51 +94,6 @@ class QuestionsResultController extends Controller
                                           </div>';
                                         }
 
-                                        if($result_type=="RANGE"){
-                                              if($audit_check=='Y'){
-                                                $html .='  <div >
-                                                <div class="form-group">
-                                                         <label></label>
-                                                         <select class="form-control" id="check_box" name="check_box" >
-                                                             <option value="">--คะแนน--</option>
-                                                             <option value="0" '. ( $result_val ==0 ? 'selected' : '' ).'>0 คะแนน</option>
-                                                             <option value="1" '. ( $result_val ==1 ? 'selected' : '' ).'>1 คะแนน</option>
-                                                             <option value="2" '. ( $result_val ==2 ? 'selected' : '' ).'>2 คะแนน</option>
-                                                             <option value="3" '. ( $result_val ==3 ? 'selected' : '' ).'>3 คะแนน</option>
-                                                             <option value="4" '. ( $result_val ==4 ? 'selected' : '' ).'>4 คะแนน</option>
-                                                             <option value="5" '. ( $result_val ==5 ? 'selected' : '' ).'>5 คะแนน</option>
-                                                             <option value="6" '. ( $result_val ==6 ? 'selected' : '' ).'>6 คะแนน</option>
-                                                             <option value="7" '. ( $result_val ==7 ? 'selected' : '' ).'>7 คะแนน</option>
-                                                             <option value="8" '. ( $result_val ==8 ? 'selected' : '' ).'>8 คะแนน</option>
-                                                             <option value="9" '. ( $result_val ==9 ? 'selected' : '' ).'>9 คะแนน</option>
-                                                             <option value="10" '. ( $result_val ==10 ? 'selected' : '' ).'>10 คะแนน</option>
-                                                         </select>
-                                                     </div>
-                                                  </div>';
-                                              } else {
-                                                $html .='  <div >
-                                                <div class="form-group">
-                                                         <label></label>
-                                                         <select class="form-control" onchange="saveResultrange(\''.$row->unid.'\')"  id="check_box" name="check_box" >
-                                                             <option value="">--คะแนน--</option>
-                                                             <option value="0" >0 คะแนน</option>
-                                                             <option value="1">1 คะแนน</option>
-                                                             <option value="2">2 คะแนน</option>
-                                                             <option value="3">3 คะแนน</option>
-                                                             <option value="4">4 คะแนน</option>
-                                                             <option value="5">5 คะแนน</option>
-                                                             <option value="6">6 คะแนน</option>
-                                                             <option value="7">7 คะแนน</option>
-                                                             <option value="8">8 คะแนน</option>
-                                                             <option value="9">9 คะแนน</option>
-                                                             <option value="10">10 คะแนน</option>
-                                                         </select>
-                                                     </div>
-                                                  </div>';
-                                              }
-
-                                        }
-
                                    $html .='</div>
                              </div>
                            </div>
@@ -158,7 +113,85 @@ class QuestionsResultController extends Controller
                </div>
                <p/>
              ';
-           }else {
+           } elseif($row->result_type=='RANGE') {
+             $html .='
+               <div class="row">
+                 <div class="col-md-12">
+                   <div class="ibox">
+                       <div class="ibox-head">
+                           <div class="ibox-title">หัวข้อตรวจ : '.$row->result_toppic.'</div>
+                       </div>
+                   <div class="ibox-body">
+                       <div class="row">
+                         <div class="col-md-8">
+                            <p> <strong> ข้อที่ '.$row->result_index.'. </strong> '.$row->result_desc.' </p>
+                         </div>
+                         <div class="col-md-4">
+                         <div class="form-group">
+                                    <label class="h4 m-0 text-danger mb-3 ">คะแนนตรวจประเมิน</label>';
+                   if($audit_check=='Y'){
+                     $html .='  <div >
+                     <div class="form-group">
+                              <label></label>
+                              <select class="form-control" id="check_box" name="check_box" >
+                                  <option value="">--คะแนน--</option>
+                                  <option value="0" '. ( $result_val ==0 ? 'selected' : '' ).'>0 คะแนน</option>
+                                  <option value="1" '. ( $result_val ==1 ? 'selected' : '' ).'>1 คะแนน</option>
+                                  <option value="2" '. ( $result_val ==2 ? 'selected' : '' ).'>2 คะแนน</option>
+                                  <option value="3" '. ( $result_val ==3 ? 'selected' : '' ).'>3 คะแนน</option>
+                                  <option value="4" '. ( $result_val ==4 ? 'selected' : '' ).'>4 คะแนน</option>
+                                  <option value="5" '. ( $result_val ==5 ? 'selected' : '' ).'>5 คะแนน</option>
+                                  <option value="6" '. ( $result_val ==6 ? 'selected' : '' ).'>6 คะแนน</option>
+                                  <option value="7" '. ( $result_val ==7 ? 'selected' : '' ).'>7 คะแนน</option>
+                                  <option value="8" '. ( $result_val ==8 ? 'selected' : '' ).'>8 คะแนน</option>
+                                  <option value="9" '. ( $result_val ==9 ? 'selected' : '' ).'>9 คะแนน</option>
+                                  <option value="10" '. ( $result_val ==10 ? 'selected' : '' ).'>10 คะแนน</option>
+                              </select>
+                          </div>
+                       </div>';
+                   } else {
+                           $html .='  <div >
+                           <div class="form-group">
+                                    <label></label>
+                                    <select class="form-control" onchange="saveResultrange(\''.$row->unid.'\')"  id="check_box" name="check_box" >
+                                        <option value="">--คะแนน--</option>
+                                        <option value="0" >0 คะแนน</option>
+                                        <option value="1">1 คะแนน</option>
+                                        <option value="2">2 คะแนน</option>
+                                        <option value="3">3 คะแนน</option>
+                                        <option value="4">4 คะแนน</option>
+                                        <option value="5">5 คะแนน</option>
+                                        <option value="6">6 คะแนน</option>
+                                        <option value="7">7 คะแนน</option>
+                                        <option value="8">8 คะแนน</option>
+                                        <option value="9">9 คะแนน</option>
+                                        <option value="10">10 คะแนน</option>
+                                    </select>
+                                </div>
+                             </div>';
+                         }
+
+                         $html .='</div>
+                   </div>
+                 </div>
+             </div>
+         </div>
+       </div>
+   </div>
+   <div class="container">
+       <div class="row">
+         <div class="col-md text-center">
+           <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowBack.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
+           <button class="btn btn-info" > '.$row->result_index.' / '.count($QuestionsResult).'  </button>
+           <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
+         </div>
+
+       </div>
+     </div>
+     <p/>
+   ';
+
+           } else   {
 
              $html .='
                 <div class="row">
@@ -200,18 +233,8 @@ class QuestionsResultController extends Controller
            }
 
          }
-             // if($TotalRow == ($RowCurrent-1)){
-             //   $html .='<div class="row">
-             //               <div  class="col-md-6">
-             //                 <div class="form-group row">
-             //                             <div class="col-sm-10 ml-sm-auto">
-             //                                 <button class="btn btn-info" type="submit">ส่งคะแนน '.$RowCurrent.$TotalRow.'</button>
-             //                             </div>
-             //                         </div>
-             //               </div>
-             //             </div>';
-             // }
-           }
+
+    }
 
 
     return response()->json(['result'=> true,'html'=> $html ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
