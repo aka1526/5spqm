@@ -275,8 +275,8 @@ function final(ans) {
                              text: data.data,
                              timer: 1300
                            }).then((result) => {
-
-                             location.href = "{{ route('check.index')}}";
+                             console.log(result);
+                             location.href =  result.url;
                            })
 
                  } else {

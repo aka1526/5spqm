@@ -335,7 +335,10 @@ $html .=' </div>
           ,'edit_time'=>Carbon::now()
         ]);
 
-          return response()->json(['result'=> true,'data'=> 'ส่งคะแนนสำเร็จ'],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+       $url="/check/get/". Cookie::get('DOC_PV').'/'.Cookie::get('DOC_YEAR').'/'.Cookie::get('DOC_MONTH') ;
+
+          return response()->json(['result'=> true,'data'=> 'ส่งคะแนนสำเร็จ','url'=> $url ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }
 
 
