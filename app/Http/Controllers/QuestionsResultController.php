@@ -182,13 +182,18 @@ class QuestionsResultController extends Controller
        <div class="row">
          <div class="col-md text-center">
            <button class="btn btn-warning btn-back '.($RowCurrent <=1 ? 'disabled' : '') .'"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-back="'.$RowBack.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowBack.'\')"> <i class="fa fa-step-backward"></i>กลับ</button>
-           <button class="btn btn-info" > '.$row->result_index.' / '.count($QuestionsResult).'  </button>
-           <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>
-         </div>
+            <button class="btn btn-info" >'.$row->result_index.' / '.count($QuestionsResult).'  </button>';
+            if($row->result_index ==count($QuestionsResult)) {
+                $html .=' <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="final(\''.$row->unid_ans.'\')"> ส่งคะแนน <i class="fas fa-sign-in-alt"></i></button>';
+            } else {
+                  $html .=' <button class="btn btn-primary btn-next"  data-ans="'.$row->unid_ans.'" data-current="'. $RowCurrent .'" data-next="'.$RowNext.'" onclick="getResult(\''.$row->unid_ans.'\',\''.$RowNext.'\')"> ถัดไป <i class="fa fa-step-forward"></i></button>';
+            }
 
+$html .=' </div>
        </div>
      </div>
      <p/>
+     
    ';
 
            } else   {
@@ -243,7 +248,7 @@ class QuestionsResultController extends Controller
 
 
   public function scoresave(Request $request){
-   
+
   $unid   =isset($request->unid) ? $request->unid : '' ;
   $score  =isset($request->score)? $request->score : '' ;
   $count  =QuestionsResultTbl::where('unid','=',$unid)->count();
