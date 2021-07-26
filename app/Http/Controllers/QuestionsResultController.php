@@ -94,6 +94,51 @@ class QuestionsResultController extends Controller
                                           </div>';
                                         }
 
+                                        if($result_type=="RANGE"){
+                                              if($audit_check=='Y'){
+                                                $html .='  <div >
+                                                <div class="form-group">
+                                                         <label></label>
+                                                         <select class="form-control" id="check_box" name="check_box" >
+                                                             <option value="">--คะแนน--</option>
+                                                             <option value="0" '. ( $result_val ==0 ? 'selected' : '' ).'>0 คะแนน</option>
+                                                             <option value="1" '. ( $result_val ==1 ? 'selected' : '' ).'>1 คะแนน</option>
+                                                             <option value="2" '. ( $result_val ==2 ? 'selected' : '' ).'>2 คะแนน</option>
+                                                             <option value="3" '. ( $result_val ==3 ? 'selected' : '' ).'>3 คะแนน</option>
+                                                             <option value="4" '. ( $result_val ==4 ? 'selected' : '' ).'>4 คะแนน</option>
+                                                             <option value="5" '. ( $result_val ==5 ? 'selected' : '' ).'>5 คะแนน</option>
+                                                             <option value="6" '. ( $result_val ==6 ? 'selected' : '' ).'>6 คะแนน</option>
+                                                             <option value="7" '. ( $result_val ==7 ? 'selected' : '' ).'>7 คะแนน</option>
+                                                             <option value="8" '. ( $result_val ==8 ? 'selected' : '' ).'>8 คะแนน</option>
+                                                             <option value="9" '. ( $result_val ==9 ? 'selected' : '' ).'>9 คะแนน</option>
+                                                             <option value="10" '. ( $result_val ==10 ? 'selected' : '' ).'>10 คะแนน</option>
+                                                         </select>
+                                                     </div>
+                                                  </div>';
+                                              } else {
+                                                $html .='  <div >
+                                                <div class="form-group">
+                                                         <label></label>
+                                                         <select class="form-control" onchange="saveResultrange(\''.$row->unid.'\')"  id="check_box" name="check_box" >
+                                                             <option value="">--คะแนน--</option>
+                                                             <option value="0" >0 คะแนน</option>
+                                                             <option value="1">1 คะแนน</option>
+                                                             <option value="2">2 คะแนน</option>
+                                                             <option value="3">3 คะแนน</option>
+                                                             <option value="4">4 คะแนน</option>
+                                                             <option value="5">5 คะแนน</option>
+                                                             <option value="6">6 คะแนน</option>
+                                                             <option value="7">7 คะแนน</option>
+                                                             <option value="8">8 คะแนน</option>
+                                                             <option value="9">9 คะแนน</option>
+                                                             <option value="10">10 คะแนน</option>
+                                                         </select>
+                                                     </div>
+                                                  </div>';
+                                              }
+
+                                        }
+
                                    $html .='</div>
                              </div>
                            </div>
