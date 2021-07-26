@@ -191,6 +191,9 @@ $(".btn-edit").on('click',function (e){
  //
  //
  //   });
+
+
+
   function getResult(ans,next) {
 
       var url    = "{{ route('result.getnext') }}";
@@ -221,6 +224,21 @@ var url="{{ route('result.scoresave')}}";
     });
 
 }
+
+
+ function saveResultrange(unid) {
+   var score= $("#check_box").val();
+   var url="{{ route('result.scoresave')}}";
+     $.ajax({
+               type: "POST",
+               url: url,
+               data:{unid:unid,score:score,"_token": "{{ csrf_token() }}"},
+               success: function(data)
+               {
+               //  console.log(data);
+               }
+       });
+ }
 
 function SaveComment(unid){
 

@@ -39,7 +39,7 @@
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
-                    <input class="form-control" type="password" name="user_password" id="user_password" placeholder="Password">
+                    <input class="form-control" type="password" name="user_password" id="user_password" placeholder="Password" autocomplete="off">
                 </div>
             </div>
             <div class="form-group d-flex justify-content-between">
