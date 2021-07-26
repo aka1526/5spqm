@@ -336,7 +336,7 @@ $html .=' </div>
         ]);
 
 
-       $url="/check/get/". Cookie::get('DOC_PV').'/'.Cookie::get('DOC_YEAR').'/'.Cookie::get('DOC_MONTH') ;
+       $url="check/get/". Cookie::get('DOC_PV').'/'.Cookie::get('DOC_YEAR').'/'.Cookie::get('DOC_MONTH') ;
 
           return response()->json(['result'=> true,'data'=> 'ส่งคะแนนสำเร็จ','url'=> $url ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }

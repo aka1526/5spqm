@@ -276,7 +276,7 @@ function final(ans) {
                              timer: 1300
                            }).then((result) => {
                              console.log(result);
-                             location.href =  result.url;
+                             location.href = result.url;
                            })
 
                  } else {
