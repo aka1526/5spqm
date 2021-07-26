@@ -193,7 +193,7 @@ $html .=' </div>
        </div>
      </div>
      <p/>
-     
+
    ';
 
            } else   {
@@ -306,7 +306,7 @@ $html .=' </div>
         $username='5s';
         $score=0;
         if($ans !=''){
-          $Score = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','=','VALUE')->get();
+          $Score = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','!=','TEXT')->get();
           foreach ($Score as $key => $val) {
             $score = $score+$val->result_val ;
           }
