@@ -309,7 +309,7 @@ $html .=' </div>
         $Totalitem=0;
         if($ans !=''){
           $Score = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','!=','TEXT')orderby('result_index')->get();
-          $positions_type =$Score[0]->$positions_type
+          $positions_type =$Score[0]->$positions_type;
 
           foreach ($Score as $key => $val) {
             $Totalitem++;
