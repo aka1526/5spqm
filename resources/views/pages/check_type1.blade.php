@@ -275,8 +275,8 @@ function final(ans) {
                              text: data.data,
                              timer: 1300
                            }).then((result) => {
-                             console.log(result);
-                             location.href = result.url;
+
+                             location.href = "/check/get/TOP/2021/8";
                            })
 
                  } else {
