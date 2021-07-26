@@ -53,7 +53,17 @@
                                         <td>{{ $row->item_toppic }}</td>
                                         <td class="text-center">{{ $row->item_index }}</td>
                                         <td>{{ $row->item_desc }}</td>
-                                        <td>{{ $row->item_type }}</td>
+
+                                        <td>
+                                            @if($row->item_type=='VALUE')
+                                             คะแนน 0-5
+                                            @elseif($row->item_type=='RANGE')
+                                            คะแนน 0-10
+                                            @els
+                                            ข้อเสนอแนะ
+                                            @endif
+                                          {{ $row->item_type }}
+                                        </td>
 
                                         <td>
                                           <button class="btn btn btn-primary btn-xs m-r-5 btn-edit" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="Edit" ><i class="fas fa-pencil-alt font-14"></i></button>
