@@ -58,11 +58,11 @@
                                             @if($row->item_type=='VALUE')
                                              คะแนน 0-5
                                             @elseif($row->item_type=='RANGE')
-                                            คะแนน 0-10
-                                            @els
-                                            ข้อเสนอแนะ
+                                              คะแนน 0-10
+                                            @else
+                                              ข้อเสนอแนะ
                                             @endif
-                                          {{ $row->item_type }}
+
                                         </td>
 
                                         <td>
