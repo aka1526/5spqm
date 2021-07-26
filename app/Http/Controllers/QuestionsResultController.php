@@ -243,7 +243,7 @@ class QuestionsResultController extends Controller
 
 
   public function scoresave(Request $request){
-    dd($Result->result_type);
+   
   $unid   =isset($request->unid) ? $request->unid : '' ;
   $score  =isset($request->score)? $request->score : '' ;
   $count  =QuestionsResultTbl::where('unid','=',$unid)->count();
