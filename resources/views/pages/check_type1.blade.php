@@ -276,7 +276,7 @@ function final(ans) {
                              timer: 1300
                            }).then((result) => {
 
-                             location.href = "/check/get/TOP/2021/8";
+                             location.href = "/check/get/{{ Cookie::get('DOC_PV')}}/{{ Cookie::get('DOC_YEAR')}}/{{ Cookie::get('DOC_MONTH')}}";
                            })
 
                  } else {
