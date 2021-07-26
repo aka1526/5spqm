@@ -299,65 +299,6 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
             ]);
       }
 
-      ///
-      /*
-      $rowTotal =$rowTotal+1;
-      QuestionsResultTbl::insert([
-        'unid' =>  $this->genUnid()
-        ,'plan_unid' => $Plan->unid
-        ,'plan_date' => $Plan->plan_date
-        ,'plan_year' => $Plan->plan_year
-        ,'plan_month' => $Plan->plan_month
-        ,'ques_unid' => $Questions->unid
-        ,'ques_rev' => $Questions->ques_rev
-        ,'ques_header' => $Questions->ques_header
-        ,'positions_type' => $pv
-        ,'position_name' => $Positions->position_name
-        ,'area_unid' =>$Area->unid
-        ,'area_name' =>$Area->area_name
-        ,'area_owner' =>$Area->area_owner
-        ,'result_index' => $rowTotal
-        ,'result_toppic' => 'สิ่งที่ควรปรับปรุง'
-        ,'result_desc' => ""
-        ,'result_val' => 0
-        ,'status'=>"Y"
-        ,'result_type' => "TEXT"
-        ,'create_by'=> $username
-        ,'create_time'=>Carbon::now()
-        ,'edit_by'=> $username
-        ,'edit_time'=>Carbon::now()
-          ,'unid_ans' => $unid_ans
-      ]);
-
-      $rowTotal =$rowTotal+1;
-      QuestionsResultTbl::insert([
-        'unid' =>  $this->genUnid()
-        ,'plan_unid' => $Plan->unid
-        ,'plan_date' => $Plan->plan_date
-        ,'plan_year' => $Plan->plan_year
-        ,'plan_month' => $Plan->plan_month
-        ,'ques_unid' => $Questions->unid
-        ,'ques_rev' => $Questions->ques_rev
-        ,'ques_header' => $Questions->ques_header
-        ,'positions_type' => $pv
-        ,'position_name' => $Positions->position_name
-        ,'area_unid' => $Area->unid
-        ,'area_name' =>$Area->area_name
-        ,'area_owner' =>$Area->area_owner
-        ,'result_index' => $rowTotal
-        ,'result_toppic' => 'สิ่งที่ดี เป็นตัวอย่างได้'
-        ,'result_desc' => ""
-        ,'result_val' => 0
-        ,'status'=>"Y"
-        ,'result_type' => "TEXT"
-        ,'create_by'=> $username
-        ,'create_time'=> Carbon::now()
-        ,'edit_by'=> $username
-        ,'edit_time'=>Carbon::now()
-        ,'unid_ans' => $unid_ans
-      ]);
-      */
-
 
     $countItem = QuestionsResultTbl::where('unid_ans','=',$unid_ans)->where('result_type','=','VALUE')->count();
     SummaryResultTbl::insert([
@@ -398,13 +339,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
   $result_toppic_next='';
 
 
-// $agent->isDesktop();
-// $agent->isMobile();
-// $agent->isTablet();
-//
-//
-
-  if($datatype==1){
+  if($datatype==1){ // ส่งคะแนนทำแบบประเมินแล้ว
 
 
   $html .='
@@ -443,8 +378,27 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
                      </div>
                    </td>
                </tr>';
+      }elseif($row->result_type=='RANGE'){
+        if($result_toppic_befor!='') {
+          $html .='<tr class="btn-info">
+                 <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
+                 <td class="text-center" width="120px">ระดับคะแนน</td>
 
-           } else {
+             </tr>';
+        }
+            $html .='<tr>
+
+                   <td class="text-center"><strong>'.$row->result_index.'</strong></td>
+                   <td>'.$row->result_desc.'</td>
+
+                   <td class="text-center" data-toggle="tooltip" data-original-title="ระดับคะแนน">
+                     <div>
+                        <span class="h4 m-0">  '.$row->result_val.'</span>
+                     </div>
+                   </td>
+               </tr>';
+
+      } else {
 
              $html .='<tr class="btn-warning"><td colspan="6"><strong> '.$row->result_toppic.'</strong></td></tr>';
 
