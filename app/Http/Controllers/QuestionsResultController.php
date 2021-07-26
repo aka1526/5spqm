@@ -309,18 +309,19 @@ $html .=' </div>
         $Totalitem=0;
         if($ans !=''){
           $Score = QuestionsResultTbl::where('unid_ans','=',$ans)->where('result_type','!=','TEXT')->orderby('result_index')->get();
-          $positions_type =$Score[0]->positions_type;
+
 
           foreach ($Score as $key => $val) {
-            $Totalitem++;
+            $Totalitem = $Totalitem+1;
             $score = $score+$val->result_val ;
           }
 
-          if($positions_type=='VALUE'){
-              $Totalscore= $Totalitem*5;
-          }
-          if($positions_type=='RANGE'){
-              $Totalscore= $Totalitem*10;
+         $positions_type =$Score[0]->positions_type;
+
+          if($positions_type=='COMMIT'){
+              $Totalscore= (int)$Totalitem*5;
+          }elseif($positions_type=='TOP'){
+              $Totalscore= (int)$Totalitem*10;
           }
 
         }
