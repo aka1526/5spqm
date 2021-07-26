@@ -107,6 +107,7 @@
                        <select  class="form-control" name="item_type" id="item_type" required>
 
                           <option  value="VALUE">คะแนน 0-5 </option>
+                          <option  value="RANGE">คะแนน 0-10 </option>
                           <option  value="TEXT">ข้อเสนอแนะ</option>
 
                       </select>
