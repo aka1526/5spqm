@@ -57,7 +57,7 @@
                                           @endif
                                         <td>{{ $row->plan_area_owner }}</td>
                                         <td class="text-center h4 m-0">
-                                          <button class="btn btn-info btn-rounded">  {{ $row->area_score > 0 ?  $row->total_score : '0' }}</button>
+                                          <button class="btn btn-info btn-rounded">  {{ $row->total_score > 0 ?  $row->total_score : '0' }}</button>
                                         </td>
                                         <td class="text-center h4 m-0">
                                           <button class="btn btn-success  btn-rounded">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</button>
