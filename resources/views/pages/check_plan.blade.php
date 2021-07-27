@@ -39,7 +39,7 @@
                                                 <th  class="text-center">กลุ่ม</th>
                                                 @endif
                                             <th class="text-center d-none d-md-block">หัวหน้าพื้นที่</th>
-                                            <th class="text-center">คะแนนเต็ม</th>
+                                            <th class="text-center d-none d-md-block">คะแนนเต็ม</th>
                                             <th class="text-center">คะแนนที่ได้</th>
                                             <th>ประเมิน</th>
                                             <th>ลบ</th>
@@ -55,7 +55,7 @@
                                          <td  class="text-center"> <button class="btn btn-primary btn-circle   btn-sm"> {{ $row->plan_groups }}</button> </td>
                                           @endif
                                         <td class=" d-none d-md-block"><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
-                                        <td class="text-center h4 m-0">
+                                        <td class="text-center h4 m-0 d-none d-md-block">
                                           <button class="btn btn-info btn-rounded btn-sm">  {{ $row->total_score > 0 ?  $row->total_score : '0' }}</button>
                                         </td>
                                         <td class="text-center h4 m-0">
