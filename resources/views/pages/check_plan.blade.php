@@ -40,7 +40,7 @@
                                                 @endif
                                             <th class="text-center">หัวหน้าพื้นที่</th>
                                             <th class="text-center">คะแนนเต็ม</th>
-                                            <th class="text-center">ผลคะแนน</th>
+                                            <th class="text-center">คะแนนที่ได้</th>
 
                                             <th>Action</th>
                                         </tr>
