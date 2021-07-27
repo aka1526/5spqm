@@ -89,7 +89,7 @@
                                     </td>
                                     <td>
 
-                                      @if($row->area_score > 0)
+                                      @if($row->total_score > 0)
                                             <button type=submit class="btn btn btn-danger   m-r-5 btn-delete "
                                             style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ลบผลตรวจ" >
                                            <i class="fas fa-trash-alt"></i> ลบผลตรวจ</button>
