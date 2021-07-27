@@ -63,7 +63,7 @@ class QuestionsResultController extends Controller
                        <div class="ibox-body">
                            <div class="row">
                              <div class="col-md-8">
-                                <p> <strong> ข้อที่ '.$row->result_index.'. </strong> '.$row->result_desc.' </p>
+                                <p> '.$row->result_desc.' </p>
                              </div>
                              <div class="col-md-4">
                              <div class="form-group">
