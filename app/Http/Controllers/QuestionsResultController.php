@@ -341,5 +341,21 @@ $html .=' </div>
           return response()->json(['result'=> true,'data'=> 'ส่งคะแนนสำเร็จ','url'=> $url ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }
 
+    public function delete(Request $request){
+     
+      $unid   =isset($request->unid ) ? $request->unid  : '' ;
+      if($unid !=''){
+        DB::beginTransaction();
+        try {
+           QuestionsResultTbl::where('plan_unid','=',$unid)->delete();
+           SummaryResultTbl::where('plan_unid','=',$unid)->delete();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => $ex->getMessage()], 500);
+        }
+      }
+      return response()->json(['result'=> 'success','msg'=>'ลบข้อมูลสำเสร็จ'],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
+    }
 }

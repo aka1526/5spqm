@@ -80,6 +80,19 @@
 
 
                                     </td>
+                                    <td>
+
+                                      @if($row->area_score > 0)
+                                            <button type=submit class="btn btn btn-danger   m-r-5 btn-delete "
+                                            style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ลบผลตรวจ" >
+                                           <i class="fas fa-trash-alt"></i> ลบผลตรวจ</button>
+                                      @else
+                                            <button type=submit class="btn btn btn-default    m-r-5 btn-delete " disabled >
+                                            <i class="fas fa-trash-alt"></i> ลบผลตรวจ</button>
+                                      @endif
+
+                                    </td>
+
 
                                     </tr>
                                      @endforeach
@@ -151,9 +164,10 @@
 $(".btn-delete").on('click',function (e){
 
     var unid =$(this).data('unid');
-    var url = "{{ route('area.delete')}}";
+    var url = "{{ route('result.delete')}}";
+
         Swal.fire({
-            title: 'คุณต้องการลบข้อมูล?',
+            title: 'คุณต้องการลบผลการตรวจประเมิน?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

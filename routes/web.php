@@ -105,6 +105,7 @@ Route::post('/result/getback', [QuestionsResultController::class,'getback'])->na
 Route::post('/result/score', [QuestionsResultController::class,'scoresave'])->name('result.scoresave');
 Route::post('/result/commentsave', [QuestionsResultController::class,'commentsave'])->name('result.commentsave');
 Route::post('/result/final', [QuestionsResultController::class,'final'])->name('result.final');
+Route::post('/result/delete', [QuestionsResultController::class,'delete'])->name('result.delete');
 
 Route::get('/user',            [UserController::class,'index'])->name('user.index');
 Route::get('/user/get',        [UserController::class,'get'])->name('user.get');
