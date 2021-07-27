@@ -55,7 +55,7 @@
                                          @if($pv !='SELF')
                                        <td  class="text-center"> <button class="btn btn-primary btn-circle"> {{ $row->plan_groups }}</button> </td>
                                           @endif
-                                        <td>{{ $row->plan_area_owner }}</td>
+                                        <td><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
                                         <td class="text-center h4 m-0">
                                           <button class="btn btn-info btn-rounded">  {{ $row->total_score > 0 ?  $row->total_score : '0' }}</button>
                                         </td>
