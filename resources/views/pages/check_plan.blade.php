@@ -52,14 +52,14 @@
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
-                                       <td  class="text-center"> <button class="btn btn-primary btn-circle"> {{ $row->plan_groups }}</button> </td>
+                                       <td  class="text-center"> <button class="btn btn-primary btn-circle   btn-sm"> {{ $row->plan_groups }}</button> </td>
                                           @endif
                                         <td><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
                                         <td class="text-center h4 m-0">
-                                          <button class="btn btn-info btn-rounded">  {{ $row->total_score > 0 ?  $row->total_score : '0' }}</button>
+                                          <button class="btn btn-info btn-rounded btn-sm">  {{ $row->total_score > 0 ?  $row->total_score : '0' }}</button>
                                         </td>
                                         <td class="text-center h4 m-0">
-                                          <button class="btn btn-success  btn-rounded">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</button>
+                                          <button class="btn btn-success  btn-rounded btn-sm">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</button>
                                         </td>
                                       <td>
                                         @if($row->doc_status !='Y')
