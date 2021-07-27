@@ -399,6 +399,15 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
                </tr>';
       }elseif($row->result_type=='RANGE'){
 
+        if($totalscroe ==0) {
+          $html .='<tr class="btn-info">
+                 <td width="20px"><strong> ลำดับ</strong></td>
+                 <td ><strong> หัวข้อตรวจประเมิน</strong></td>
+                 <td class="text-center" width="120px">ระดับคะแนน</td>
+
+             </tr>';
+        }
+
         $totalscroe=$totalscroe +$row->result_val;
           if($result_toppic_next != $row->result_toppic){
             $result_toppic_next = $row->result_toppic;
@@ -406,13 +415,7 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
           } else {
             $result_toppic_befor='';
           }
-        if($result_toppic_befor!='') {
-          $html .='<tr class="btn-info">
-                 <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
-                 <td class="text-center" width="120px">ระดับคะแนน</td>
 
-             </tr>';
-        }
             $html .='<tr>
 
                    <td class="text-center"><strong>'.$row->result_index.'</strong></td>
@@ -426,6 +429,21 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
                </tr>';
 
       } else {
+
+            $totalscroe=$totalscroe +$row->result_val;
+              if($result_toppic_next != $row->result_toppic){
+                $result_toppic_next = $row->result_toppic;
+                $result_toppic_befor= $row->result_toppic;
+              } else {
+                $result_toppic_befor='';
+              }
+            if($result_toppic_befor!='') {
+              $html .='<tr class="btn-info">
+                     <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
+                     <td class="text-center" width="120px">ระดับคะแนน</td>
+
+                 </tr>';
+            }
 
              $html .='<tr class="btn-warning"><td colspan="6"><strong> '.$row->result_toppic.'</strong></td></tr>';
 
