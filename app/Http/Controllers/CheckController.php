@@ -255,15 +255,17 @@ class CheckController extends Controller
 
   $QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
 
-  $CountResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
-            ->where('positions_type','=',$pv)
-            ->where('area_unid','=',$area_unid)->count();
+
 
 $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
 
 $Positions =AuditpositionTbl::where('position_name_eng','=',$pv)->first();
 $Area =AreaTbl::where('unid','=',$area_unid)->first();
 $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
+
+$CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
+          ->where('positions_type','=',$pv)
+          ->where('area_unid','=',$area_unid)->count();
 
   if($CountResult==0){
 
@@ -299,9 +301,10 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
             ]);
       }
+
       $Totalitem=0;
       $Totalscore=0;
-      $Score = QuestionsResultTbl::where('unid_ans','=',$unid_ans)->where('result_type','!=','TEXT')->orderby('result_index')->get();
+      $Score = QuestionsResultTbl::where('plan_unid','=',$Plan->unid)->where('result_type','!=','TEXT')->get();
       foreach ($Score as $key => $val) {
         $Totalitem = $Totalitem+1;
       }
@@ -310,11 +313,11 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
           $Totalscore= (int)$Totalitem*5;
       }elseif($pv=='SELF'){
           $Totalscore= (int)$Totalitem*5;
-        }elseif($pv=='TOP'){
+      }elseif($pv=='TOP'){
             $Totalscore= (int)$Totalitem*10;
-        }
+      }
 
-
+      //dd($pv,$Totalscore);
 
     SummaryResultTbl::insert([
       'unid' => $this->genUnid()
@@ -327,7 +330,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
       ,'questions_unid' => $Questions->unid
       ,'questions_rev' => $Questions->ques_rev
       ,'questions_header' => $Questions->ques_header
-      ,'total_item' =>$Totalitem
+      ,'total_item' => $Totalitem
       ,'total_score' =>  $Totalscore
       ,'area_score' => 0
       ,'audit_date' =>  Carbon::now()
@@ -347,7 +350,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
       ]);
 }
 
-  $QuestionsResult=  QuestionsResultTbl::where('ques_unid','=',$ques_unid)
+  $QuestionsResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
             ->where('positions_type','=',$pv)
             ->where('area_unid','=',$area_unid)->orderBy('result_index')->get();
   $html ='';
