@@ -43,6 +43,7 @@
                                             <th class="text-center">คะแนนที่ได้</th>
 
                                             <th>Action</th>
+                                            <th>ลบผลตรวจ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
