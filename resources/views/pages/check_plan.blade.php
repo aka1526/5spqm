@@ -39,7 +39,8 @@
                                                 <th  class="text-center">กลุ่ม</th>
                                                 @endif
                                             <th class="text-center">หัวหน้าพื้นที่</th>
-                                            <th class="text-center">ระดับคะแนน</th>
+                                            <th class="text-center">คะแนนเต็ม</th>
+                                            <th class="text-center">ผลคะแนน</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -51,10 +52,15 @@
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
-                                       <td  class="text-center">{{ $row->plan_groups }}</td>
+                                       <td  class="text-center"> <button class="btn btn-primary btn-circle"> {{ $row->plan_groups }}</button> </td>
                                           @endif
                                         <td>{{ $row->plan_area_owner }}</td>
-                                        <td class="text-center h4 m-0">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</td>
+                                        <td class="text-center h4 m-0">
+                                          <button class="btn btn-info btn-rounded">  {{ $row->area_score > 0 ?  $row->total_score : '0' }}</button>
+                                        </td>
+                                        <td class="text-center h4 m-0">
+                                          <button class="btn btn-success  btn-rounded">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</button>
+                                        </td>
                                       <td>
                                         @if($row->doc_status !='Y')
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
