@@ -41,9 +41,8 @@
                                             <th class="text-center">หัวหน้าพื้นที่</th>
                                             <th class="text-center">คะแนนเต็ม</th>
                                             <th class="text-center">คะแนนที่ได้</th>
-
-                                            <th>Action</th>
-                                            <th>ลบผลตรวจ</th>
+                                            <th>ประเมิน</th>
+                                            <th>ลบ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
