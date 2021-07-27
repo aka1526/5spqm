@@ -38,8 +38,8 @@
                                                @if($pv !='SELF')
                                                 <th  class="text-center">กลุ่ม</th>
                                                 @endif
-                                            <th class="text-center d-none d-md-block">หัวหน้าพื้นที่</th>
-                                            <th class="text-center d-none d-md-block">คะแนนเต็ม</th>
+                                            <th class="text-center ">หัวหน้าพื้นที่</th>
+                                            <th class="text-center">คะแนนเต็ม</th>
                                             <th class="text-center">คะแนนที่ได้</th>
                                             <th>ประเมิน</th>
                                             <th>ลบ</th>
@@ -48,14 +48,14 @@
                                     <tbody>
                                     @foreach ($dtPlan as $key => $row)
                                     <tr>
-                                        <td class="text-center "> {{ date("d", strtotime($row->plan_date)) }}</td>
+                                        <td class="text-center"> {{ date("d", strtotime($row->plan_date)) }}</td>
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
-                                         <td  class="text-center"> <button class="btn btn-primary btn-circle   btn-sm"> {{ $row->plan_groups }}</button> </td>
+                                       <td  class="text-center"> <button class="btn btn-primary btn-circle   btn-sm"> {{ $row->plan_groups }}</button> </td>
                                           @endif
-                                        <td class=" d-none d-md-block"><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
-                                        <td class="text-center h4 m-0 d-none d-md-block">
+                                        <td><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
+                                        <td class="text-center h4 m-0">
                                           <button class="btn btn-info btn-rounded btn-sm">  {{ $row->total_score > 0 ?  $row->total_score : '0' }}</button>
                                         </td>
                                         <td class="text-center h4 m-0">
