@@ -69,9 +69,9 @@
                                               <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
                                               <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
 
-                                          <button type=submit class="btn btn btn-primary   m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
+                                          <button type=submit class="btn btn btn-primary   btn-sm   m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                          <i class="fas fa-balance-scale font-14 btn-check"></i> ตรวจประเมินพื้นที่ </button>
+                                          <i class="fas fa-balance-scale font-14 btn-check"></i> ตรวจ</button>
                                           </form>
                                         @else
                                           <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
@@ -79,9 +79,9 @@
                                               <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
                                               <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
 
-                                          <button type=submit class="btn btn btn-warning   m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="คะแนนตรวจประเมิน" >
+                                          <button type=submit class="btn btn btn-warning   btn-sm  m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="คะแนนตรวจประเมิน" >
 
-                                            <i class="fas fa-thumbs-up"></i> คะแนนตรวจประเมิน</button>
+                                            <i class="fas fa-thumbs-up"></i> คะแนน</button>
                                           </form>
                                         @endif
 
@@ -90,12 +90,12 @@
                                     <td>
 
                                       @if($row->total_score > 0)
-                                            <button type=submit class="btn btn btn-danger   m-r-5 btn-delete "
+                                            <button type=submit class="btn btn btn-danger    btn-sm m-r-5 btn-delete "
                                             style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ลบผลตรวจ" >
-                                           <i class="fas fa-trash-alt"></i> ลบผลตรวจ</button>
+                                           <i class="fas fa-trash-alt"></i> ลบ</button>
                                       @else
-                                            <button type=submit class="btn btn btn-default    m-r-5 btn-delete " disabled >
-                                            <i class="fas fa-trash-alt"></i> ลบผลตรวจ</button>
+                                            <button type=submit class="btn btn btn-default  btn-sm  m-r-5 btn-delete " disabled >
+                                            <i class="fas fa-trash-alt"></i> ลบ</button>
                                       @endif
 
                                     </td>
