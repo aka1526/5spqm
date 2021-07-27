@@ -296,11 +296,26 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
               ,'edit_by'=> $username
               ,'edit_time'=>Carbon::now()
               ,'unid_ans' => $unid_ans
+
             ]);
       }
+      $Totalitem=0;
+      $Totalscore=0;
+      $Score = QuestionsResultTbl::where('unid_ans','=',$unid_ans)->where('result_type','!=','TEXT')->orderby('result_index')->get();
+      foreach ($Score as $key => $val) {
+        $Totalitem = $Totalitem+1;
+      }
+
+      if($pv=='COMMIT'){
+          $Totalscore= (int)$Totalitem*5;
+      }elseif($pv=='SELF'){
+          $Totalscore= (int)$Totalitem*5;
+        }elseif($pv=='TOP'){
+            $Totalscore= (int)$Totalitem*10;
+        }
 
 
-    $countItem = QuestionsResultTbl::where('unid_ans','=',$unid_ans)->where('result_type','=','VALUE')->count();
+
     SummaryResultTbl::insert([
       'unid' => $this->genUnid()
       ,'plan_date' => Carbon::now()->format('Y-m-d')
@@ -312,8 +327,8 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
       ,'questions_unid' => $Questions->unid
       ,'questions_rev' => $Questions->ques_rev
       ,'questions_header' => $Questions->ques_header
-      ,'total_item' => $countItem
-      ,'total_score' => ($countItem*5)
+      ,'total_item' =>$Totalitem
+      ,'total_score' =>  $Totalscore
       ,'area_score' => 0
       ,'audit_date' =>  Carbon::now()
       ,'area_unid' => $Area->unid
@@ -328,6 +343,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
       ,'edit_by' =>$username
       ,'edit_time' => Carbon::now()
       ,'ans_unid' => $unid_ans
+
       ]);
 }
 

@@ -323,13 +323,12 @@ $html .=' </div>
           }elseif($positions_type=='TOP'){
               $Totalscore= (int)$Totalitem*10;
           }
-
         }
 
         SummaryResultTbl::where('ans_unid','=',$ans)->update([
           'area_score'=> $score
-          ,'total_item' => $Totalitem
-          ,'total_score' => $Totalscore
+        //  ,'total_item' => $Totalitem
+        //  ,'total_score' => $Totalscore
           ,'doc_status' => 'Y'
           ,'edit_by'=> $username
           ,'edit_time'=>Carbon::now()
@@ -342,7 +341,7 @@ $html .=' </div>
   }
 
     public function delete(Request $request){
-     
+
       $unid   =isset($request->unid ) ? $request->unid  : '' ;
       if($unid !=''){
         DB::beginTransaction();
