@@ -428,7 +428,7 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
              $html .=' <tr>
                          <td colspan="5">
-                              <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'" disabled >'.$row->audit_comment.'</textarea>
+                              <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'" disabled >'.trim($row->audit_comment).'</textarea>
 
                           </td>
                       </tr> ';

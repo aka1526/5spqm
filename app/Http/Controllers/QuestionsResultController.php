@@ -211,8 +211,7 @@ $html .=' </div>
                            <label><h5 class="m-t-20 m-b-20">'.$row->result_toppic.'</h5> </label>
                              <input type="hidden" name="unid" id="unid" value="'.$row->unid.'" >
                            <textarea class="form-control"  id="audit_comment" name="audit_comment"
-                              data-unid="'.$row->unid.'" rows="3" onchange="SaveComment(\''.$row->unid.'\')" placeholder="'.$row->result_toppic.'">'.$row->audit_comment.'
-                            </textarea>
+                              data-unid="'.$row->unid.'" rows="3" onchange="SaveComment(\''.$row->unid.'\')" placeholder="'.$row->result_toppic.'">'.trim($row->audit_comment).'</textarea>
                           </div>
                       </div>
                     </div>
