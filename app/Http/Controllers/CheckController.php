@@ -110,7 +110,7 @@ class CheckController extends Controller
     }
 
   public function get(Request $request,$pv=null,$year=null,$moth=null){
-
+     //dd($request,$pv,$year,$moth);
       $unid= isset($request->unid) ? $request->unid :'';
       $dataArea =AreaTbl::where('unid','!=',$unid)->get();
 
@@ -119,7 +119,7 @@ class CheckController extends Controller
       $area_unid = Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
 
       $position_type =$pv;
-      Cookie::queue('DOC_MONTH',$moth);
+       Cookie::queue('DOC_MONTH',$moth);
        $AUDITOR_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID') : '';
 
        if($AUDITOR_UNID !=''){
@@ -133,9 +133,9 @@ class CheckController extends Controller
               $plan_area_unid[] = $row->area_unid;
                $auditor_group= $row->auditor_group;
 
-
        }
-
+    //   dd($auditor_group);
+  //  dd($position_type);
       $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
          ->where(function($query) use ($plan_area_unid) {
                         if ($plan_area_unid != '') {
@@ -145,7 +145,13 @@ class CheckController extends Controller
 
       ->where('plan_year','=',$year)
       ->where('plan_month','=',$moth)
-      ->where('plan_groups','=',$auditor_group)
+      //->where('plan_groups','=',$auditor_group)
+      ->where(function($query) use ($auditor_group,$position_type ) {
+                     if ($position_type != 'SELF' && $auditor_group !='') {
+                         return $query->where('plan_groups', $auditor_group);
+                     }
+                 })
+
       ->orderBy('plan_date')->orderBy('plan_area_index')->get();
 
       $dtSummaryResult =SummaryResultTbl::where('plan_year','=',$year)
