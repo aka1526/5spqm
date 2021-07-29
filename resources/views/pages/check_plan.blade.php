@@ -68,9 +68,9 @@
                                           @endif
                                         <td><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
                                         <td class="text-center h4 m-0">
-                                         
+
                                           @if(isset($Totalscores[$row->unid]))
-                                           <button class="btn btn-info  btn-rounded btn-sm"> {{ $scores[$row->unid] }}</button>
+                                           <button class="btn btn-info  btn-rounded btn-sm"> {{ $Totalscores[$row->unid] }}</button>
                                            @else
                                                <button class="btn btn-info btn-rounded btn-sm"> 0</button>
                                            @endif
