@@ -5,7 +5,15 @@
                       <img src="/assets/img/admin-avatar.png" width="45px" />
                   </div>
                   <div class="admin-info">
-                      <div class="font-strong">Admin</div><small>Administrator</small></div>
+                        @if(Cookie::get('USER_LEVEL') !='')
+                          <div class="font-strong"> {{ Cookie::get('USER_NAME') }}</div>
+                          <small> {{ Cookie::get('USER_LEVEL') }}</small>
+                        @else
+                          <div class="font-strong">ผู้เยี่ยมชม</div>
+                          <small>-</small>
+                        @endif
+
+                  </div>
               </div>
               <ul class="side-menu metismenu">
 
