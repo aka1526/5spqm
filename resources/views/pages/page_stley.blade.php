@@ -58,14 +58,26 @@
                 <!-- START TOP-RIGHT TOOLBAR-->
                 <ul class="nav navbar-toolbar">
 
-                    <li class="dropdown dropdown-user">
-                        <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img src="/assets/img/admin-avatar.png" />
-                         </a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                           <a class="dropdown-item" href="/logout"><i class="fa fa-power-off"></i>Logout</a>
+                  <li class="dropdown dropdown-user">
+                        <a class="nav-link dropdown-toggle link" data-toggle="dropdown" aria-expanded="true">
+                            <img src="/assets/img/admin-avatar.png">
+                            <span></span>{{  Cookie::get('USER_NAME') !='' ? Cookie::get('USER_NAME') : 'ผู้เยี่ยมชม' }}<i class="fa fa-angle-down m-l-5"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right " x-placement="bottom-end"
+                         style="position: absolute; transform: translate3d(-14px, 30px, 0px); top: 0px; left: 0px; will-change: transform;">
+
+                            @if(Cookie::get('USER_UNID'))
+                            <a class="dropdown-item" href="{{ route('user.profile')}}"><i class="fa fa-user"></i>Profile</a>
+                            <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Password</a>
+                            <li class="dropdown-divider"></li>
+                              <a class="dropdown-item" href="/logout"><i class="fa fa-power-off"></i>Logout</a>
+                            @else
+                              <a class="dropdown-item" href="/check"><i class="fas fa-key"></i>Login</a>
+                            @endif
+
                         </ul>
                     </li>
+
+
                 </ul>
                 <!-- END TOP-RIGHT TOOLBAR-->
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\PlanController;
@@ -21,7 +22,10 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('pages.check_index');
+    //return view('pages.check_index');
+    $year=date('Y');
+    $month=date('n');
+    return redirect('/report/byarea?year='.$year.'&month='.$month );
 });
 
 Route::get('/plan',       [PlanController::class,'index'])->name('plan.index');
@@ -106,6 +110,8 @@ Route::post('/result/score', [QuestionsResultController::class,'scoresave'])->na
 Route::post('/result/commentsave', [QuestionsResultController::class,'commentsave'])->name('result.commentsave');
 Route::post('/result/final', [QuestionsResultController::class,'final'])->name('result.final');
 Route::post('/result/delete', [QuestionsResultController::class,'delete'])->name('result.delete');
+Route::get('/report/byarea', [QuestionsResultController::class,'reportbyarea'])->name('report.byarea');
+
 
 Route::get('/user',            [UserController::class,'index'])->name('user.index');
 Route::get('/user/get',        [UserController::class,'get'])->name('user.get');
@@ -114,6 +120,8 @@ Route::post('/user/edit',      [UserController::class,'edit'])->name('user.edit'
 Route::post('/user/pwd',       [UserController::class,'pwd'])->name('user.pwd');
 Route::post('/user/delete',    [UserController::class,'delete'])->name('user.delete');
 Route::post('/user/editfield', [UserController::class,'editfield'])->name('user.editfield');
+Route::get('/user/profile',    [UserController::class,'profile'])->name('user.profile');
+
 
 Route::post('/login', [UserController::class,'login'])->name('user.login');
 Route::get('/logout', [UserController::class,'logout'])->name('user.logout');

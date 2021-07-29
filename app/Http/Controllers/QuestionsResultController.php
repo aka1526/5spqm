@@ -340,13 +340,13 @@ $html .=' </div>
   }
 
     public function delete(Request $request){
-
+      $auditor_unid = Cookie::get('USER_UNID') ;
       $unid   =isset($request->unid ) ? $request->unid  : '' ;
-      if($unid !=''){
+      if($unid !='' && $auditor_unid !=''){
         DB::beginTransaction();
         try {
-           QuestionsResultTbl::where('plan_unid','=',$unid)->delete();
-           SummaryResultTbl::where('plan_unid','=',$unid)->delete();
+           QuestionsResultTbl::where('plan_unid','=',$unid)->where('auditor_unid','=',$auditor_unid)->delete();
+           SummaryResultTbl::where('plan_unid','=',$unid)->where('auditor_unid','=',$auditor_unid)->delete();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -356,4 +356,45 @@ $html .=' </div>
       return response()->json(['result'=> 'success','msg'=>'ลบข้อมูลสำเสร็จ'],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
     }
+    public function reportbyarea(Request $request){
+      $year=isset($request->year) ? $request->year : date('Y');
+      $month=isset($request->month) ? $request->month : date('n');
+      $Areadb = AreaTbl::where('status','=','Y')->orderby('area_index')->get();
+      $Area = [];
+      $SeltResult= [];
+      $CommitResult= [];
+      $TopResult= [];
+      foreach ($Areadb as $key => $value) {
+          $Area[]       = $value->area_name ;// AreaTbl::select('area_name')->where('status','=','Y')->get();
+          $SummaryResult1 = SummaryResultTbl::select(DB::raw('round(AVG(area_score),0) as area_score'))->where('plan_year','=',$year)->where('plan_month','=',$month)
+                            ->where('area_unid','=',$value->unid)->where('auditor_position','=','SELF')
+                            ->where('doc_status','=','Y')->first();
+          $SeltResult[] = isset($SummaryResult1->area_score )   ? $SummaryResult1->area_score : 0 ;
+
+          $SummaryResult2 = SummaryResultTbl::select(DB::raw('round(AVG(area_score),0) as area_score'))->where('plan_year','=',$year)->where('plan_month','=',$month)
+                            ->where('area_unid','=',$value->unid)->where('auditor_position','=','COMMIT')
+                            ->where('doc_status','=','Y')->first();
+          $CommitResult[] = isset($SummaryResult2->area_score )   ? $SummaryResult2->area_score : 0 ;
+
+          $SummaryResult3 = SummaryResultTbl::select(DB::raw('round(AVG(area_score),0) as area_score'))->where('plan_year','=',$year)->where('plan_month','=',$month)
+                            ->where('area_unid','=',$value->unid)->where('auditor_position','=','TOP')
+                            ->where('doc_status','=','Y')->first();
+          $TopResult[] = isset($SummaryResult3->area_score )   ? $SummaryResult3->area_score : 0 ;
+      }
+
+
+  return view('pages.report_byarea')
+  ->with('Year',$year)
+  ->with('Month',$month)
+  ->with('Area',json_encode($Area,JSON_UNESCAPED_UNICODE))
+  ->with('SeltResult',json_encode($SeltResult,JSON_NUMERIC_CHECK))
+  ->with('CommitResult',json_encode($CommitResult,JSON_NUMERIC_CHECK))
+  ->with('TopResult',json_encode($TopResult,JSON_NUMERIC_CHECK))
+  ;
+    // return view('pages.report_byarea', [
+    //    'Area' => json_encode($Area, JSON_UNESCAPED_UNICODE)
+    // ]);
+
+    }
+
 }

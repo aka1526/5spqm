@@ -47,12 +47,24 @@
                                     </thead>
                                     <tbody>
                                     @foreach ($dtPlan as $key => $row)
+                                    <?php
+                                    $scores=array();
+                                    $Totalscores=array();
+                                    $Docstatus=array();
+                                    foreach ($dtSummaryResult as $key => $value) {
+                                        $_unid  = $value->plan_unid;
+                                        $scores[$_unid] = $value->area_score;
+                                        $Totalscores[$_unid] =$value->total_score;
+                                        $Docstatus[$_unid] =$value->doc_status;
+                                    }
+                                    ?>
+
                                     <tr>
                                         <td class="text-center"> {{ date("d", strtotime($row->plan_date)) }}</td>
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
-                                       <td  class="text-center"> <button class="btn btn-primary btn-circle   btn-sm"> {{ $row->plan_groups }}</button> </td>
+                                          <td  class="text-center"> <button class="btn btn-primary btn-circle   btn-sm"> {{ $row->plan_groups }}</button> </td>
                                           @endif
                                         <td><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
                                         <td class="text-center h4 m-0">
@@ -60,35 +72,45 @@
                                         </td>
                                         <td class="text-center h4 m-0">
                                           <button class="btn btn-success  btn-rounded btn-sm">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</button>
+
+
+                                              @if(isset($scores[$row->unid]))
+                                              <button class="btn btn-success  btn-rounded btn-sm"> {{ $scores[$row->unid] }}</button>
+                                              @else
+                                                <button class="btn btn-success  btn-rounded btn-sm"> 0</button>
+                                              @endif
+
+
+
                                         </td>
                                       <td>
-                                        @if($row->doc_status !='Y')
-                                          <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
-                                            @csrf
-                                              <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
-                                              <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
 
-                                          <button type=submit class="btn btn btn-primary   btn-sm   m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                          <i class="fas fa-balance-scale font-14 btn-check"></i> ตรวจ</button>
-                                          </form>
+                                        @if( isset($Docstatus[$row->unid]) && $Docstatus[$row->unid] =='Y')
+                                            <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
+                                              @csrf
+                                                <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
+                                                <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
+
+                                            <button type=submit class="btn btn btn-warning   btn-sm  m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="คะแนนตรวจประเมิน" >
+
+                                              <i class="fas fa-thumbs-up"></i> คะแนน</button>
+                                            </form>
                                         @else
-                                          <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
-                                            @csrf
-                                              <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
-                                              <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
+                                            <form name="testForm" id="testForm" action="{{route('check.checked')}}" method="POST"  enctype="multipart/form-data" >
+                                              @csrf
+                                                <input type="hidden" id="area_unid" name="area_unid" value="{{ $row->plan_area_unid }}">
+                                                <input type="hidden" id="plan_unid" name="plan_unid" value="{{ $row->unid }}">
 
-                                          <button type=submit class="btn btn btn-warning   btn-sm  m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="คะแนนตรวจประเมิน" >
+                                            <button type=submit class="btn btn btn-primary   btn-sm   m-r-5  " style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ตรวจประเมินพื้นที่" >
 
-                                            <i class="fas fa-thumbs-up"></i> คะแนน</button>
-                                          </form>
+                                            <i class="fas fa-balance-scale font-14 btn-check"></i> ตรวจ</button>
+                                            </form>
                                         @endif
-
-
                                     </td>
                                     <td>
 
-                                      @if($row->total_score > 0)
+                                      @if( isset($Totalscores[$row->unid]) &&  $Totalscores[$row->unid] > 0)
                                             <button type=submit class="btn btn btn-danger    btn-sm m-r-5 btn-delete "
                                             style="cursor: pointer;" data-unid="{{ $row->unid }}" data-toggle="tooltip" data-original-title="ลบผลตรวจ" >
                                            <i class="fas fa-trash-alt"></i> ลบ</button>

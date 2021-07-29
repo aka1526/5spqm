@@ -34,6 +34,16 @@ protected  $paging =10;
     $User =UserTbl::orderBy('user_name')->paginate($this->paging);
    return view('pages.user_index',compact('User','search'));
  }
+
+ public function profile(Request $request){
+     $USER_UNID = Cookie::get('USER_UNID') ; // Cookie::queue('USER_UNID',$row->unid);
+     if($USER_UNID !=''){
+       $User =UserTbl::orderBy('user_name')->paginate($this->paging);
+      return view('pages.user_profile',compact('User'));
+     }
+   return redirect('/check');
+ }
+
  public function get(Request $request){
    $unid  =isset($request->unid) ? $request->unid :'';
    $user  =UserTbl::where('unid','=',$unid)->first();

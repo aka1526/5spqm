@@ -118,13 +118,12 @@ class CheckController extends Controller
       $pv   =  Cookie::get('DOC_PV') !=''   ? strtoupper(Cookie::get('DOC_PV')) :strtoupper($pv) ;
       $area_unid = Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
 
-
       $position_type =$pv;
-       Cookie::queue('DOC_MONTH',$moth);
+      Cookie::queue('DOC_MONTH',$moth);
+       $AUDITOR_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID') : '';
 
-       $USER_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID') : '';
-       if($USER_UNID !=''){
-          $AuditArea =  AuditAreaTbl::where('auditor_unid','=',$USER_UNID)
+       if($AUDITOR_UNID !=''){
+          $AuditArea =  AuditAreaTbl::where('auditor_unid','=',$AUDITOR_UNID)
           ->where('status','=','Y')->orderBy('area_index')->get();
        }
 
@@ -137,27 +136,25 @@ class CheckController extends Controller
 
        }
 
-
-      $dtPlan =PlanPositionTbl::select('tbl_planposition.*','doc_status','area_score','total_score')
-      ->leftJoin("tbl_result_summary", "tbl_result_summary.plan_unid", "=", "tbl_planposition.unid")
-      ->where('tbl_planposition.position_type','=',$position_type)
-      ->where(function($query) use ($plan_area_unid) {
+      $dtPlan =PlanPositionTbl::where('position_type','=',$position_type)
+         ->where(function($query) use ($plan_area_unid) {
                         if ($plan_area_unid != '') {
-                            return $query->whereIn('tbl_planposition.plan_area_unid', $plan_area_unid);
+                            return $query->whereIn('plan_area_unid', $plan_area_unid);
                         }
                     })
-    //  ->dd()
 
-    //  ->wherein('tbl_planposition.plan_area_unid','in','('.$plan_area_unid.')') //web line 3
-    //  ->where('plan_area_unid','=','b30a86eb99e04624966c295c5ede35fb') // Test
+      ->where('plan_year','=',$year)
+      ->where('plan_month','=',$moth)
+      ->where('plan_groups','=',$auditor_group)
+      ->orderBy('plan_date')->orderBy('plan_area_index')->get();
 
-      ->where('tbl_planposition.plan_year','=',$year)
-      ->where('tbl_planposition.plan_month','=',$moth)
-      ->where('tbl_planposition.plan_groups','=',$auditor_group)
-      ->orderBy('tbl_planposition.plan_date')
-      ->orderBy('tbl_planposition.plan_area_index')->get();
+      $dtSummaryResult =SummaryResultTbl::where('plan_year','=',$year)
+      ->where('plan_month','=',$moth)
+      ->where('auditor_unid','=',$AUDITOR_UNID)
+      ->get();
+
     // return response()->json(['result'=> 'success','data'=> $dataArea],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-   return view('pages.check_plan',compact('dtPlan','pv'));
+   return view('pages.check_plan',compact('dtPlan','dtSummaryResult','pv'));
   }
   public function add(Request $request){
     $unid       =isset($request->unid) ? $request->unid:'';
@@ -233,8 +230,12 @@ class CheckController extends Controller
 
     $area_unid =isset($request->area_unid) ? $request->area_unid :'';
     $plan_unid =isset($request->plan_unid) ? $request->plan_unid :'';
+    $AUDIT_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID')  : ''  ;
+    $AUDIT_NAME =Cookie::get('USER_NAME') !='' ? Cookie::get('USER_NAME')  : ''  ;
 
-    $PlanStatus = SummaryResultTbl::where('plan_unid','=',$plan_unid)->where('doc_status','=','Y')->count();
+    $PlanStatus = SummaryResultTbl::where('plan_unid','=',$plan_unid)
+    ->where('auditor_unid', '=',$AUDIT_UNID)
+    ->where('doc_status','=','Y')->count();
     $datatype= $PlanStatus > 0 ? 1 : 2;
     $username='5s';
     Cookie::queue('AREA_UNID',$request->area_unid);
@@ -253,18 +254,15 @@ class CheckController extends Controller
  }
 
 
-  $QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
-
-
-
+$QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
 $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
-
 $Positions =AuditpositionTbl::where('position_name_eng','=',$pv)->first();
 $Area =AreaTbl::where('unid','=',$area_unid)->first();
 $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
 $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
           ->where('positions_type','=',$pv)
+          ->where('auditor_unid','=',$AUDIT_UNID)
           ->where('area_unid','=',$area_unid)->count();
 
   if($CountResult==0){
@@ -291,6 +289,8 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
               ,'result_toppic' =>$item->item_toppic
               ,'result_desc' =>$item->item_desc
               ,'result_val' => 0
+              ,'auditor_unid' =>$AUDIT_UNID
+              ,'auditor_name' =>$AUDIT_NAME
               ,'status'=>"Y"
               ,'result_type' =>  $item->item_type
               ,'create_by'=> $username
@@ -337,8 +337,8 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
       ,'area_unid' => $Area->unid
       ,'area_name' => $Area->area_name
       ,'area_owner' => $Area->area_owner
-      ,'auditor_unid' => $username
-      ,'auditor_name' => $username
+      ,'auditor_unid' =>$AUDIT_UNID
+      ,'auditor_name' =>$AUDIT_NAME
       ,'auditor_position' => $pv
       ,'position_name' => $Positions->position_name
       ,'create_by' =>$username
@@ -352,6 +352,7 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
 
   $QuestionsResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
             ->where('positions_type','=',$pv)
+              ->where('auditor_unid','=',$AUDIT_UNID)
             ->where('area_unid','=',$area_unid)->orderBy('result_index')->get();
   $html ='';
   $result_toppic_befor='';
