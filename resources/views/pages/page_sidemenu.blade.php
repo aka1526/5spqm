@@ -65,7 +65,7 @@
                                       <a href="{{ route('area.index')}}">พื้นที่การตรวจ</a>
                                   </li>
                                   <li>
-                                      <a href="{{ route('user.index')}}">User Login</a>
+                                      <a href="{{ route('user.index')}}">List User</a>
                                   </li>
                               </ul>
                           </li>
