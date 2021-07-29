@@ -31,7 +31,7 @@ protected  $paging =10;
 
  public function index(Request $request){
    $search='';
-    $User =UserTbl::orderBy('user_name')->paginate($this->paging);
+    $User =UserTbl::orderBy('user_login')->orderBy('user_name')->paginate($this->paging);
    return view('pages.user_index',compact('User','search'));
  }
 
