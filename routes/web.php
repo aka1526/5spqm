@@ -121,6 +121,9 @@ Route::post('/user/pwd',       [UserController::class,'pwd'])->name('user.pwd');
 Route::post('/user/delete',    [UserController::class,'delete'])->name('user.delete');
 Route::post('/user/editfield', [UserController::class,'editfield'])->name('user.editfield');
 Route::get('/user/profile',    [UserController::class,'profile'])->name('user.profile');
+Route::post('/user/editbyunid',      [UserController::class,'editbyunid'])->name('user.editbyunid');
+Route::get('/user/viewpwd',    [UserController::class,'viewpwd'])->name('user.viewpwd');
+Route::post('/user/changepwd',       [UserController::class,'changepwd'])->name('user.changepwd');
 
 
 Route::post('/login', [UserController::class,'login'])->name('user.login');

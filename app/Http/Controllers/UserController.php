@@ -38,8 +38,17 @@ protected  $paging =10;
  public function profile(Request $request){
      $USER_UNID = Cookie::get('USER_UNID') ; // Cookie::queue('USER_UNID',$row->unid);
      if($USER_UNID !=''){
-       $User =UserTbl::orderBy('user_name')->paginate($this->paging);
+       $User =UserTbl::where('unid','=',$USER_UNID)->first();
       return view('pages.user_profile',compact('User'));
+     }
+   return redirect('/check');
+ }
+
+ public function viewpwd(Request $request){
+     $USER_UNID = Cookie::get('USER_UNID') ; // Cookie::queue('USER_UNID',$row->unid);
+     if($USER_UNID !=''){
+       $User =UserTbl::where('unid','=',$USER_UNID)->first();
+      return view('pages.user_changepwd',compact('User'));
      }
    return redirect('/check');
  }
@@ -106,6 +115,33 @@ protected  $paging =10;
 
  }
 
+ public function editbyunid(Request $request){
+
+   $user_unid =isset($request->unid) ? $request->unid :'';
+   $user_login =isset($request->user_login) ? $request->user_login :'';
+   $user_name =isset($request->user_name) ? $request->user_name :'';
+
+
+   $count =UserTbl::where('unid','=',$user_unid)->count();
+
+    $username='s5';
+    $action=false;
+
+    if($count > 0){
+        $action=  UserTbl::where('unid','=',$user_unid)->update([
+          'user_login' => $user_login
+          ,'user_name' => $user_name
+          ,'user_status' => 'Y'
+          ,'edit_by' => $username
+          ,'edit_time' => Carbon::now()->format('Y-m-d')
+         ]);
+    }
+
+
+     return  redirect()->back();;
+
+ }
+
  public function delete(Request $request){
    $unid  =isset($request->unid) ? $request->unid :'';
    $count  =UserTbl::where('unid','=',$unid)->count();
@@ -117,7 +153,34 @@ protected  $paging =10;
      return response()->json(['result'=> $action  ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
  }
 
+ public function changepwd(Request $request){
+   $user_unid =isset($request->unid) ? $request->unid :'';
+   $user_password =isset($request->new_password) ? $request->new_password :'';
+   $user_password=Hash::make($user_password);
+   $count =UserTbl::where('unid','=',$user_unid)->count();
 
+    $username= Cookie::get('USER_NAME');
+    $username= $username !='' ? $username :'5s';
+    $action=false;
+
+    if($count > 0 && $user_password !='' ){
+        $action=  UserTbl::where('unid','=',$user_unid)->update([
+          'user_password' => $user_password
+          ,'user_status' => 'Y'
+          ,'edit_by' => $username
+          ,'edit_time' => Carbon::now()->format('Y-m-d')
+         ]);
+
+    }
+
+    if($action){
+       return  redirect('/logout') ;
+    }else {
+       return  redirect()->back()->with('error', 'Data error') ;
+    }
+
+
+ }
  public function pwd(Request $request){
    $user_unid =isset($request->unid) ? $request->unid :'';
    $user_password =isset($request->user_password) ? $request->user_password :'';

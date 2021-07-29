@@ -67,7 +67,7 @@
 
                             @if(Cookie::get('USER_UNID'))
                             <a class="dropdown-item" href="{{ route('user.profile')}}"><i class="fa fa-user"></i>Profile</a>
-                            <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Password</a>
+                            <a class="dropdown-item" href="{{ route('user.viewpwd')}}"><i class="fa fa-user"></i>Password</a>
                             <li class="dropdown-divider"></li>
                               <a class="dropdown-item" href="/logout"><i class="fa fa-power-off"></i>Logout</a>
                             @else

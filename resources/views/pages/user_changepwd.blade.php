@@ -15,33 +15,34 @@
              <div class="col-xl-12">
                <div class="ibox ibox-primary">
                            <div class="ibox-head">
-                               <div class="ibox-title">ข้อมูลผู้ใช้งาน</div>
+                               <div class="ibox-title">เปลี่ยนรหัสผ่าน</div>
 
                            </div>
                            <div class="ibox-body">
-                               <form class="form-horizontal" id="frmuser" name="frmuser" action="{{ route('user.editbyunid') }}" method="post">
+                             @if(Session::has('error'))
+                              <div class="alert alert-danger">
+                                {{ Session::get('error') }}
+                             
+                            </div>
+                            @endif
+                               <form class="form-horizontal" id="frmuser" name="frmuser" action="{{ route('user.changepwd') }}" method="post">
                                  @csrf
                                  <input class="form-control" type="hidden" id="unid" name="unid" value="{{ $User->unid }}" >
                                    <div class="form-group row">
                                        <label class="col-sm-2 col-form-label">User Name</label>
                                        <div class="col-sm-10">
                                            <input class="form-control" type="text" id="user_login" name="user_login" value="{{ $User->user_login }}"
-                                           placeholder="User Name" required>
+                                            readonly required>
                                        </div>
                                    </div>
                                    <div class="form-group row">
-                                       <label class="col-sm-2 col-form-label">ชื่อผู้ใช้งาน</label>
+                                       <label class="col-sm-2 col-form-label">รหัสผ่านใหม่ <br/>(อย่างน้อย 6 ตัวอักษร)</label>
                                        <div class="col-sm-10">
-                                         <input class="form-control" type="text" id="user_name" name="user_name" value="{{ $User->user_name }}"
-                                         placeholder="ชื่อผู้ใช้งาน" required>
+                                         <input class="form-control" type="password" id="new_password" name="new_password" value=""
+                                         placeholder="รหัสผ่านใหม่ " required  minlength="6" >
                                        </div>
                                    </div>
-                                   <div class="form-group row">
-                                       <label class="col-sm-2 col-form-label">ระดับใช้งาน</label>
-                                       <div class="col-sm-10">
-                                           <input class="form-control" type="text"  value="{{ $User->user_level }}" readonly>
-                                       </div>
-                                   </div>
+
 
                                    <div class="form-group row">
                                        <div class="col-sm-10 ml-sm-auto">
