@@ -68,13 +68,17 @@
                                           @endif
                                         <td><i class="fa fa-star text-danger"></i> {{ $row->plan_area_owner }}</td>
                                         <td class="text-center h4 m-0">
-                                          <button class="btn btn-info btn-rounded btn-sm">  {{ $row->total_score > 0 ?  $row->total_score : '0' }}</button>
+                                         
+                                          @if(isset($Totalscores[$row->unid]))
+                                           <button class="btn btn-info  btn-rounded btn-sm"> {{ $scores[$row->unid] }}</button>
+                                           @else
+                                               <button class="btn btn-info btn-rounded btn-sm"> 0</button>
+                                           @endif
+
+
                                         </td>
                                         <td class="text-center h4 m-0">
-                                          <button class="btn btn-success  btn-rounded btn-sm">{{ $row->area_score > 0 ?  $row->area_score : '0' }}</button>
-
-
-                                              @if(isset($scores[$row->unid]))
+                                             @if(isset($scores[$row->unid]))
                                               <button class="btn btn-success  btn-rounded btn-sm"> {{ $scores[$row->unid] }}</button>
                                               @else
                                                 <button class="btn btn-success  btn-rounded btn-sm"> 0</button>
