@@ -31,21 +31,8 @@
                                   </div>
                                   @endif
                                 <table class="table table-bordered">
-                                    <thead class="">
-                                        <tr>
-                                            <th>วันที่</th>
-                                            <th >พื้นที่</th>
-                                               @if($pv !='SELF')
-                                                <th  class="text-center">กลุ่ม</th>
-                                                @endif
-                                            <th class="text-center ">หัวหน้าพื้นที่</th>
-                                            <th class="text-center">คะแนนเต็ม</th>
-                                            <th class="text-center">คะแนนที่ได้</th>
-                                            <th>ประเมิน</th>
-                                            <th>ลบ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+
+                                      <?php $rowbefor=''; ?>
                                     @foreach ($dtPlan as $key => $row)
                                     <?php
                                     $scores=array();
@@ -56,6 +43,27 @@
                                         $scores[$_unid] = $value->area_score;
                                         $Totalscores[$_unid] =$value->total_score;
                                         $Docstatus[$_unid] =$value->doc_status;
+                                    }
+
+                                    if($rowbefor != strtotime($row->plan_date) ){
+                                      ?>
+                                      <thead class="btn-info">
+                                          <tr>
+                                              <th>วันที่</th>
+                                              <th >พื้นที่</th>
+                                                 @if($pv !='SELF')
+                                                  <th  class="text-center">กลุ่ม</th>
+                                                  @endif
+                                              <th class="text-center ">หัวหน้าพื้นที่</th>
+                                              <th class="text-center">คะแนนเต็ม</th>
+                                              <th class="text-center">คะแนนที่ได้</th>
+                                              <th>ประเมิน</th>
+                                              <th>ลบ</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                      <?
+
                                     }
                                     ?>
 
@@ -83,8 +91,6 @@
                                               @else
                                                 <button class="btn btn-success  btn-rounded btn-sm"> 0</button>
                                               @endif
-
-
 
                                         </td>
                                       <td>
@@ -127,6 +133,14 @@
 
 
                                     </tr>
+                                      <?php
+                                      if($rowbefor != strtotime($row->plan_date) ){
+                                        $rowbefor = strtotime($row->plan_date);
+                                        ?>
+
+                                        <?php
+                                      }
+                                      ?>
                                      @endforeach
 
 
