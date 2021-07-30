@@ -16,7 +16,7 @@
                         <div class="ibox ibox-primary">
 
                             <div class="ibox-head">
-                                <div class="ibox-title">ตารางพื้นที่การตรวจ </div>
+                                <div class="ibox-title">ตารางพื้นที่การตรวจ  <span class="badge badge-success m-r-5 m-b-5">{{ Cookie::get('USER_NAME') }} </span>  </div>
                                 <div>
                                     <a class="btn btn-warning btn-sm " href="/check/yearmonth?pv={{ $pv }}"><i class="fa fa-backward"></i> กลับ</a>
 
