@@ -5,7 +5,7 @@
                       <img src="/assets/img/admin-avatar.png" width="45px" />
                   </div>
                   <div class="admin-info">
-                        @if(Cookie::get('USER_LEVEL') !='')
+                       @if(Cookie::get('USER_LEVEL') =='admin' || Cookie::get('USER_LEVEL') =='user')
                           <div class="font-strong"> {{ Cookie::get('USER_NAME') }}</div>
                           <small> {{ Cookie::get('USER_LEVEL') }}</small>
                         @else
@@ -44,7 +44,7 @@
                              @endfor
                         </ul>
                     </li>
-                    @if(Cookie::get('USER_LEVEL') =='admin')
+                    @if(Cookie::get('USER_LEVEL') =='admin' || Cookie::get('USER_LEVEL') =='user')
                             <li>
                                 <a class="active" href="{{ route('check.index')}}">
                                   <i class="sidebar-item-icon fas fa-clipboard-check"></i>
@@ -52,7 +52,8 @@
                                     <span class="nav-label">ตรวจประเมินพื้นที่</span>
                                 </a>
                             </li>
-
+                      @endif
+                      @if(Cookie::get('USER_LEVEL') =='admin')
                           <li class="heading">ตั้งค่าระบบ</li>
                           <li>
                               <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
