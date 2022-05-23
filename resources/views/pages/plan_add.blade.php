@@ -199,7 +199,7 @@ Swal.fire({
                 confirmButtonText: 'Yes, delete it!'
 				})
 				.then((willDelete) => {
-				if (willDelete) {
+				if (willDelete.isConfirmed) {
                     var url="{{route('planmaster.DeletePlanMasterPlan')}}";
                     $.ajax({
                             type: "POST",
@@ -217,7 +217,9 @@ Swal.fire({
                             }
                     });
 
-				}
+				} else {
+                   // Swal.fire('Action Cancel')
+                }
 				});
 		});
 
