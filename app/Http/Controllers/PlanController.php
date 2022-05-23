@@ -95,6 +95,7 @@ class PlanController extends Controller
     $plandate =isset($request->plandate) ? $request->plandate : '';
     $plandate=  Carbon::createFromFormat('d/m/Y', $plandate)->format('Y-m-d');
     $plan_date = Carbon::parse($plandate)->format('Y-m-d');
+
     $countCheck= PlanPositionTbl::where('position_type','=',$position_type)
     ->where('plan_date','=',$plan_date)->count();
     $act=false;
@@ -105,15 +106,18 @@ class PlanController extends Controller
     }
 
     if($act){
-        $result="error";
-        $title="Data Error";
-    } else {
+
         $result ="success";
-        $title="บันทึกสำเร็จ";
+        $title="ลบข้อมูลสำเร็จ";
+    } else {
+        $result="error";
+        $title="ลบข้อมูล Error";
     }
 
+    return response()->json(['result'=> $result,'msg'=> $title],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
-    return back()->with('result', $result)->with('title', $title);
+
+  //  return back()->with('result', $result)->with('title', $title);
 
 }
  public function planmastercreateplan(Request $request){

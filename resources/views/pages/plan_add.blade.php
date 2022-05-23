@@ -193,8 +193,10 @@ Swal.fire({
 				title: "คุณต้องการลบ แผนวันที่ "+ plandate+ ' ?',
 				//text: "Once deleted, you will not be able to recover this imaginary file!",
 				icon: "warning",
-				buttons: true,
-				dangerMode: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
 				})
 				.then((willDelete) => {
 				if (willDelete) {
@@ -205,7 +207,13 @@ Swal.fire({
                             data:{position_type:pv,plandate:plandate,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
                             success: function(data)
                             {
-                            console.log(data);
+                                Swal.fire({
+                                        title: data.msg,
+                                        //text: "Once deleted, you will not be able to recover this imaginary file!",
+                                        icon: data.result,
+
+                                        });
+
                             }
                     });
 
