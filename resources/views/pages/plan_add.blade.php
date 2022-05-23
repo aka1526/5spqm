@@ -62,8 +62,8 @@
 
                                         <a class="  btn btn-warning btn-sm " href="/plan"><i class="fa fa-backward"></i> กลับ</a>
                                           <!-- <a class="btn btn-info btn-sm btn-new" href="javascript:;"><i class="fa fa-plus"></i> แผน</a> -->
-                                  <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-bell"></i> แผน</button>
-
+                                  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-plus-square"></i> สร้างแผน</button>
+                                  <button type="button" data-pv="{{ $pv}}" class="btn btn-danger btn-delete btn-sm"><i class="fa fa-trash"></i> ลบแผน</button>
                                   </div>
 
 
@@ -182,5 +182,37 @@ $('.Groupcheck').on('change',function () {
 
 });
 });
+
+
+$(".btn-delete").on('click',function (e){
+	e.preventDefault();
+	var pv =$(this).data('pv');
+    var plandate= $("#plandate").val();
+
+Swal.fire({
+				title: "คุณต้องการลบ แผนวันที่ "+ plandate+ ' ?',
+				//text: "Once deleted, you will not be able to recover this imaginary file!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+				})
+				.then((willDelete) => {
+				if (willDelete) {
+                    var url="{{route('planmaster.DeletePlanMasterPlan')}}";
+                    $.ajax({
+                            type: "POST",
+                            url: url,
+                            data:{position_type:pv,plandate:plandate,"_token": "{{ csrf_token() }}"}, // serializes the form's elements.
+                            success: function(data)
+                            {
+                            console.log(data);
+                            }
+                    });
+
+				}
+				});
+		});
+
+
 </script>
 @endsection

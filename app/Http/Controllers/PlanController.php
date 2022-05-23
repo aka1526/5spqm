@@ -90,6 +90,32 @@ class PlanController extends Controller
 
  }
 
+ public function DeletePlanMasterPlan(Request $request){
+    $position_type =isset($request->position_type) ? $request->position_type : '';
+    $plandate =isset($request->plandate) ? $request->plandate : '';
+    $plandate=  Carbon::createFromFormat('d/m/Y', $plandate)->format('Y-m-d');
+    $plan_date = Carbon::parse($plandate)->format('Y-m-d');
+    $countCheck= PlanPositionTbl::where('position_type','=',$position_type)
+    ->where('plan_date','=',$plan_date)->count();
+    $act=false;
+    if($countCheck>0){
+        $act= PlanPositionTbl::where('position_type','=',$position_type)
+        ->where('plan_date','=',$plan_date)->delete();
+
+    }
+
+    if($act){
+        $result="error";
+        $title="Data Error";
+    } else {
+        $result ="success";
+        $title="บันทึกสำเร็จ";
+    }
+
+
+    return back()->with('result', $result)->with('title', $title);
+
+}
  public function planmastercreateplan(Request $request){
 
       $position_type =isset($request->position_type) ? $request->position_type : '';
