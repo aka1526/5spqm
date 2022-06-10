@@ -34,7 +34,7 @@
                                    $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
                                    ?>
                                   <li>
-                                      <a href="{{ route('report.byarea') }}?year=2021&month={{$i}}"> {{ $i.'. '.$months[$i] }}</a>
+                                      <a href="{{ route('report.byarea') }}?year={{ $y}}&month={{$i}}"> {{ $i.'. '.$months[$i] }}</a>
                                   </li>
                                    @endfor
 
