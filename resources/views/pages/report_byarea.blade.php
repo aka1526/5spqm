@@ -79,22 +79,102 @@
 
  <script type="text/javascript">
  $(function() {
-   var Area = <?php echo $Area; ?>;
-   var AreaResult = <?php echo $SeltResult; ?>;
-   var CommitResult = <?php echo $CommitResult; ?>;
-   var TopResult = <?php echo $TopResult; ?>;
+   const Area ={!! $Area !!};
+   const AreaResult ={!! $SeltResult !!};
+   const CommitResult = {!! $CommitResult !!};
+   const TopResult =  {!! $TopResult !!};
+
+   var backgroundColor = ['#03989e','#160042','#db7093','#3cb371','#7722aa','#6d4059','#b76b95','#ff8d47','#a14242','#35e7bf','#6f4d3b','#0000bd','#66887c','#b2c3bd']
+   var borderColor =  ['rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)']
+
+  let merged_Area=borderColor.map((border,i)=>{
+      return {
+            "border": borderColor[i]
+            ,"background": backgroundColor[i]
+            ,"datapoin": AreaResult[i]
+            ,"labels": Area[i]
+    };
+  })
+
+const Area_dataSort =merged_Area.sort(function(b,a){
+    return a.datapoin-b.datapoin;
+});
+
+  const Area_bc=[];
+  const Area_bgc=[];
+  const Area_score=[];
+  const Area_lbl=[];
+  for(i=0;i <Area_dataSort.length;i++){
+    Area_bc.push(Area_dataSort[i].border);
+    Area_bgc.push(Area_dataSort[i].background);
+    Area_score.push(Area_dataSort[i].datapoin);
+    Area_lbl.push(Area_dataSort[i].labels);
+
+  }
+
+  let merged_CommitResult=borderColor.map((border,i)=>{
+      return {
+            "border": borderColor[i]
+            ,"background": backgroundColor[i]
+            ,"datapoin": CommitResult[i]
+            ,"labels": Area[i]
+    };
+  })
+
+const Commit_dataSort =merged_CommitResult.sort(function(b,a){
+    return a.datapoin-b.datapoin;
+});
+
+const Commit_bc=[];
+  const Commit_bgc=[];
+  const Commit_score=[];
+  const Commit_lbl=[];
+  for(i=0;i <Commit_dataSort.length;i++){
+    Commit_bc.push(Commit_dataSort[i].border);
+    Commit_bgc.push(Commit_dataSort[i].background);
+    Commit_score.push(Commit_dataSort[i].datapoin);
+    Commit_lbl.push(Commit_dataSort[i].labels);
+
+  }
+
+ //TOP
+  let merged_TopResult=borderColor.map((border,i)=>{
+      return {
+            "border": borderColor[i]
+            ,"background": backgroundColor[i]
+            ,"datapoin": TopResult[i]
+            ,"labels": Area[i]
+    };
+  })
+
+  const Top_dataSort =merged_TopResult.sort(function(b,a){
+    return a.datapoin-b.datapoin;
+});
+
+ const Top_bc=[];
+  const Top_bgc=[];
+  const Top_score=[];
+  const Top_lbl=[];
+  for(i=0;i <Top_dataSort.length;i++){
+    Top_bc.push(Top_dataSort[i].border);
+    Top_bgc.push(Top_dataSort[i].background);
+    Top_score.push(Top_dataSort[i].datapoin);
+    Top_lbl.push(Top_dataSort[i].labels);
+
+  }
+
+
+
 
    var ctx = document.getElementById('bar_Selt').getContext('2d');
-   var   backgroundColor = ['#03989e','#160042','#db7093','#3cb371','#7722aa','#6d4059','#b76b95','#ff8d47','#a14242','#35e7bf','#6f4d3b','#0000bd','#66887c','#b2c3bd'];
-   var borderColor =  ['rgba(0,0,0,0)' ];
    new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: Area,
+          labels: Area_lbl,
           datasets: [{
-            data:  AreaResult,
-            backgroundColor: backgroundColor,
-            borderColor: borderColor ,
+            data:  Area_score,
+            backgroundColor: Area_bgc,
+            borderColor: Area_bc ,
             borderWidth: 1
           }]
         },
@@ -159,11 +239,11 @@
       new Chart(ctx, {
            type: 'bar',
            data: {
-             labels: Area,
+             labels: Commit_lbl,
              datasets: [{
-               data:  CommitResult,
-               backgroundColor: backgroundColor,
-               borderColor: borderColor ,
+               data:  Commit_score,
+               backgroundColor: Commit_bgc,
+               borderColor: Commit_bc ,
                borderWidth: 1
              }]
            },
@@ -229,11 +309,11 @@
          new Chart(ctx, {
               type: 'bar',
               data: {
-                labels: Area,
+                labels: Top_lbl,
                 datasets: [{
-                  data:  TopResult,
-                  backgroundColor: backgroundColor,
-                  borderColor: borderColor ,
+                  data:  Top_score,
+                  backgroundColor: Top_bgc,
+                  borderColor: Top_bc ,
                   borderWidth: 1
                 }]
               },
