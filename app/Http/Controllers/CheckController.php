@@ -118,6 +118,10 @@ class CheckController extends Controller
       $pv   =  Cookie::get('DOC_PV') !=''   ? strtoupper(Cookie::get('DOC_PV')) :strtoupper($pv) ;
       $area_unid = Cookie::get('DOC_YEAR') !='' ? Cookie::get('DOC_YEAR') : $year;
 
+      $user_unid = Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID') : '';
+
+
+
       $position_type =$pv;
        Cookie::queue('DOC_MONTH',$moth);
        $AUDITOR_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID') : '';
