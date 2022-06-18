@@ -274,7 +274,7 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
           ->where('positions_type','=',$pv)
           ->where('auditor_unid','=',$AUDIT_UNID)
           ->where('area_unid','=',$area_unid)->count();
-
+//dd($CountResult);
   if($CountResult==0){
 
       $rowTotal=0;
@@ -363,7 +363,8 @@ $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
   $QuestionsResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
             ->where('positions_type','=',$pv)
               ->where('auditor_unid','=',$AUDIT_UNID)
-            ->where('area_unid','=',$area_unid)->orderBy('result_index')->get();
+            ->where('area_unid','=',$area_unid)
+            ->orderBy('result_index')->get();
   $html ='';
   $result_toppic_befor='';
   $result_toppic_next='';
@@ -489,7 +490,7 @@ if($datatype==2){
         $RowBack= 0;
         $RowCurrent=0 ;
         $RowNext=0  ;
-
+        //dd( $TotalRow );
         foreach ($QuestionsResult as $key => $row) {
           $RowBack=  0;
           $RowCurrent= $row->result_index ;
@@ -497,6 +498,7 @@ if($datatype==2){
           $audit_check = $row->audit_check;
           $result_val  = $row->result_val;
           $result_type = $row->result_type;
+
           if($key==0){
 
           $html .='
@@ -611,6 +613,7 @@ if($datatype==2){
             <p/>
           ';
         }
+       // dd($key);
           if($TotalRow == ($RowCurrent-1)){
             $html .='<div class="row">
                         <div  class="col-md-6">

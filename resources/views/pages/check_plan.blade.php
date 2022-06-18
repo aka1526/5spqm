@@ -30,7 +30,7 @@
 
                                   </div>
                                   @endif
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-responsive">
 
                                       <?php $rowbefor=''; ?>
                                     @foreach ($dtPlan as $key => $row)
