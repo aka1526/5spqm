@@ -21,7 +21,10 @@ use App\Models\QuestionsTbl;
 use App\Models\QuestionsResultTbl;
 use App\Models\SummaryResultTbl;
 use App\Models\UserTbl;
+use App\Models\Positions;
+
 use Jenssegers\Agent\Agent;
+
 
 class CheckController extends Controller
 {
@@ -232,7 +235,7 @@ class CheckController extends Controller
 
   }
 
-  public function checked(Request $request){
+public function checked(Request $request){
   //  dd($request);
     $year   = Cookie::get('DOC_YEAR')   !='' ? Cookie::get('DOC_YEAR') : '';
     $month  = Cookie::get('DOC_MONTH')  !='' ? Cookie::get('DOC_MONTH') : '';
@@ -633,5 +636,283 @@ if($datatype==2){
 
     return view('pages.check_type1',compact('Questions','QuestionsResult','html')) ;
   }
+
+  public function score(Request $request){
+
+    $year   = isset($request->year) ? $request->year :'';
+    $month  =  isset($request->month) ? $request->month :'';
+
+    $positions = Positions::where('status','=','Y')->orderBy('position_index')->get();
+
+    $Areas =AreaTbl::where('status','=','Y')->orderBy('area_index')->get();
+
+   /*
+    $QuestionsResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
+    ->where('positions_type','=',$pv)
+      ->where('auditor_unid','=',$AUDIT_UNID)
+    ->where('area_unid','=',$area_unid)
+    ->orderBy('result_index')->get();
+*/
+    $html='<table class="table table-bordered table-responsive">';
+
+    foreach ($positions as $key => $position) {
+        $positions_type =$position->positions_type;
+        $position_name =$position->position_name;
+        // "positions_type" => "SELF"
+        // "position_name" => "หัวหน้าพื้นที่"
+        $html .='
+        <thead class="btn-info">
+        <tr >
+            <td colspan="8" class="text-center">'.$position_name .'</td>
+            </tr>
+        </thead>
+            <tr>
+                <th>วันที่ตามแผน</th>
+                <th>พื้นที่</th>
+
+                <th class="text-center ">หัวหน้าพื้นที่</th>
+                <th class="text-center">ผุ้ตรวจ</th>
+                <th class="text-center">คะแนนเต็ม</th>
+                <th class="text-center">คะแนนที่ได้</th>
+                <th class="text-center">แบบประเมิน</th>
+
+            </tr>
+        ';
+
+        // $QuestionsResult=  QuestionsResultTbl::where('plan_year','=',$year )
+        // ->where('plan_month','=', $month)
+        // ->where('positions_type','=',$positions_type)
+        // //->where('auditor_unid','=',$AUDIT_UNID)
+        // //->where('area_unid','=',$area_unid)
+        // ->orderBy('area_name')
+        // ->orderBy('result_index')
+        // ->get();
+
+
+        foreach ($Areas as $a => $area) {
+            $area_unid  = $area->unid;
+            $SummaryResultTbl =SummaryResultTbl::where('auditor_position','=',$positions_type)
+            ->where('plan_year','=',$year )
+            ->where('plan_month','=', $month)
+            ->where('area_unid','=',$area_unid)
+            ->orderBy('plan_date')
+             ->get();
+              foreach ($SummaryResultTbl as $p => $result) {
+                    $unid = $result->unid;
+                    $plan_unid = $result->plan_unid;
+                    $AUDIT_UNID= $result->auditor_unid;
+
+                    $html .='
+                        <tr>
+                            <td>'.$result->plan_date.'</td>
+                            <td>'.$result->area_name.'</td>
+                            <td>'.$result->area_owner.'</td>
+                            <td>'.$result->auditor_name.'</td>
+                            <td class="text-center">'.$result->total_score.'</td>
+                            <td class="text-center">'.$result->area_score.'</td>
+                            <td>
+
+
+                                <form name="testForm" id="testForm" action="/check/scorechecked" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="_token" value="'.csrf_token().'">
+
+                                <input type="hidden" id="DOC_YEAR" name="DOC_YEAR" value="'.$year.'">
+                                <input type="hidden" id="DOC_MONTH" name="DOC_MONTH" value="'.$month.'">
+                                <input type="hidden" id="DOC_PV" name="DOC_PV" value="'.$positions_type.'">
+                                <input type="hidden" id="AUDIT_UNID" name="AUDIT_UNID" value="'.$AUDIT_UNID.'">
+                                <input type="hidden" id="area_unid" name="area_unid" value="'.$area_unid.'">
+                                <input type="hidden" id="plan_unid" name="plan_unid" value="'.$plan_unid.'">
+
+                                <button type="submit" class="btn btn btn-warning   btn-sm  m-r-5  " style="cursor: pointer;" data-unid="'.$unid.'" data-toggle="tooltip" data-original-title="คะแนนตรวจประเมิน">
+
+                                <i class="fas fa-thumbs-up"></i> คะแนน</button>
+                                </form>
+                                </td>
+                        </tr>
+                    ';
+
+                }
+        }
+
+
+    }
+
+    $html .='</table>';
+    return view('pages.check_score',compact('html')) ;
+  }
+
+  public function scorechecked(Request $request){
+  // dd($request->all());
+
+  $year =isset($request->DOC_YEAR) ? $request->DOC_YEAR :'';
+  $month =isset($request->DOC_MONTH) ? $request->DOC_MONTH :'';
+  $pv =isset($request->DOC_PV) ? $request->DOC_PV :'';
+  $AUDIT_UNID   =isset($request->AUDIT_UNID) ? $request->AUDIT_UNID :'';
+  $area_unid =isset($request->area_unid) ? $request->area_unid :'';
+  $plan_unid =isset($request->plan_unid) ? $request->plan_unid :'';
+ //$AUDIT_UNID =Cookie::get('USER_UNID') !='' ? Cookie::get('USER_UNID')  : ''  ;
+ // $AUDIT_NAME =Cookie::get('USER_NAME') !='' ? Cookie::get('USER_NAME')  : ''  ;
+
+//   $PlanStatus = SummaryResultTbl::where('plan_unid','=',$plan_unid)
+//   ->where('auditor_unid', '=',$AUDIT_UNID)
+//   ->where('doc_status','=','Y')->count();
+//   $datatype= $PlanStatus > 0 ? 1 : 2;
+$datatype=  1 ;
+
+ $Questions = QuestionsTbl::select('tbl_questions.*')
+                    ->leftJoin("tbl_questions_position", "tbl_questions_position.ques_unid", "=", "tbl_questions.unid")
+                    ->leftJoin("tbl_questions_area", "tbl_questions_area.ques_unid", "=", "tbl_questions.unid")
+                    ->where('tbl_questions_position.position_type','=',$pv)
+                    ->where('tbl_questions_area.area_unid','=',$area_unid)
+                    ->first();
+
+if($Questions ){
+   $ques_unid =$Questions->unid;
+ }else {
+ return back()->with('error','ไม่พบแบบประเมินพื้นที่');
+}
+
+
+$QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
+$Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
+$Positions =AuditpositionTbl::where('position_name_eng','=',$pv)->first();
+$Area =AreaTbl::where('unid','=',$area_unid)->first();
+$Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
+
+$CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
+        ->where('positions_type','=',$pv)
+        //->where('auditor_unid','=',$AUDIT_UNID)
+        ->where('area_unid','=',$area_unid)->count();
+//dd($CountResult.'dfdf');
+
+$QuestionsResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
+          ->where('positions_type','=',$pv)
+            //->where('auditor_unid','=',$AUDIT_UNID)
+          ->where('area_unid','=',$area_unid)
+          ->orderBy('result_index')->get();
+$html ='';
+$result_toppic_befor='';
+$result_toppic_next='';
+
+
+if($datatype==1){ // ส่งคะแนนทำแบบประเมินแล้ว
+
+
+$html .='
+<div class="row">
+<div class="col-xl-12">
+<table class="table table-bordered">
+
+    <tbody>
+';
+$totalscroe=0;
+foreach ($QuestionsResult as $key => $row) {
+    $plan_date =$row->plan_date;
+  if($row->result_type=='VALUE'){
+    $totalscroe=$totalscroe +$row->result_val;
+      if($result_toppic_next != $row->result_toppic){
+        $result_toppic_next = $row->result_toppic;
+        $result_toppic_befor= $row->result_toppic;
+      } else {
+        $result_toppic_befor='';
+      }
+
+      if($result_toppic_befor!='') {
+        $html .='<tr class="btn-info">
+               <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
+               <td class="text-center" width="120px">ระดับคะแนน</td>
+
+           </tr>';
+      }
+          $html .='<tr>
+
+                 <td class="text-center"><strong>'.$row->result_index.'</strong></td>
+                 <td>'.$row->result_desc.'</td>
+
+                 <td class="text-center" data-toggle="tooltip" data-original-title="ระดับคะแนน">
+                   <div>
+                      <span class="h4 m-0">  '.$row->result_val.'</span>
+                   </div>
+                 </td>
+             </tr>';
+    }elseif($row->result_type=='RANGE'){
+
+      if($totalscroe ==0) {
+        $html .='<tr class="btn-info">
+               <td width="20px"><strong> ลำดับ</strong></td>
+               <td ><strong> หัวข้อตรวจประเมิน</strong></td>
+               <td class="text-center" width="120px">ระดับคะแนน</td>
+
+           </tr>';
+      }
+
+      $totalscroe=$totalscroe +$row->result_val;
+        if($result_toppic_next != $row->result_toppic){
+          $result_toppic_next = $row->result_toppic;
+          $result_toppic_befor= $row->result_toppic;
+        } else {
+          $result_toppic_befor='';
+        }
+
+          $html .='<tr>
+
+                 <td class="text-center"><strong>'.$row->result_index.'</strong></td>
+                 <td>'.$row->result_desc.'</td>
+
+                 <td class="text-center" data-toggle="tooltip" data-original-title="ระดับคะแนน">
+                   <div>
+                      <span class="h4 m-0">  '.$row->result_val.'</span>
+                   </div>
+                 </td>
+             </tr>';
+
+    } else {
+
+          $totalscroe=$totalscroe +$row->result_val;
+            if($result_toppic_next != $row->result_toppic){
+              $result_toppic_next = $row->result_toppic;
+              $result_toppic_befor= $row->result_toppic;
+            } else {
+              $result_toppic_befor='';
+            }
+          if($result_toppic_befor!='') {
+            $html .='<tr class="btn-info">
+                   <td colspan="2"><strong> หัวข้อตรวจ :: '.$result_toppic_befor.'</strong></td>
+                   <td class="text-center" width="120px">ระดับคะแนน</td>
+
+               </tr>';
+          }
+
+           $html .='<tr class="btn-warning"><td colspan="6"><strong> '.$row->result_toppic.'</strong></td></tr>';
+
+           $html .=' <tr>
+                       <td colspan="5">
+                            <textarea class="form-control"  data-unid="'.$row->unid.'" rows="3" placeholder="'.$row->result_toppic.'" disabled >'.trim($row->audit_comment).'</textarea>
+
+                        </td>
+                    </tr> ';
+         }
+       }
+
+       $html .='<tr class="btn-danger "><td class="text-center"  colspan="2"><strong> รวมคะแนน </strong></td>
+               <td class="text-center" >
+                 <div>
+                    <span class="h4 m-0">  '.$totalscroe.'</span>
+                 </div>
+               </td>
+               </tr>';
+
+       $html .='  </tbody>
+               </table>
+             </div>
+             </div>
+
+             ';
+}
+
+return view('pages.check_type3',compact('Questions','QuestionsResult','html','year','month','plan_date')) ;
+}
+
+
 
 }

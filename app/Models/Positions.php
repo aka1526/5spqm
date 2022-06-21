@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PositionsTbl extends Model
+class Positions extends Model
 {
   use HasFactory;
   const CREATED_AT = 'create_time';

@@ -102,7 +102,10 @@ Route::get('/check/edit/{unid}',[CheckController::class,'editunid'])->name('chec
 Route::post('/check/edit',      [CheckController::class,'edit'])->name('check.edit');
 Route::post('/check/delete',    [CheckController::class,'delete'])->name('check.delete');
 Route::post('/check/editfield', [CheckController::class,'editfield'])->name('check.editfield');
-Route::post('/check/checked', [CheckController::class,'checked'])->name('check.checked');
+Route::post('/check/checked',   [CheckController::class,'checked'])->name('check.checked');
+
+Route::get('/check/byscore',    [CheckController::class,'score'])->name('check.byscore');
+Route::post('/check/scorechecked',   [CheckController::class,'scorechecked'])->name('check.scorechecked');
 
 
 Route::post('/result/getnext', [QuestionsResultController::class,'getnext'])->name('result.getnext');
