@@ -674,6 +674,7 @@ if($datatype==2){
                 <th class="text-center">ผุ้ตรวจ</th>
                 <th class="text-center">คะแนนเต็ม</th>
                 <th class="text-center">คะแนนที่ได้</th>
+                <th class="text-center"> % ที่ได้</th>
                 <th class="text-center">แบบประเมิน</th>
 
             </tr>
@@ -701,6 +702,7 @@ if($datatype==2){
                     $unid = $result->unid;
                     $plan_unid = $result->plan_unid;
                     $AUDIT_UNID= $result->auditor_unid;
+                    $score_percen=$result->area_score>0 ? ($result->area_score/$result->total_score)*100 : 0;
 
                     $html .='
                         <tr>
@@ -710,6 +712,7 @@ if($datatype==2){
                             <td>'.$result->auditor_name.'</td>
                             <td class="text-center">'.$result->total_score.'</td>
                             <td class="text-center">'.$result->area_score.'</td>
+                            <td class="text-center">'.$score_percen.'</td>
                             <td>
 
 
