@@ -712,7 +712,7 @@ if($datatype==2){
                             <td>'.$result->auditor_name.'</td>
                             <td class="text-center">'.$result->total_score.'</td>
                             <td class="text-center">'.$result->area_score.'</td>
-                            <td class="text-center">'.$score_percen.'</td>
+                            <td class="text-center">'.number_format( $score_percen,0).' %</td>
                             <td>
 
 
