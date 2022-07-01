@@ -324,7 +324,7 @@ $html .=' </div>
           }
         }
 
-        SummaryResultTbl::where('ans_unid','=',$ans)->where('doc_status','=','Y')->update([
+        SummaryResultTbl::where('ans_unid','=',$ans)->update([
           'area_score'=> $score
         //  ,'total_item' => $Totalitem
         //  ,'total_score' => $Totalscore
@@ -334,7 +334,7 @@ $html .=' </div>
         ]);
 
 
-       $url="check/get/". Cookie::get('DOC_PV').'/'.Cookie::get('DOC_YEAR').'/'.Cookie::get('DOC_MONTH') ;
+       $url="check/get/".Cookie::get('DOC_PV').'/'.Cookie::get('DOC_YEAR').'/'.Cookie::get('DOC_MONTH') ;
 
           return response()->json(['result'=> true,'data'=> 'ส่งคะแนนสำเร็จ','url'=> $url ],200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
   }

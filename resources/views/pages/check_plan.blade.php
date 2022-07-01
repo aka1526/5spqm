@@ -68,7 +68,7 @@
                                     ?>
 
                                     <tr>
-                                        <td class="text-center"> {{ date("d", strtotime($row->plan_date)) }}</td>
+                                        <td class="text-center"> {{ date("d-m-Y", strtotime($row->plan_date)) }}</td>
                                          <td>{{ $row->plan_area_name }}</td>
 
                                          @if($pv !='SELF')
