@@ -324,7 +324,7 @@ $html .=' </div>
           }
         }
 
-        SummaryResultTbl::where('ans_unid','=',$ans)->update([
+        SummaryResultTbl::where('ans_unid','=',$ans)->where('doc_status','=','Y')->update([
           'area_score'=> $score
         //  ,'total_item' => $Totalitem
         //  ,'total_score' => $Totalscore

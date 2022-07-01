@@ -696,6 +696,7 @@ if($datatype==2){
             ->where('plan_year','=',$year )
             ->where('plan_month','=', $month)
             ->where('area_unid','=',$area_unid)
+            ->where('doc_status','=','Y')
             ->orderBy('plan_date')
              ->get();
               foreach ($SummaryResultTbl as $p => $result) {
@@ -776,7 +777,8 @@ if($Questions ){
 }
 
 
-$QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)->orderBy('item_index')->get();
+$QuestionsItem = QuestionsItemTbl::where('item_refunid','=',$ques_unid)
+                ->orderBy('item_index')->get();
 $Questions = QuestionsTbl::where('unid','=',$ques_unid)->first();
 $Positions =AuditpositionTbl::where('position_name_eng','=',$pv)->first();
 $Area =AreaTbl::where('unid','=',$area_unid)->first();
@@ -784,14 +786,16 @@ $Plan= PlanPositionTbl::where('unid','=',$plan_unid)->first();
 
 $CountResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
         ->where('positions_type','=',$pv)
-        //->where('auditor_unid','=',$AUDIT_UNID)
+        ->where('auditor_unid','=',$AUDIT_UNID)
         ->where('area_unid','=',$area_unid)->count();
 //dd($CountResult.'dfdf');
 
 $QuestionsResult=  QuestionsResultTbl::where('plan_unid','=',$Plan->unid)
           ->where('positions_type','=',$pv)
-            //->where('auditor_unid','=',$AUDIT_UNID)
+            ->where('auditor_unid','=',$AUDIT_UNID)
+
           ->where('area_unid','=',$area_unid)
+          //->dd()
           ->orderBy('result_index')->get();
 $html ='';
 $result_toppic_befor='';
